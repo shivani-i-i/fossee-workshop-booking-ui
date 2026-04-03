@@ -1,7 +1,7 @@
 .propose-page {
     min-height: calc(100vh - 56px);
     padding: var(--space-8) var(--space-4);
-    background: var(--color-bg-secondary);
+    background: linear-gradient(135deg, color-mix(in srgb, var(--color-primary) 10%, var(--color-bg-primary)), var(--color-bg-secondary));
 }
 
 .propose-shell {
@@ -11,7 +11,8 @@
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     padding: var(--space-8);
-    box-shadow: var(--shadow-card);
+    border-top: 3px solid var(--color-primary);
+    box-shadow: 0 8px 24px rgba(94, 106, 210, 0.12);
 }
 
 .propose-steps {
@@ -114,7 +115,8 @@
     pointer-events: none;
     max-height: 0;
     overflow: hidden;
-    transition: opacity var(--transition-slow), visibility var(--transition-slow);
+    transform: translateY(var(--space-2));
+    transition: opacity 300ms ease, visibility 300ms ease, transform 300ms ease;
 }
 
 .propose-panel.is-active {
@@ -122,6 +124,7 @@
     visibility: visible;
     pointer-events: auto;
     max-height: 2000px;
+    transform: translateY(0);
 }
 
 .propose-panel h2 {
@@ -313,6 +316,22 @@
 
 .propose-btn.is-loading .propose-btn__loading {
     display: inline;
+}
+
+#exampleModalCenter .modal-content {
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-lg);
+}
+
+#exampleModalCenter .modal-header {
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+#exampleModalCenter .modal-body {
+    max-height: 50vh;
+    overflow-y: auto;
+    color: var(--color-text-secondary);
 }
 
 @media (max-width: 767px) {

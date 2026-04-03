@@ -10,6 +10,10 @@
     align-items: center;
     gap: var(--space-4);
     margin-bottom: var(--space-6);
+    background: linear-gradient(135deg, color-mix(in srgb, var(--color-primary) 11%, var(--color-bg-primary)), var(--color-bg-primary));
+    border: 1px solid color-mix(in srgb, var(--color-primary) 15%, var(--color-border));
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
 }
 
 .profile-hero__avatar {
@@ -80,6 +84,12 @@
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-card);
     padding: var(--space-5);
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.profile-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card-hover);
 }
 
 .profile-card--activity {
@@ -233,6 +243,10 @@
 }
 
 .profile-submit {
+    background: linear-gradient(90deg, var(--color-primary), color-mix(in srgb, var(--color-primary) 70%, var(--color-bg-primary)));
+}
+
+.profile-submit {
     border: 1px solid var(--color-primary);
     background: var(--color-primary);
     color: var(--color-bg-primary);
@@ -322,6 +336,12 @@
     font-size: 2rem;
     font-weight: var(--font-weight-bold);
     cursor: pointer;
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.profile-photo-circle:hover {
+    transform: scale(1.03);
+    box-shadow: var(--shadow-md);
 }
 
 .profile-photo-camera {
