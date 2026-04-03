@@ -55,6 +55,12 @@
     text-decoration: none;
 }
 
+.site-logo:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+    border-radius: 6px;
+}
+
 .site-nav {
     display: flex;
     align-items: center;
@@ -101,6 +107,12 @@
 .site-nav__link:hover {
     color: var(--color-primary);
     text-decoration: none;
+}
+
+.site-nav__link:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+    border-radius: 6px;
 }
 
 .site-nav__link:hover::after {
@@ -156,6 +168,11 @@
     text-decoration: none;
 }
 
+.site-nav__btn:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
 .site-navbar__toggle {
     display: none;
     width: 40px;
@@ -173,6 +190,11 @@
 .site-navbar__toggle:hover {
     background: transparent;
     color: var(--color-primary);
+}
+
+.site-navbar__toggle:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
 }
 
 .site-navbar__toggle-bar {

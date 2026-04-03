@@ -45,19 +45,15 @@
             </a>
             <a class="workshop-chip{% if request.GET.filter == 'pending' %} is-active{% endif %}" href="?filter=pending{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}">
                 <span>Pending</span>
-                <span class="workshop-chip__count">12</span>
             </a>
             <a class="workshop-chip{% if request.GET.filter == 'accepted' %} is-active{% endif %}" href="?filter=accepted{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}">
                 <span>Accepted</span>
-                <span class="workshop-chip__count">38</span>
             </a>
             <a class="workshop-chip{% if request.GET.filter == 'rejected' %} is-active{% endif %}" href="?filter=rejected{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}">
                 <span>Rejected</span>
-                <span class="workshop-chip__count">7</span>
             </a>
             <a class="workshop-chip{% if request.GET.filter == 'this-month' %} is-active{% endif %}" href="?filter=this-month{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}">
                 <span>This Month</span>
-                <span class="workshop-chip__count">15</span>
             </a>
         </div>
 
@@ -74,7 +70,7 @@
             </div>
         </div>
 
-        <div class="workshop-list-skeleton-grid" id="workshopSkeletonGrid" aria-hidden="true">
+        <div class="workshop-list-skeleton-grid is-hidden" id="workshopSkeletonGrid" aria-hidden="true">
             {% for i in '123456' %}
                 <article class="workshop-list-card workshop-list-card--skeleton">
                     <div class="workshop-list-card__body">
@@ -182,12 +178,10 @@
             }
 
             if (skeletonGrid && listGrid) {
-                listGrid.classList.add('is-loading');
-                setTimeout(function () {
-                    skeletonGrid.classList.add('is-hidden');
-                    listGrid.classList.remove('is-loading');
+                skeletonGrid.classList.add('is-hidden');
+                requestAnimationFrame(function () {
                     listGrid.classList.add('is-ready');
-                }, 420);
+                });
             }
         })();
     </script>

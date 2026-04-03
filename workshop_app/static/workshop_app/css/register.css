@@ -178,7 +178,7 @@ body.modal-open {
 .register-field select:focus {
     outline: none;
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(94, 106, 210, 0.15);
+    box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.14);
 }
 
 .register-control label {
@@ -186,7 +186,6 @@ body.modal-open {
     left: var(--space-4);
     top: 50%;
     transform: translateY(-50%);
-    margin: 0;
     color: var(--color-text-muted);
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-medium);
@@ -194,8 +193,6 @@ body.modal-open {
     transition: top var(--transition-normal), transform var(--transition-normal), font-size var(--transition-normal), color var(--transition-normal);
 }
 
-.register-field.has-value .register-control label,
-.register-field.is-focused .register-control label,
 .register-control input:focus + label,
 .register-control select:focus + label {
     top: 10px;

@@ -293,6 +293,11 @@
     background: #FFFFFF;
     border: 1px solid #E2E8F0;
     border-left: 4px solid #003366;
+.workshop-chip:focus-visible {
+    outline: 2px solid #003366;
+    outline-offset: 2px;
+    text-decoration: none;
+}
     border-radius: 12px;
     box-shadow: var(--shadow-card);
     transition: all 200ms ease;
@@ -316,6 +321,10 @@
     animation: workshopCardIn 460ms ease forwards;
 }
 
+.workshop-list-page__search-clear:focus-visible {
+    outline: 2px solid #003366;
+    outline-offset: 2px;
+}
 .workshop-list-grid.is-ready .workshop-list-card:nth-child(3n + 1) {
     animation-delay: 0.1s;
 }
@@ -331,6 +340,10 @@
 .workshop-list-card:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-card-hover);
+.workshop-list-page__sort select:focus-visible {
+    outline: 2px solid #003366;
+    outline-offset: 1px;
+}
 }
 
 .workshop-list-card--pending .workshop-list-card__badge { background: color-mix(in srgb, var(--color-warning) 14%, #ffffff); color: #B45309; }
@@ -348,8 +361,17 @@
 .workshop-skeleton {
     position: relative;
     overflow: hidden;
+.workshop-list-card__button:focus-visible {
+    outline: 2px solid #003366;
+    outline-offset: 2px;
+    border-radius: 6px;
+}
     background: #E2E8F0;
     border-radius: var(--radius-sm);
+}
+.workshop-list-page__pagination .page-link:focus-visible {
+    outline: 2px solid #003366;
+    outline-offset: 2px;
 }
 
 .workshop-skeleton::after {

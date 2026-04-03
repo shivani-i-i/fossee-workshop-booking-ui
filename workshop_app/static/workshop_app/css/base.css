@@ -2,6 +2,12 @@
     z-index: 1000;
 }
 .base-content {
-    padding-top: 5em;
+    padding-top: calc(64px + var(--space-4));
     padding-bottom: 5em;
+}
+
+@media (max-width: 767px) {
+    .base-content {
+        padding-top: calc(56px + var(--space-4));
+    }
 }
