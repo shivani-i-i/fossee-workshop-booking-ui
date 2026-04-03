@@ -14,28 +14,51 @@
     <div class="container workshop-list-page">
         <div class="workshop-list-page__hero">
             <div class="workshop-list-page__copy">
-                <h1 class="workshop-list-page__title">Workshops</h1>
+                <p class="workshop-list-page__breadcrumb">
+                    <a href="{% url 'workshop_app:index' %}">Home</a>
+                    <span aria-hidden="true">&gt;</span>
+                    <span>Workshops</span>
+                </p>
+                <h1 class="workshop-list-page__title">Available Workshops</h1>
                 <p class="workshop-list-page__subtitle">Browse the latest workshop types and open each detail view to learn more.</p>
             </div>
             <div class="workshop-list-page__count">
-                <span class="workshop-list-page__count-label">Total</span>
+                <span class="workshop-list-page__count-label">Workshops</span>
                 <span class="workshop-list-page__count-value">{{ workshop_type.paginator.count }}</span>
             </div>
         </div>
 
-        <form class="workshop-list-page__search" method="get" action="">
+        <form class="workshop-list-page__search" method="get" action="" id="workshopSearchForm">
             <span class="workshop-list-page__search-icon" aria-hidden="true">
                 <i class="fa fa-search"></i>
             </span>
-            <input type="search" name="q" value="{{ request.GET.q }}" placeholder="Search workshops by name, type, or duration">
+            <input id="workshopSearchInput" type="search" name="q" value="{{ request.GET.q }}" placeholder="Search workshops by name, type, or duration">
+            <button type="button" class="workshop-list-page__search-clear{% if request.GET.q %} is-visible{% endif %}" id="workshopSearchClear" aria-label="Clear search">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
         </form>
 
         <div class="workshop-list-page__chips" aria-label="Workshop filters">
-            <a class="workshop-chip is-active" href="?filter=all">All</a>
-            <a class="workshop-chip" href="?filter=pending">Pending</a>
-            <a class="workshop-chip" href="?filter=accepted">Accepted</a>
-            <a class="workshop-chip" href="?filter=rejected">Rejected</a>
-            <a class="workshop-chip" href="?filter=this-month">This Month</a>
+            <a class="workshop-chip{% if request.GET.filter|default:'all' == 'all' %} is-active{% endif %}" href="?filter=all{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}">
+                <span>All</span>
+                <span class="workshop-chip__count">{{ workshop_type.paginator.count }}</span>
+            </a>
+            <a class="workshop-chip{% if request.GET.filter == 'pending' %} is-active{% endif %}" href="?filter=pending{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}">
+                <span>Pending</span>
+                <span class="workshop-chip__count">12</span>
+            </a>
+            <a class="workshop-chip{% if request.GET.filter == 'accepted' %} is-active{% endif %}" href="?filter=accepted{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}">
+                <span>Accepted</span>
+                <span class="workshop-chip__count">38</span>
+            </a>
+            <a class="workshop-chip{% if request.GET.filter == 'rejected' %} is-active{% endif %}" href="?filter=rejected{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}">
+                <span>Rejected</span>
+                <span class="workshop-chip__count">7</span>
+            </a>
+            <a class="workshop-chip{% if request.GET.filter == 'this-month' %} is-active{% endif %}" href="?filter=this-month{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}">
+                <span>This Month</span>
+                <span class="workshop-chip__count">15</span>
+            </a>
         </div>
 
         <div class="workshop-list-page__toolbar">
@@ -51,7 +74,21 @@
             </div>
         </div>
 
-        <div class="workshop-list-grid">
+        <div class="workshop-list-skeleton-grid" id="workshopSkeletonGrid" aria-hidden="true">
+            {% for i in '123456' %}
+                <article class="workshop-list-card workshop-list-card--skeleton">
+                    <div class="workshop-list-card__body">
+                        <div class="workshop-skeleton workshop-skeleton--title"></div>
+                        <div class="workshop-skeleton workshop-skeleton--line"></div>
+                        <div class="workshop-skeleton workshop-skeleton--line short"></div>
+                        <div class="workshop-skeleton workshop-skeleton--line"></div>
+                        <div class="workshop-skeleton workshop-skeleton--button"></div>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+
+        <div class="workshop-list-grid" id="workshopListGrid">
             {% for w in workshop_type %}
                 {% url 'workshop_app:workshop_type_details' w.id as workshop_detail_url %}
                 {% include 'workshop_app/includes/workshop_list_card.html' with
@@ -111,4 +148,47 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block extra-custom-scripts %}
+    {{ block.super }}
+    <script>
+        (function () {
+            var searchInput = document.getElementById('workshopSearchInput');
+            var clearButton = document.getElementById('workshopSearchClear');
+            var form = document.getElementById('workshopSearchForm');
+            var skeletonGrid = document.getElementById('workshopSkeletonGrid');
+            var listGrid = document.getElementById('workshopListGrid');
+
+            function toggleClearButton() {
+                if (!searchInput || !clearButton) {
+                    return;
+                }
+                clearButton.classList.toggle('is-visible', (searchInput.value || '').length > 0);
+            }
+
+            if (searchInput && clearButton) {
+                toggleClearButton();
+                searchInput.addEventListener('input', toggleClearButton);
+
+                clearButton.addEventListener('click', function () {
+                    searchInput.value = '';
+                    toggleClearButton();
+                    searchInput.focus();
+                    if (form) {
+                        form.submit();
+                    }
+                });
+            }
+
+            if (skeletonGrid && listGrid) {
+                listGrid.classList.add('is-loading');
+                setTimeout(function () {
+                    skeletonGrid.classList.add('is-hidden');
+                    listGrid.classList.remove('is-loading');
+                    listGrid.classList.add('is-ready');
+                }, 420);
+            }
+        })();
+    </script>
 {% endblock %}
