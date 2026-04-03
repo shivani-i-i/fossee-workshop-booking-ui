@@ -45,15 +45,19 @@
             </a>
             <a class="workshop-chip{% if request.GET.filter == 'pending' %} is-active{% endif %}" href="?filter=pending{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}">
                 <span>Pending</span>
+                <span class="workshop-chip__count">0</span>
             </a>
             <a class="workshop-chip{% if request.GET.filter == 'accepted' %} is-active{% endif %}" href="?filter=accepted{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}">
                 <span>Accepted</span>
+                <span class="workshop-chip__count">0</span>
             </a>
             <a class="workshop-chip{% if request.GET.filter == 'rejected' %} is-active{% endif %}" href="?filter=rejected{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}">
                 <span>Rejected</span>
+                <span class="workshop-chip__count">0</span>
             </a>
             <a class="workshop-chip{% if request.GET.filter == 'this-month' %} is-active{% endif %}" href="?filter=this-month{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}">
                 <span>This Month</span>
+                <span class="workshop-chip__count">0</span>
             </a>
         </div>
 
