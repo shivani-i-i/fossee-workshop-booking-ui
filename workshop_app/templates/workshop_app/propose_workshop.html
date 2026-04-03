@@ -11,97 +11,107 @@
     <script src="{% static 'workshop_app/js/jquery-ui.min.js' %}"></script>
 {% endblock %}
 
-{% block extra-custom-scripts %}
-    <script>
-        var dateToday = new Date();
-        var upto = new Date();
-
-        dateToday.setDate(dateToday.getDate() + 3);
-        upto.setFullYear(dateToday.getFullYear() + 1);
-
-        $(function () {
-            $(".datepicker").datepicker({
-                changeMonth: true,
-                changeYear: true,
-                minDate: dateToday,
-                maxDate: upto,
-                beforeShowDay: $.datepicker.noWeekends,
-            });
-
-
-            $('#disp_tnc').click(function (e) {
-                e.preventDefault()
-                if ($('#id_workshop_type').val() === '')
-                    $('.modal-body').html("<p class='text-danger'>Please select a workshop type</p>")
-                else {
-                    $.ajax({
-                        url: '/workshop/type_tnc/' + $('#id_workshop_type').val(),
-                        success: function (data) {
-                            $('.modal-body').html(data.tnc)
-                        }
-                    })
-                }
-            })
-        });
-    </script>
+{% block page_styles %}
+    <link rel="stylesheet" href="{% static 'workshop_app/css/propose-workshop.css' %}" type="text/css"/>
 {% endblock %}
 
-
 {% block content %}
-    <style type="text/css">
-        .errorlist {
-            color: red;
-        }
-
-    .modal-open .modal{
-        overflow-y: hidden;
-    }
-    </style>
-
-    <div class="container" align="center">
-        <div class="alert alert-info">
-            Note: Before proposing the workshop, please check about the workshop in the
-            <strong>Workshop Types</strong> section
-        </div>
-        <br><br>
-        <div class="col-md-6 col-md-offset-6">
-            <div class="card border-primary">
-                <div class="card-header">
-                    <h3>Propose Workshop</h3>
+    <div class="propose-page" data-start-step="{% if form.tnc_accepted.errors %}3{% elif form.date.errors %}2{% elif form.workshop_type.errors %}1{% else %}1{% endif %}">
+        <div class="propose-shell">
+            <div class="propose-steps" aria-label="Form progress">
+                <div class="propose-steps__line" aria-hidden="true"></div>
+                <div class="propose-step is-current" data-step="1">
+                    <span class="propose-step__circle"><span class="propose-step__number">1</span><i class="fa fa-check" aria-hidden="true"></i></span>
+                    <span class="propose-step__label">Select Type</span>
                 </div>
-                <div class="card-body">
-                    <div class="form-group">
-                        <form method="post">
-                            {% csrf_token %}
-                            <br/>
-                            {{ form.workshop_type }}
-                            <br>
-                            {{ form.date }}
-                            <br>
-                            {{ form.tnc_accepted }} I accept the
-                            <a href="#" id="disp_tnc" data-toggle="modal"
-                            data-target="#exampleModalCenter">
-                                terms and conditions
-                            </a>
-                            <br>
-                            {% if form.errors %}
-                                <br>
-                                <div style="text-align: left; border: 1px solid red; padding-top: 5px">
-                                    <h5 style="text-align: center; color: red; font-weight: bolder">Errors</h5>
-                                    {{ form.errors }}
-                                </div>
-                            {% endif %}
-                            <br>
-                            <button class="btn btn-success" type="submit">Submit</button>
-                        </form>
-                    </div>
+                <div class="propose-step" data-step="2">
+                    <span class="propose-step__circle"><span class="propose-step__number">2</span><i class="fa fa-check" aria-hidden="true"></i></span>
+                    <span class="propose-step__label">Choose Date</span>
+                </div>
+                <div class="propose-step" data-step="3">
+                    <span class="propose-step__circle"><span class="propose-step__number">3</span><i class="fa fa-check" aria-hidden="true"></i></span>
+                    <span class="propose-step__label">Confirm</span>
                 </div>
             </div>
-        </div>
-        <br>
 
+            {% if form.errors %}
+                <div class="propose-error" role="alert">
+                    <h4>Please fix the following fields:</h4>
+                    {{ form.errors }}
+                </div>
+            {% endif %}
+
+            <form method="post" id="proposeWorkshopForm">
+                {% csrf_token %}
+
+                <div class="propose-hidden-inputs" aria-hidden="true">
+                    {{ form.workshop_type }}
+                    {{ form.date }}
+                    {{ form.tnc_accepted }}
+                </div>
+
+                <section class="propose-panel is-active" data-step="1">
+                    <h2>Select Workshop Type</h2>
+                    <p class="propose-panel__note">Choose a workshop format to continue.</p>
+
+                    <div class="propose-type-grid" id="workshopTypeGrid"></div>
+                    <p class="propose-field-error" id="workshopTypeError"></p>
+
+                    <div class="propose-actions">
+                        <button type="button" class="propose-btn propose-btn--primary" id="step1Next" disabled>Next</button>
+                    </div>
+                </section>
+
+                <section class="propose-panel" data-step="2">
+                    <h2>Choose Date</h2>
+                    <p class="propose-panel__note">Please schedule at least 3 days in advance. Weekends are disabled.</p>
+
+                    <div class="propose-date-wrap">
+                        <label for="proposeDateInput">Workshop Date</label>
+                        <input id="proposeDateInput" type="text" class="propose-date-input" placeholder="YYYY-MM-DD" autocomplete="off">
+                    </div>
+                    <p class="propose-field-error" id="workshopDateError"></p>
+
+                    <div class="propose-actions propose-actions--between">
+                        <button type="button" class="propose-btn propose-btn--ghost" data-back="1">Back</button>
+                        <button type="button" class="propose-btn propose-btn--primary" id="step2Next">Next</button>
+                    </div>
+                </section>
+
+                <section class="propose-panel" data-step="3">
+                    <h2>Confirm Details</h2>
+                    <div class="propose-summary">
+                        <div>
+                            <span class="propose-summary__label">Workshop Type</span>
+                            <span class="propose-summary__value" id="summaryType">-</span>
+                        </div>
+                        <div>
+                            <span class="propose-summary__label">Date</span>
+                            <span class="propose-summary__value" id="summaryDate">-</span>
+                        </div>
+                    </div>
+
+                    <div class="propose-terms">
+                        <label class="propose-terms__check" for="termsCheckboxMirror">
+                            <input id="termsCheckboxMirror" type="checkbox">
+                            <span>I accept the</span>
+                        </label>
+                        <a href="#" id="disp_tnc" data-toggle="modal" data-target="#exampleModalCenter">terms and conditions</a>
+                    </div>
+                    <p class="propose-field-error" id="workshopTermsError"></p>
+
+                    <div class="propose-actions propose-actions--between">
+                        <button type="button" class="propose-btn propose-btn--ghost" data-back="2">Back</button>
+                        <button type="submit" class="propose-btn propose-btn--primary" id="submitProposalBtn">
+                            <span class="propose-btn__text">Submit</span>
+                            <span class="propose-btn__loading">Submitting...</span>
+                        </button>
+                    </div>
+                </section>
+            </form>
+        </div>
     </div>
-    <!-- Modal -->
+
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -112,10 +122,190 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-
-                </div>
+                <div class="modal-body"></div>
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block extra-custom-scripts %}
+    <script src="{% static 'workshop_app/js/datepicker.js' %}"></script>
+    <script>
+        (function () {
+            var dateToday = new Date();
+            var upto = new Date();
+            dateToday.setDate(dateToday.getDate() + 3);
+            upto.setFullYear(dateToday.getFullYear() + 1);
+
+            var page = document.querySelector('.propose-page');
+            var startStep = parseInt(page.getAttribute('data-start-step'), 10) || 1;
+            var panels = document.querySelectorAll('.propose-panel');
+            var stepNodes = document.querySelectorAll('.propose-step');
+
+            var workshopTypeSelect = document.getElementById('id_workshop_type');
+            var workshopDateInput = document.getElementById('id_date');
+            var termsCheckbox = document.getElementById('id_tnc_accepted');
+
+            var workshopTypeGrid = document.getElementById('workshopTypeGrid');
+            var dateMirrorInput = document.getElementById('proposeDateInput');
+            var termsMirrorCheckbox = document.getElementById('termsCheckboxMirror');
+
+            var step1Next = document.getElementById('step1Next');
+            var step2Next = document.getElementById('step2Next');
+
+            var typeError = document.getElementById('workshopTypeError');
+            var dateError = document.getElementById('workshopDateError');
+            var termsError = document.getElementById('workshopTermsError');
+
+            var summaryType = document.getElementById('summaryType');
+            var summaryDate = document.getElementById('summaryDate');
+
+            function setStep(step) {
+                panels.forEach(function (panel) {
+                    var isTarget = parseInt(panel.getAttribute('data-step'), 10) === step;
+                    panel.classList.toggle('is-active', isTarget);
+                });
+
+                stepNodes.forEach(function (node) {
+                    var nodeStep = parseInt(node.getAttribute('data-step'), 10);
+                    node.classList.remove('is-complete', 'is-current', 'is-future');
+                    if (nodeStep < step) {
+                        node.classList.add('is-complete');
+                    } else if (nodeStep === step) {
+                        node.classList.add('is-current');
+                    } else {
+                        node.classList.add('is-future');
+                    }
+                });
+            }
+
+            function updateStep1State() {
+                var hasSelection = !!workshopTypeSelect.value;
+                step1Next.disabled = !hasSelection;
+                typeError.textContent = hasSelection ? '' : 'Please select a workshop type to continue.';
+            }
+
+            function buildWorkshopCards() {
+                var options = Array.prototype.slice.call(workshopTypeSelect.options || []);
+                workshopTypeGrid.innerHTML = '';
+                options.forEach(function (opt) {
+                    if (!opt.value) {
+                        return;
+                    }
+
+                    var button = document.createElement('button');
+                    button.type = 'button';
+                    button.className = 'propose-type-card';
+                    button.setAttribute('data-value', opt.value);
+                    button.textContent = opt.text;
+
+                    if (workshopTypeSelect.value === opt.value) {
+                        button.classList.add('is-selected');
+                    }
+
+                    button.addEventListener('click', function () {
+                        workshopTypeSelect.value = opt.value;
+                        var cards = workshopTypeGrid.querySelectorAll('.propose-type-card');
+                        cards.forEach(function (c) { c.classList.remove('is-selected'); });
+                        button.classList.add('is-selected');
+                        summaryType.textContent = opt.text;
+                        updateStep1State();
+                    });
+
+                    workshopTypeGrid.appendChild(button);
+                });
+
+                if (workshopTypeSelect.value) {
+                    var selected = workshopTypeSelect.options[workshopTypeSelect.selectedIndex];
+                    summaryType.textContent = selected ? selected.text : '-';
+                }
+            }
+
+            $(dateMirrorInput).datepicker({
+                changeMonth: true,
+                changeYear: true,
+                minDate: dateToday,
+                maxDate: upto,
+                beforeShowDay: $.datepicker.noWeekends,
+                dateFormat: 'yy-mm-dd',
+                onSelect: function (value) {
+                    workshopDateInput.value = value;
+                    summaryDate.textContent = value;
+                    dateError.textContent = '';
+                }
+            });
+
+            dateMirrorInput.addEventListener('input', function () {
+                workshopDateInput.value = dateMirrorInput.value;
+                summaryDate.textContent = dateMirrorInput.value || '-';
+            });
+
+            termsMirrorCheckbox.addEventListener('change', function () {
+                termsCheckbox.checked = termsMirrorCheckbox.checked;
+                if (termsMirrorCheckbox.checked) {
+                    termsError.textContent = '';
+                }
+            });
+
+            step1Next.addEventListener('click', function () {
+                if (!workshopTypeSelect.value) {
+                    typeError.textContent = 'Please select a workshop type to continue.';
+                    return;
+                }
+                setStep(2);
+            });
+
+            step2Next.addEventListener('click', function () {
+                if (!workshopDateInput.value) {
+                    dateError.textContent = 'Please choose a workshop date to continue.';
+                    return;
+                }
+                summaryDate.textContent = workshopDateInput.value;
+                setStep(3);
+            });
+
+            var backButtons = document.querySelectorAll('[data-back]');
+            backButtons.forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    setStep(parseInt(btn.getAttribute('data-back'), 10));
+                });
+            });
+
+            document.getElementById('proposeWorkshopForm').addEventListener('submit', function (event) {
+                if (!termsCheckbox.checked) {
+                    event.preventDefault();
+                    termsError.textContent = 'Please accept terms and conditions before submitting.';
+                    return;
+                }
+
+                var submitBtn = document.getElementById('submitProposalBtn');
+                submitBtn.classList.add('is-loading');
+                submitBtn.disabled = true;
+            });
+
+            $('#disp_tnc').click(function (e) {
+                e.preventDefault();
+                if ($('#id_workshop_type').val() === '') {
+                    $('.modal-body').html("<p class='text-danger'>Please select a workshop type</p>");
+                } else {
+                    $.ajax({
+                        url: '/workshop/type_tnc/' + $('#id_workshop_type').val(),
+                        success: function (data) {
+                            $('.modal-body').html(data.tnc);
+                        }
+                    });
+                }
+            });
+
+            if (workshopDateInput.value) {
+                dateMirrorInput.value = workshopDateInput.value;
+                summaryDate.textContent = workshopDateInput.value;
+            }
+
+            termsMirrorCheckbox.checked = !!termsCheckbox.checked;
+            buildWorkshopCards();
+            updateStep1State();
+            setStep(startStep);
+        })();
+    </script>
 {% endblock %}
