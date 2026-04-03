@@ -1,0 +1,171 @@
+{% extends 'workshop_app/base.html' %}
+{% load static %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block page_styles %}
+    <link rel="stylesheet" href="{% static 'workshop_app/css/register.css' %}" type="text/css"/>
+{% endblock %}
+
+{% block content %}
+    <div class="register-page">
+        <div class="register-card">
+            <div class="register-card__brand" aria-hidden="true">F</div>
+            <h1 class="register-card__title">Create your account</h1>
+            <p class="register-card__subtitle">Join the workshop booking platform</p>
+
+            {% if form.non_field_errors %}
+                <div class="register-alert" role="alert">
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error|escape }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <form method="post" class="register-form" novalidate>
+                {% csrf_token %}
+
+                <div class="register-form__grid">
+                    <div class="register-field register-field--half">
+                        <label for="id_first_name">First Name</label>
+                        {{ form.first_name }}
+                        {% for error in form.first_name.errors %}
+                            <p class="register-field__error">{{ error|escape }}</p>
+                        {% endfor %}
+                    </div>
+
+                    <div class="register-field register-field--half">
+                        <label for="id_last_name">Last Name</label>
+                        {{ form.last_name }}
+                        {% for error in form.last_name.errors %}
+                            <p class="register-field__error">{{ error|escape }}</p>
+                        {% endfor %}
+                    </div>
+
+                    <div class="register-field register-field--full">
+                        <label for="id_email">Email</label>
+                        {{ form.email }}
+                        {% for error in form.email.errors %}
+                            <p class="register-field__error">{{ error|escape }}</p>
+                        {% endfor %}
+                    </div>
+
+                    <div class="register-field register-field--full">
+                        <label for="id_username">Username</label>
+                        {{ form.username }}
+                        {% for error in form.username.errors %}
+                            <p class="register-field__error">{{ error|escape }}</p>
+                        {% endfor %}
+                    </div>
+
+                    <div class="register-field register-field--full">
+                        <label for="id_institute">Institute Name</label>
+                        {{ form.institute }}
+                        {% for error in form.institute.errors %}
+                            <p class="register-field__error">{{ error|escape }}</p>
+                        {% endfor %}
+                    </div>
+
+                    <div class="register-field register-field--full">
+                        <label for="id_department">Role</label>
+                        {{ form.department }}
+                        {% for error in form.department.errors %}
+                            <p class="register-field__error">{{ error|escape }}</p>
+                        {% endfor %}
+                    </div>
+
+                    <div class="register-field register-field--full">
+                        <label for="id_password">Password</label>
+                        <div class="register-password-wrap">
+                            {{ form.password }}
+                            <button type="button" class="register-password-toggle" id="registerPasswordToggle"
+                                    aria-label="Show password" aria-pressed="false">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <div class="register-strength" aria-label="Password strength">
+                            <span class="register-strength__bar"></span>
+                            <span class="register-strength__bar"></span>
+                            <span class="register-strength__bar"></span>
+                            <span class="register-strength__bar"></span>
+                        </div>
+                        {% for error in form.password.errors %}
+                            <p class="register-field__error">{{ error|escape }}</p>
+                        {% endfor %}
+                    </div>
+
+                    <div class="register-field register-field--full">
+                        <label for="id_confirm_password">Confirm Password</label>
+                        {{ form.confirm_password }}
+                        {% for error in form.confirm_password.errors %}
+                            <p class="register-field__error">{{ error|escape }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <button type="submit" class="register-submit">Create Account</button>
+            </form>
+
+            <p class="register-card__footer">
+                Already have an account?
+                <a href="{% url 'workshop_app:login' %}">Sign in</a>
+            </p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra-custom-scripts %}
+    {{ block.super }}
+    <script>
+        (function () {
+            var passwordField = document.getElementById('id_password');
+            var toggleButton = document.getElementById('registerPasswordToggle');
+            var strengthBars = document.querySelectorAll('.register-strength__bar');
+
+            if (passwordField && toggleButton) {
+                toggleButton.addEventListener('click', function () {
+                    var isPassword = passwordField.getAttribute('type') === 'password';
+                    passwordField.setAttribute('type', isPassword ? 'text' : 'password');
+                    toggleButton.setAttribute('aria-pressed', isPassword ? 'true' : 'false');
+                    toggleButton.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
+                    toggleButton.innerHTML = isPassword
+                        ? '<i class="fa fa-eye-slash" aria-hidden="true"></i>'
+                        : '<i class="fa fa-eye" aria-hidden="true"></i>';
+                });
+            }
+
+            function scorePassword(value) {
+                var score = 0;
+                if (!value) {
+                    return 0;
+                }
+
+                if (value.length >= 8) score += 1;
+                if (value.length >= 12) score += 1;
+                if (/[A-Z]/.test(value)) score += 1;
+                if (/[0-9]/.test(value) || /[^A-Za-z0-9]/.test(value)) score += 1;
+
+                return Math.min(score, 4);
+            }
+
+            function updateStrength(value) {
+                var score = scorePassword(value);
+                strengthBars.forEach(function (bar, index) {
+                    bar.className = 'register-strength__bar';
+                    if (index < score) {
+                        bar.classList.add('is-active');
+                    }
+                });
+            }
+
+            if (passwordField) {
+                updateStrength(passwordField.value);
+                passwordField.addEventListener('input', function () {
+                    updateStrength(passwordField.value);
+                });
+            }
+        })();
+    </script>
+{% endblock %}
