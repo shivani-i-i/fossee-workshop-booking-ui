@@ -7,10 +7,8 @@
     <script>
         (function () {
             try {
-                var storedTheme = localStorage.getItem('theme');
-                var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-                var initialTheme = storedTheme || (prefersDark ? 'dark' : 'light');
-                document.documentElement.setAttribute('data-theme', initialTheme);
+                document.documentElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
             } catch (error) {
                 document.documentElement.setAttribute('data-theme', 'light');
             }
@@ -58,7 +56,7 @@
         <div class="site-navbar__inner">
             <a class="site-logo" href="/">
                 <span class="site-logo__mark" aria-hidden="true">
-                    <img class="site-logo__image" src="https://fossee.in/sites/all/themes/software_responsive_theme/img/logo.png" alt="">
+                    <img class="site-logo__image" src="https://fossee.in/sites/all/themes/software_responsive_theme/img/logo/logo/logo_icon_2.png" alt="">
                 </span>
                 <span class="site-logo__text">
                     <span class="site-logo__title">FOSSEE</span>
@@ -218,11 +216,11 @@
         <div class="site-footer__inner">
             <div class="site-footer__logo-row">
                 <a class="site-footer__logo-chip" href="/">
-                    <img class="site-footer__logo-image" src="https://fossee.in/sites/all/themes/software_responsive_theme/img/logo.png" alt="FOSSEE logo">
+                    <img class="site-footer__logo-image" src="https://fossee.in/sites/all/themes/software_responsive_theme/img/logo/logo/logo_icon_2.png" alt="FOSSEE logo">
                     <span>FOSSEE</span>
                 </a>
                 <div class="site-footer__logo-chip site-footer__logo-chip--iit">
-                    <img class="site-footer__logo-image" src="https://www.iitb.ac.in/themes/custom/iitb_bootstrap/logo.png" alt="IIT Bombay logo">
+                    <img class="site-footer__logo-image" src="https://fossee.in/sites/all/themes/software_responsive_theme/img/iitb-logo.png" alt="IIT Bombay logo">
                     <span>IIT Bombay</span>
                 </div>
             </div>

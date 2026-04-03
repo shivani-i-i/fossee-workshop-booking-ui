@@ -42,9 +42,12 @@
     height: 42px;
     border-radius: 8px;
     overflow: hidden;
-    border: 1px solid rgba(0, 51, 102, 0.2);
+    border: 1px solid rgba(0, 51, 102, 0.14);
     background: #FFFFFF;
     flex: 0 0 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .site-logo__image {

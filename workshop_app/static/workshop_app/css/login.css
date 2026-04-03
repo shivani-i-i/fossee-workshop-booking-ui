@@ -96,12 +96,12 @@
 }
 
 .login-split-hero__logo-img {
-    width: auto;
-    height: 32px;
+    width: 34px;
+    height: 34px;
     border-radius: 8px;
     background: #FFFFFF;
-    object-fit: contain;
-    padding: 3px 6px;
+    object-fit: cover;
+    padding: 2px;
 }
 
 .login-card-wrap {

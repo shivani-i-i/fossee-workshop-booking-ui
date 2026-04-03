@@ -47,15 +47,16 @@
     text-decoration: none;
     font-weight: var(--font-weight-semibold);
     letter-spacing: 0.01em;
+    min-height: 44px;
 }
 
 .site-footer__logo-image {
-    width: auto;
-    height: 30px;
+    width: 28px;
+    height: 28px;
     border-radius: 8px;
-    object-fit: contain;
+    object-fit: cover;
     background: #ffffff;
-    padding: 2px 4px;
+    padding: 2px;
 }
 
 .site-footer__logo-chip--iit {
