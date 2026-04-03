@@ -16,6 +16,23 @@
             <h1 class="register-card__title">Create your account</h1>
             <p class="register-card__subtitle">Join the workshop booking platform</p>
 
+            <div class="register-steps" aria-label="Registration progress">
+                <div class="register-step is-active">
+                    <span class="register-step__dot">1</span>
+                    <span class="register-step__label">Personal Info</span>
+                </div>
+                <span class="register-step__line" aria-hidden="true"></span>
+                <div class="register-step is-active">
+                    <span class="register-step__dot">2</span>
+                    <span class="register-step__label">Account Details</span>
+                </div>
+                <span class="register-step__line" aria-hidden="true"></span>
+                <div class="register-step">
+                    <span class="register-step__dot">3</span>
+                    <span class="register-step__label">Complete</span>
+                </div>
+            </div>
+
             {% if form.non_field_errors %}
                 <div class="register-alert" role="alert">
                     {% for error in form.non_field_errors %}
@@ -24,88 +41,135 @@
                 </div>
             {% endif %}
 
-            <form method="post" class="register-form" novalidate>
+            <form method="post" class="register-form" id="registerForm">
                 {% csrf_token %}
 
                 <div class="register-form__grid">
-                    <div class="register-field register-field--half">
-                        <label for="id_first_name">First Name</label>
-                        {{ form.first_name }}
+                    <div class="register-field register-field--half{% if form.first_name.errors %} has-error{% elif form.first_name.value %} has-value{% endif %}">
+                        <div class="register-control">
+                            {{ form.first_name }}
+                            <label for="id_first_name">First Name</label>
+                            <span class="register-field__icon register-field__icon--valid"><i class="fa fa-check" aria-hidden="true"></i></span>
+                            <span class="register-field__icon register-field__icon--invalid"><i class="fa fa-times" aria-hidden="true"></i></span>
+                        </div>
                         {% for error in form.first_name.errors %}
                             <p class="register-field__error">{{ error|escape }}</p>
                         {% endfor %}
                     </div>
 
-                    <div class="register-field register-field--half">
-                        <label for="id_last_name">Last Name</label>
-                        {{ form.last_name }}
+                    <div class="register-field register-field--half{% if form.last_name.errors %} has-error{% elif form.last_name.value %} has-value{% endif %}">
+                        <div class="register-control">
+                            {{ form.last_name }}
+                            <label for="id_last_name">Last Name</label>
+                            <span class="register-field__icon register-field__icon--valid"><i class="fa fa-check" aria-hidden="true"></i></span>
+                            <span class="register-field__icon register-field__icon--invalid"><i class="fa fa-times" aria-hidden="true"></i></span>
+                        </div>
                         {% for error in form.last_name.errors %}
                             <p class="register-field__error">{{ error|escape }}</p>
                         {% endfor %}
                     </div>
 
-                    <div class="register-field register-field--full">
-                        <label for="id_email">Email</label>
-                        {{ form.email }}
+                    <div class="register-field register-field--full{% if form.email.errors %} has-error{% elif form.email.value %} has-value{% endif %}">
+                        <div class="register-control">
+                            {{ form.email }}
+                            <label for="id_email">Email</label>
+                            <span class="register-field__icon register-field__icon--valid"><i class="fa fa-check" aria-hidden="true"></i></span>
+                            <span class="register-field__icon register-field__icon--invalid"><i class="fa fa-times" aria-hidden="true"></i></span>
+                        </div>
                         {% for error in form.email.errors %}
                             <p class="register-field__error">{{ error|escape }}</p>
                         {% endfor %}
                     </div>
 
-                    <div class="register-field register-field--full">
-                        <label for="id_username">Username</label>
-                        {{ form.username }}
+                    <div class="register-field register-field--full{% if form.username.errors %} has-error{% elif form.username.value %} has-value{% endif %}">
+                        <div class="register-control">
+                            {{ form.username }}
+                            <label for="id_username">Username</label>
+                            <span class="register-field__icon register-field__icon--valid"><i class="fa fa-check" aria-hidden="true"></i></span>
+                            <span class="register-field__icon register-field__icon--invalid"><i class="fa fa-times" aria-hidden="true"></i></span>
+                        </div>
                         {% for error in form.username.errors %}
                             <p class="register-field__error">{{ error|escape }}</p>
                         {% endfor %}
                     </div>
 
-                    <div class="register-field register-field--full">
-                        <label for="id_institute">Institute Name</label>
-                        {{ form.institute }}
+                    <div class="register-field register-field--full{% if form.institute.errors %} has-error{% elif form.institute.value %} has-value{% endif %}">
+                        <div class="register-control">
+                            {{ form.institute }}
+                            <label for="id_institute">Institute Name</label>
+                            <span class="register-field__icon register-field__icon--valid"><i class="fa fa-check" aria-hidden="true"></i></span>
+                            <span class="register-field__icon register-field__icon--invalid"><i class="fa fa-times" aria-hidden="true"></i></span>
+                        </div>
                         {% for error in form.institute.errors %}
                             <p class="register-field__error">{{ error|escape }}</p>
                         {% endfor %}
                     </div>
 
-                    <div class="register-field register-field--full">
-                        <label for="id_department">Role</label>
-                        {{ form.department }}
+                    <div class="register-field register-field--full{% if form.department.errors %} has-error{% elif form.department.value %} has-value{% endif %}">
+                        <div class="register-control register-control--select">
+                            {{ form.department }}
+                            <label for="id_department">Role</label>
+                            <span class="register-field__icon register-field__icon--valid"><i class="fa fa-check" aria-hidden="true"></i></span>
+                            <span class="register-field__icon register-field__icon--invalid"><i class="fa fa-times" aria-hidden="true"></i></span>
+                        </div>
                         {% for error in form.department.errors %}
                             <p class="register-field__error">{{ error|escape }}</p>
                         {% endfor %}
                     </div>
 
-                    <div class="register-field register-field--full">
-                        <label for="id_password">Password</label>
-                        <div class="register-password-wrap">
-                            {{ form.password }}
-                            <button type="button" class="register-password-toggle" id="registerPasswordToggle"
-                                    aria-label="Show password" aria-pressed="false">
-                                <i class="fa fa-eye" aria-hidden="true"></i>
-                            </button>
+                    <div class="register-field register-field--full{% if form.password.errors %} has-error{% elif form.password.value %} has-value{% endif %}" id="passwordFieldBlock">
+                        <div class="register-control">
+                            <div class="register-password-wrap">
+                                {{ form.password }}
+                                <button type="button" class="register-password-toggle" id="registerPasswordToggle"
+                                        aria-label="Show password" aria-pressed="false">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <label for="id_password">Password</label>
+                            <span class="register-field__icon register-field__icon--valid"><i class="fa fa-check" aria-hidden="true"></i></span>
+                            <span class="register-field__icon register-field__icon--invalid"><i class="fa fa-times" aria-hidden="true"></i></span>
                         </div>
                         <div class="register-strength" aria-label="Password strength">
-                            <span class="register-strength__bar"></span>
-                            <span class="register-strength__bar"></span>
-                            <span class="register-strength__bar"></span>
-                            <span class="register-strength__bar"></span>
+                            <span class="register-strength__fill" id="registerStrengthFill"></span>
                         </div>
+                        <ul class="register-password-rules" id="passwordRules" aria-label="Password requirements">
+                            <li data-rule="length"><span class="rule-icon">✓</span>At least 8 characters</li>
+                            <li data-rule="number"><span class="rule-icon">✓</span>Contains a number</li>
+                            <li data-rule="upper"><span class="rule-icon">✓</span>Contains uppercase letter</li>
+                        </ul>
                         {% for error in form.password.errors %}
                             <p class="register-field__error">{{ error|escape }}</p>
                         {% endfor %}
                     </div>
 
-                    <div class="register-field register-field--full">
-                        <label for="id_confirm_password">Confirm Password</label>
-                        {{ form.confirm_password }}
+                    <div class="register-field register-field--full{% if form.confirm_password.errors %} has-error{% elif form.confirm_password.value %} has-value{% endif %}">
+                        <div class="register-control">
+                            {{ form.confirm_password }}
+                            <label for="id_confirm_password">Confirm Password</label>
+                            <span class="register-field__icon register-field__icon--valid"><i class="fa fa-check" aria-hidden="true"></i></span>
+                            <span class="register-field__icon register-field__icon--invalid"><i class="fa fa-times" aria-hidden="true"></i></span>
+                        </div>
                         {% for error in form.confirm_password.errors %}
                             <p class="register-field__error">{{ error|escape }}</p>
                         {% endfor %}
                     </div>
                 </div>
 
-                <button type="submit" class="register-submit">Create Account</button>
+                <div class="register-terms">
+                    <label class="register-checkbox" for="id_terms_acknowledged">
+                        <input type="checkbox" id="id_terms_acknowledged" required>
+                        <span class="register-checkbox__box" aria-hidden="true"></span>
+                        <span>I agree to the workshop booking terms</span>
+                    </label>
+                    <button type="button" class="register-terms__view" id="viewTermsBtn">View Terms</button>
+                </div>
+
+                <button type="submit" class="register-submit" id="registerSubmitBtn">
+                    <span class="register-submit__label">Create Account</span>
+                    <span class="register-submit__spinner" aria-hidden="true"></span>
+                    <span class="register-submit__success" aria-hidden="true"><i class="fa fa-check"></i></span>
+                </button>
             </form>
 
             <p class="register-card__footer">
@@ -114,15 +178,42 @@
             </p>
         </div>
     </div>
+
+    <div class="register-modal" id="termsModal" aria-hidden="true" role="dialog" aria-labelledby="termsModalTitle">
+        <div class="register-modal__backdrop" data-close-modal="true"></div>
+        <div class="register-modal__dialog">
+            <div class="register-modal__header">
+                <h2 id="termsModalTitle">Workshop Terms</h2>
+                <button type="button" class="register-modal__close" id="closeTermsModal" aria-label="Close terms modal">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="register-modal__content">
+                <p>By creating an account, you agree to use this portal for academic and workshop-related purposes only.</p>
+                <p>You are responsible for providing accurate profile details and maintaining the confidentiality of your login credentials.</p>
+                <p>Workshop schedules, participation rules, and confirmation policies may vary by workshop type and coordinator guidance.</p>
+                <p>FOSSEE and IIT Bombay may use anonymized participation data to improve workshop quality and planning outcomes.</p>
+                <p>Participants are expected to follow professional conduct during sessions and respect instructor and institutional guidelines.</p>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block extra-custom-scripts %}
     {{ block.super }}
     <script>
         (function () {
+            var form = document.getElementById('registerForm');
             var passwordField = document.getElementById('id_password');
+            var confirmPasswordField = document.getElementById('id_confirm_password');
             var toggleButton = document.getElementById('registerPasswordToggle');
-            var strengthBars = document.querySelectorAll('.register-strength__bar');
+            var strengthFill = document.getElementById('registerStrengthFill');
+            var rulesList = document.getElementById('passwordRules');
+            var fields = document.querySelectorAll('.register-control input, .register-control select');
+            var submitButton = document.getElementById('registerSubmitBtn');
+            var termsModal = document.getElementById('termsModal');
+            var openTermsButton = document.getElementById('viewTermsBtn');
+            var closeTermsButton = document.getElementById('closeTermsModal');
 
             if (passwordField && toggleButton) {
                 toggleButton.addEventListener('click', function () {
@@ -135,6 +226,41 @@
                         : '<i class="fa fa-eye" aria-hidden="true"></i>';
                 });
             }
+
+            if (openTermsButton && termsModal) {
+                openTermsButton.addEventListener('click', function () {
+                    termsModal.classList.add('is-open');
+                    termsModal.setAttribute('aria-hidden', 'false');
+                    document.body.classList.add('modal-open');
+                });
+            }
+
+            function closeTermsModal() {
+                if (!termsModal) {
+                    return;
+                }
+                termsModal.classList.remove('is-open');
+                termsModal.setAttribute('aria-hidden', 'true');
+                document.body.classList.remove('modal-open');
+            }
+
+            if (closeTermsButton) {
+                closeTermsButton.addEventListener('click', closeTermsModal);
+            }
+
+            if (termsModal) {
+                termsModal.addEventListener('click', function (event) {
+                    if (event.target && event.target.getAttribute('data-close-modal') === 'true') {
+                        closeTermsModal();
+                    }
+                });
+            }
+
+            document.addEventListener('keydown', function (event) {
+                if (event.key === 'Escape') {
+                    closeTermsModal();
+                }
+            });
 
             function scorePassword(value) {
                 var score = 0;
@@ -151,19 +277,136 @@
             }
 
             function updateStrength(value) {
+                if (!strengthFill) {
+                    return;
+                }
                 var score = scorePassword(value);
-                strengthBars.forEach(function (bar, index) {
-                    bar.className = 'register-strength__bar';
-                    if (index < score) {
-                        bar.classList.add('is-active');
+                var percent = (score / 4) * 100;
+
+                strengthFill.style.width = percent + '%';
+
+                if (score <= 1) {
+                    strengthFill.style.background = 'var(--color-error)';
+                } else if (score <= 2) {
+                    strengthFill.style.background = 'var(--color-warning)';
+                } else {
+                    strengthFill.style.background = 'var(--color-success)';
+                }
+
+                if (rulesList) {
+                    var checks = {
+                        length: value.length >= 8,
+                        number: /[0-9]/.test(value),
+                        upper: /[A-Z]/.test(value)
+                    };
+
+                    Object.keys(checks).forEach(function (rule) {
+                        var item = rulesList.querySelector('[data-rule="' + rule + '"]');
+                        if (item) {
+                            item.classList.toggle('is-met', checks[rule]);
+                        }
+                    });
+                }
+            }
+
+            function markFieldState(inputElement) {
+                if (!inputElement) {
+                    return;
+                }
+
+                var wrapper = inputElement.closest('.register-field');
+                if (!wrapper) {
+                    return;
+                }
+
+                var value = (inputElement.value || '').trim();
+                var hasValue = value.length > 0;
+                var isValid = true;
+
+                if (inputElement.id === 'id_email' && hasValue) {
+                    isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+                } else if (inputElement.id === 'id_password' && hasValue) {
+                    isValid = value.length >= 8 && /[A-Z]/.test(value) && /[0-9]/.test(value);
+                } else if (inputElement.id === 'id_confirm_password' && hasValue && passwordField) {
+                    isValid = value === passwordField.value;
+                } else if (inputElement.tagName === 'SELECT') {
+                    isValid = hasValue;
+                } else if (hasValue) {
+                    isValid = value.length > 1;
+                }
+
+                wrapper.classList.toggle('has-value', hasValue);
+                wrapper.classList.toggle('is-valid', hasValue && isValid);
+                wrapper.classList.toggle('is-invalid', hasValue && !isValid);
+            }
+
+            fields.forEach(function (field) {
+                if (!field.getAttribute('placeholder')) {
+                    field.setAttribute('placeholder', ' ');
+                }
+
+                markFieldState(field);
+
+                field.addEventListener('input', function () {
+                    markFieldState(field);
+                    if (field.id === 'id_password') {
+                        updateStrength(field.value);
+                        if (confirmPasswordField) {
+                            markFieldState(confirmPasswordField);
+                        }
                     }
                 });
-            }
+
+                field.addEventListener('change', function () {
+                    markFieldState(field);
+                });
+
+                field.addEventListener('focus', function () {
+                    var wrapper = field.closest('.register-field');
+                    if (wrapper) {
+                        wrapper.classList.add('is-focused');
+                    }
+                });
+
+                field.addEventListener('blur', function () {
+                    var wrapper = field.closest('.register-field');
+                    if (wrapper) {
+                        wrapper.classList.remove('is-focused');
+                    }
+                    markFieldState(field);
+                });
+            });
 
             if (passwordField) {
                 updateStrength(passwordField.value);
-                passwordField.addEventListener('input', function () {
-                    updateStrength(passwordField.value);
+            }
+
+            if (form && submitButton) {
+                form.addEventListener('submit', function (event) {
+                    if (form.dataset.submitting === 'true') {
+                        return;
+                    }
+
+                    var terms = document.getElementById('id_terms_acknowledged');
+                    if (terms && !terms.checked) {
+                        event.preventDefault();
+                        terms.focus();
+                        return;
+                    }
+
+                    event.preventDefault();
+                    submitButton.disabled = true;
+                    submitButton.classList.add('is-loading');
+
+                    setTimeout(function () {
+                        submitButton.classList.remove('is-loading');
+                        submitButton.classList.add('is-success');
+
+                        setTimeout(function () {
+                            form.dataset.submitting = 'true';
+                            form.submit();
+                        }, 500);
+                    }, 700);
                 });
             }
         })();

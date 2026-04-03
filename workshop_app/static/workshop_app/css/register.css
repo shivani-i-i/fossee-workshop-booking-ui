@@ -7,6 +7,10 @@
     background: var(--color-bg-secondary);
 }
 
+body.modal-open {
+    overflow: hidden;
+}
+
 .base-content {
     padding: 0;
     background: var(--color-bg-secondary);
@@ -14,7 +18,7 @@
 
 .register-card {
     width: 100%;
-    max-width: 400px;
+    max-width: 560px;
     padding: 40px;
     border-radius: 12px;
     background: var(--color-bg-primary);
@@ -53,6 +57,60 @@
     text-align: center;
 }
 
+.register-steps {
+    margin-top: var(--space-6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+}
+
+.register-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-1);
+}
+
+.register-step__dot {
+    width: 24px;
+    height: 24px;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-primary);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+}
+
+.register-step__label {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    white-space: nowrap;
+}
+
+.register-step.is-active .register-step__dot {
+    border-color: var(--color-primary);
+    background: var(--color-primary);
+    color: var(--color-bg-primary);
+}
+
+.register-step.is-active .register-step__label {
+    color: var(--color-primary);
+}
+
+.register-step__line {
+    width: 56px;
+    height: 2px;
+    border-radius: var(--radius-full);
+    background: var(--color-border);
+    margin-bottom: calc(var(--space-4) - var(--space-1));
+}
+
 .register-alert {
     margin-top: var(--space-6);
     padding: var(--space-3) var(--space-4);
@@ -89,19 +147,15 @@
     grid-column: 1 / -1;
 }
 
-.register-field label {
-    display: block;
-    margin-bottom: var(--space-2);
-    color: var(--color-text-primary);
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-medium);
+.register-control {
+    position: relative;
 }
 
 .register-field input,
 .register-field select {
     width: 100%;
     height: 44px;
-    padding: 0 var(--space-4);
+    padding: 14px calc(var(--space-6) + var(--space-4)) 0 var(--space-4);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     background: var(--color-bg-primary);
@@ -112,11 +166,12 @@
 
 .register-field select {
     appearance: none;
+    padding-top: 16px;
 }
 
 .register-field input::placeholder,
 .register-field select::placeholder {
-    color: var(--color-text-muted);
+    color: transparent;
 }
 
 .register-field input:focus,
@@ -126,12 +181,78 @@
     box-shadow: 0 0 0 3px rgba(94, 106, 210, 0.15);
 }
 
+.register-control label {
+    position: absolute;
+    left: var(--space-4);
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    pointer-events: none;
+    transition: top var(--transition-normal), transform var(--transition-normal), font-size var(--transition-normal), color var(--transition-normal);
+}
+
+.register-field.has-value .register-control label,
+.register-field.is-focused .register-control label,
+.register-control input:focus + label,
+.register-control select:focus + label {
+    top: 10px;
+    transform: translateY(0);
+    font-size: var(--font-size-xs);
+    color: var(--color-primary);
+}
+
+.register-field__icon {
+    position: absolute;
+    right: var(--space-3);
+    top: 50%;
+    transform: translateY(-50%) scale(0.85);
+    font-size: var(--font-size-sm);
+    opacity: 0;
+    transition: opacity var(--transition-normal), transform var(--transition-normal), color var(--transition-normal);
+    pointer-events: none;
+}
+
+.register-field__icon--valid {
+    color: var(--color-success);
+}
+
+.register-field__icon--invalid {
+    color: var(--color-error);
+}
+
+.register-field.is-valid .register-field__icon--valid {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+}
+
+.register-field.is-invalid .register-field__icon--invalid,
+.register-field.has-error .register-field__icon--invalid {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+}
+
+.register-field.is-invalid input,
+.register-field.has-error input,
+.register-field.is-invalid select,
+.register-field.has-error select {
+    border-color: var(--color-error);
+    box-shadow: 0 0 0 3px rgba(229, 72, 77, 0.12);
+}
+
+.register-field.is-valid input,
+.register-field.is-valid select {
+    border-color: var(--color-success);
+}
+
 .register-password-wrap {
     position: relative;
 }
 
 .register-password-wrap input {
-    padding-right: 3rem;
+    padding-right: calc(var(--space-16) + var(--space-2));
 }
 
 .register-password-toggle {
@@ -155,33 +276,61 @@
 }
 
 .register-strength {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 6px;
+    position: relative;
+    height: 8px;
+    border-radius: var(--radius-full);
+    background: var(--color-border-light);
+    overflow: hidden;
     margin-top: var(--space-3);
 }
 
-.register-strength__bar {
-    height: 6px;
+.register-strength__fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0;
     border-radius: var(--radius-full);
-    background: var(--color-border-light);
-    transition: background var(--transition-normal);
-}
-
-.register-strength__bar:nth-child(1).is-active {
     background: var(--color-error);
+    transition: width var(--transition-slow), background var(--transition-slow);
 }
 
-.register-strength__bar:nth-child(2).is-active {
-    background: var(--color-warning);
+.register-password-rules {
+    margin: var(--space-3) 0 0;
+    display: grid;
+    gap: var(--space-2);
 }
 
-.register-strength__bar:nth-child(3).is-active {
-    background: #f4c95d;
+.register-password-rules li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+    transition: color var(--transition-normal);
 }
 
-.register-strength__bar:nth-child(4).is-active {
-    background: var(--color-success);
+.register-password-rules .rule-icon {
+    width: 16px;
+    height: 16px;
+    border-radius: var(--radius-full);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-border-light);
+    color: var(--color-text-muted);
+    font-size: 10px;
+    font-weight: var(--font-weight-bold);
+    transition: background var(--transition-normal), color var(--transition-normal);
+}
+
+.register-password-rules li.is-met {
+    color: var(--color-success);
+}
+
+.register-password-rules li.is-met .rule-icon {
+    background: color-mix(in srgb, var(--color-success) 20%, var(--color-bg-primary));
+    color: var(--color-success);
 }
 
 .register-field__error {
@@ -191,7 +340,76 @@
     line-height: var(--line-height-normal);
 }
 
+.register-terms {
+    margin-top: var(--space-5);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+}
+
+.register-checkbox {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+    cursor: pointer;
+}
+
+.register-checkbox input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.register-checkbox__box {
+    width: 18px;
+    height: 18px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-primary);
+    position: relative;
+    transition: border-color var(--transition-normal), background var(--transition-normal);
+}
+
+.register-checkbox__box::after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 2px;
+    width: 5px;
+    height: 9px;
+    border-right: 2px solid var(--color-bg-primary);
+    border-bottom: 2px solid var(--color-bg-primary);
+    transform: rotate(45deg) scale(0);
+    transition: transform var(--transition-normal);
+}
+
+.register-checkbox input:checked + .register-checkbox__box {
+    border-color: var(--color-primary);
+    background: var(--color-primary);
+}
+
+.register-checkbox input:checked + .register-checkbox__box::after {
+    transform: rotate(45deg) scale(1);
+}
+
+.register-terms__view {
+    border: 0;
+    background: transparent;
+    color: var(--color-primary);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    padding: 0;
+}
+
+.register-terms__view:hover {
+    color: var(--color-primary-hover);
+}
+
 .register-submit {
+    position: relative;
     width: 100%;
     height: 44px;
     margin-top: var(--space-6);
@@ -201,7 +419,7 @@
     color: var(--color-bg-primary);
     font-size: var(--font-size-base);
     font-weight: var(--font-weight-semibold);
-    transition: background var(--transition-normal), border-color var(--transition-normal), transform var(--transition-fast);
+    transition: background var(--transition-normal), border-color var(--transition-normal), transform var(--transition-fast), opacity var(--transition-normal);
 }
 
 .register-submit:hover {
@@ -211,6 +429,59 @@
 
 .register-submit:active {
     transform: translateY(1px);
+}
+
+.register-submit:disabled {
+    cursor: not-allowed;
+    background: var(--color-text-muted);
+    border-color: var(--color-text-muted);
+}
+
+.register-submit__spinner,
+.register-submit__success {
+    position: absolute;
+    right: var(--space-4);
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+}
+
+.register-submit__spinner {
+    width: 16px;
+    height: 16px;
+    border-radius: var(--radius-full);
+    border: 2px solid rgba(255, 255, 255, 0.45);
+    border-top-color: var(--color-bg-primary);
+}
+
+.register-submit.is-loading {
+    pointer-events: none;
+    opacity: 0.85;
+}
+
+.register-submit.is-loading .register-submit__spinner {
+    opacity: 1;
+    animation: registerSpin 650ms linear infinite;
+}
+
+.register-submit.is-loading .register-submit__label {
+    opacity: 0.85;
+}
+
+.register-submit.is-success {
+    background: var(--color-success);
+    border-color: var(--color-success);
+}
+
+.register-submit.is-success .register-submit__success {
+    opacity: 1;
+}
+
+@keyframes registerSpin {
+    to {
+        transform: translateY(-50%) rotate(360deg);
+    }
 }
 
 .register-card__footer {
@@ -231,6 +502,89 @@
     text-decoration: none;
 }
 
+.register-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-normal);
+}
+
+.register-modal.is-open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.register-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(26, 26, 26, 0.45);
+}
+
+.register-modal__dialog {
+    position: relative;
+    width: min(560px, calc(100% - var(--space-6)));
+    max-height: calc(100vh - var(--space-12));
+    background: var(--color-bg-primary);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    flex-direction: column;
+    transform: translateY(var(--space-4));
+    transition: transform var(--transition-normal);
+}
+
+.register-modal.is-open .register-modal__dialog {
+    transform: translateY(0);
+}
+
+.register-modal__header {
+    padding: var(--space-4) var(--space-5);
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+}
+
+.register-modal__header h2 {
+    margin: 0;
+    color: var(--color-text-primary);
+    font-size: var(--font-size-lg);
+}
+
+.register-modal__close {
+    border: 0;
+    background: transparent;
+    color: var(--color-text-secondary);
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-full);
+}
+
+.register-modal__close:hover {
+    background: var(--color-bg-hover);
+    color: var(--color-text-primary);
+}
+
+.register-modal__content {
+    padding: var(--space-5);
+    overflow-y: auto;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-relaxed);
+    display: grid;
+    gap: var(--space-3);
+}
+
+.register-modal__content p {
+    margin: 0;
+}
+
 @media (max-width: 767px) {
     .register-page {
         min-height: calc(100vh - 52px);
@@ -238,8 +592,20 @@
     }
 
     .register-card {
-        max-width: none;
+        max-width: 100%;
         padding: 28px 20px;
+    }
+
+    .register-steps {
+        gap: var(--space-1);
+    }
+
+    .register-step__label {
+        font-size: 10px;
+    }
+
+    .register-step__line {
+        width: 26px;
     }
 
     .register-form__grid {
@@ -249,5 +615,10 @@
     .register-field--half,
     .register-field--full {
         grid-column: 1 / -1;
+    }
+
+    .register-terms {
+        flex-direction: column;
+        align-items: flex-start;
     }
 }
