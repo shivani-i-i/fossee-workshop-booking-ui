@@ -92,12 +92,26 @@ def workshop_public_stats(request):
             messages.add_message(request, messages.WARNING, "No data found")
     ws_states, ws_count = Workshop.objects.get_workshops_by_state(workshops)
     ws_type, ws_type_count = Workshop.objects.get_workshops_by_type(workshops)
+
+    total_workshops = workshops.count()
+    total_participants = workshops.values('coordinator_id').distinct().count()
+    first_date = workshops.order_by('date').values_list('date', flat=True).first()
+    last_date = workshops.order_by('-date').values_list('date', flat=True).first()
+    months_span = 1
+    if first_date and last_date:
+        months_span = ((last_date.year - first_date.year) * 12) + (last_date.month - first_date.month) + 1
+        months_span = max(months_span, 1)
+    avg_per_month = round(total_workshops / months_span, 1) if total_workshops else 0
+
     paginator = Paginator(workshops, 30)
     page = request.GET.get('page')
     workshops = paginator.get_page(page)
     context = {"form": form, "objects": workshops, "ws_states": ws_states,
                "ws_count": ws_count, "ws_type": ws_type,
-               "ws_type_count": ws_type_count}
+               "ws_type_count": ws_type_count,
+               "total_workshops": total_workshops,
+               "total_participants": total_participants,
+               "avg_per_month": avg_per_month}
     return render(
         request, 'statistics_app/workshop_public_stats.html', context
     )
