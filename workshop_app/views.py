@@ -213,9 +213,16 @@ def workshop_status_instructor(request):
         date__gte=today,
     ) | Q(status=0)).order_by('-date')
 
+    total_proposed = workshops.count()
+    accepted_count = workshops.filter(status=1).count()
+    pending_count = workshops.filter(status=0, tnc_accepted=True).count()
+
     return render(request, 'workshop_app/workshop_status_instructor.html',
                   {"workshops": workshops,
-                   "today": today})
+                   "today": today,
+                   "total_proposed": total_proposed,
+                   "accepted_count": accepted_count,
+                   "pending_count": pending_count})
 
 
 @login_required

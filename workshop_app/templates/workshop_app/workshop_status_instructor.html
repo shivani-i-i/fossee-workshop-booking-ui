@@ -2,135 +2,195 @@
 {% load static %}
 
 {% block title %}
-    Workshop Status
+    My Workshops
 {% endblock %}
 
 {% block extra-dependencies %}
-    <style >
-    .table-heading{
-        color: #04a9cf;
-    }
-    </style>
     <link rel="stylesheet" href="{% static 'workshop_app/css/jquery-ui.css' %}" type="text/css"/>
     <script src="{% static 'workshop_app/js/jquery-1.12.4.js' %}"></script>
     <script src="{% static 'workshop_app/js/jquery-ui.min.js' %}"></script>
 {% endblock %}
-{% block extra-custom-scripts %}
-    {% load static %}
-    <script src="{% static 'workshop_app/js/datepicker.js' %}"></script>
+
+{% block page_styles %}
+    <link rel="stylesheet" href="{% static 'workshop_app/css/instructor-dashboard.css' %}" type="text/css"/>
 {% endblock %}
 
-
 {% block content %}
+<div class="container instructor-dashboard">
     {% if not workshops %}
-        <div class="container">
-            <div class="jumbotron">
-                <h1>Welcome {{ user.first_name }}</h1>
-                <p>Your workshop related information will be shown here, Please navigate to <b>Workshop list</b> and
-                    depending upon
-                    your expertise and availability create a workshop by going to
-                    <b>Create Workshop</b>.</p>
-            </div>
+        <div class="instructor-empty-state">
+            <h1>My Workshops</h1>
+            <p>No workshops to show right now. Propose a new workshop to get started.</p>
+            <a href="{% url 'workshop_app:propose_workshop' %}" class="instructor-btn instructor-btn--primary">Propose New Workshop</a>
         </div>
     {% else %}
-        <h3 class="text-center">The status of your workshops </h3>
-        <br>
-
-        <!-- Accepted View -->
-        <br>
-        <div class="container">
-            <h3 align="center" class="table-heading"><strong>Workshops Accepted</strong></h3>
-            <table class="table table-striped table-responsive-sm">
-                <thead>
-                <tr>
-                    <th>Coordinator Name</th>
-                    <th>Institute</th>
-                    <th>Workshop Name</th>
-                    <th>Workshop Day</th>
-                    <th>Status</th>
-                </tr>
-                </thead>
-                {% for workshop in workshops %}
-                    <tbody>
-                    <tr>
-                        {% if workshop.status %}
-                            <td>
-                                <a href="{% url 'workshop_app:view_profile' workshop.coordinator.id %}">
-                                    {{ workshop.coordinator.get_full_name }}</a>
-                            </td>
-                            <td>{{ workshop.coordinator.profile.institute }}</td>
-                            <td>{{ workshop.workshop_type |capfirst }}</td>
-                            <td>{{ workshop.date | date }}
-
-                                {% if workshop.date > today %}
-                                    <span class="material-icons datepicker btn"
-                                          data-toggle="popinfo"
-                                          title="Note"
-                                          data-content="Click here to change date"
-                                          onclick="changeDate('R,{{ workshop.date| safe }}, {{ forloop.counter }}')">event</span>
-                                    <div class="myDialogR{{ forloop.counter }}" style="display: none;"
-                                         title="Select New Date">
-                                        <form method="post" action="{% url 'workshop_app:change_workshop_date' workshop.id %}">
-                                            <input type="text" placeholder="New date" name="new_date"
-                                                   class="rDate{{ forloop.counter }}"/><br>
-                                            {% csrf_token %}
-                                            <button class="btn btn-primary btn-xs" type="submit">Save</button>
-                                        </form>
-                                    </div>
-                                {% endif %}
-                            </td>
-                            <td><span class="badge badge-success">{{ workshop.get_status }}</span></td>
-                        {% endif %}
-                    </tr>
-                    </tbody>
-
-                {% endfor %}
-
-            </table>
+        <div class="instructor-dashboard__header">
+            <h1>My Workshops</h1>
+            <a href="{% url 'workshop_app:propose_workshop' %}" class="instructor-btn instructor-btn--primary">Propose New Workshop</a>
         </div>
 
+        <section class="instructor-stats-grid">
+            <article class="instructor-stat-card">
+                <span class="instructor-stat-card__icon is-total"><i class="fa fa-briefcase" aria-hidden="true"></i></span>
+                <strong>{{ total_proposed }}</strong>
+                <p>Total Proposed</p>
+            </article>
+            <article class="instructor-stat-card">
+                <span class="instructor-stat-card__icon is-accepted"><i class="fa fa-check" aria-hidden="true"></i></span>
+                <strong>{{ accepted_count }}</strong>
+                <p>Accepted</p>
+            </article>
+            <article class="instructor-stat-card">
+                <span class="instructor-stat-card__icon is-pending"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+                <strong>{{ pending_count }}</strong>
+                <p>Pending</p>
+            </article>
+        </section>
 
-        <!-- Proposed View -->
-        <br>
-        <div class="container">
-            <h3 class="text-center table-heading"><strong>Workshops Proposed By Coordinators</strong>
-            </h3>
-            <table class="table table-striped table-responsive-sm">
-                <thead>
-                <tr>
-                    <th>Coordinator Name</th>
-                    <th>Institute</th>
-                    <th>Workshop Name</th>
-                    <th>Workshop Day</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                {% csrf_token %}
-                {% for workshop in workshops %}
+        <section class="instructor-table-wrap">
+            <div class="instructor-table-scroll">
+                <table class="instructor-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
                     <tbody>
-                    <tr>
-                        {% if not workshop.status and workshop.tnc_accepted %}
+                    {% for workshop in workshops %}
+                        {% if workshop.tnc_accepted %}
+                        <tr>
+                            <td>{{ workshop.workshop_type|capfirst }}</td>
+                            <td>{{ workshop.date|date }}</td>
                             <td>
-                                <a href="{% url 'workshop_app:view_profile' workshop.coordinator.id %}">
-                                    {{ workshop.coordinator.get_full_name }}</a>
+                                <span class="instructor-status-badge {% if workshop.status == 1 %}is-accepted{% else %}is-pending{% endif %}">
+                                    {{ workshop.get_status }}
+                                </span>
                             </td>
-                            <td>{{ workshop.coordinator.profile.institute }}</td>
-                            <td>{{ workshop.workshop_type }}</td>
-                            <td>{{ workshop.date | date }}</td>
-                            <td><span class="badge badge-warning">{{ workshop.get_status }}</span></td>
                             <td>
-                                <a href="{% url 'workshop_app:accept_workshop' workshop.id %}" class="btn btn-primary btn-sm"  onclick="return confirm('Once accepted you cannot reject, you have to personally contact the Coordinator if the workshop is to be cancelled. Are you sure you want to accept the workshop?')">
-                                    Accept
-                                </a>
+                                <div class="instructor-actions">
+                                    <a href="{% url 'workshop_app:workshop_details' workshop.id %}" class="instructor-btn instructor-btn--outline">View Details</a>
+                                    <button type="button" class="instructor-btn instructor-btn--secondary"
+                                            {% if workshop.date <= today or workshop.status != 1 %}disabled{% endif %}
+                                            data-change-date="true"
+                                            data-workshop-id="{{ workshop.id }}"
+                                            data-workshop-date="{{ workshop.date|date:'Y-m-d' }}">
+                                        Change Date
+                                    </button>
+                                    <button type="button" class="instructor-btn instructor-btn--danger" disabled>Cancel</button>
+                                </div>
                             </td>
+                        </tr>
                         {% endif %}
-                    </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="4" class="instructor-table__empty">No workshops available.</td>
+                        </tr>
+                    {% endfor %}
                     </tbody>
+                </table>
+            </div>
 
+            <div class="instructor-mobile-cards">
+                {% for workshop in workshops %}
+                    {% if workshop.tnc_accepted %}
+                    <article class="instructor-mobile-card">
+                        <h3>{{ workshop.workshop_type|capfirst }}</h3>
+                        <p><i class="fa fa-calendar" aria-hidden="true"></i> {{ workshop.date|date }}</p>
+                        <p>
+                            <span class="instructor-status-badge {% if workshop.status == 1 %}is-accepted{% else %}is-pending{% endif %}">
+                                {{ workshop.get_status }}
+                            </span>
+                        </p>
+                        <div class="instructor-actions">
+                            <a href="{% url 'workshop_app:workshop_details' workshop.id %}" class="instructor-btn instructor-btn--outline">View Details</a>
+                            <button type="button" class="instructor-btn instructor-btn--secondary"
+                                    {% if workshop.date <= today or workshop.status != 1 %}disabled{% endif %}
+                                    data-change-date="true"
+                                    data-workshop-id="{{ workshop.id }}"
+                                    data-workshop-date="{{ workshop.date|date:'Y-m-d' }}">
+                                Change Date
+                            </button>
+                            <button type="button" class="instructor-btn instructor-btn--danger" disabled>Cancel</button>
+                        </div>
+                    </article>
+                    {% endif %}
+                {% empty %}
+                    <div class="instructor-table__empty">No workshops available.</div>
                 {% endfor %}
-            </table>
-        </div>
+            </div>
+        </section>
     {% endif %}
+</div>
 
+<div class="instructor-modal" id="changeDateModal" aria-hidden="true">
+    <div class="instructor-modal__backdrop" data-close-modal="true"></div>
+    <div class="instructor-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="changeDateTitle">
+        <h2 id="changeDateTitle">Change Workshop Date</h2>
+        <form id="changeDateForm" method="post">
+            {% csrf_token %}
+            <label for="changeDateInput">New Date</label>
+            <input type="text" id="changeDateInput" name="new_date" placeholder="YYYY-MM-DD" required>
+            <div class="instructor-modal__actions">
+                <button type="button" class="instructor-btn instructor-btn--outline" data-close-modal="true">Cancel</button>
+                <button type="submit" class="instructor-btn instructor-btn--primary">Confirm</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra-custom-scripts %}
+<script>
+    (function () {
+        var dateInput = $('#changeDateInput');
+        var modal = document.getElementById('changeDateModal');
+        var form = document.getElementById('changeDateForm');
+        var openButtons = document.querySelectorAll('[data-change-date="true"]');
+        var closeButtons = document.querySelectorAll('[data-close-modal="true"]');
+
+        function openModal(workshopId, currentDate) {
+            var dateToday = new Date();
+            var upto = new Date();
+            upto.setFullYear(dateToday.getFullYear() + 1);
+
+            form.setAttribute('action', '/workshop/change_workshop_date/' + workshopId);
+            dateInput.val(currentDate);
+
+            dateInput.datepicker('destroy').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                minDate: dateToday,
+                maxDate: upto,
+                dateFormat: 'yy-mm-dd'
+            });
+
+            modal.classList.add('is-open');
+            modal.setAttribute('aria-hidden', 'false');
+        }
+
+        function closeModal() {
+            modal.classList.remove('is-open');
+            modal.setAttribute('aria-hidden', 'true');
+        }
+
+        openButtons.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                openModal(btn.getAttribute('data-workshop-id'), btn.getAttribute('data-workshop-date'));
+            });
+        });
+
+        closeButtons.forEach(function (btn) {
+            btn.addEventListener('click', closeModal);
+        });
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && modal.classList.contains('is-open')) {
+                closeModal();
+            }
+        });
+    })();
+</script>
 {% endblock %}
