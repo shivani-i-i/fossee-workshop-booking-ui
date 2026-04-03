@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+{% load custom_filters %}
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        {% block title %}
+            HomePage
+        {% endblock %}
+    </title>
+
+    <script src="{% static 'workshop_app/js/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'workshop_app/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'workshop_app/js/popper.min.js' %}"></script>
+    <script src="{% static 'workshop_app/js/toastr.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+
+    {% block extra-dependencies %}
+    {% endblock %}
+
+    <link rel="stylesheet" href="{% static 'workshop_app/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'workshop_app/css/toastr.min.css' %}">
+    <link rel="stylesheet" href="{% static 'workshop_app/css/variables.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'workshop_app/css/navbar.css' %}" type="text/css"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'workshop_app/css/base.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'workshop_app/css/font-awesome.css' %}" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+
+    {% block extra-custom-scripts %}
+    {% endblock %}
+
+</head>
+
+<body>
+{% block header %}
+    <nav class="site-navbar" aria-label="Primary navigation">
+        <div class="site-navbar__inner">
+            <a class="site-logo" href="/">FOSSEE</a>
+
+            <button class="site-navbar__toggle" type="button" id="siteNavbarToggle"
+                    aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="siteNavMenu">
+                <span class="site-navbar__toggle-bar"></span>
+                <span class="site-navbar__toggle-bar"></span>
+                <span class="site-navbar__toggle-bar"></span>
+            </button>
+
+            <div class="site-nav" id="siteNavMenu">
+                <a href="/" class="site-nav__link{% if request.path == '/' %} active{% endif %}">Home</a>
+                <a href="{% url 'workshop_app:workshop_type_list' %}" class="site-nav__link{% if '/workshop/types/' in request.path %} active{% endif %}">Workshops</a>
+                <a href="{% url 'workshop_app:login' %}" class="site-nav__btn site-nav__btn--login{% if '/workshop/login/' in request.path %} active{% endif %}">Login</a>
+                <a href="{% url 'workshop_app:register' %}" class="site-nav__btn site-nav__btn--register{% if '/workshop/register/' in request.path %} active{% endif %}">Register</a>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+<div class="base-content">
+    {% block content %}
+        <h1>Base Template Content. Please override me</h1>
+    {% endblock %}
+</div>
+
+<script>
+    {% if messages %}
+        {% for message in messages %}
+            toastr[{% if message.tags %} "{{ message.tags }}" {% else %} "info" {% endif %}]("{{ message }}");
+        {% endfor %}
+    {% endif %}
+
+    (function () {
+        var toggleButton = document.getElementById('siteNavbarToggle');
+        var menu = document.getElementById('siteNavMenu');
+
+        if (!toggleButton || !menu) {
+            return;
+        }
+
+        function closeMenu() {
+            menu.classList.remove('is-open');
+            toggleButton.setAttribute('aria-expanded', 'false');
+        }
+
+        toggleButton.addEventListener('click', function (event) {
+            event.stopPropagation();
+            var isOpen = menu.classList.toggle('is-open');
+            toggleButton.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        document.addEventListener('click', function (event) {
+            if (!menu.contains(event.target) && !toggleButton.contains(event.target)) {
+                closeMenu();
+            }
+        });
+
+        var navLinks = menu.querySelectorAll('a');
+        navLinks.forEach(function (link) {
+            link.addEventListener('click', closeMenu);
+        });
+    })();
+</script>
+
+</body>
+<footer class="footer">
+    {% block footer %}
+       <div class="container">
+           Developed by FOSSEE group, IIT Bombay
+       </div> 
+    {% endblock %}
+</footer>
+</html>
