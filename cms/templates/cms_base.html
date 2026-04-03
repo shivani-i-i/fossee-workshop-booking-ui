@@ -11,6 +11,8 @@
     {{ page.imports | safe }}
     <script src="{% static 'cms/js/bootstrap.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'workshop_app/css/base.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'workshop_app/css/variables.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'cms/css/cms-home.css' %}" type="text/css"/>
 </head>
 <body>
 
@@ -52,6 +54,73 @@
         </div>
     </div>
 </nav>
+{% if page.permalink == 'home' %}
+<main class="cms-home">
+    <section class="cms-home-hero">
+        <div class="cms-home-hero__inner">
+            <h1>Learn. Build. Contribute.</h1>
+            <p>Book hands-on workshops by IIT Bombay's FOSSEE team</p>
+            <div class="cms-home-hero__actions">
+                <a class="cms-btn cms-btn--light" href="{% url 'workshop_app:workshop_type_list' %}">Browse Workshops</a>
+                <a class="cms-btn cms-btn--outline-light" href="#cms-home-features">Learn More</a>
+            </div>
+        </div>
+        <div class="cms-home-hero__wave" aria-hidden="true">
+            <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill="currentColor" d="M0,64L80,58.7C160,53,320,43,480,48C640,53,800,75,960,80C1120,85,1280,75,1360,69.3L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"></path>
+            </svg>
+        </div>
+    </section>
+
+    <section id="cms-home-features" class="cms-home-features">
+        <article class="cms-feature-card">
+            <span class="cms-feature-card__icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 3L13.9 8.1L19 10L13.9 11.9L12 17L10.1 11.9L5 10L10.1 8.1L12 3Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+            <h3>Free Workshops</h3>
+            <p>Attend practical sessions at zero cost and build real skills with open-source tools.</p>
+        </article>
+        <article class="cms-feature-card">
+            <span class="cms-feature-card__icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 12C14.2091 12 16 10.2091 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8C8 10.2091 9.79086 12 12 12Z" stroke="currentColor" stroke-width="1.8"/>
+                    <path d="M5 20C5 16.6863 8.13401 14 12 14C15.866 14 19 16.6863 19 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+            </span>
+            <h3>Expert Instructors</h3>
+            <p>Learn directly from experienced educators and contributors from IIT Bombay's FOSSEE team.</p>
+        </article>
+        <article class="cms-feature-card">
+            <span class="cms-feature-card__icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 7L12 3L20 7V12C20 16.4183 16.4183 20 12 20C7.58172 20 4 16.4183 4 12V7Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                    <path d="M9 11.5L11.2 13.7L15.5 9.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+            <h3>Certificate on Completion</h3>
+            <p>Receive recognition for your learning journey after successfully completing workshop tasks.</p>
+        </article>
+    </section>
+
+    <section class="cms-home-stats">
+        <div class="cms-home-stats__inner">
+            <p class="cms-home-stats__item"><strong>500+</strong>Workshops Conducted</p>
+            <p class="cms-home-stats__item"><strong>10,000+</strong>Students</p>
+            <p class="cms-home-stats__item"><strong>20+</strong>Topics</p>
+        </div>
+    </section>
+
+    <section class="cms-home-cta">
+        <div class="cms-home-cta__inner">
+            <h2>Ready to start learning?</h2>
+            <p>Register now and book your first workshop</p>
+            <a class="cms-btn cms-btn--primary" href="{% url 'workshop_app:register' %}">Register</a>
+        </div>
+    </section>
+</main>
+{% endif %}
 <div class="base-content">
 {{ page.content | safe }}
 </div>
