@@ -176,8 +176,29 @@ def workshop_status_coordinator(request):
     workshops = Workshop.objects.filter(
         coordinator=user.id
     ).order_by('-date')
+
+    pending_workshops = workshops.filter(status=0, tnc_accepted=True)
+    accepted_queryset = workshops.filter(status=1)
+
+    accepted_paginator = Paginator(accepted_queryset, 10)
+    accepted_page = request.GET.get('accepted_page')
+    accepted_workshops = accepted_paginator.get_page(accepted_page)
+
+    total_workshops = workshops.count()
+    pending_count = pending_workshops.count()
+    accepted_count = accepted_queryset.count()
+    rejected_count = workshops.filter(status=2).count()
+
     return render(request, 'workshop_app/workshop_status_coordinator.html',
-                  {"workshops": workshops})
+                  {
+                      "workshops": workshops,
+                      "pending_workshops": pending_workshops,
+                      "accepted_workshops": accepted_workshops,
+                      "total_workshops": total_workshops,
+                      "pending_count": pending_count,
+                      "accepted_count": accepted_count,
+                      "rejected_count": rejected_count,
+                  })
 
 
 @login_required

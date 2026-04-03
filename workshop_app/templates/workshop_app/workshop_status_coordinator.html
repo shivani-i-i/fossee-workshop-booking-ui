@@ -1,88 +1,154 @@
 {% extends "workshop_app/base.html" %}
+{% load static %}
 
 {% block title %}
-    My Workshops
+    Coordinator Dashboard
 {% endblock %}
 
-{% block extra-custom-scripts %}
-<style >
-    .table-heading{
-        color: #04a9cf;
-    }
-    </style>
+{% block page_styles %}
+    <link rel="stylesheet" href="{% static 'workshop_app/css/coordinator-dashboard.css' %}" type="text/css"/>
 {% endblock %}
 
 {% block content %}
+<div class="container coordinator-dashboard">
     {% if not workshops %}
-        <div class="container">
-            <div class="jumbotron">
-                <h1>Welcome {{ user.first_name }}</h1>
-                <p>Information Related to your workshops will be shown here, you can also
-                    propose a Workshop as per your available date in <strong>Propose Workshop tab</strong> .</p>
-            </div>
+        <div class="coordinator-empty-jumbo">
+            <h1>Welcome {{ user.first_name }}</h1>
+            <p>
+                Information related to your workshops will appear here.
+                You can propose a new workshop from the <strong>Propose Workshop</strong> section.
+            </p>
         </div>
     {% else %}
-        <h3 class="text-center">The status of your workshops </h3>
-        <br>
+        <div class="coordinator-dashboard__header">
+            <h1>Dashboard</h1>
+            <span class="coordinator-role-badge">Coordinator</span>
+        </div>
 
-        <!-- Accepted View -->
+        <section class="coordinator-stats-grid">
+            <article class="coordinator-stat-card">
+                <span class="coordinator-stat-card__icon is-total"><i class="fa fa-briefcase" aria-hidden="true"></i></span>
+                <strong>{{ total_workshops }}</strong>
+                <p>Total Workshops</p>
+            </article>
+            <article class="coordinator-stat-card">
+                <span class="coordinator-stat-card__icon is-pending"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+                <strong>{{ pending_count }}</strong>
+                <p>Pending</p>
+            </article>
+            <article class="coordinator-stat-card">
+                <span class="coordinator-stat-card__icon is-accepted"><i class="fa fa-check" aria-hidden="true"></i></span>
+                <strong>{{ accepted_count }}</strong>
+                <p>Accepted</p>
+            </article>
+            <article class="coordinator-stat-card">
+                <span class="coordinator-stat-card__icon is-rejected"><i class="fa fa-times" aria-hidden="true"></i></span>
+                <strong>{{ rejected_count }}</strong>
+                <p>Rejected</p>
+            </article>
+        </section>
 
-        <br>
-        <div class="container">
-            <h3 class="text-center table-heading"><strong>Workshops Accepted</strong></h3>
-            <table class="table table-striped table-responsive-sm">
-                <thead>
-                <tr>
-                    <th>Workshop Name</th>
-                    <th>Instructor Name</th>
-                    <th>Workshop Day</th>
-                    <th>Status</th>
-                </tr>
-                </thead>
-
-                {% for workshop in workshops %}
+        <section class="coordinator-table-section">
+            <div class="coordinator-table-section__head">
+                <h2>Pending Workshops</h2>
+            </div>
+            {% if pending_workshops %}
+            <div class="coordinator-table-scroll">
+                <table class="coordinator-table coordinator-table--pending">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Date</th>
+                            <th>Instructor</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
                     <tbody>
-                    <tr>
-                        {% if workshop.status %}
-                            <td><a href="{% url 'workshop_app:workshop_details' workshop.id %}" >{{ workshop.workshop_type |capfirst }}</a></td>
+                        {% for workshop in pending_workshops %}
+                        <tr>
+                            <td><a href="{% url 'workshop_app:workshop_details' workshop.id %}">{{ workshop.coordinator.get_full_name|default:user.get_full_name }}</a></td>
+                            <td>{{ workshop.workshop_type|capfirst }}</td>
+                            <td>{{ workshop.date|date }}</td>
+                            <td>{% if workshop.instructor %}{{ workshop.instructor.get_full_name }}{% else %}Not assigned{% endif %}</td>
+                            <td>
+                                <div class="coordinator-action-buttons">
+                                    <button type="button" class="coordinator-btn coordinator-btn--accept" disabled>Accept</button>
+                                    <button type="button" class="coordinator-btn coordinator-btn--reject" disabled>Reject</button>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="coordinator-empty-state">
+                <i class="fa fa-inbox" aria-hidden="true"></i>
+                <p>No pending workshops found.</p>
+            </div>
+            {% endif %}
+        </section>
+
+        <section class="coordinator-table-section">
+            <div class="coordinator-table-section__head">
+                <h2>Accepted Workshops</h2>
+            </div>
+            {% if accepted_workshops %}
+            <div class="coordinator-table-scroll">
+                <table class="coordinator-table coordinator-table--accepted">
+                    <thead>
+                        <tr>
+                            <th>Workshop Name</th>
+                            <th>Instructor Name</th>
+                            <th>Workshop Day</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for workshop in accepted_workshops %}
+                        <tr>
+                            <td><a href="{% url 'workshop_app:workshop_details' workshop.id %}">{{ workshop.workshop_type|capfirst }}</a></td>
                             <td>{{ workshop.instructor.get_full_name }}</td>
-                            <td>{{ workshop.date | date }}</td>
-                            <td><span class="badge badge-success">{{ workshop.get_status }}</span></td>
-                        {% endif %}
-                    </tr>
+                            <td>{{ workshop.date|date }}</td>
+                            <td>
+                                <span class="coordinator-status-badge">
+                                    <span class="coordinator-status-dot"></span>
+                                    {{ workshop.get_status }}
+                                </span>
+                            </td>
+                        </tr>
+                        {% endfor %}
                     </tbody>
-                {% endfor %}
+                </table>
+            </div>
 
-            </table>
-        </div>
-
-        <!-- Proposed View -->
-
-        <br>
-        <div class="container">
-            <h3 class="text-center table-heading"><strong>Workshops Proposed By Me</strong></h3>
-            <table class="table table-striped table-responsive-sm">
-                <thead>
-                <tr>
-                    <th>Workshop Name</th>
-                    <th>Workshop Day</th>
-                    <th>Status</th>
-                </tr>
-                </thead>
-                {% for workshop in workshops %}
-                    <tbody>
-                    <tr>
-                        {% if not workshop.status and workshop.tnc_accepted %}
-                            <td><a href="{% url 'workshop_app:workshop_details' workshop.id %}" >{{ workshop.workshop_type |capfirst }}</a></td>
-                            <td>{{ workshop.date | date }}</td>
-                            <td><span class="badge badge-warning">{{ workshop.get_status }}</span></td>
+            <div class="coordinator-pagination-wrap">
+                <ul class="pagination pagination-sm">
+                    <li class="page-item">
+                        {% if accepted_workshops.has_previous %}
+                            <a class="page-link" href="?accepted_page={{ accepted_workshops.previous_page_number }}">Previous</a>
                         {% endif %}
-                    </tr>
-                    </tbody>
-
-                {% endfor %}
-            </table>
-        </div>
+                    </li>
+                    <li class="page-item">
+                        <span class="page-link">
+                            Page {{ accepted_workshops.number }} of {{ accepted_workshops.paginator.num_pages }}
+                        </span>
+                    </li>
+                    <li class="page-item">
+                        {% if accepted_workshops.has_next %}
+                            <a class="page-link" href="?accepted_page={{ accepted_workshops.next_page_number }}">Next</a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+            {% else %}
+            <div class="coordinator-empty-state">
+                <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                <p>No accepted workshops yet.</p>
+            </div>
+            {% endif %}
+        </section>
     {% endif %}
-
+</div>
 {% endblock %}
