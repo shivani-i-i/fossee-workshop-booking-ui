@@ -1,0 +1,161 @@
+{% extends "workshop_app/base.html" %}
+{% load static %}
+
+{% block title %}Workshop Details{% endblock %}
+
+{% block page_styles %}
+<link rel="stylesheet" href="{% static 'workshop_app/css/workshop-details.css' %}" type="text/css"/>
+{% endblock %}
+
+{% block content %}
+<div class="workshop-details-page container">
+    <section class="workshop-details-hero">
+        <a href="javascript:history.back()" class="workshop-details-hero__back"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
+        <div class="workshop-details-hero__head">
+            <h1>{{ workshop.workshop_type.name }}</h1>
+            <span class="workshop-status-badge workshop-status-badge--{{ workshop.get_status|lower }}">{{ workshop.get_status }}</span>
+        </div>
+    </section>
+
+    <div class="workshop-details-layout">
+        <main class="workshop-details-main">
+            <section class="workshop-info-grid">
+                <article class="workshop-info-card">
+                    <span class="workshop-info-card__icon"><i class="fa fa-calendar"></i></span>
+                    <div>
+                        <span>Date</span>
+                        <strong>{{ workshop.date|date }}</strong>
+                    </div>
+                </article>
+                <article class="workshop-info-card">
+                    <span class="workshop-info-card__icon"><i class="fa fa-clock-o"></i></span>
+                    <div>
+                        <span>Duration</span>
+                        <strong>{{ workshop.workshop_type.duration }} day{{ workshop.workshop_type.duration|pluralize }}</strong>
+                    </div>
+                </article>
+                <article class="workshop-info-card">
+                    <span class="workshop-info-card__icon"><i class="fa fa-tag"></i></span>
+                    <div>
+                        <span>Type</span>
+                        <strong>{{ workshop.workshop_type.name }}</strong>
+                    </div>
+                </article>
+                <article class="workshop-info-card">
+                    <span class="workshop-info-card__icon"><i class="fa fa-user"></i></span>
+                    <div>
+                        <span>Coordinator</span>
+                        <strong>{{ workshop.coordinator.get_full_name|default:workshop.coordinator.username }}</strong>
+                    </div>
+                </article>
+            </section>
+
+            <section class="workshop-terms-card">
+                <button type="button" class="workshop-accordion" id="termsAccordionBtn" aria-expanded="false" aria-controls="termsAccordionPanel">
+                    <span>Terms and Conditions</span>
+                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                </button>
+                <div class="workshop-accordion__panel" id="termsAccordionPanel">
+                    <div class="workshop-accordion__content">
+                        {{ workshop.workshop_type.terms_and_conditions|linebreaks }}
+                    </div>
+                </div>
+            </section>
+
+            <section class="workshop-comments-card">
+                <div class="workshop-comments-card__head">
+                    <h2>Comments</h2>
+                </div>
+
+                <form method="post" class="workshop-comment-form" id="workshopCommentForm">
+                    {% csrf_token %}
+                    <div class="workshop-comment-form__field">
+                        {{ form.comment }}
+                    </div>
+                    <div class="workshop-comment-form__meta">
+                        <div>
+                            {% if request.user.profile.position == 'instructor' %}
+                                <label class="workshop-public-check">{{ form.public }} Public comment</label>
+                            {% endif %}
+                        </div>
+                        <span class="workshop-comment-form__count"><span id="commentCharCount">0</span>/600</span>
+                    </div>
+                    <button type="submit" class="workshop-primary-btn">Post Comment</button>
+                </form>
+
+                <div class="workshop-comment-list">
+                    {% for comment in workshop_comments %}
+                    <article class="workshop-comment-item">
+                        <div class="workshop-comment-item__avatar">
+                            {{ comment.author.first_name|default:comment.author.username|slice:":1"|upper }}
+                        </div>
+                        <div class="workshop-comment-item__body">
+                            <div class="workshop-comment-item__meta">
+                                <strong>{{ comment.author.get_full_name|default:comment.author.username }}</strong>
+                                <span>{{ comment.created_date|date:"d M Y, H:i" }}</span>
+                                <span class="workshop-comment-item__visibility {% if comment.public %}is-public{% else %}is-private{% endif %}">
+                                    <i aria-hidden="true"></i>{% if comment.public %}Public{% else %}Private{% endif %}
+                                </span>
+                            </div>
+                            <p>{{ comment.comment|linebreaksbr }}</p>
+                        </div>
+                    </article>
+                    {% empty %}
+                    <div class="workshop-empty">No comments yet.</div>
+                    {% endfor %}
+                </div>
+            </section>
+        </main>
+
+        <aside class="workshop-action-card">
+            <h3>Actions</h3>
+            {% if request.user.profile.position == 'coordinator' %}
+                <button type="button" class="workshop-action-btn workshop-action-btn--accept">Accept</button>
+                <button type="button" class="workshop-action-btn workshop-action-btn--reject">Reject</button>
+            {% elif request.user.profile.position == 'instructor' %}
+                <a href="{% url 'workshop_app:workshop_type_details' workshop.workshop_type.id %}" class="workshop-action-btn workshop-action-btn--edit">Edit</a>
+                <button type="button" class="workshop-action-btn workshop-action-btn--cancel">Cancel</button>
+            {% else %}
+                <a href="{% url 'workshop_app:propose_workshop' %}" class="workshop-action-btn workshop-action-btn--book">Book Now</a>
+            {% endif %}
+        </aside>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra-custom-scripts %}
+{{ block.super }}
+<script>
+    (function () {
+        var commentField = document.getElementById('id_comment');
+        var countNode = document.getElementById('commentCharCount');
+        var accordionBtn = document.getElementById('termsAccordionBtn');
+        var accordionPanel = document.getElementById('termsAccordionPanel');
+
+        function updateCountAndHeight() {
+            if (!commentField) {
+                return;
+            }
+            commentField.style.height = 'auto';
+            commentField.style.height = Math.min(commentField.scrollHeight, 220) + 'px';
+            if (countNode) {
+                countNode.textContent = (commentField.value || '').length;
+            }
+        }
+
+        if (commentField) {
+            commentField.setAttribute('maxlength', '600');
+            updateCountAndHeight();
+            commentField.addEventListener('input', updateCountAndHeight);
+        }
+
+        if (accordionBtn && accordionPanel) {
+            accordionBtn.addEventListener('click', function () {
+                var open = accordionBtn.getAttribute('aria-expanded') === 'true';
+                accordionBtn.setAttribute('aria-expanded', open ? 'false' : 'true');
+                accordionPanel.style.maxHeight = open ? '0px' : accordionPanel.scrollHeight + 'px';
+            });
+        }
+    })();
+</script>
+{% endblock %}

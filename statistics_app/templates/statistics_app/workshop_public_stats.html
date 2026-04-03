@@ -20,7 +20,7 @@
         <aside class="stats-filter-panel" id="statsFilterPanel">
             <form method="GET" class="stats-filter-form">
                 <div class="stats-filter-panel__header">
-                    <h2>Filters</h2>
+                    <h2>Filters <span class="stats-filter-count" id="statsFilterCount">(0)</span></h2>
                 </div>
 
                 <div class="stats-filter-group">
@@ -81,12 +81,27 @@
                 <div class="stats-filter-actions">
                     <button type="submit" class="stats-btn stats-btn--primary">Apply</button>
                     <a href="{% url 'statistics_app:public' %}" class="stats-btn stats-btn--outline">Clear All</a>
-                    <button type="submit" class="stats-btn stats-btn--ghost" name="download" value="download">Download</button>
+                    <button type="submit" class="stats-btn stats-btn--ghost" name="download" value="download" id="statsDownloadBtn">Download</button>
                 </div>
             </form>
         </aside>
 
         <section class="stats-content">
+            <div class="stats-active-filters" id="statsActiveFilters">
+                {% if request.GET.from_date %}
+                    <a class="stats-active-chip" href="?{% if request.GET.to_date %}to_date={{ request.GET.to_date|urlencode }}&{% endif %}{% if request.GET.workshop_type %}workshop_type={{ request.GET.workshop_type|urlencode }}&{% endif %}{% if request.GET.state %}state={{ request.GET.state|urlencode }}&{% endif %}{% if request.GET.sort %}sort={{ request.GET.sort|urlencode }}&{% endif %}{% if request.GET.show_workshops %}show_workshops={{ request.GET.show_workshops|urlencode }}&{% endif %}">From: {{ request.GET.from_date }} <i class="fa fa-times" aria-hidden="true"></i></a>
+                {% endif %}
+                {% if request.GET.to_date %}
+                    <a class="stats-active-chip" href="?{% if request.GET.from_date %}from_date={{ request.GET.from_date|urlencode }}&{% endif %}{% if request.GET.workshop_type %}workshop_type={{ request.GET.workshop_type|urlencode }}&{% endif %}{% if request.GET.state %}state={{ request.GET.state|urlencode }}&{% endif %}{% if request.GET.sort %}sort={{ request.GET.sort|urlencode }}&{% endif %}{% if request.GET.show_workshops %}show_workshops={{ request.GET.show_workshops|urlencode }}&{% endif %}">To: {{ request.GET.to_date }} <i class="fa fa-times" aria-hidden="true"></i></a>
+                {% endif %}
+                {% if request.GET.workshop_type %}
+                    <a class="stats-active-chip" href="?{% if request.GET.from_date %}from_date={{ request.GET.from_date|urlencode }}&{% endif %}{% if request.GET.to_date %}to_date={{ request.GET.to_date|urlencode }}&{% endif %}{% if request.GET.state %}state={{ request.GET.state|urlencode }}&{% endif %}{% if request.GET.sort %}sort={{ request.GET.sort|urlencode }}&{% endif %}{% if request.GET.show_workshops %}show_workshops={{ request.GET.show_workshops|urlencode }}&{% endif %}">Type <i class="fa fa-times" aria-hidden="true"></i></a>
+                {% endif %}
+                {% if request.GET.state %}
+                    <a class="stats-active-chip" href="?{% if request.GET.from_date %}from_date={{ request.GET.from_date|urlencode }}&{% endif %}{% if request.GET.to_date %}to_date={{ request.GET.to_date|urlencode }}&{% endif %}{% if request.GET.workshop_type %}workshop_type={{ request.GET.workshop_type|urlencode }}&{% endif %}{% if request.GET.sort %}sort={{ request.GET.sort|urlencode }}&{% endif %}{% if request.GET.show_workshops %}show_workshops={{ request.GET.show_workshops|urlencode }}&{% endif %}">State <i class="fa fa-times" aria-hidden="true"></i></a>
+                {% endif %}
+            </div>
+
             <div class="stats-summary-grid">
                 <article class="stats-summary-card">
                     <span>Total Workshops</span>
@@ -97,8 +112,8 @@
                     <strong>{{ total_participants }}</strong>
                 </article>
                 <article class="stats-summary-card">
-                    <span>Average per Month</span>
-                    <strong>{{ avg_per_month }}</strong>
+                    <span>Most Popular Type</span>
+                    <strong>{{ ws_type.0|default:'N/A' }}</strong>
                 </article>
             </div>
 
@@ -125,13 +140,13 @@
                     <table class="stats-table">
                         <thead>
                             <tr>
-                                <th>Sr No.</th>
-                                <th>Status</th>
-                                <th>Coordinator Name</th>
-                                <th>Institute Name</th>
-                                <th>Instructor Name</th>
-                                <th>Workshop Name</th>
-                                <th>Workshop Date</th>
+                                <th>Sr No. <span class="stats-sort-arrow">↕</span></th>
+                                <th>Status <span class="stats-sort-arrow">↕</span></th>
+                                <th>Coordinator Name <span class="stats-sort-arrow">↕</span></th>
+                                <th>Institute Name <span class="stats-sort-arrow">↕</span></th>
+                                <th>Instructor Name <span class="stats-sort-arrow">↕</span></th>
+                                <th>Workshop Name <span class="stats-sort-arrow">↕</span></th>
+                                <th>Workshop Date <span class="stats-sort-arrow">↕</span></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -150,7 +165,12 @@
                             </tr>
                         {% empty %}
                             <tr>
-                                <td colspan="7" class="stats-empty-row">No workshops found for selected filters.</td>
+                                <td colspan="7" class="stats-empty-row">
+                                    <div class="stats-empty-state">
+                                        <p>No results match your filters</p>
+                                        <a href="{% url 'statistics_app:public' %}" class="stats-btn stats-btn--outline">Clear filters</a>
+                                    </div>
+                                </td>
                             </tr>
                         {% endfor %}
                         </tbody>
@@ -225,6 +245,34 @@
         toggle.addEventListener('click', function () {
             panel.classList.toggle('is-open');
             toggle.setAttribute('aria-expanded', panel.classList.contains('is-open') ? 'true' : 'false');
+        });
+    })();
+
+    (function () {
+        var filterCount = document.getElementById('statsFilterCount');
+        var activeFilterArea = document.getElementById('statsActiveFilters');
+        var activeCount = activeFilterArea ? activeFilterArea.querySelectorAll('.stats-active-chip').length : 0;
+        if (filterCount) {
+            filterCount.textContent = '(' + activeCount + ')';
+        }
+    })();
+
+    (function () {
+        var downloadBtn = document.getElementById('statsDownloadBtn');
+        if (!downloadBtn) {
+            return;
+        }
+        downloadBtn.addEventListener('click', function () {
+            var original = downloadBtn.textContent;
+            downloadBtn.classList.add('is-loading');
+            downloadBtn.textContent = 'Downloading...';
+            setTimeout(function () {
+                if (window.toastr) {
+                    toastr.success('Download started successfully');
+                }
+                downloadBtn.classList.remove('is-loading');
+                downloadBtn.textContent = original;
+            }, 1000);
         });
     })();
 

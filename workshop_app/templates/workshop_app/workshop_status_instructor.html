@@ -17,11 +17,23 @@
 
 {% block content %}
 <div class="container instructor-dashboard">
+    <section class="instructor-welcome-banner">
+        <div>
+            <h1>Welcome back {{ user.first_name|default:user.username }}!</h1>
+            <p>Track your workshop progress and keep your schedule updated.</p>
+        </div>
+        <div class="instructor-welcome-banner__actions">
+            <a href="{% url 'workshop_app:propose_workshop' %}" class="instructor-btn instructor-btn--primary">Propose Workshop</a>
+            <a href="{% url 'workshop_app:view_own_profile' %}" class="instructor-btn instructor-btn--outline">Profile</a>
+        </div>
+    </section>
+
     {% if not workshops %}
         <div class="instructor-empty-state">
-            <h1>My Workshops</h1>
-            <p>No workshops to show right now. Propose a new workshop to get started.</p>
-            <a href="{% url 'workshop_app:propose_workshop' %}" class="instructor-btn instructor-btn--primary">Propose New Workshop</a>
+            <div class="instructor-empty-state__illustration" aria-hidden="true"><i class="fa fa-lightbulb-o"></i></div>
+            <h2>You haven't proposed any workshops yet</h2>
+            <p>Start by creating your first workshop proposal.</p>
+            <a href="{% url 'workshop_app:propose_workshop' %}" class="instructor-btn instructor-btn--primary">Propose Workshop</a>
         </div>
     {% else %}
         <div class="instructor-dashboard__header">
@@ -55,6 +67,7 @@
                             <th>Name</th>
                             <th>Date</th>
                             <th>Status</th>
+                            <th>Timeline</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -68,6 +81,13 @@
                                 <span class="instructor-status-badge {% if workshop.status == 1 %}is-accepted{% else %}is-pending{% endif %}">
                                     {{ workshop.get_status }}
                                 </span>
+                            </td>
+                            <td>
+                                <div class="instructor-timeline">
+                                    <span class="is-done">Proposed</span>
+                                    <span class="{% if workshop.status == 0 %}is-done{% else %}is-done{% endif %}">Under Review</span>
+                                    <span class="{% if workshop.status == 1 %}is-done is-accepted{% elif workshop.status == 2 %}is-done is-rejected{% endif %}">{% if workshop.status == 2 %}Rejected{% else %}Accepted{% endif %}</span>
+                                </div>
                             </td>
                             <td>
                                 <div class="instructor-actions">
@@ -104,6 +124,11 @@
                                 {{ workshop.get_status }}
                             </span>
                         </p>
+                        <div class="instructor-timeline instructor-timeline--mobile">
+                            <span class="is-done">Proposed</span>
+                            <span class="is-done">Under Review</span>
+                            <span class="{% if workshop.status == 1 %}is-done is-accepted{% elif workshop.status == 2 %}is-done is-rejected{% endif %}">{% if workshop.status == 2 %}Rejected{% else %}Accepted{% endif %}</span>
+                        </div>
                         <div class="instructor-actions">
                             <a href="{% url 'workshop_app:workshop_details' workshop.id %}" class="instructor-btn instructor-btn--outline">View Details</a>
                             <button type="button" class="instructor-btn instructor-btn--secondary"
@@ -135,7 +160,7 @@
             <input type="text" id="changeDateInput" name="new_date" placeholder="YYYY-MM-DD" required>
             <div class="instructor-modal__actions">
                 <button type="button" class="instructor-btn instructor-btn--outline" data-close-modal="true">Cancel</button>
-                <button type="submit" class="instructor-btn instructor-btn--primary">Confirm</button>
+                <button type="submit" class="instructor-btn instructor-btn--primary" id="confirmDateBtn" disabled>Confirm</button>
             </div>
         </form>
     </div>
@@ -148,8 +173,10 @@
         var dateInput = $('#changeDateInput');
         var modal = document.getElementById('changeDateModal');
         var form = document.getElementById('changeDateForm');
+        var confirmBtn = document.getElementById('confirmDateBtn');
         var openButtons = document.querySelectorAll('[data-change-date="true"]');
         var closeButtons = document.querySelectorAll('[data-close-modal="true"]');
+        var originalDate = '';
 
         function openModal(workshopId, currentDate) {
             var dateToday = new Date();
@@ -158,6 +185,10 @@
 
             form.setAttribute('action', '/workshop/change_workshop_date/' + workshopId);
             dateInput.val(currentDate);
+            originalDate = currentDate;
+            if (confirmBtn) {
+                confirmBtn.disabled = true;
+            }
 
             dateInput.datepicker('destroy').datepicker({
                 changeMonth: true,
@@ -184,6 +215,13 @@
 
         closeButtons.forEach(function (btn) {
             btn.addEventListener('click', closeModal);
+        });
+
+        dateInput.on('change', function () {
+            if (!confirmBtn) {
+                return;
+            }
+            confirmBtn.disabled = !dateInput.val() || dateInput.val() === originalDate;
         });
 
         document.addEventListener('keydown', function (event) {

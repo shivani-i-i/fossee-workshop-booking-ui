@@ -51,30 +51,40 @@
         <section class="coordinator-table-section">
             <div class="coordinator-table-section__head">
                 <h2>Pending Workshops</h2>
+                <div class="coordinator-table-tools">
+                    <input type="search" class="coordinator-table-search" data-target-table="pendingWorkshopTable" placeholder="Search pending workshops">
+                    <button type="button" class="coordinator-export-btn" data-export-table="pendingWorkshopTable">Export CSV</button>
+                </div>
             </div>
             {% if pending_workshops %}
             <div class="coordinator-table-scroll">
-                <table class="coordinator-table coordinator-table--pending">
+                <table class="coordinator-table coordinator-table--pending" id="pendingWorkshopTable">
                     <thead>
                         <tr>
                             <th>Name</th>
                             <th>Type</th>
                             <th>Date</th>
+                            <th>Priority</th>
                             <th>Instructor</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for workshop in pending_workshops %}
-                        <tr>
+                        <tr data-date="{{ workshop.date|date:'Y-m-d' }}">
                             <td><a href="{% url 'workshop_app:workshop_details' workshop.id %}">{{ workshop.coordinator.get_full_name|default:user.get_full_name }}</a></td>
                             <td>{{ workshop.workshop_type|capfirst }}</td>
                             <td>{{ workshop.date|date }}</td>
+                            <td><span class="coordinator-priority-badge" data-priority-badge>New</span></td>
                             <td>{% if workshop.instructor %}{{ workshop.instructor.get_full_name }}{% else %}Not assigned{% endif %}</td>
                             <td>
                                 <div class="coordinator-action-buttons">
-                                    <button type="button" class="coordinator-btn coordinator-btn--accept" disabled>Accept</button>
-                                    <button type="button" class="coordinator-btn coordinator-btn--reject" disabled>Reject</button>
+                                    <button type="button" class="coordinator-btn coordinator-btn--accept" data-loading-btn>
+                                        <i class="fa fa-check" aria-hidden="true"></i> Accept
+                                    </button>
+                                    <button type="button" class="coordinator-btn coordinator-btn--reject" data-loading-btn>
+                                        <i class="fa fa-times" aria-hidden="true"></i> Reject
+                                    </button>
                                 </div>
                             </td>
                         </tr>
@@ -93,10 +103,14 @@
         <section class="coordinator-table-section">
             <div class="coordinator-table-section__head">
                 <h2>Accepted Workshops</h2>
+                <div class="coordinator-table-tools">
+                    <input type="search" class="coordinator-table-search" data-target-table="acceptedWorkshopTable" placeholder="Search accepted workshops">
+                    <button type="button" class="coordinator-export-btn" data-export-table="acceptedWorkshopTable">Export CSV</button>
+                </div>
             </div>
             {% if accepted_workshops %}
             <div class="coordinator-table-scroll">
-                <table class="coordinator-table coordinator-table--accepted">
+                <table class="coordinator-table coordinator-table--accepted" id="acceptedWorkshopTable">
                     <thead>
                         <tr>
                             <th>Workshop Name</th>
@@ -151,4 +165,101 @@
         </section>
     {% endif %}
 </div>
+{% endblock %}
+
+{% block extra-custom-scripts %}
+{{ block.super }}
+<script>
+    (function () {
+        var searchInputs = document.querySelectorAll('.coordinator-table-search');
+        var exportButtons = document.querySelectorAll('[data-export-table]');
+        var loadingButtons = document.querySelectorAll('[data-loading-btn]');
+        var pendingRows = document.querySelectorAll('#pendingWorkshopTable tbody tr[data-date]');
+
+        searchInputs.forEach(function (input) {
+            input.addEventListener('input', function () {
+                var table = document.getElementById(input.getAttribute('data-target-table'));
+                if (!table) {
+                    return;
+                }
+                var query = (input.value || '').toLowerCase();
+                table.querySelectorAll('tbody tr').forEach(function (row) {
+                    row.style.display = row.textContent.toLowerCase().indexOf(query) > -1 ? '' : 'none';
+                });
+            });
+        });
+
+        function exportTableToCsv(tableId) {
+            var table = document.getElementById(tableId);
+            if (!table) {
+                return;
+            }
+
+            var rows = table.querySelectorAll('tr');
+            var csv = [];
+
+            rows.forEach(function (row) {
+                if (row.style.display === 'none') {
+                    return;
+                }
+                var cols = row.querySelectorAll('th, td');
+                var values = [];
+                cols.forEach(function (col) {
+                    values.push('"' + col.innerText.replace(/"/g, '""').trim() + '"');
+                });
+                csv.push(values.join(','));
+            });
+
+            var blob = new Blob([csv.join('\n')], { type: 'text/csv;charset=utf-8;' });
+            var link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = tableId + '.csv';
+            link.click();
+            URL.revokeObjectURL(link.href);
+        }
+
+        exportButtons.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                exportTableToCsv(btn.getAttribute('data-export-table'));
+            });
+        });
+
+        loadingButtons.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                if (btn.classList.contains('is-loading')) {
+                    return;
+                }
+                var original = btn.innerHTML;
+                btn.classList.add('is-loading');
+                btn.innerHTML = '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading...';
+                setTimeout(function () {
+                    btn.classList.remove('is-loading');
+                    btn.innerHTML = original;
+                }, 900);
+            });
+        });
+
+        pendingRows.forEach(function (row) {
+            var badge = row.querySelector('[data-priority-badge]');
+            var dateText = row.getAttribute('data-date');
+            if (!badge || !dateText) {
+                return;
+            }
+            var target = new Date(dateText + 'T00:00:00');
+            var now = new Date();
+            var diffDays = Math.floor((target - now) / (1000 * 60 * 60 * 24));
+
+            if (diffDays >= 7) {
+                badge.textContent = 'Urgent';
+                badge.classList.add('is-urgent');
+            } else if (diffDays >= 3) {
+                badge.textContent = 'Review Soon';
+                badge.classList.add('is-review');
+            } else {
+                badge.textContent = 'New';
+                badge.classList.add('is-new');
+            }
+        });
+    })();
+</script>
 {% endblock %}
