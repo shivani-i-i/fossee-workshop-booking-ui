@@ -89,19 +89,34 @@
     display: inline-flex;
     align-items: center;
     gap: var(--space-3);
-    padding: var(--space-2);
+    width: fit-content;
+    padding: var(--space-2) var(--space-3);
     border-radius: var(--radius-md);
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+.login-split-hero__logo-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: 38px;
+    padding: 4px 10px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.95);
+    color: #003366;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
+
 .login-split-hero__logo-img {
-    width: 34px;
-    height: 34px;
-    border-radius: 8px;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
     background: #FFFFFF;
-    object-fit: cover;
-    padding: 2px;
+    object-fit: contain;
+    padding: 1px;
 }
 
 .login-card-wrap {

@@ -51,12 +51,12 @@
 }
 
 .site-footer__logo-image {
-    width: 28px;
+    width: 82px;
     height: 28px;
     border-radius: 8px;
-    object-fit: cover;
+    object-fit: contain;
     background: #ffffff;
-    padding: 2px;
+    padding: 2px 6px;
 }
 
 .site-footer__logo-chip--iit {
