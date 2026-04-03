@@ -4,6 +4,18 @@
 {% load custom_filters %}
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        (function () {
+            try {
+                var storedTheme = localStorage.getItem('theme');
+                var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                var initialTheme = storedTheme || (prefersDark ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme', initialTheme);
+            } catch (error) {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
     <title>
         {% block title %}
             HomePage
@@ -55,6 +67,9 @@
             <div class="site-nav" id="siteNavMenu">
                 <a href="/" class="site-nav__link{% if request.path == '/' %} active{% endif %}">Home</a>
                 <a href="{% url 'workshop_app:workshop_type_list' %}" class="site-nav__link{% if '/workshop/types/' in request.path %} active{% endif %}">Workshops</a>
+                <button type="button" class="site-theme-toggle" id="siteThemeToggle" aria-label="Toggle dark mode" aria-pressed="false">
+                    <i class="fa fa-moon-o" aria-hidden="true"></i>
+                </button>
                 <a href="{% url 'workshop_app:login' %}" class="site-nav__btn site-nav__btn--login{% if '/workshop/login/' in request.path %} active{% endif %}">Login</a>
                 <a href="{% url 'workshop_app:register' %}" class="site-nav__btn site-nav__btn--register{% if '/workshop/register/' in request.path %} active{% endif %}">Register</a>
             </div>
@@ -79,6 +94,33 @@
         var navbar = document.querySelector('.site-navbar');
         var toggleButton = document.getElementById('siteNavbarToggle');
         var menu = document.getElementById('siteNavMenu');
+        var themeToggle = document.getElementById('siteThemeToggle');
+
+        function setTheme(themeName) {
+            document.documentElement.setAttribute('data-theme', themeName);
+            if (themeToggle) {
+                var isDark = themeName === 'dark';
+                themeToggle.classList.toggle('is-dark', isDark);
+                themeToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+                themeToggle.innerHTML = isDark
+                    ? '<i class="fa fa-sun-o" aria-hidden="true"></i>'
+                    : '<i class="fa fa-moon-o" aria-hidden="true"></i>';
+            }
+        }
+
+        if (themeToggle) {
+            setTheme(document.documentElement.getAttribute('data-theme') || 'light');
+            themeToggle.addEventListener('click', function () {
+                var current = document.documentElement.getAttribute('data-theme') || 'light';
+                var next = current === 'dark' ? 'light' : 'dark';
+                setTheme(next);
+                try {
+                    localStorage.setItem('theme', next);
+                } catch (error) {
+                    // Ignore storage failures silently.
+                }
+            });
+        }
 
         function setNavbarScrollState() {
             if (!navbar) {
