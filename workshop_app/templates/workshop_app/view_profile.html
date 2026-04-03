@@ -1,129 +1,162 @@
 {% extends 'workshop_app/base.html' %}
+{% load static %}
 
-{% block title %} Profile {% endblock %}
+{% block title %}Profile{% endblock %}
 
-{% csrf_token %}
+{% block page_styles %}
+    <link rel="stylesheet" href="{% static 'workshop_app/css/profile.css' %}" type="text/css"/>
+{% endblock %}
+
 {% block content %}
-
-    <div class="container">
-        {% if Workshops %}
-            <table class="table table-bordered">
-                <tr>
-                    <th><label for="id_first_name"><h5>First name:</h5></label></th>
-                    <th><label for="id_first_name"><h5>{{ coordinator_profile.user.first_name }}</h5></label></th>
-                </tr>
-                <tr>
-                    <th><label for="id_last_name"><h5>Last name:</h5></label></th>
-                    <th><label for="id_last_name"><h5>{{ coordinator_profile.user.last_name }}</h5></label></th>
-                </tr>
-                <tr>
-                    <th><label for="id_email"><h5>Email:</h5></label></th>
-                    <th><label for="id_email"><h5>{{ coordinator_profile.user.email }}</h5></label></th>
-                </tr>
-                <tr>
-                    <th><label for="id_institute"><h5>Institute:</h5></label></th>
-                    <th><label for="id_institute"><h5>{{ coordinator_profile.user.profile.institute }}</h5></label></th>
-                </tr>
-                <tr>
-                    <th><label for="id_phone_number"><h5>Phone Number:</h5></label></th>
-                    <th><label for="id_phone_number"><h5>{{ coordinator_profile.user.profile.phone_number }}</h5></label>
-                    </th>
-                </tr>
-                <tr>
-                    <th><label for="id_department"><h5>Department:</h5></label></th>
-                    <th><label for="id_department"><h5>{{ coordinator_profile.user.profile.department }}</h5></label></th>
-                </tr>
-                <tr>
-                    <th><label for="id_location"><h5>Location:</h5></label></th>
-                    <th><label for="id_location"><h5>{{ coordinator_profile.user.profile.location }}</h5></label></th>
-                </tr>
-                <tr>
-                    <th><label for="id_position"><h5>Position:</h5></label></th>
-                    <th><label for="id_position"><h5>{{ coordinator_profile.user.profile.position }}</h5></label></th>
-                </tr>
-            </table>
-            <br>
-
-            <div class="container">
-            <h2>Workshop Details</h2>
-            <table class="table table-bordered">
-            <tr>
-                <th><label for="id_instructor_name">Instructor name</label></th>
-                <th><label for="id_workshop_date">Workshop date</label></th>
-                <th><label for="id_workshop_type">Workshop type</label></th>
-            </tr>
-            {% for workshop in Workshops %}
-                {% if workshop.instructor %}
-                    <tr>
-                        <td><label for="id_instructor_name">{{ workshop.instructor }}
-                        </label></td>
-                        <td><label for="id_workshop_date">{{ workshop.date }}</label>
-                        </td>
-                        <td><label for="id_workshop_type">{{ workshop.workshop_type }}</label>
-                        </td>
-                    </tr>
-                {% else %}
-                    <tr>
-                        <td><span class="badge badge-warning">Pending</span></td>
-                        <td><label for="id_workshop_date">{{ workshop.date }}</label>
-                        </td>
-                        <td><label for="id_workshop_type">{{ workshop.workshop_type }}</label>
-                        </td>
-                    </tr>
-                {% endif %}
-            {% endfor %}
-            </table>
-            </div>
-            <br><br>
-        {% else %}
-            <form action="" method="post">
-              {% csrf_token %}
-                <div class="row justify-content-center form-group">
-                    <div class="col-md-6">
-                    <form action="" method="post">
-                        <fieldset>
-                            {% csrf_token %}
-                            {% if form.errors %}
-                                {% for field in form %}
-                                    {% for error in field.errors %}
-                                        <div class="alert alert-dismissible alert-danger">
-                                            <button type="button" class="close" data-dismiss="alert">
-                                                <i class="fa fa-close"></i>
-                                            </button>
-                                            <strong>{{field.label}} : {{ error|escape }}</strong>
-                                        </div>
-                                    {% endfor %}
-                                {% endfor %}
-                                {% for error in form.non_field_errors %}
-                                    <div class="alert alert-dismissible alert-danger">
-                                        <button type="button" class="close" data-dismiss="alert">
-                                            <i class="fa fa-close"></i>
-                                        </button>
-                                        <strong>{{field.label}} : {{ error|escape }}</strong>
-                                    </div>
-                                {% endfor %}
-                            {% endif %}
-                            <table class="table table-responsive-sm">
-                                <tr><td>{{form.title}}</td></tr>
-                                <tr><td>{{form.first_name}}</td></tr>
-                                <tr><td>{{form.last_name}}</td></tr>
-                                <tr><td>{{form.phone_number}}</td></tr>
-                                <tr><td>{{form.institute}}</td></tr>
-                                <tr><td>{{form.department}}</td></tr>
-                                <tr><td>{{form.position}}</td></tr>
-                                <tr><td>{{form.location}}</td></tr>
-                                <tr><td>{{form.state}}</td></tr>
-                            </table>
-                            <br>
-                        </fieldset>
-                        <button class="btn btn-success btn-lg" type="submit">
-                            <i class="fa fa-pencil-square-o"></i>&nbsp;Update</button>
-                        <a href="{% url 'workshop_app:index' %}" class="btn btn-primary btn-lg">Cancel
-                        </a>
-                    </form>
-                    </div>
+<div class="profile-page container">
+    {% if Workshops %}
+        <div class="profile-hero">
+            <div class="profile-hero__avatar">{{ coordinator_profile.user.first_name|default:coordinator_profile.user.username|slice:":1"|upper }}</div>
+            <div class="profile-hero__meta">
+                <h1>{{ coordinator_profile.user.get_full_name|default:coordinator_profile.user.username }}</h1>
+                <div class="profile-hero__badges">
+                    <span class="profile-role-badge">{{ coordinator_profile.user.profile.position|title }}</span>
                 </div>
-            </form>
-        {% endif %}
-    </div>
+            </div>
+            <a class="profile-edit-btn" href="{% url 'workshop_app:view_own_profile' %}">Edit Profile</a>
+        </div>
+
+        <div class="profile-grid">
+            <section class="profile-card">
+                <h2>Personal Info</h2>
+                <div class="profile-info-grid">
+                    <div><span>Name</span><strong>{{ coordinator_profile.user.get_full_name }}</strong></div>
+                    <div><span>Email</span><strong>{{ coordinator_profile.user.email }}</strong></div>
+                    <div><span>Username</span><strong>{{ coordinator_profile.user.username }}</strong></div>
+                    <div><span>Institute</span><strong>{{ coordinator_profile.user.profile.institute }}</strong></div>
+                </div>
+            </section>
+
+            <section class="profile-card">
+                <h2>Workshop Stats</h2>
+                <div class="profile-stats-grid">
+                    <div><span>Total</span><strong>{{ workshop_total }}</strong></div>
+                    <div><span>Accepted</span><strong>{{ workshop_accepted }}</strong></div>
+                    <div><span>Pending</span><strong>{{ workshop_pending }}</strong></div>
+                </div>
+            </section>
+        </div>
+
+        <section class="profile-card profile-card--activity">
+            <h2>Recent Activity</h2>
+            <div class="profile-activity-list">
+                {% for workshop in recent_workshops %}
+                    <article class="profile-activity-item">
+                        <div class="profile-activity-item__title">{{ workshop.workshop_type }}</div>
+                        <div class="profile-activity-item__meta">{{ workshop.date|date }}</div>
+                        <span class="profile-status-badge {% if workshop.status == 1 %}is-accepted{% elif workshop.status == 0 %}is-pending{% else %}is-rejected{% endif %}">
+                            {{ workshop.get_status }}
+                        </span>
+                    </article>
+                {% empty %}
+                    <div class="profile-empty">No recent workshop activity found.</div>
+                {% endfor %}
+            </div>
+        </section>
+    {% else %}
+        <div class="profile-hero">
+            <div class="profile-hero__avatar">{{ request.user.first_name|default:request.user.username|slice:":1"|upper }}</div>
+            <div class="profile-hero__meta">
+                <h1>{{ request.user.get_full_name|default:request.user.username }}</h1>
+                <div class="profile-hero__badges">
+                    <span class="profile-role-badge">{{ profile.position|title }}</span>
+                </div>
+            </div>
+            <a class="profile-edit-btn" href="#edit-profile-card">Edit Profile</a>
+        </div>
+
+        <div class="profile-grid">
+            <section class="profile-card">
+                <h2>Personal Info</h2>
+                <div class="profile-info-grid">
+                    <div><span>Name</span><strong>{{ request.user.get_full_name }}</strong></div>
+                    <div><span>Email</span><strong>{{ request.user.email }}</strong></div>
+                    <div><span>Username</span><strong>{{ request.user.username }}</strong></div>
+                    <div><span>Institute</span><strong>{{ profile.institute }}</strong></div>
+                </div>
+            </section>
+
+            <section class="profile-card">
+                <h2>Workshop Stats</h2>
+                <div class="profile-stats-grid">
+                    <div><span>Total</span><strong>{{ workshop_total }}</strong></div>
+                    <div><span>Accepted</span><strong>{{ workshop_accepted }}</strong></div>
+                    <div><span>Pending</span><strong>{{ workshop_pending }}</strong></div>
+                </div>
+            </section>
+
+            <section class="profile-card" id="edit-profile-card">
+                <h2>Edit Profile</h2>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="profile-alert profile-alert--{{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+
+                <form action="" method="post" class="profile-edit-form">
+                    {% csrf_token %}
+                    <div class="profile-form-grid">
+                        <div>
+                            <label for="id_first_name">First Name</label>
+                            {{ form.first_name }}
+                            {{ form.first_name.errors }}
+                        </div>
+                        <div>
+                            <label for="id_last_name">Last Name</label>
+                            {{ form.last_name }}
+                            {{ form.last_name.errors }}
+                        </div>
+                        <div>
+                            <label for="id_institute">Institute</label>
+                            {{ form.institute }}
+                            {{ form.institute.errors }}
+                        </div>
+                        <div>
+                            <label for="id_phone_number">Phone</label>
+                            {{ form.phone_number }}
+                            {{ form.phone_number.errors }}
+                        </div>
+                        <div class="profile-form-grid__full">
+                            <label for="id_location">Bio</label>
+                            <textarea id="id_location" name="location" rows="4">{{ form.location.value|default_if_none:'' }}</textarea>
+                            {{ form.location.errors }}
+                        </div>
+                        <div>
+                            <label>Email</label>
+                            <input type="text" value="{{ request.user.email }}" readonly class="profile-readonly">
+                        </div>
+                        <div>
+                            <label>Username</label>
+                            <input type="text" value="{{ request.user.username }}" readonly class="profile-readonly">
+                        </div>
+                    </div>
+                    <button class="profile-submit" type="submit">Save Changes</button>
+                    <a href="{% url 'workshop_app:index' %}" class="profile-cancel">Cancel</a>
+                </form>
+            </section>
+        </div>
+
+        <section class="profile-card profile-card--activity">
+            <h2>Recent Activity</h2>
+            <div class="profile-activity-list">
+                {% for workshop in recent_workshops %}
+                    <article class="profile-activity-item">
+                        <div class="profile-activity-item__title">{{ workshop.workshop_type }}</div>
+                        <div class="profile-activity-item__meta">{{ workshop.date|date }}</div>
+                        <span class="profile-status-badge {% if workshop.status == 1 %}is-accepted{% elif workshop.status == 0 %}is-pending{% else %}is-rejected{% endif %}">
+                            {{ workshop.get_status }}
+                        </span>
+                    </article>
+                {% empty %}
+                    <div class="profile-empty">No recent workshop activity found.</div>
+                {% endfor %}
+            </div>
+        </section>
+    {% endif %}
+</div>
 {% endblock %}

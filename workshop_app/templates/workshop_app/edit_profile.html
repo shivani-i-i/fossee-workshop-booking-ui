@@ -1,20 +1,77 @@
 {% extends "workshop_app/base.html" %}
+{% load static %}
 
 {% block title %}
-	Edit Profile
+    Edit Profile
+{% endblock %}
+
+{% block page_styles %}
+    <link rel="stylesheet" href="{% static 'workshop_app/css/profile.css' %}" type="text/css"/>
 {% endblock %}
 
 {% block content %}
-  <div class="container">
-    <form action="{{URL_ROOT}}/edit_profile/" method="post" >
-    {% csrf_token %}
-      <center>
-        <table class="table table-bordered">
-          {{ form.as_table }}
-        </table>
-      </center>
-      <br>
-        <button class="btn btn-primary pull-right" type="submit">Save Profile</button>
-    </form>
-  </div>
+<div class="profile-edit-page container">
+    <a href="{% url 'workshop_app:view_own_profile' %}" class="profile-back-link">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        Back to Profile
+    </a>
+
+    <div class="profile-edit-card">
+        <div class="profile-edit-photo">
+            <input type="file" id="profilePhotoUpload" class="profile-photo-input" accept="image/*">
+            <label for="profilePhotoUpload" class="profile-photo-circle">
+                <span>{{ request.user.first_name|default:request.user.username|slice:":1"|upper }}</span>
+                <span class="profile-photo-camera"><i class="fa fa-camera" aria-hidden="true"></i></span>
+            </label>
+        </div>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="profile-alert profile-alert--{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <form action="" method="post" class="profile-edit-form">
+            {% csrf_token %}
+            <div class="profile-form-grid">
+                <div>
+                    <label for="id_first_name">First Name</label>
+                    {{ form.first_name }}
+                    {{ form.first_name.errors }}
+                </div>
+                <div>
+                    <label for="id_last_name">Last Name</label>
+                    {{ form.last_name }}
+                    {{ form.last_name.errors }}
+                </div>
+                <div>
+                    <label for="id_institute">Institute</label>
+                    {{ form.institute }}
+                    {{ form.institute.errors }}
+                </div>
+                <div>
+                    <label for="id_phone_number">Phone</label>
+                    {{ form.phone_number }}
+                    {{ form.phone_number.errors }}
+                </div>
+                <div class="profile-form-grid__full">
+                    <label for="id_location">Bio</label>
+                    <textarea id="id_location" name="location" rows="4">{{ form.location.value|default_if_none:'' }}</textarea>
+                    {{ form.location.errors }}
+                </div>
+                <div>
+                    <label>Email</label>
+                    <input type="text" value="{{ request.user.email }}" readonly class="profile-readonly">
+                </div>
+                <div>
+                    <label>Username</label>
+                    <input type="text" value="{{ request.user.username }}" readonly class="profile-readonly">
+                </div>
+            </div>
+
+            <button class="profile-submit" type="submit">Save Changes</button>
+            <a href="{% url 'workshop_app:view_own_profile' %}" class="profile-cancel">Cancel</a>
+        </form>
+    </div>
+</div>
 {% endblock %}

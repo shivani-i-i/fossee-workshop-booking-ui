@@ -493,11 +493,20 @@ def view_profile(request, user_id):
     if is_instructor(user) and is_email_checked(user):
         coordinator_profile = Profile.objects.get(user_id=user_id)
         workshops = Workshop.objects.filter(coordinator=user_id).order_by(
-            'date')
+            '-date')
+
+        workshop_total = workshops.count()
+        workshop_accepted = workshops.filter(status=1).count()
+        workshop_pending = workshops.filter(status=0).count()
+        recent_workshops = workshops[:5]
 
         return render(request, "workshop_app/view_profile.html",
                       {"coordinator_profile": coordinator_profile,
-                       "Workshops": workshops})
+                       "Workshops": workshops,
+                       "workshop_total": workshop_total,
+                       "workshop_accepted": workshop_accepted,
+                       "workshop_pending": workshop_pending,
+                       "recent_workshops": recent_workshops})
     return redirect(get_landing_page(user))
 
 
@@ -526,5 +535,15 @@ def view_own_profile(request):
     else:
         form = ProfileForm(user=user, instance=profile)
 
+    own_workshops = Workshop.objects.filter(coordinator=user.id).order_by('-date')
+    workshop_total = own_workshops.count()
+    workshop_accepted = own_workshops.filter(status=1).count()
+    workshop_pending = own_workshops.filter(status=0).count()
+    recent_workshops = own_workshops[:5]
+
     return render(request, "workshop_app/view_profile.html",
-                  {"profile": profile, "Workshops": None, "form": form})
+                  {"profile": profile, "Workshops": None, "form": form,
+                   "workshop_total": workshop_total,
+                   "workshop_accepted": workshop_accepted,
+                   "workshop_pending": workshop_pending,
+                   "recent_workshops": recent_workshops})
