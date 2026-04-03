@@ -81,12 +81,14 @@
 
         function closeMenu() {
             menu.classList.remove('is-open');
+            toggleButton.classList.remove('is-open');
             toggleButton.setAttribute('aria-expanded', 'false');
         }
 
         toggleButton.addEventListener('click', function (event) {
             event.stopPropagation();
             var isOpen = menu.classList.toggle('is-open');
+            toggleButton.classList.toggle('is-open', isOpen);
             toggleButton.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         });
 
