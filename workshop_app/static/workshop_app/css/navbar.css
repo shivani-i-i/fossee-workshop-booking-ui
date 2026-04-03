@@ -8,6 +8,11 @@
     height: 56px;
     background: var(--color-bg-primary);
     border-bottom: 1px solid var(--color-border);
+    transition: box-shadow 300ms ease;
+}
+
+.site-navbar.is-scrolled {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
 .site-navbar__inner {
@@ -51,16 +56,7 @@
     transition: color var(--transition-normal);
 }
 
-.site-nav__link:hover {
-    color: var(--color-text-primary);
-    text-decoration: none;
-}
-
-.site-nav__link.active {
-    color: var(--color-text-primary);
-}
-
-.site-nav__link.active::after {
+.site-nav__link::after {
     content: "";
     position: absolute;
     left: 0;
@@ -69,6 +65,27 @@
     height: 2px;
     border-radius: var(--radius-full);
     background: var(--color-primary);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 300ms ease;
+}
+
+.site-nav__link:hover {
+    color: var(--color-text-primary);
+    text-decoration: none;
+}
+
+.site-nav__link:hover::after {
+    transform: scaleX(1);
+}
+
+.site-nav__link.active {
+    color: var(--color-primary);
+    border-bottom: 2px solid var(--color-primary);
+}
+
+.site-nav__link.active::after {
+    transform: scaleX(1);
 }
 
 .site-nav__btn {
@@ -137,7 +154,7 @@
     height: 2px;
     border-radius: var(--radius-full);
     background: currentColor;
-    transition: transform var(--transition-normal), opacity var(--transition-normal);
+    transition: transform 300ms ease, opacity 300ms ease;
 }
 
 .site-navbar__toggle-bar + .site-navbar__toggle-bar {
@@ -187,11 +204,11 @@
         border-bottom: 1px solid var(--color-border);
         box-shadow: var(--shadow-md);
         transform: translateY(-4px);
-        transition: max-height var(--transition-slow), opacity var(--transition-normal), transform var(--transition-normal), padding var(--transition-normal);
+        transition: max-height 300ms ease, opacity var(--transition-normal), transform var(--transition-normal), padding var(--transition-normal);
     }
 
     .site-nav.is-open {
-        max-height: 340px;
+        max-height: 300px;
         opacity: 1;
         transform: translateY(0);
         padding: var(--space-3);

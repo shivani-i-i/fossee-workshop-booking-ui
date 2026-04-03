@@ -76,8 +76,19 @@
     {% endif %}
 
     (function () {
+        var navbar = document.querySelector('.site-navbar');
         var toggleButton = document.getElementById('siteNavbarToggle');
         var menu = document.getElementById('siteNavMenu');
+
+        function setNavbarScrollState() {
+            if (!navbar) {
+                return;
+            }
+            navbar.classList.toggle('is-scrolled', window.scrollY > 2);
+        }
+
+        setNavbarScrollState();
+        window.addEventListener('scroll', setNavbarScrollState, { passive: true });
 
         if (!toggleButton || !menu) {
             return;
