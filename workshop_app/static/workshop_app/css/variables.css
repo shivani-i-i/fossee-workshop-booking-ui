@@ -1,22 +1,29 @@
 :root {
-    /* Colors (Linear-inspired) */
-    --color-primary: #4f46e5;
-    --color-primary-hover: #4338ca;
-    --color-primary-light: #eef2ff;
-    --color-success: #4cb782;
-    --color-warning: #f2a12e;
-    --color-error: #e5484d;
-    --color-text-primary: #1a1a1a;
-    --color-text-secondary: #6b7280;
-    --color-text-muted: #9ca3af;
-    --color-border: #e5e7eb;
+    /* Colors (IIT Bombay inspired) */
+    --color-primary: #003366;
+    --color-primary-hover: #002244;
+    --color-primary-light: #E8F0FE;
+    --color-accent: #FF6B00;
+    --color-accent-hover: #E55A00;
+    --color-accent-light: #FFF3E8;
+    --color-success: #10B981;
+    --color-warning: #F59E0B;
+    --color-error: #EF4444;
+    --color-text-primary: #1A1A2E;
+    --color-text-secondary: #64748B;
+    --color-text-muted: #94A3B8;
+    --color-border: #E2E8F0;
     --color-border-light: #f3f4f6;
-    --color-bg-primary: #ffffff;
-    --color-bg-secondary: #f9fafb;
-    --color-bg-hover: #f3f4f6;
+    --color-bg: #F8F9FA;
+    --color-bg-card: #FFFFFF;
+    --color-bg-hover: #F1F5F9;
+    --color-bg-primary: var(--color-bg-card);
+    --color-bg-secondary: var(--color-bg);
 
-    /* Typography (Notion-inspired) */
-    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    /* Typography */
+    --font-heading: 'Poppins', system-ui, sans-serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+    --font-family: var(--font-body);
     --font-size-xs: 0.75rem;
     --font-size-sm: 0.875rem;
     --font-size-base: 1rem;
@@ -69,20 +76,25 @@ html {
 }
 
 [data-theme="dark"] {
-    --color-primary: #8d98f0;
-    --color-primary-hover: #a4adff;
-    --color-primary-light: #242a4f;
-    --color-success: #67d79f;
-    --color-warning: #f5bf57;
-    --color-error: #ff787d;
-    --color-text-primary: #e6e9f2;
-    --color-text-secondary: #b0b7c8;
-    --color-text-muted: #8790a5;
-    --color-border: #2a2f45;
-    --color-border-light: #22273a;
-    --color-bg-primary: #131729;
-    --color-bg-secondary: #0d1120;
-    --color-bg-hover: #1a2035;
+    --color-primary: #5E8FC1;
+    --color-primary-hover: #80A8CF;
+    --color-primary-light: #1D3550;
+    --color-accent: #FF8B3D;
+    --color-accent-hover: #FFA769;
+    --color-accent-light: #3B2A1E;
+    --color-success: #34D399;
+    --color-warning: #FBBF24;
+    --color-error: #F87171;
+    --color-text-primary: #E2E8F0;
+    --color-text-secondary: #B6C2D1;
+    --color-text-muted: #93A3B8;
+    --color-border: #2A3A50;
+    --color-border-light: #213246;
+    --color-bg: #0E1726;
+    --color-bg-card: #132033;
+    --color-bg-hover: #1B2B42;
+    --color-bg-primary: var(--color-bg-card);
+    --color-bg-secondary: var(--color-bg);
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
     --shadow-md: 0 6px 12px rgba(0, 0, 0, 0.35);
     --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.45);

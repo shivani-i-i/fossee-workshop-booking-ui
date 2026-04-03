@@ -1,43 +1,31 @@
-<article class="workshop-list-card workshop-list-card--{{ card_status_slug|default:'upcoming' }}">
+<article class="workshop-list-card workshop-list-card--{{ card_status_slug|default:'upcoming' }}" data-workshop-type="{{ card_type_label }}">
     <div class="workshop-list-card__body">
         <div class="workshop-list-card__header">
             <h2 class="workshop-list-card__title">{{ card_title }}</h2>
-            <span class="workshop-list-card__badge">{{ card_status_label }}</span>
         </div>
 
-        <p class="workshop-list-card__type">
-            <i class="fa fa-tag" aria-hidden="true"></i>
-            <span>{{ card_type_label }}</span>
-        </p>
+        <span class="workshop-list-card__type">{{ card_type_label }}</span>
 
         <div class="workshop-list-card__details">
             <div class="workshop-list-card__detail">
                 <i class="fa fa-calendar" aria-hidden="true"></i>
-                <div>
-                    <span class="workshop-list-card__detail-label">Date</span>
-                    <span class="workshop-list-card__detail-value">{{ card_date_label }}</span>
-                </div>
+                <span class="workshop-list-card__detail-value">{{ card_date_label }}</span>
             </div>
 
             <div class="workshop-list-card__detail">
                 <i class="fa fa-clock-o" aria-hidden="true"></i>
-                <div>
-                    <span class="workshop-list-card__detail-label">Duration</span>
-                    <span class="workshop-list-card__detail-value">{{ card_duration_label }} day{{ card_duration_label|pluralize }}</span>
-                </div>
+                <span class="workshop-list-card__detail-value">{{ card_duration_label }} day{{ card_duration_label|pluralize }}</span>
             </div>
 
             <div class="workshop-list-card__detail">
                 <i class="fa fa-user" aria-hidden="true"></i>
-                <div>
-                    <span class="workshop-list-card__detail-label">Instructor</span>
-                    <span class="workshop-list-card__detail-value">{{ card_instructor_label }}</span>
-                </div>
+                <span class="workshop-list-card__detail-value">{{ card_instructor_label }}</span>
             </div>
         </div>
 
-        <div class="workshop-list-card__divider"></div>
-
-        <a href="{{ detail_url }}" class="workshop-list-card__button">View Details</a>
+        <div class="workshop-list-card__footer">
+            <span class="workshop-list-card__badge"><i></i>{{ card_status_label }}</span>
+            <a href="{{ detail_url }}" class="workshop-list-card__button">View Details &rarr;</a>
+        </div>
     </div>
 </article>

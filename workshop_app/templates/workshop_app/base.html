@@ -35,6 +35,7 @@
 
     <link rel="stylesheet" href="{% static 'workshop_app/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'workshop_app/css/toastr.min.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'workshop_app/css/variables.css' %}" type="text/css"/>
     <link rel="stylesheet" href="{% static 'workshop_app/css/navbar.css' %}" type="text/css"/>
     <link rel="stylesheet" href="{% static 'workshop_app/css/footer.css' %}" type="text/css"/>
@@ -207,27 +208,24 @@
     })();
 </script>
 
-    <footer class="site-footer" aria-label="Site footer">
+<footer class="site-footer" aria-label="Site footer">
     {% block footer %}
         <div class="site-footer__inner">
-            <div class="site-footer__grid">
-                <div class="site-footer__brand">
-                    <a class="site-footer__brand-mark" href="/">
-                        <span class="site-footer__brand-circle">F</span>
-                        <span class="site-footer__brand-text">FOSSEE</span>
-                    </a>
-                    <p class="site-footer__tagline">Free and Open Source Software for Education</p>
-                    <p class="site-footer__initiative">An initiative by IIT Bombay</p>
-                    <div class="site-footer__social" aria-label="Social links">
-                        <a href="https://github.com/FOSSEE" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa fa-github"></i></a>
-                        <a href="mailto:contact@fossee.in" aria-label="Email"><i class="fa fa-envelope"></i></a>
-                        <a href="https://fossee.in" target="_blank" rel="noopener noreferrer" aria-label="Website"><i class="fa fa-globe"></i></a>
-                    </div>
+            <div class="site-footer__logo-row">
+                <a class="site-footer__logo-chip" href="/">
+                    <span class="site-footer__logo-dot">F</span>
+                    <span>FOSSEE</span>
+                </a>
+                <div class="site-footer__logo-chip site-footer__logo-chip--iit">
+                    <span class="site-footer__logo-dot">I</span>
+                    <span>IIT Bombay</span>
                 </div>
+            </div>
 
+            <div class="site-footer__grid">
                 <div class="site-footer__about">
                     <h2 class="site-footer__heading">About</h2>
-                    <p>Book hands-on FOSSEE workshops, collaborate with instructors, and build practical open-source skills.</p>
+                    <p>Book hands-on FOSSEE workshops, collaborate with instructors, and build practical open-source skills guided by IIT Bombay experts.</p>
                 </div>
 
                 <div class="site-footer__links" aria-label="Quick links">
@@ -251,8 +249,8 @@
             </div>
 
             <div class="site-footer__bottom">
+                <p>An initiative of IIT Bombay under the National Mission on Education</p>
                 <p>© 2026 FOSSEE, IIT Bombay. All rights reserved.</p>
-                <p>Made with &hearts; at IIT Bombay</p>
             </div>
         </div>
     {% endblock %}

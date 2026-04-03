@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>{{ page.title|title }}</title>
     <link rel="stylesheet" href="{% static 'cms/css/bootstrap.min.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
     <script src="{% static 'cms/js/jquery-3.4.1.slim.min.js' %}"></script>
     <script src="{% static 'cms/js/popper.min.js' %}"></script>
@@ -16,11 +17,14 @@
 </head>
 <body>
 
-<nav class=" navbar navbar-dark navbar navbar-expand-lg bg-dark fixed-top">
-    <a class="navbar-brand" href="/">FOSSEE Workshops</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+<nav class="cms-site-nav navbar navbar-expand-lg fixed-top">
+    <a class="navbar-brand cms-site-nav__brand" href="/">
+        <span>FOSSEE</span>
+        <small>by IIT Bombay</small>
+    </a>
+    <button class="navbar-toggler cms-site-nav__toggle" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+        <span></span><span></span><span></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -33,7 +37,7 @@
                         {% if nav.subnavs %}
                             <ul class="navbar-nav mr-auto">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        <a class="nav-link dropdown-toggle cms-site-nav__link" href="#" id="navbarDropdown" role="button"
                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span
                                             class="material-icons" style="vertical-align: middle">{{ nav.name }}</span>
                                     </a>
@@ -45,7 +49,7 @@
                                 </li>
                             </ul>
                         {% else %}
-                            <a class="nav-link" href="{{ nav.link }}">{{ nav.name }}</a>
+                            <a class="nav-link cms-site-nav__link" href="{{ nav.link }}">{{ nav.name }}</a>
                         {% endif %}
                     </li>
                 {% endfor %}
@@ -57,66 +61,68 @@
 {% if page.permalink == 'home' %}
 <main class="cms-home">
     <section class="cms-home-hero">
+        <div class="cms-home-hero__pattern" aria-hidden="true"></div>
         <div class="cms-home-hero__inner">
-            <h1>Learn. Build. Contribute.</h1>
-            <p>Book hands-on workshops by IIT Bombay's FOSSEE team</p>
+            <h1>Book Free Workshops by IIT Bombay</h1>
+            <p>Learn from experts. Build real skills. Get certified.</p>
             <div class="cms-home-hero__actions">
-                <a class="cms-btn cms-btn--light" href="{% url 'workshop_app:workshop_type_list' %}">Browse Workshops</a>
-                <a class="cms-btn cms-btn--outline-light" href="#cms-home-features">Learn More</a>
+                <a class="cms-btn cms-btn--accent" href="{% url 'workshop_app:workshop_type_list' %}">Browse Workshops</a>
+                <a class="cms-btn cms-btn--outline-light" href="{% url 'workshop_app:register' %}">Register Free</a>
             </div>
         </div>
-        <div class="cms-home-hero__wave" aria-hidden="true">
-            <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill="currentColor" d="M0,64L80,58.7C160,53,320,43,480,48C640,53,800,75,960,80C1120,85,1280,75,1360,69.3L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"></path>
-            </svg>
-        </div>
-    </section>
-
-    <section id="cms-home-features" class="cms-home-features">
-        <article class="cms-feature-card">
-            <span class="cms-feature-card__icon" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 3L13.9 8.1L19 10L13.9 11.9L12 17L10.1 11.9L5 10L10.1 8.1L12 3Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </span>
-            <h3>Free Workshops</h3>
-            <p>Attend practical sessions at zero cost and build real skills with open-source tools.</p>
-        </article>
-        <article class="cms-feature-card">
-            <span class="cms-feature-card__icon" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 12C14.2091 12 16 10.2091 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8C8 10.2091 9.79086 12 12 12Z" stroke="currentColor" stroke-width="1.8"/>
-                    <path d="M5 20C5 16.6863 8.13401 14 12 14C15.866 14 19 16.6863 19 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-                </svg>
-            </span>
-            <h3>Expert Instructors</h3>
-            <p>Learn directly from experienced educators and contributors from IIT Bombay's FOSSEE team.</p>
-        </article>
-        <article class="cms-feature-card">
-            <span class="cms-feature-card__icon" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4 7L12 3L20 7V12C20 16.4183 16.4183 20 12 20C7.58172 20 4 16.4183 4 12V7Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-                    <path d="M9 11.5L11.2 13.7L15.5 9.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </span>
-            <h3>Certificate on Completion</h3>
-            <p>Receive recognition for your learning journey after successfully completing workshop tasks.</p>
-        </article>
     </section>
 
     <section class="cms-home-stats">
         <div class="cms-home-stats__inner">
-            <p class="cms-home-stats__item"><strong>500+</strong>Workshops Conducted</p>
-            <p class="cms-home-stats__item"><strong>10,000+</strong>Students</p>
-            <p class="cms-home-stats__item"><strong>20+</strong>Topics</p>
+            <p class="cms-home-stats__item"><strong>500+</strong><span>workshops</span></p>
+            <p class="cms-home-stats__item"><strong>10,000+</strong><span>students</span></p>
+            <p class="cms-home-stats__item"><strong>20+</strong><span>topics</span></p>
+            <p class="cms-home-stats__item"><strong>100%</strong><span>free</span></p>
+        </div>
+    </section>
+
+    <section id="cms-home-features" class="cms-home-categories">
+        <div class="cms-home-section-head">
+            <h2>Workshop Categories</h2>
+        </div>
+        <div class="cms-home-categories__grid">
+            <article class="cms-category-card"><span class="cms-category-card__icon">Py</span><h3>Python</h3><span class="cms-category-card__count">120+</span></article>
+            <article class="cms-category-card"><span class="cms-category-card__icon">Sc</span><h3>Scilab</h3><span class="cms-category-card__count">90+</span></article>
+            <article class="cms-category-card"><span class="cms-category-card__icon">Op</span><h3>OpenFOAM</h3><span class="cms-category-card__count">70+</span></article>
+            <article class="cms-category-card"><span class="cms-category-card__icon">Ci</span><h3>Circuit Design</h3><span class="cms-category-card__count">55+</span></article>
+            <article class="cms-category-card"><span class="cms-category-card__icon">Da</span><h3>Data Analytics</h3><span class="cms-category-card__count">80+</span></article>
+            <article class="cms-category-card"><span class="cms-category-card__icon">Os</span><h3>Open Source</h3><span class="cms-category-card__count">65+</span></article>
+        </div>
+    </section>
+
+    <section class="cms-home-steps">
+        <div class="cms-home-section-head">
+            <h2>How It Works</h2>
+        </div>
+        <div class="cms-home-steps__row">
+            <article class="cms-step-card">
+                <span class="cms-step-card__num">1</span>
+                <h3>Browse</h3>
+                <p>Explore workshop categories and schedules.</p>
+            </article>
+            <article class="cms-step-card">
+                <span class="cms-step-card__num">2</span>
+                <h3>Register</h3>
+                <p>Book your preferred workshop in a few clicks.</p>
+            </article>
+            <article class="cms-step-card">
+                <span class="cms-step-card__num">3</span>
+                <h3>Attend</h3>
+                <p>Join live sessions and build practical skills.</p>
+            </article>
         </div>
     </section>
 
     <section class="cms-home-cta">
         <div class="cms-home-cta__inner">
             <h2>Ready to start learning?</h2>
-            <p>Register now and book your first workshop</p>
-            <a class="cms-btn cms-btn--primary" href="{% url 'workshop_app:register' %}">Register</a>
+            <a class="cms-btn cms-btn--accent" href="{% url 'workshop_app:register' %}">Register Now</a>
+            <p>Free for all students</p>
         </div>
     </section>
 </main>
