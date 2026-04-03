@@ -1,0 +1,45 @@
+<article class="workshop-card workshop-card--{{ card_status_slug|default:'upcoming' }}">
+    <div class="workshop-card__bar"></div>
+
+    <div class="workshop-card__body">
+        <div class="workshop-card__header">
+            <h3 class="workshop-card__title">{{ card_title }}</h3>
+            <span class="workshop-card__badge">{{ card_status_label }}</span>
+        </div>
+
+        <p class="workshop-card__type">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            <span>{{ card_type_label }}</span>
+        </p>
+
+        <div class="workshop-card__details">
+            <div class="workshop-card__detail">
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+                <div>
+                    <span class="workshop-card__detail-label">Date</span>
+                    <span class="workshop-card__detail-value">{{ card_date_label }}</span>
+                </div>
+            </div>
+
+            <div class="workshop-card__detail">
+                <i class="fa fa-clock-o" aria-hidden="true"></i>
+                <div>
+                    <span class="workshop-card__detail-label">Duration</span>
+                    <span class="workshop-card__detail-value">{{ card_duration_label }} day{{ card_duration_label|pluralize }}</span>
+                </div>
+            </div>
+
+            <div class="workshop-card__detail">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <div>
+                    <span class="workshop-card__detail-label">Instructor</span>
+                    <span class="workshop-card__detail-value">{{ card_instructor_label }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="workshop-card__divider"></div>
+
+        <a href="{{ detail_url }}" class="workshop-card__button">View Details</a>
+    </div>
+</article>
