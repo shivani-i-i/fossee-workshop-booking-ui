@@ -49,6 +49,15 @@
     letter-spacing: 0.01em;
 }
 
+.site-footer__logo-image {
+    width: auto;
+    height: 30px;
+    border-radius: 8px;
+    object-fit: contain;
+    background: #ffffff;
+    padding: 2px 4px;
+}
+
 .site-footer__logo-chip--iit {
     background: rgba(255, 255, 255, 0.08);
 }

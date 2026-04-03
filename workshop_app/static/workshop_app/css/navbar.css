@@ -29,11 +29,35 @@
     color: var(--color-primary);
     font-family: var(--font-heading);
     display: inline-flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
+    gap: var(--space-2);
     line-height: 1;
     text-decoration: none;
     transition: opacity var(--transition-normal);
+}
+
+.site-logo__mark {
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 51, 102, 0.2);
+    background: #FFFFFF;
+    flex: 0 0 42px;
+}
+
+.site-logo__image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.site-logo__text {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .site-logo__title {
@@ -43,10 +67,26 @@
 }
 
 .site-logo__tagline {
-    margin-top: 2px;
+    margin-top: 3px;
     color: var(--color-accent);
     font-size: 10px;
     font-weight: var(--font-weight-medium);
+}
+
+@media (max-width: 767px) {
+    .site-logo__mark {
+        width: 36px;
+        height: 36px;
+        flex-basis: 36px;
+    }
+
+    .site-logo__title {
+        font-size: 18px;
+    }
+
+    .site-logo__tagline {
+        font-size: 9px;
+    }
 }
 
 .site-logo:hover {

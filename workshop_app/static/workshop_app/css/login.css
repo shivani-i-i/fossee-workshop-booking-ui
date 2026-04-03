@@ -1,18 +1,20 @@
 .login-page {
-    min-height: calc(100vh - 56px);
+    min-height: calc(100vh - 64px);
+    margin-top: 64px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     background: var(--color-bg);
 }
 
 .base-content {
-    padding: 0;
+    padding-top: 0;
+    padding-bottom: 0;
     background: var(--color-bg-primary);
 }
 
 .login-split-hero {
     position: relative;
-    min-height: calc(100vh - 56px);
+    min-height: calc(100vh - 64px);
     padding: var(--space-12);
     display: flex;
     flex-direction: column;
@@ -83,14 +85,22 @@
 }
 
 .login-split-hero__logos {
-    width: fit-content;
-    color: #ffffff;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    padding: var(--space-2) var(--space-4);
-    border: 1px solid rgba(255, 255, 255, 0.35);
-    border-radius: var(--radius-full);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-2);
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.login-split-hero__logo-img {
+    width: auto;
+    height: 32px;
+    border-radius: 8px;
+    background: #FFFFFF;
+    object-fit: contain;
+    padding: 3px 6px;
 }
 
 .login-card-wrap {
@@ -333,10 +343,8 @@
     .login-page {
         display: flex;
         background: var(--color-bg);
-    }
-
-    .login-page {
-        min-height: calc(100vh - 52px);
+        min-height: calc(100vh - 56px);
+        margin-top: 56px;
     }
 
     .login-split-hero {
@@ -345,7 +353,7 @@
 
     .login-card-wrap {
         width: 100%;
-        min-height: calc(100vh - 52px);
+        min-height: calc(100vh - 56px);
         padding: var(--space-4) 16px;
     }
 
