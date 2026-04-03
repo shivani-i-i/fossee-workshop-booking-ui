@@ -4,6 +4,19 @@
     background: #F8F9FA;
 }
 
+/* Keep this page in a readable light palette even if site-wide dark mode is active. */
+.workshop-list-page--light {
+    --color-text-primary: #1A1A2E;
+    --color-text-secondary: #475569;
+    --color-text-muted: #64748B;
+    --color-border: #E2E8F0;
+    --color-border-light: #E2E8F0;
+    --color-bg-primary: #FFFFFF;
+    --color-bg-secondary: #F8F9FA;
+    --color-bg-hover: #F1F5F9;
+    color: #1A1A2E;
+}
+
 .workshop-list-page__hero {
     background: #FFFFFF;
     border: 1px solid #E2E8F0;
@@ -25,12 +38,12 @@
     align-items: center;
     gap: var(--space-2);
     margin: 0 0 var(--space-3);
-    color: var(--color-text-secondary);
+    color: #64748B;
     font-size: var(--font-size-xs);
 }
 
 .workshop-list-page__breadcrumb a {
-    color: var(--color-text-secondary);
+    color: #64748B;
     text-decoration: none;
 }
 
@@ -40,7 +53,7 @@
 
 .workshop-list-page__title {
     margin: 0;
-    color: var(--color-text-primary);
+    color: #1A1A2E;
     font-size: 28px;
     font-weight: var(--font-weight-bold);
     line-height: var(--line-height-tight);
@@ -48,7 +61,7 @@
 
 .workshop-list-page__subtitle {
     margin: var(--space-2) 0 0;
-    color: var(--color-text-secondary);
+    color: #475569;
     font-size: var(--font-size-sm);
     line-height: var(--line-height-normal);
 }
@@ -66,7 +79,7 @@
 
 .workshop-list-page__count-label {
     display: block;
-    color: var(--color-text-muted);
+    color: #64748B;
     font-size: var(--font-size-xs);
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -75,7 +88,7 @@
 .workshop-list-page__count-value {
     display: block;
     margin-top: var(--space-1);
-    color: var(--color-text-primary);
+    color: #1A1A2E;
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-semibold);
 }
@@ -132,7 +145,7 @@
     border: 0;
     border-radius: var(--radius-full);
     background: transparent;
-    color: var(--color-text-muted);
+    color: #64748B;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -147,8 +160,8 @@
 }
 
 .workshop-list-page__search-clear:hover {
-    color: var(--color-text-primary);
-    background: var(--color-bg-hover);
+    color: #1A1A2E;
+    background: #F1F5F9;
 }
 
 .workshop-list-page__chips {
@@ -185,6 +198,7 @@
     padding: 0 var(--space-2);
     border-radius: var(--radius-full);
     background: #E2E8F0;
+    color: #334155;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -208,6 +222,7 @@
 
 .workshop-chip.is-active .workshop-chip__count {
     background: rgba(255, 255, 255, 0.24);
+    color: #FFFFFF;
 }
 
 .workshop-list-page__toolbar {
@@ -219,16 +234,18 @@
 }
 
 .workshop-list-page__results {
-    color: var(--color-text-secondary);
+    color: #475569;
     font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
 }
 
 .workshop-list-page__sort {
     display: inline-flex;
     align-items: center;
     gap: var(--space-2);
-    color: var(--color-text-secondary);
+    color: #475569;
     font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
 }
 
 .workshop-list-page__sort select {
@@ -239,6 +256,13 @@
     border-radius: var(--radius-md);
     background: #FFFFFF;
     color: #1A1A2E;
+    font-weight: var(--font-weight-medium);
+}
+
+.workshop-list-page__sort select:focus {
+    outline: none;
+    border-color: #003366;
+    box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.12);
 }
 
 .workshop-list-grid {
@@ -387,7 +411,7 @@
 
 .workshop-list-card__title {
     margin: 0;
-    color: var(--color-text-primary);
+    color: #1A1A2E;
     font-size: 16px;
     font-weight: var(--font-weight-semibold);
     line-height: var(--line-height-tight);
@@ -404,7 +428,7 @@
     justify-content: center;
     padding: 4px 8px;
     border-radius: var(--radius-full);
-    color: var(--color-text-secondary);
+    color: #475569;
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-semibold);
     line-height: 1;
@@ -424,7 +448,7 @@
     display: inline-flex;
     margin: var(--space-3) 0 0;
     background: var(--color-primary-light);
-    color: var(--color-primary);
+    color: #003366;
     border-radius: var(--radius-full);
     padding: 4px 10px;
     font-size: 12px;
@@ -447,26 +471,26 @@
     display: inline-flex;
     align-items: center;
     gap: var(--space-2);
-    color: var(--color-text-secondary);
+    color: #475569;
     font-size: 13px;
 }
 
 .workshop-list-card__detail i {
-    color: var(--color-text-muted);
+    color: #64748B;
     width: 14px;
     text-align: center;
 }
 
 .workshop-list-card__detail-label {
     display: block;
-    color: var(--color-text-muted);
+    color: #64748B;
     font-size: var(--font-size-xs);
     line-height: var(--line-height-tight);
 }
 
 .workshop-list-card__detail-value {
     display: inline-block;
-    color: var(--color-text-primary);
+    color: #1A1A2E;
     font-size: 13px;
     font-weight: 500;
     line-height: var(--line-height-normal);
@@ -509,9 +533,9 @@
     gap: var(--space-3);
     padding: var(--space-10);
     text-align: center;
-    color: var(--color-text-secondary);
-    background: var(--color-bg-primary);
-    border: 1px solid var(--color-border);
+    color: #475569;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
     border-radius: 12px;
 }
 
@@ -522,7 +546,7 @@
 
 .workshop-list-grid__empty h2 {
     margin: 0;
-    color: var(--color-text-primary);
+    color: #1A1A2E;
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-semibold);
 }
@@ -558,6 +582,26 @@
 
 .workshop-list-page__pagination .pagination {
     margin-bottom: 0;
+}
+
+/* Make horizontal chip scrolling feel cleaner on Windows. */
+.workshop-list-page__chips::-webkit-scrollbar {
+    height: 8px;
+}
+
+.workshop-list-page__chips::-webkit-scrollbar-track {
+    background: #E2E8F0;
+    border-radius: 999px;
+}
+
+.workshop-list-page__chips::-webkit-scrollbar-thumb {
+    background: #94A3B8;
+    border-radius: 999px;
+}
+
+.workshop-list-page__chips {
+    scrollbar-color: #94A3B8 #E2E8F0;
+    scrollbar-width: thin;
 }
 
 @media (max-width: 1024px) {
