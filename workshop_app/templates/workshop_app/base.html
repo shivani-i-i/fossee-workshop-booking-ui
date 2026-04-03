@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="{% static 'workshop_app/css/toastr.min.css' %}">
     <link rel="stylesheet" href="{% static 'workshop_app/css/variables.css' %}" type="text/css"/>
     <link rel="stylesheet" href="{% static 'workshop_app/css/navbar.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'workshop_app/css/footer.css' %}" type="text/css"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'workshop_app/css/base.css' %}" type="text/css"/>
     <link rel="stylesheet" href="{% static 'workshop_app/css/font-awesome.css' %}" type="text/css"/>
@@ -105,12 +106,40 @@
     })();
 </script>
 
-</body>
-<footer class="footer">
+    <footer class="site-footer" aria-label="Site footer">
     {% block footer %}
-       <div class="container">
-           Developed by FOSSEE group, IIT Bombay
-       </div> 
+        <div class="site-footer__inner">
+            <div class="site-footer__grid">
+                <div class="site-footer__brand">
+                    <a class="site-footer__logo" href="/">FOSSEE</a>
+                    <p class="site-footer__tagline">Free and Open Source Software for Education</p>
+                    <p class="site-footer__institution">IIT Bombay</p>
+                </div>
+
+                <div class="site-footer__links" aria-label="Quick links">
+                    <h2 class="site-footer__heading">Quick Links</h2>
+                    <ul class="site-footer__list">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="{% url 'workshop_app:workshop_type_list' %}">Workshops</a></li>
+                        <li><a href="{% url 'workshop_app:login' %}">Login</a></li>
+                        <li><a href="{% url 'workshop_app:register' %}">Register</a></li>
+                    </ul>
+                </div>
+
+                <div class="site-footer__contact">
+                    <h2 class="site-footer__heading">Contact</h2>
+                    <ul class="site-footer__list site-footer__list--contact">
+                        <li><span>Email:</span> <a href="mailto:contact@fossee.in">contact@fossee.in</a></li>
+                        <li><span>Website:</span> <a href="https://fossee.in" target="_blank" rel="noopener noreferrer">fossee.in</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="site-footer__bottom">
+                <p>© 2024 FOSSEE, IIT Bombay. All rights reserved.</p>
+            </div>
+        </div>
     {% endblock %}
 </footer>
+</body>
 </html>
