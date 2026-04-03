@@ -55,26 +55,37 @@
 {% block header %}
     <nav class="site-navbar" aria-label="Primary navigation">
         <div class="site-navbar__inner">
-            <a class="site-logo" href="/">FOSSEE</a>
+            <a class="site-logo" href="/">
+                <span class="site-logo__title">FOSSEE</span>
+                <span class="site-logo__tagline">by IIT Bombay</span>
+            </a>
 
             <button class="site-navbar__toggle" type="button" id="siteNavbarToggle"
-                    aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="siteNavMenu">
+                    aria-label="Open menu" aria-expanded="false" aria-controls="siteNavMenu">
                 <span class="site-navbar__toggle-bar"></span>
                 <span class="site-navbar__toggle-bar"></span>
                 <span class="site-navbar__toggle-bar"></span>
             </button>
 
             <div class="site-nav" id="siteNavMenu">
-                <a href="/" class="site-nav__link{% if request.path == '/' %} active{% endif %}">Home</a>
-                <a href="{% url 'workshop_app:workshop_type_list' %}" class="site-nav__link{% if '/workshop/types/' in request.path %} active{% endif %}">Workshops</a>
-                <button type="button" class="site-theme-toggle" id="siteThemeToggle" aria-label="Toggle dark mode" aria-pressed="false">
-                    <i class="fa fa-moon-o" aria-hidden="true"></i>
-                </button>
-                <a href="{% url 'workshop_app:login' %}" class="site-nav__btn site-nav__btn--login{% if '/workshop/login/' in request.path %} active{% endif %}">Login</a>
-                <a href="{% url 'workshop_app:register' %}" class="site-nav__btn site-nav__btn--register{% if '/workshop/register/' in request.path %} active{% endif %}">Register</a>
+                <div class="site-nav__links">
+                    <a href="/" class="site-nav__link{% if request.path == '/' %} active{% endif %}">Home</a>
+                    <a href="{% url 'workshop_app:workshop_type_list' %}" class="site-nav__link{% if '/workshop/types/' in request.path %} active{% endif %}">Workshops</a>
+                </div>
+                <div class="site-nav__divider" aria-hidden="true"></div>
+                <div class="site-nav__actions">
+                    <a href="{% url 'workshop_app:login' %}" class="site-nav__btn site-nav__btn--login{% if '/workshop/login/' in request.path %} active{% endif %}">Login</a>
+                    <a href="{% url 'workshop_app:register' %}" class="site-nav__btn site-nav__btn--register{% if '/workshop/register/' in request.path %} active{% endif %}">Register</a>
+                </div>
+                <div class="site-nav__footer" aria-hidden="true">
+                    <div class="site-nav__footer-divider"></div>
+                    <p>FOSSEE Workshop Portal</p>
+                    <small>© IIT Bombay</small>
+                </div>
             </div>
         </div>
     </nav>
+    <div class="site-nav-backdrop" id="siteNavBackdrop" aria-hidden="true"></div>
 {% endblock %}
 
 <div class="base-content">
@@ -94,33 +105,8 @@
         var navbar = document.querySelector('.site-navbar');
         var toggleButton = document.getElementById('siteNavbarToggle');
         var menu = document.getElementById('siteNavMenu');
-        var themeToggle = document.getElementById('siteThemeToggle');
-
-        function setTheme(themeName) {
-            document.documentElement.setAttribute('data-theme', themeName);
-            if (themeToggle) {
-                var isDark = themeName === 'dark';
-                themeToggle.classList.toggle('is-dark', isDark);
-                themeToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
-                themeToggle.innerHTML = isDark
-                    ? '<i class="fa fa-sun-o" aria-hidden="true"></i>'
-                    : '<i class="fa fa-moon-o" aria-hidden="true"></i>';
-            }
-        }
-
-        if (themeToggle) {
-            setTheme(document.documentElement.getAttribute('data-theme') || 'light');
-            themeToggle.addEventListener('click', function () {
-                var current = document.documentElement.getAttribute('data-theme') || 'light';
-                var next = current === 'dark' ? 'light' : 'dark';
-                setTheme(next);
-                try {
-                    localStorage.setItem('theme', next);
-                } catch (error) {
-                    // Ignore storage failures silently.
-                }
-            });
-        }
+        var backdrop = document.getElementById('siteNavBackdrop');
+        var focusableSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
         function setNavbarScrollState() {
             if (!navbar) {
@@ -136,10 +122,40 @@
             return;
         }
 
+        function isMobileLayout() {
+            return window.matchMedia('(max-width: 767px)').matches;
+        }
+
+        function trapFocus(event) {
+            if (!isMobileLayout() || !menu.classList.contains('is-open') || event.key !== 'Tab') {
+                return;
+            }
+            var focusable = menu.querySelectorAll(focusableSelector);
+            if (!focusable.length) {
+                return;
+            }
+
+            var first = focusable[0];
+            var last = focusable[focusable.length - 1];
+
+            if (event.shiftKey && document.activeElement === first) {
+                event.preventDefault();
+                last.focus();
+            } else if (!event.shiftKey && document.activeElement === last) {
+                event.preventDefault();
+                first.focus();
+            }
+        }
+
         function closeMenu() {
             menu.classList.remove('is-open');
             toggleButton.classList.remove('is-open');
             toggleButton.setAttribute('aria-expanded', 'false');
+            toggleButton.setAttribute('aria-label', 'Open menu');
+            if (backdrop) {
+                backdrop.classList.remove('is-visible');
+            }
+            document.removeEventListener('keydown', trapFocus);
         }
 
         toggleButton.addEventListener('click', function (event) {
@@ -147,10 +163,39 @@
             var isOpen = menu.classList.toggle('is-open');
             toggleButton.classList.toggle('is-open', isOpen);
             toggleButton.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            toggleButton.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+            if (backdrop) {
+                backdrop.classList.toggle('is-visible', isOpen);
+            }
+            if (isOpen && isMobileLayout()) {
+                var firstFocusable = menu.querySelector(focusableSelector);
+                if (firstFocusable) {
+                    firstFocusable.focus();
+                }
+                document.addEventListener('keydown', trapFocus);
+            } else {
+                document.removeEventListener('keydown', trapFocus);
+            }
         });
 
         document.addEventListener('click', function (event) {
             if (!menu.contains(event.target) && !toggleButton.contains(event.target)) {
+                closeMenu();
+            }
+        });
+
+        if (backdrop) {
+            backdrop.addEventListener('click', closeMenu);
+        }
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                closeMenu();
+            }
+        });
+
+        window.addEventListener('resize', function () {
+            if (!isMobileLayout()) {
                 closeMenu();
             }
         });
