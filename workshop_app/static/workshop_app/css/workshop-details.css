@@ -5,6 +5,8 @@
 
 .workshop-details-hero {
     background: linear-gradient(135deg, var(--color-primary), color-mix(in srgb, var(--color-primary) 70%, var(--color-bg-primary)));
+    background-size: 200% 200%;
+    animation: gradientShift 6s ease infinite;
     border-radius: var(--radius-lg);
     padding: var(--space-6);
     margin-bottom: var(--space-6);
@@ -26,9 +28,13 @@
 
 .workshop-details-hero h1 {
     margin: 0;
-    color: var(--color-bg-primary);
     font-size: var(--font-size-3xl);
     font-weight: var(--font-weight-bold);
+    background: linear-gradient(135deg, #FFFFFF, #FFE4CC);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
 }
 
 .workshop-status-badge {
@@ -46,6 +52,10 @@
 .workshop-status-badge--accepted { color: var(--color-success); }
 .workshop-status-badge--pending { color: var(--color-warning); }
 .workshop-status-badge--deleted { color: var(--color-error); }
+
+.workshop-status-badge--pending {
+    animation: pendingPulse 2s infinite;
+}
 
 .workshop-details-layout {
     display: grid;
@@ -73,6 +83,12 @@
     display: flex;
     align-items: center;
     gap: var(--space-3);
+    transition: var(--transition-bounce);
+}
+
+.workshop-info-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card-hover);
 }
 
 .workshop-info-card__icon {
@@ -128,6 +144,7 @@
     justify-content: center;
     text-decoration: none;
     font-weight: var(--font-weight-semibold);
+    transition: var(--transition-bounce);
 }
 
 .workshop-action-btn--accept { background: #eaf8f0; border-color: #bde8cf; color: #1f7f51; }
@@ -142,6 +159,14 @@
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-card);
+    transition: var(--transition-bounce);
+}
+
+.workshop-terms-card:hover,
+.workshop-comments-card:hover,
+.workshop-action-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card-hover);
 }
 
 .workshop-accordion {
@@ -199,6 +224,8 @@
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     padding: var(--space-3);
+    background: var(--color-bg-primary);
+    transition: var(--transition-interactive);
 }
 
 .workshop-comment-form textarea:focus {
@@ -235,6 +262,7 @@
     background: var(--color-primary);
     color: var(--color-bg-primary);
     padding: 0 var(--space-4);
+    transition: var(--transition-bounce);
 }
 
 .workshop-comment-list {
@@ -317,6 +345,20 @@
 .workshop-empty {
     color: var(--color-text-muted);
     font-size: var(--font-size-sm);
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 @media (max-width: 991px) {

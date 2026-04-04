@@ -12,7 +12,13 @@
     border-radius: var(--radius-lg);
     padding: var(--space-8);
     border-top: 3px solid var(--color-primary);
-    box-shadow: 0 8px 24px rgba(94, 106, 210, 0.12);
+    box-shadow: var(--shadow-card);
+    transition: var(--transition-bounce);
+}
+
+.propose-shell:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card-hover);
 }
 
 .propose-steps {
@@ -129,9 +135,13 @@
 
 .propose-panel h2 {
     margin: 0;
-    color: var(--color-text-primary);
     font-size: var(--font-size-xl);
     font-weight: var(--font-weight-semibold);
+    background: linear-gradient(135deg, #003366, #FF6B00);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
 }
 
 .propose-panel__note {
@@ -156,11 +166,13 @@
     font-weight: var(--font-weight-medium);
     text-align: left;
     padding: var(--space-4);
-    transition: border-color var(--transition-normal), background var(--transition-normal), box-shadow var(--transition-normal);
+    transition: var(--transition-bounce);
 }
 
 .propose-type-card:hover {
     border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card-hover);
 }
 
 .propose-type-card.is-selected {
@@ -186,12 +198,18 @@
     padding: 0 var(--space-4);
     color: var(--color-text-primary);
     background: var(--color-bg-primary);
+    transition: var(--transition-interactive);
 }
 
 .propose-date-input:focus {
     outline: none;
     border-color: var(--color-primary);
     box-shadow: 0 0 0 3px rgba(94, 106, 210, 0.15);
+}
+
+.propose-date-input:focus-visible {
+    outline: 2px solid #003366;
+    outline-offset: 2px;
 }
 
 .ui-datepicker td.ui-datepicker-unselectable span {

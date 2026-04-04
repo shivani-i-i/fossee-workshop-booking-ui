@@ -41,6 +41,11 @@
     margin: 0 0 var(--space-4);
     font-size: var(--font-size-xl);
     font-weight: var(--font-weight-semibold);
+    background: linear-gradient(135deg, #003366, #FF6B00);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
 }
 
 .stats-filter-count {
@@ -67,6 +72,11 @@
     color: var(--color-text-secondary);
     text-decoration: none;
     font-size: var(--font-size-xs);
+    transition: var(--transition-interactive);
+}
+
+.stats-active-chip:active {
+    transform: scale(0.95);
 }
 
 .stats-active-chip:hover {
@@ -135,6 +145,12 @@
     color: var(--color-text-secondary);
     background: var(--color-bg-primary);
     cursor: pointer;
+    transition: var(--transition-bounce);
+}
+
+.stats-check-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card-hover);
 }
 
 .stats-check-card.is-checked {
@@ -177,7 +193,7 @@
     text-decoration: none;
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-semibold);
-    transition: all var(--transition-normal);
+    transition: var(--transition-bounce);
 }
 
 .stats-btn:hover {
@@ -236,11 +252,11 @@
     border-radius: var(--radius-lg);
     padding: var(--space-4);
     box-shadow: var(--shadow-card);
-    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+    transition: var(--transition-bounce);
 }
 
 .stats-summary-card:hover {
-    transform: translateY(-2px);
+    transform: translateY(-4px);
     box-shadow: var(--shadow-card-hover);
 }
 
@@ -264,6 +280,13 @@
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-card);
+    transition: var(--transition-bounce);
+}
+
+.stats-chart-card:hover,
+.stats-table-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card-hover);
 }
 
 .stats-chart-card {
@@ -298,12 +321,17 @@
     padding: 6px 12px;
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-medium);
+    transition: var(--transition-bounce);
 }
 
 .stats-chip-btn.is-active {
     background: var(--color-primary);
     border-color: var(--color-primary);
     color: var(--color-bg-primary);
+}
+
+.stats-chip-btn:active {
+    transform: scale(0.95);
 }
 
 .stats-chart-wrap {
@@ -402,6 +430,17 @@
     display: grid;
     justify-items: center;
     gap: var(--space-3);
+    position: relative;
+}
+
+.stats-empty-state::before {
+    content: "";
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #003366, #0F4C81);
+    box-shadow: 0 14px 30px rgba(0, 51, 102, 0.15);
+    animation: floatSoft 3s ease-in-out infinite;
 }
 
 .stats-empty-state p {

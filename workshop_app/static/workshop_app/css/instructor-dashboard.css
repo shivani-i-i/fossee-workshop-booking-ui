@@ -13,12 +13,17 @@
     align-items: center;
     justify-content: space-between;
     gap: var(--space-4);
+    box-shadow: var(--shadow-card);
 }
 
 .instructor-welcome-banner h1 {
     margin: 0;
-    color: var(--color-text-primary);
     font-size: var(--font-size-2xl);
+    background: linear-gradient(135deg, #003366, #FF6B00);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
 }
 
 .instructor-welcome-banner p {
@@ -43,9 +48,13 @@
 
 .instructor-dashboard__header h1 {
     margin: 0;
-    color: var(--color-text-primary);
     font-size: var(--font-size-3xl);
     font-weight: var(--font-weight-bold);
+    background: linear-gradient(135deg, #003366, #FF6B00);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
 }
 
 .instructor-stats-grid {
@@ -61,6 +70,12 @@
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-card);
     padding: var(--space-4);
+    transition: var(--transition-bounce);
+}
+
+.instructor-stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card-hover);
 }
 
 .instructor-stat-card__icon {
@@ -142,6 +157,7 @@
 .instructor-status-badge.is-pending {
     background: #fff5e6;
     color: #ad6e12;
+    animation: pendingPulse 2s infinite;
 }
 
 .instructor-actions {
@@ -161,7 +177,7 @@
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-semibold);
     text-decoration: none;
-    transition: all var(--transition-normal);
+    transition: var(--transition-bounce);
 }
 
 .instructor-btn:hover {
@@ -245,6 +261,19 @@
     box-shadow: var(--shadow-card);
     padding: var(--space-8);
     text-align: center;
+    position: relative;
+}
+
+.instructor-empty-state::before {
+    content: "";
+    width: 72px;
+    height: 72px;
+    margin: 0 auto var(--space-3);
+    display: block;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #003366, #0F4C81);
+    box-shadow: 0 14px 30px rgba(0, 51, 102, 0.15);
+    animation: floatSoft 3s ease-in-out infinite;
 }
 
 .instructor-empty-state__illustration {
@@ -307,7 +336,7 @@
     box-shadow: var(--shadow-lg);
     padding: var(--space-5);
     transform: translateY(var(--space-3));
-    transition: transform var(--transition-normal);
+    transition: var(--transition-bounce);
 }
 
 .instructor-modal.is-open .instructor-modal__dialog {
@@ -335,6 +364,7 @@
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     padding: 0 var(--space-3);
+    transition: var(--transition-interactive);
 }
 
 .instructor-modal__dialog input:focus {

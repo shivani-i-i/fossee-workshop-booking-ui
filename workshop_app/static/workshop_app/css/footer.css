@@ -109,7 +109,7 @@
     position: relative;
     color: var(--color-bg-primary);
     text-decoration: none;
-    transition: color var(--transition-normal), padding-left var(--transition-normal);
+    transition: var(--transition-interactive);
 }
 
 .site-footer__list a:hover {

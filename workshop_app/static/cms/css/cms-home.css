@@ -6,9 +6,11 @@ body {
 
 .cms-site-nav {
     min-height: 64px;
-    background: #ffffff;
-    border-bottom: 2px solid var(--color-primary);
-    box-shadow: 0 2px 12px rgba(0, 51, 102, 0.08);
+    background: rgba(255, 255, 255, 0.85);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 24px rgba(0, 51, 102, 0.06);
 }
 
 .cms-site-nav .navbar-collapse {
@@ -83,6 +85,8 @@ body {
     padding: 96px 16px 84px;
     overflow: hidden;
     background: linear-gradient(135deg, #003366 0%, #0F4C81 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 6s ease infinite;
 }
 
 .cms-home-hero__pattern {
@@ -102,10 +106,14 @@ body {
 
 .cms-home-hero h1 {
     margin: 0;
-    color: #ffffff;
     font-family: var(--font-heading);
     font-size: clamp(2rem, 4.8vw, 3.5rem);
     line-height: 1.15;
+    background: linear-gradient(135deg, #ffffff, #FFE4CC);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
 }
 
 .cms-home-hero p {
@@ -134,7 +142,7 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    transition: all 220ms ease;
+    transition: var(--transition-bounce);
 }
 
 .cms-btn--accent {
@@ -235,7 +243,7 @@ body {
     display: grid;
     gap: 10px;
     box-shadow: var(--shadow-sm);
-    transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+    transition: var(--transition-bounce);
 }
 
 .cms-category-card:hover {
@@ -303,6 +311,27 @@ body {
     padding: 18px;
     position: relative;
     z-index: 1;
+    box-shadow: var(--shadow-card);
+    transition: var(--transition-bounce);
+}
+
+.cms-step-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card-hover);
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .cms-step-card__num {

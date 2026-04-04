@@ -58,8 +58,21 @@ body {
     font-family: var(--font-family);
     font-size: var(--font-size-base);
     line-height: var(--line-height-normal);
-    background: var(--color-bg-secondary);
+    background:
+        radial-gradient(circle at top left, color-mix(in srgb, var(--color-primary) 8%, transparent), transparent 36%),
+        radial-gradient(circle at top right, color-mix(in srgb, var(--color-accent) 8%, transparent), transparent 28%),
+        var(--color-bg-secondary);
     color: var(--color-text-primary);
+}
+
+body,
+button,
+input,
+textarea,
+select,
+a,
+[role="button"] {
+    transition: var(--transition-interactive);
 }
 
 :focus-visible {
@@ -76,6 +89,16 @@ textarea:focus-visible,
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 18%, transparent);
 }
 
+h1,
+.page-title,
+.section-title {
+    background: linear-gradient(135deg, #003366, #FF6B00);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
 /* Shared button system */
 .btn,
 button,
@@ -84,6 +107,118 @@ input[type="button"] {
     min-height: 44px;
     border-radius: 8px;
     font-weight: 500;
+}
+
+.btn,
+button,
+input[type="submit"],
+input[type="button"],
+.site-nav__btn,
+.cms-btn,
+.workshop-card__button,
+.workshop-action-btn,
+.workshop-primary-btn,
+.stats-btn,
+.instructor-btn,
+.coordinator-btn,
+.profile-edit-btn,
+.profile-submit,
+.profile-cancel,
+.login-submit,
+.register-submit,
+.propose-btn {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.btn::after,
+button::after,
+.site-nav__btn::after,
+.cms-btn::after,
+.workshop-card__button::after,
+.workshop-action-btn::after,
+.workshop-primary-btn::after,
+.stats-btn::after,
+.instructor-btn::after,
+.coordinator-btn::after,
+.profile-edit-btn::after,
+.profile-submit::after,
+.profile-cancel::after,
+.login-submit::after,
+.register-submit::after,
+.propose-btn::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -75%;
+    width: 50%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: skewX(-20deg);
+    transition: left 400ms ease;
+    pointer-events: none;
+}
+
+.btn:hover::after,
+button:hover::after,
+.site-nav__btn:hover::after,
+.cms-btn:hover::after,
+.workshop-card__button:hover::after,
+.workshop-action-btn:hover::after,
+.workshop-primary-btn:hover::after,
+.stats-btn:hover::after,
+.instructor-btn:hover::after,
+.coordinator-btn:hover::after,
+.profile-edit-btn:hover::after,
+.profile-submit:hover::after,
+.profile-cancel:hover::after,
+.login-submit:hover::after,
+.register-submit:hover::after,
+.propose-btn:hover::after {
+    left: 125%;
+}
+
+.btn:hover,
+button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+.site-nav__btn:hover,
+.cms-btn:hover,
+.workshop-card__button:hover,
+.workshop-action-btn:hover,
+.workshop-primary-btn:hover,
+.stats-btn:hover,
+.instructor-btn:hover,
+.coordinator-btn:hover,
+.profile-edit-btn:hover,
+.profile-submit:hover,
+.profile-cancel:hover,
+.login-submit:hover,
+.register-submit:hover,
+.propose-btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn:active,
+button:active,
+input[type="submit"]:active,
+input[type="button"]:active,
+.site-nav__btn:active,
+.cms-btn:active,
+.workshop-card__button:active,
+.workshop-action-btn:active,
+.workshop-primary-btn:active,
+.stats-btn:active,
+.instructor-btn:active,
+.coordinator-btn:active,
+.profile-edit-btn:active,
+.profile-submit:active,
+.profile-cancel:active,
+.login-submit:active,
+.register-submit:active,
+.propose-btn:active {
+    transform: translateY(0);
 }
 
 .btn-primary,
@@ -126,6 +261,47 @@ input[type="button"] {
     background: var(--color-success);
     border-color: var(--color-success);
     color: #ffffff;
+}
+
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 600ms cubic-bezier(0.4, 0, 0.2, 1), transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.is-pending,
+.pending-badge {
+    animation: pendingPulse 2s infinite;
+}
+
+@keyframes pendingPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 6px rgba(245, 158, 11, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+    }
+}
+
+@keyframes floatSoft {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
 }
 
 /* Typography */
