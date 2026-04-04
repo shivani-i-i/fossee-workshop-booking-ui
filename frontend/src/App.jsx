@@ -5,28 +5,6 @@ const navItems = [
   { key: 'workshops', label: 'Workshops' },
 ];
 
-const workshopCards = [
-  { title: 'Python for Beginners', tag: 'Python', schedule: 'To be announced', status: 'Upcoming' },
-  { title: 'Scilab Fundamentals', tag: 'Scilab', schedule: 'To be announced', status: 'Upcoming' },
-  { title: 'OpenFOAM Essentials', tag: 'Hardware', schedule: 'To be announced', status: 'Upcoming' },
-  { title: 'Data Analytics with Python', tag: 'Python', schedule: 'To be announced', status: 'Upcoming' },
-  { title: 'Electronics Lab Basics', tag: 'Hardware', schedule: 'To be announced', status: 'Upcoming' },
-  { title: 'Scientific Computing Toolkit', tag: 'Scilab', schedule: 'To be announced', status: 'Upcoming' },
-];
-
-const stats = [
-  { value: '500+', label: 'Workshops Conducted' },
-  { value: '10,000+', label: 'Students Trained' },
-  { value: '20+', label: 'FOSS Topics' },
-  { value: '100%', label: 'Free for Students' },
-];
-
-const featuredStats = [
-  { value: '92%', label: 'Reported higher confidence' },
-  { value: '4.8/5', label: 'Average learner satisfaction' },
-  { value: '350+', label: 'Active institutions' },
-];
-
 const faq = [
   { q: 'Are FOSSEE workshops free?', a: 'Yes. Core workshops on this portal are free for students and educators.' },
   { q: 'Who can join these workshops?', a: 'Anyone with an academic or skill-building interest in open-source technologies.' },
@@ -49,6 +27,10 @@ const routeMeta = {
   register: {
     title: 'FOSSEE Workshop Booking | Register',
     description: 'Create your FOSSEE Workshop Booking account in a modern, accessible registration flow.',
+  },
+  statistics: {
+    title: 'FOSSEE Workshop Booking | Statistics',
+    description: 'Review workshop statistics and filter results in a dashboard-style view.',
   },
 };
 
@@ -98,11 +80,12 @@ function App() {
   return (
     <div className="app-shell">
       <Header route={route} navigate={navigate} />
-      <main className="app-main">
+      <main className={route === 'home' ? 'app-main app-main--home' : 'app-main'}>
         {route === 'home' && <HomePage navigate={navigate} />}
         {route === 'workshops' && <WorkshopsPage />}
         {route === 'login' && <LoginPage navigate={navigate} />}
         {route === 'register' && <RegisterPage navigate={navigate} />}
+        {route === 'statistics' && <StatisticsPage />}
       </main>
       <Footer navigate={navigate} />
     </div>
@@ -150,24 +133,21 @@ function HomePage({ navigate }) {
     <>
       <section className="hero-split">
         <div className="hero-split__copy">
-          <p className="eyebrow">Book Free Workshops by IIT Bombay</p>
-          <h1>FOSSEE Workshop Booking Portal</h1>
-          <p className="hero-split__lead">Learn from experts. Build real skills. Get certified.</p>
+          <h1>FOSSEE</h1>
+          <p className="hero-split__lead hero-split__lead--title">Workshop Booking Portal</p>
+          <p className="eyebrow">by IIT Bombay</p>
           <ul className="hero-split__list">
             <li>Free workshops for all students</li>
             <li>Certified by IIT Bombay</li>
             <li>500+ workshops conducted</li>
           </ul>
-          <div className="hero-split__actions">
-            <button type="button" className="btn btn--solid" onClick={() => navigate('workshops')}>Browse Workshops</button>
-            <button type="button" className="btn btn--outline" onClick={() => navigate('register')}>Register Free</button>
-          </div>
         </div>
         <aside className="hero-split__panel" aria-label="Quick sign in preview">
           <div className="panel-card">
             <span className="panel-card__brand">FOSSEE</span>
             <span className="panel-card__subbrand">Workshop Portal</span>
             <h2>Sign in</h2>
+            <p className="panel-card__helper">Enter your credentials to continue</p>
             <label>
               Username
               <input type="text" placeholder="Username" />
@@ -177,81 +157,20 @@ function HomePage({ navigate }) {
               <input type="password" placeholder="Password" />
             </label>
             <button type="button" className="btn btn--solid">Sign In</button>
+            <div className="panel-card__divider"><span>or</span></div>
+            <p className="auth-card__foot">New around here? <button type="button" className="text-button" onClick={() => navigate('register')}>Register</button></p>
+            <p className="panel-card__meta">© 2024 FOSSEE, IIT Bombay</p>
           </div>
         </aside>
       </section>
 
-      <section className="stats-strip" aria-label="FOSSEE impact stats">
-        {stats.map((item) => (
-          <article key={item.label} className="stats-strip__item">
-            <strong>{item.value}</strong>
-            <span>{item.label}</span>
-          </article>
-        ))}
-      </section>
-
-      <section className="trust-row" aria-label="Institution support">
-        <span>Supported by</span>
-        <strong>IIT Bombay</strong>
-        <strong>FOSSEE</strong>
-        <span>MoE, Govt. of India</span>
-      </section>
-
-      <section className="content-section">
-        <SectionHeading label="About Us" title="About FOSSEE Workshop Portal" />
-        <div className="about-grid">
-          <div className="info-card">
-            <p>The FOSSEE Workshop Portal is an IIT Bombay initiative that helps institutions host high-quality, practical workshops on free and open-source software.</p>
-            <p>Our goal is to make technical learning accessible, hands-on, and career-relevant for every learner.</p>
+      <section className="faq-strip">
+        <div className="faq-strip__inner">
+          <p className="faq-strip__label">FAQ</p>
+          <h2 className="faq-strip__title">Frequently Asked Questions</h2>
+          <div className="faq-grid faq-grid--compact">
+            {faq.map((item) => <FaqItem key={item.q} question={item.q} answer={item.a} compact />)}
           </div>
-          <div className="feature-list">
-            <article>
-              <strong>IIT Bombay</strong>
-              <span>Academic leadership and trusted pedagogy</span>
-            </article>
-            <article>
-              <strong>Open Source Focus</strong>
-              <span>Learn tools that are free and industry-used</span>
-            </article>
-            <article>
-              <strong>Institution Ready</strong>
-              <span>Designed for scalable campus delivery</span>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section className="content-section">
-        <SectionHeading label="Why FOSSEE Works" title="Built For Serious Learning" />
-        <div className="why-grid">
-          <Card icon="01" title="Learner-first pacing" text="Workshops move from fundamentals to applied practice without overwhelming students." />
-          <Card icon="02" title="Trusted academic content" text="Sessions are guided by IIT ecosystem mentors with practical, open-source teaching materials." />
-          <Card icon="03" title="Career-relevant outcomes" text="Each track focuses on portfolio-ready workflows that build confidence and employability." />
-        </div>
-      </section>
-
-      <section className="content-section">
-        <SectionHeading label="Workshops" title="Workshop Categories" />
-        <div className="chip-grid">
-          {['Python', 'Scilab', 'OpenFOAM', 'Circuit Design', 'Data Analytics', 'Open Source'].map((label) => (
-            <button key={label} className="chip" type="button" onClick={() => navigate('workshops')}>{label}</button>
-          ))}
-        </div>
-      </section>
-
-      <section className="content-section">
-        <SectionHeading label="How It Works" title="How It Works" />
-        <div className="steps-grid">
-          <Card icon="1" title="Browse" text="Explore workshop categories and schedules." />
-          <Card icon="2" title="Register" text="Book your preferred workshop in a few clicks." />
-          <Card icon="3" title="Attend" text="Join live sessions and build practical skills." />
-        </div>
-      </section>
-
-      <section className="content-section faq-block">
-        <SectionHeading label="FAQ" title="Frequently Asked Questions" />
-        <div className="faq-grid">
-          {faq.map((item) => <FaqItem key={item.q} question={item.q} answer={item.a} />)}
         </div>
       </section>
 
@@ -267,9 +186,11 @@ function HomePage({ navigate }) {
 }
 
 function LoginPage({ navigate }) {
+  const [showPassword, setShowPassword] = React.useState(false);
+
   return (
-    <section className="auth-split">
-      <div className="auth-split__hero">
+    <section className="auth-screen" aria-label="Login page">
+      <div className="auth-screen__hero">
         <h1>FOSSEE</h1>
         <p>Workshop Booking Portal</p>
         <small>by IIT Bombay</small>
@@ -279,43 +200,137 @@ function LoginPage({ navigate }) {
           <li>500+ workshops conducted</li>
         </ul>
       </div>
-      <div className="auth-card">
+      <div className="auth-screen__panel">
+        <div className="auth-card auth-card--exact">
         <span className="auth-card__brand">FOSSEE</span>
         <span className="auth-card__subtitle">Workshop Portal</span>
         <h2>Sign in</h2>
+        <p className="panel-card__helper">Enter your credentials to continue</p>
         <label>
           Username
           <input type="text" placeholder="Username" />
         </label>
         <label>
           Password
-          <input type="password" placeholder="Password" />
+          <div className="input-with-icon">
+            <input type={showPassword ? 'text' : 'password'} placeholder="Password" />
+            <button
+              type="button"
+              className="field-icon-btn"
+              aria-label={showPassword ? 'Hide password' : 'Show password'}
+              onClick={() => setShowPassword((value) => !value)}
+            >
+              {showPassword ? '🙈' : '👁'}
+            </button>
+          </div>
         </label>
+        <p className="field-helper">Use at least 8 characters.</p>
+        <p className="auth-card__link-row"><button type="button" className="text-button">Forgot password?</button></p>
         <button type="button" className="btn btn--solid">Sign In</button>
+        <div className="panel-card__divider"><span>or</span></div>
         <p className="auth-card__foot">New around here? <button type="button" className="text-button" onClick={() => navigate('register')}>Register</button></p>
+        <p className="panel-card__meta">© 2024 FOSSEE, IIT Bombay</p>
+        </div>
       </div>
     </section>
   );
 }
 
 function RegisterPage({ navigate }) {
-  const fields = ['First Name', 'Last Name', 'Email', 'Username', 'Institute Name', 'Role', 'Password', 'Confirm Password'];
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
+
   return (
-    <section className="register-layout">
-      <div className="register-card">
+    <section className="auth-screen" aria-label="Register page">
+      <div className="auth-screen__hero">
+        <h1>FOSSEE</h1>
+        <p>Workshop Booking Portal</p>
+        <small>by IIT Bombay</small>
+        <ul>
+          <li>Free workshops for all students</li>
+          <li>Certified by IIT Bombay</li>
+          <li>500+ workshops conducted</li>
+        </ul>
+      </div>
+      <div className="auth-screen__panel">
+      <div className="register-card register-card--exact">
         <span className="auth-card__brand">FOSSEE</span>
-        <span className="auth-card__subtitle">by IIT Bombay</span>
-        <h2>Create your account</h2>
+        <span className="auth-card__subtitle">Workshop Portal</span>
+        <h2>Create account</h2>
         <div className="register-grid">
-          {fields.map((field) => (
-            <label key={field}>
-              {field}
-              <input type={field.toLowerCase().includes('password') ? 'password' : 'text'} placeholder={field} />
-            </label>
-          ))}
+          <label>
+            First Name
+            <input type="text" placeholder="First Name" />
+          </label>
+          <label>
+            Last Name
+            <input type="text" placeholder="Last Name" />
+          </label>
+          <label>
+            Email
+            <input type="text" placeholder="Email" />
+          </label>
+          <label>
+            Username
+            <input type="text" placeholder="Username" />
+          </label>
+          <label>
+            Institute Name
+            <input type="text" placeholder="Institute Name" />
+          </label>
+          <label>
+            Role
+            <div className="select-wrap">
+              <select defaultValue="" aria-label="Role">
+                <option value="" disabled>Select role</option>
+                <option value="computer engineering">Computer Science</option>
+                <option value="information technology">Information Technology</option>
+                <option value="civil engineering">Civil Engineering</option>
+                <option value="electrical engineering">Electrical Engineering</option>
+                <option value="mechanical engineering">Mechanical Engineering</option>
+                <option value="chemical engineering">Chemical Engineering</option>
+                <option value="aerospace engineering">Aerospace Engineering</option>
+                <option value="biosciences and bioengineering">Biosciences and BioEngineering</option>
+                <option value="electronics">Electronics</option>
+                <option value="energy science and engineering">Energy Science and Engineering</option>
+              </select>
+              <span className="select-wrap__arrow" aria-hidden="true">▾</span>
+            </div>
+          </label>
+          <label>
+            Password
+            <div className="input-with-icon">
+              <input type={showPassword ? 'text' : 'password'} placeholder="Password" />
+              <button
+                type="button"
+                className="field-icon-btn"
+                aria-label={showPassword ? 'Hide password' : 'Show password'}
+                onClick={() => setShowPassword((value) => !value)}
+              >
+                {showPassword ? '🙈' : '👁'}
+              </button>
+            </div>
+            <span className="field-helper">Use at least 8 characters.</span>
+          </label>
+          <label>
+            Confirm Password
+            <div className="input-with-icon">
+              <input type={showConfirmPassword ? 'text' : 'password'} placeholder="Confirm Password" />
+              <button
+                type="button"
+                className="field-icon-btn"
+                aria-label={showConfirmPassword ? 'Hide confirm password' : 'Show confirm password'}
+                onClick={() => setShowConfirmPassword((value) => !value)}
+              >
+                {showConfirmPassword ? '🙈' : '👁'}
+              </button>
+            </div>
+            <span className="field-helper">Re-enter the same password to confirm.</span>
+          </label>
         </div>
         <button type="button" className="btn btn--solid">Create Account</button>
         <p className="auth-card__foot">Already have an account? <button type="button" className="text-button" onClick={() => navigate('login')}>Sign in</button></p>
+      </div>
       </div>
     </section>
   );
@@ -323,24 +338,62 @@ function RegisterPage({ navigate }) {
 
 function WorkshopsPage() {
   return (
-    <section className="page-shell">
-      <SectionHeading label="Workshops" title="Available Workshops" />
-      <div className="filter-row" aria-label="Workshop filters">
-        {['All', 'Python', 'Scilab', 'Hardware', 'Pending', 'Accepted', 'Rejected'].map((item) => (
-          <button key={item} className={`chip ${item === 'All' ? 'is-active' : ''}`} type="button">{item}</button>
-        ))}
-      </div>
-      <div className="card-grid">
-        {workshopCards.map((card) => (
-          <article key={card.title} className="workshop-card">
-            <span className="workshop-card__tag">{card.tag}</span>
-            <h3>{card.title}</h3>
-            <p>{card.schedule}</p>
-            <span className="workshop-card__status">{card.status}</span>
-          </article>
-        ))}
-      </div>
-    </section>
+    <>
+      <section className="workshops-screen" aria-label="Available workshops page">
+        <div className="workshops-screen__panel">
+          <h1>Available Workshops</h1>
+          <p>Browse the listed workshops types and open each detail view to learn more.</p>
+
+          <label className="workshops-screen__search" aria-label="Search workshops">
+            <input type="text" placeholder="Search workshops by name, type, or duration" />
+          </label>
+
+          <div className="workshops-screen__chips" aria-label="Workshop type filters">
+            {['All', 'Python', 'Scilab', 'Hardware'].map((item, index) => (
+              <button key={item} className={`chip ${index === 0 ? 'is-active' : ''}`} type="button">{item}</button>
+            ))}
+          </div>
+
+          <div className="workshops-screen__chips" aria-label="Workshop status filters">
+            {['All', 'Pending', 'Accepted', 'Rejected'].map((item, index) => (
+              <button key={item} className={`chip ${index === 0 ? 'is-active' : ''}`} type="button">{item}</button>
+            ))}
+          </div>
+
+          <div className="workshops-screen__sort">
+            <span>Sort</span>
+            <select defaultValue="newest" aria-label="Sort workshops">
+              <option value="newest">Newest</option>
+              <option value="oldest">Oldest</option>
+            </select>
+          </div>
+
+          <div className="workshops-screen__empty">
+            <h2>No workshops available yet</h2>
+            <p>Check back soon or propose a workshop if you are an instructor</p>
+            <button type="button" className="btn btn--solid">Propose a Workshop</button>
+          </div>
+        </div>
+      </section>
+
+      <section className="faq-strip">
+        <div className="faq-strip__inner">
+          <p className="faq-strip__label">FAQ</p>
+          <h2 className="faq-strip__title">Frequently Asked Questions</h2>
+          <div className="faq-grid faq-grid--compact">
+            {faq.map((item) => <FaqItem key={item.q} question={item.q} answer={item.a} compact />)}
+          </div>
+        </div>
+      </section>
+
+      <section className="cta-band">
+        <div>
+          <h2>Stay updated on new workshops</h2>
+          <p>Get notified when new workshops are announced</p>
+        </div>
+        <button type="button" className="btn btn--solid">View All Workshops</button>
+      </section>
+    </>
   );
 }
 
@@ -366,78 +419,97 @@ function ProposePage() {
 
 function StatisticsPage() {
   return (
-    <section className="page-shell">
-      <SectionHeading label="Statistics" title="Workshop Statistics" />
-      <div className="stats-grid">
-        {featuredStats.map((item) => (
-          <article key={item.label} className="stat-card">
-            <strong>{item.value}</strong>
-            <span>{item.label}</span>
-          </article>
-        ))}
-      </div>
-      <div className="two-column">
-        <div className="form-card">
-          <h3>Monthly Workshop Count</h3>
-          <div className="bar-chart" aria-hidden="true">
-            {[22, 32, 28, 48, 36, 52, 44, 58, 62, 72, 54, 68].map((height, index) => (
-              <div key={index} className="bar-chart__bar" style={{ height: `${height}%` }} />
-            ))}
+    <>
+      <section className="stats-screen" aria-label="Workshop statistics dashboard">
+        <aside className="stats-screen__filters">
+          <h2>Filters</h2>
+          <div className="stats-filter-group">
+            <h3>State Range</h3>
+            <label><input type="checkbox" /> 00-099</label>
+            <label><input type="checkbox" /> 100-999</label>
+          </div>
+
+          <div className="stats-filter-group">
+            <h3>Workshop Type</h3>
+            <label><input type="checkbox" /> Python</label>
+            <label><input type="checkbox" /> Scilab</label>
+          </div>
+
+          <div className="stats-filter-group">
+            <h3>Location</h3>
+            <label><input type="checkbox" /> City</label>
+            <label><input type="checkbox" /> State</label>
+          </div>
+
+          <div className="stats-filter-group">
+            <h3>Sort by</h3>
+            <label><input type="radio" name="sort" /> Date</label>
+            <label><input type="radio" name="sort" /> Latest</label>
+          </div>
+
+          <button type="button" className="btn btn--solid">Apply</button>
+          <button type="button" className="btn btn--muted">Clear All</button>
+          <button type="button" className="btn btn--muted">Download</button>
+        </aside>
+
+        <div className="stats-screen__content">
+          <div className="stats-screen__cards">
+            <article className="stats-kpi"><h3>Total Workshops</h3><strong>0</strong></article>
+            <article className="stats-kpi"><h3>Total Reports</h3><strong>0</strong></article>
+            <article className="stats-kpi"><h3>Most Popular</h3><strong>N/A</strong></article>
+          </div>
+
+          <section className="stats-chart-card">
+            <div className="stats-chart-card__head">
+              <h3>Workshop Distribution</h3>
+              <span>type</span>
+            </div>
+            <div className="stats-chart">
+              <div className="stats-chart__bar" style={{ width: '18%' }}>
+                <span>Python</span>
+                <span>100% workshops</span>
+              </div>
+            </div>
+          </section>
+
+          <section className="stats-table-card">
+            <div className="stats-table-card__head">
+              <h3>Showing 0 results</h3>
+              <button type="button" className="stats-page-btn">1</button>
+            </div>
+            <table>
+              <thead>
+                <tr><th>S No.</th><th>State</th><th>Coordinator Name</th><th>Institute Name</th><th>Instructor Name</th><th>Workshop Name</th><th>Workshop Date</th></tr>
+              </thead>
+              <tbody>
+                <tr><td colSpan={7} className="stats-table-empty">No records match your filters</td></tr>
+              </tbody>
+            </table>
+            <div className="stats-table-card__pagination">
+              <button type="button" className="stats-page-btn">1</button>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section className="faq-strip">
+        <div className="faq-strip__inner">
+          <p className="faq-strip__label">FAQ</p>
+          <h2 className="faq-strip__title">Frequently Asked Questions</h2>
+          <div className="faq-grid faq-grid--compact">
+            {faq.map((item) => <FaqItem key={item.q} question={item.q} answer={item.a} compact />)}
           </div>
         </div>
-        <div className="form-card table-card">
-          <h3>Upcoming Workshops</h3>
-          <table>
-            <thead>
-              <tr><th>Coordinator</th><th>Workshop</th><th>Status</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>FOSSEE Team</td><td>Python Basics</td><td>Upcoming</td></tr>
-              <tr><td>Campus Coordinator</td><td>Scilab Lab</td><td>Accepted</td></tr>
-              <tr><td>Instructor Panel</td><td>Open Source Intro</td><td>Pending</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-  );
-}
+      </section>
 
-function DashboardPage({ type }) {
-  const title = `${type} Dashboard`;
-  return (
-    <section className="page-shell">
-      <SectionHeading label={type} title={title} />
-      <div className="stats-grid">
-        {['12 Workshops', '8 Pending', '4 Accepted'].map((label) => (
-          <article key={label} className="stat-card"><strong>{label.split(' ')[0]}</strong><span>{label.split(' ').slice(1).join(' ')}</span></article>
-        ))}
-      </div>
-      <div className="card-grid">
-        <article className="workshop-card"><h3>Recent Activity</h3><p>Submitted proposals, feedback notes, and approval updates appear here.</p></article>
-        <article className="workshop-card"><h3>Assigned Workshops</h3><p>A compact list of your latest workshop assignments and next actions.</p></article>
-        <article className="workshop-card"><h3>Comments</h3><p>Profile comments and review threads remain visible in a readable card layout.</p></article>
-      </div>
-    </section>
-  );
-}
-
-function ProfilePage() {
-  return (
-    <section className="page-shell">
-      <SectionHeading label="Profile" title="Your Profile" />
-      <div className="two-column">
-        <div className="info-card">
-          <h3>Instructor Profile</h3>
-          <p>Name, institute, phone number, and role are presented clearly for quick review.</p>
+      <section className="cta-band">
+        <div>
+          <h2>Stay updated on new workshops</h2>
+          <p>Get notified when new workshops are announced</p>
         </div>
-        <div className="form-card">
-          <label>Name<input type="text" value="FOSSEE User" readOnly /></label>
-          <label>Institute<input type="text" value="IIT Bombay" readOnly /></label>
-          <label>Phone<input type="text" value="+91 90000 00000" readOnly /></label>
-        </div>
-      </div>
-    </section>
+        <button type="button" className="btn btn--solid">View All Workshops</button>
+      </section>
+    </>
   );
 }
 
@@ -460,6 +532,7 @@ function Footer({ navigate }) {
               <li><button type="button" className="text-button text-button--footer" onClick={() => navigate('home')}>Home</button></li>
               <li><button type="button" className="text-button text-button--footer" onClick={() => navigate('workshops')}>Workshops</button></li>
               <li><button type="button" className="text-button text-button--footer" onClick={() => navigate('login')}>Login</button></li>
+              <li><button type="button" className="text-button text-button--footer" onClick={() => navigate('register')}>Register</button></li>
             </ul>
           </div>
           <div>
@@ -471,18 +544,25 @@ function Footer({ navigate }) {
             </ul>
           </div>
         </div>
+        <div className="site-footer__initiative" aria-label="Institution footer badges">
+          <img className="site-footer__mini-icon" src="https://fossee.in/sites/all/themes/software_responsive_theme/img/iitb-logo.png" alt="IIT Bombay" />
+          <img className="site-footer__mini-logo" src="https://fossee.in/sites/all/themes/software_responsive_theme/img/logo.png" alt="FOSSEE" />
+          <span>MoE Govt. of India</span>
+        </div>
+        <p className="site-footer__copy">An initiative of IIT Bombay under the National Mission on Education</p>
         <p className="site-footer__copy">© 2026 FOSSEE, IIT Bombay. All rights reserved.</p>
       </div>
     </footer>
   );
 }
 
-function FaqItem({ question, answer }) {
+function FaqItem({ question, answer, compact = false }) {
   const [open, setOpen] = React.useState(false);
   return (
-    <article className="faq-item">
+    <article className={compact ? 'faq-item faq-item--compact' : 'faq-item'}>
       <button type="button" onClick={() => setOpen((value) => !value)} aria-expanded={open}>
-        {question}
+        <span>{question}</span>
+        <span aria-hidden="true">▾</span>
       </button>
       {open && <p>{answer}</p>}
     </article>
