@@ -15,11 +15,11 @@
 
 .site-navbar.scrolled,
 .site-navbar.is-scrolled {
-    background: rgba(255, 255, 255, 0.85);
+    background: var(--glass-bg);
     -webkit-backdrop-filter: blur(12px) saturate(180%);
     backdrop-filter: blur(12px) saturate(180%);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 4px 24px rgba(0, 51, 102, 0.08);
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
 }
 
 .site-navbar__inner {

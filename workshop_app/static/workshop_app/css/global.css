@@ -180,53 +180,6 @@ input[type="button"],
     isolation: isolate;
 }
 
-.btn::after,
-button::after,
-.site-nav__btn::after,
-.cms-btn::after,
-.workshop-card__button::after,
-.workshop-action-btn::after,
-.workshop-primary-btn::after,
-.stats-btn::after,
-.instructor-btn::after,
-.coordinator-btn::after,
-.profile-edit-btn::after,
-.profile-submit::after,
-.profile-cancel::after,
-.login-submit::after,
-.register-submit::after,
-.propose-btn::after {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -75%;
-    width: 50%;
-    height: 200%;
-    background: rgba(255, 255, 255, 0.3);
-    transform: skewX(-20deg);
-    transition: left 400ms ease;
-    pointer-events: none;
-}
-
-.btn:hover::after,
-button:hover::after,
-.site-nav__btn:hover::after,
-.cms-btn:hover::after,
-.workshop-card__button:hover::after,
-.workshop-action-btn:hover::after,
-.workshop-primary-btn:hover::after,
-.stats-btn:hover::after,
-.instructor-btn:hover::after,
-.coordinator-btn:hover::after,
-.profile-edit-btn:hover::after,
-.profile-submit:hover::after,
-.profile-cancel:hover::after,
-.login-submit:hover::after,
-.register-submit:hover::after,
-.propose-btn:hover::after {
-    left: 125%;
-}
-
 .btn:hover,
 button:hover,
 input[type="submit"]:hover,
@@ -301,7 +254,7 @@ input[type="button"]:active,
     background: linear-gradient(
         to right,
         rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0.24) 50%,
         rgba(255, 255, 255, 0) 100%
     );
     transform: skewX(-20deg);
