@@ -146,6 +146,19 @@
             {% endif %}
         </aside>
     </div>
+
+    <div class="workshop-details-mobile-cta" aria-label="Mobile enrollment actions">
+        {% if request.user.profile.position == 'coordinator' %}
+            <button type="button" class="workshop-details-mobile-cta__btn workshop-details-mobile-cta__btn--ghost">Accept</button>
+            <button type="button" class="workshop-details-mobile-cta__btn workshop-details-mobile-cta__btn--ghost">Reject</button>
+        {% elif request.user.profile.position == 'instructor' %}
+            <a href="{% url 'workshop_app:propose_workshop' %}" class="workshop-details-mobile-cta__btn workshop-details-mobile-cta__btn--primary">Propose Similar</a>
+            <a href="{% url 'workshop_app:workshop_type_details' workshop.workshop_type.id %}" class="workshop-details-mobile-cta__btn workshop-details-mobile-cta__btn--ghost">Edit Details</a>
+        {% else %}
+            <a href="{% url 'workshop_app:propose_workshop' %}" class="workshop-details-mobile-cta__btn workshop-details-mobile-cta__btn--primary">Book This Workshop</a>
+            <a href="{% url 'workshop_app:workshop_type_list' %}" class="workshop-details-mobile-cta__btn workshop-details-mobile-cta__btn--ghost">Back to Workshops</a>
+        {% endif %}
+    </div>
 </div>
 {% endblock %}
 
@@ -181,6 +194,34 @@
                 accordionBtn.setAttribute('aria-expanded', open ? 'false' : 'true');
                 accordionPanel.style.maxHeight = open ? '0px' : accordionPanel.scrollHeight + 'px';
             });
+        }
+
+        try {
+            var recentKey = 'fossee_recent_workshops';
+            var workshopEntry = {
+                title: '{{ workshop.workshop_type.name|escapejs }}',
+                type: '{{ workshop.workshop_type.duration|escapejs }} day workshop',
+                url: window.location.pathname
+            };
+
+            var parsed = [];
+            var existing = localStorage.getItem(recentKey);
+            if (existing) {
+                parsed = JSON.parse(existing);
+            }
+
+            if (!Array.isArray(parsed)) {
+                parsed = [];
+            }
+
+            parsed = parsed.filter(function (item) {
+                return item && item.url && item.url !== workshopEntry.url;
+            });
+
+            parsed.unshift(workshopEntry);
+            localStorage.setItem(recentKey, JSON.stringify(parsed.slice(0, 6)));
+        } catch (error) {
+            // Ignore storage issues in restricted browsers.
         }
     })();
 </script>

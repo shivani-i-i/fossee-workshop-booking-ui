@@ -47,6 +47,12 @@
             <button type="button" class="cat-chip"><i class="fa fa-cogs" aria-hidden="true"></i><span>Hardware</span></button>
         </div>
 
+        <div class="workshop-list-trust" aria-label="Academic trust highlights">
+            <span><i class="fa fa-university" aria-hidden="true"></i> IIT Bombay guided</span>
+            <span><i class="fa fa-check-circle-o" aria-hidden="true"></i> Skill-focused sessions</span>
+            <span><i class="fa fa-users" aria-hidden="true"></i> 10,000+ learners trained</span>
+        </div>
+
         <div class="workshop-list-page__chips" aria-label="Workshop filters">
             <a class="workshop-chip{% if request.GET.filter|default:'all' == 'all' %} is-active{% endif %}" href="?filter=all{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}">
                 <span>All</span>
@@ -76,6 +82,14 @@
                 </select>
             </div>
         </div>
+
+        <section class="recent-workshops" id="recentWorkshops" hidden aria-label="Recently viewed workshops">
+            <div class="recent-workshops__head">
+                <span class="section-label">Continue Learning</span>
+                <h2>Recently Viewed Workshops</h2>
+            </div>
+            <div class="recent-workshops__list" id="recentWorkshopsList"></div>
+        </section>
 
         <div class="workshop-list-skeleton-grid is-hidden" id="workshopSkeletonGrid" aria-hidden="true">
             {% for i in '123456' %}
@@ -136,6 +150,11 @@
             </nav>
         </div>
 
+        <div class="workshop-list-mobile-cta" aria-label="Quick actions">
+            <a href="{% url 'workshop_app:workshop_type_list' %}" class="workshop-list-mobile-cta__btn workshop-list-mobile-cta__btn--primary">View All Workshops</a>
+            <a href="{% url 'workshop_app:propose_workshop' %}" class="workshop-list-mobile-cta__btn workshop-list-mobile-cta__btn--secondary">Propose Workshop</a>
+        </div>
+
         <!-- The Modal -->
         <div id="mailModal" class="modal">
             <!-- Modal content -->
@@ -163,6 +182,8 @@
             var form = document.getElementById('workshopSearchForm');
             var skeletonGrid = document.getElementById('workshopSkeletonGrid');
             var listGrid = document.getElementById('workshopListGrid');
+            var recentWrap = document.getElementById('recentWorkshops');
+            var recentList = document.getElementById('recentWorkshopsList');
 
             function toggleClearButton() {
                 if (!searchInput || !clearButton) {
@@ -190,6 +211,42 @@
                 requestAnimationFrame(function () {
                     listGrid.classList.add('is-ready');
                 });
+            }
+
+            try {
+                var stored = localStorage.getItem('fossee_recent_workshops');
+                var recentItems = stored ? JSON.parse(stored) : [];
+
+                if (recentWrap && recentList && Array.isArray(recentItems) && recentItems.length) {
+                    recentWrap.hidden = false;
+                    recentList.innerHTML = '';
+
+                    recentItems.slice(0, 4).forEach(function (item) {
+                        if (!item || !item.url || !item.title) {
+                            return;
+                        }
+
+                        var link = document.createElement('a');
+                        link.className = 'recent-workshops__item';
+                        link.href = item.url;
+
+                        var title = document.createElement('strong');
+                        title.textContent = item.title;
+                        link.appendChild(title);
+
+                        if (item.type) {
+                            var meta = document.createElement('span');
+                            meta.textContent = item.type;
+                            link.appendChild(meta);
+                        }
+
+                        recentList.appendChild(link);
+                    });
+                }
+            } catch (error) {
+                if (recentWrap) {
+                    recentWrap.hidden = true;
+                }
             }
         })();
     </script>

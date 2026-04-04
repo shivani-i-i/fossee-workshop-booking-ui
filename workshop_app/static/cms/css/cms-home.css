@@ -340,6 +340,94 @@ body {
     opacity: 1;
 }
 
+.cms-outcomes {
+    background: #FFFFFF;
+    border-bottom: 1px solid #E2E8F0;
+}
+
+.cms-outcomes__inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 22px 16px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.cms-outcomes__item {
+    margin: 0;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    padding: 14px;
+    background: #F8FBFF;
+    text-align: center;
+}
+
+.cms-outcomes__item strong {
+    display: block;
+    font-size: 24px;
+    color: #003366;
+    line-height: 1.15;
+}
+
+.cms-outcomes__item span {
+    display: block;
+    margin-top: 6px;
+    font-size: 13px;
+    color: #64748B;
+}
+
+.cms-why {
+    padding: 54px 16px 24px;
+}
+
+.cms-why__grid {
+    max-width: 1120px;
+    margin: 24px auto 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.cms-why-card {
+    border: 1px solid #E2E8F0;
+    border-radius: 14px;
+    background: #FFFFFF;
+    padding: 18px;
+    box-shadow: var(--shadow-card);
+    transition: var(--transition-bounce);
+}
+
+.cms-why-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-card-hover);
+}
+
+.cms-why-card__icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFF3E8;
+    color: #FF6B00;
+    font-size: 18px;
+}
+
+.cms-why-card h3 {
+    margin: 12px 0 8px;
+    color: #003366;
+    font-size: 18px;
+}
+
+.cms-why-card p {
+    margin: 0;
+    color: #475569;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
 .cms-home-section-head {
     max-width: 1120px;
     margin: 0 auto;
@@ -580,6 +668,11 @@ body {
 }
 
 @media (max-width: 991px) {
+    .cms-outcomes__inner,
+    .cms-why__grid {
+        grid-template-columns: 1fr;
+    }
+
     .cms-home-categories__grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -645,6 +738,22 @@ body {
     .institution-bar__logo {
         width: 90px;
         height: 26px;
+    }
+
+    .cms-outcomes__inner {
+        padding: 18px 16px;
+    }
+
+    .cms-outcomes__item strong {
+        font-size: 22px;
+    }
+
+    .cms-why {
+        padding: 42px 16px 14px;
+    }
+
+    .cms-why-card {
+        padding: 16px;
     }
 
     .stat-number {
