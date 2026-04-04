@@ -11,6 +11,7 @@
 {% endblock %}
 
 {% block content %}
+    {% with workshop_count=workshop_type.paginator.count %}
     <div class="container workshop-list-page workshop-list-page--light">
         <div class="workshop-list-page__hero">
             <div class="workshop-list-page__copy">
@@ -22,10 +23,11 @@
                 <h1 class="workshop-list-page__title">Available Workshops</h1>
                 <p class="workshop-list-page__subtitle">Browse the latest workshop types and open each detail view to learn more.</p>
             </div>
-            <div class="workshop-list-page__count">
-                <span class="workshop-list-page__count-label">Workshops</span>
-                <span class="workshop-list-page__count-value">{{ workshop_type.paginator.count }}</span>
-            </div>
+            {% if workshop_count > 0 %}
+                <div class="workshop-list-page__count">
+                    <span class="workshop-list-page__count-value">{{ workshop_count }} workshops available</span>
+                </div>
+            {% endif %}
         </div>
 
         <form class="workshop-list-page__search" method="get" action="" id="workshopSearchForm">
@@ -41,28 +43,22 @@
         <div class="workshop-list-page__chips" aria-label="Workshop filters">
             <a class="workshop-chip{% if request.GET.filter|default:'all' == 'all' %} is-active{% endif %}" href="?filter=all{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}">
                 <span>All</span>
-                <span class="workshop-chip__count">{{ workshop_type.paginator.count }}</span>
             </a>
             <a class="workshop-chip{% if request.GET.filter == 'pending' %} is-active{% endif %}" href="?filter=pending{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}">
                 <span>Pending</span>
-                <span class="workshop-chip__count">0</span>
             </a>
             <a class="workshop-chip{% if request.GET.filter == 'accepted' %} is-active{% endif %}" href="?filter=accepted{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}">
                 <span>Accepted</span>
-                <span class="workshop-chip__count">0</span>
             </a>
             <a class="workshop-chip{% if request.GET.filter == 'rejected' %} is-active{% endif %}" href="?filter=rejected{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}">
                 <span>Rejected</span>
-                <span class="workshop-chip__count">0</span>
-            </a>
-            <a class="workshop-chip{% if request.GET.filter == 'this-month' %} is-active{% endif %}" href="?filter=this-month{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}">
-                <span>This Month</span>
-                <span class="workshop-chip__count">0</span>
             </a>
         </div>
 
         <div class="workshop-list-page__toolbar">
-            <div class="workshop-list-page__results">Showing {{ workshop_type|length }} results</div>
+            {% if request.GET.search or request.GET.filter %}
+                <div class="workshop-list-page__results">Showing {{ workshop_type|length }} results</div>
+            {% endif %}
             <div class="workshop-list-page__sort">
                 <label for="workshopSort">Sort</label>
                 <select id="workshopSort" name="sort">
@@ -103,10 +99,10 @@
                 %}
             {% empty %}
                 <div class="workshop-list-grid__empty">
-                    <i class="fa fa-inbox" aria-hidden="true"></i>
-                    <h2>No workshops found</h2>
-                    <p>Try clearing filters or search again.</p>
-                    <a class="workshop-list-grid__clear" href="{% url 'workshop_app:workshop_type_list' %}">Clear filters</a>
+                    <i class="fa fa-calendar-plus" aria-hidden="true"></i>
+                    <h2>No workshops available yet</h2>
+                    <p>Check back soon or propose a workshop if you are an instructor</p>
+                    <a class="workshop-list-grid__clear" href="{% url 'workshop_app:propose_workshop' %}">Propose a Workshop</a>
                 </div>
             {% endfor %}
         </div>
@@ -148,6 +144,7 @@
             </div>
         </div>
     </div>
+    {% endwith %}
 {% endblock %}
 
 {% block extra-custom-scripts %}
