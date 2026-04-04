@@ -1,258 +1,123 @@
-# FOSSEE Workshop Booking — React UI/UX Redesign
+# FOSSEE Workshop Booking UI
 
-> A modern, mobile-first redesign of the FOSSEE Workshop
-> Booking Platform by IIT Bombay. The repository now includes
-> a React/Vite frontend in `frontend/` alongside the existing
-> Django backend.
+React + Django redesign for the FOSSEE workshop booking portal. This submission modernizes the interface for mobile-first use, keeps the IIT Bombay visual identity, connects the workshop list to Django data, and documents the work clearly for screening review.
 
----
+## Setup Instructions
 
-## 🚀 Live Demo
-[Add your GitHub Pages or live link here]
+### Django backend
+Prerequisites: Python 3.8+, pip, and Git.
 
----
-
-## 📸 Screenshots
-
-### Before vs After Comparison
-
-| Page | Before | After — Desktop | After — Mobile |
-|------|--------|-----------------|----------------|
-| **Home** | ![](screenshots/before/home.png) | ![](screenshots/after/home-desktop.png) | ![](screenshots/after/home-mobile.png) |
-| **Login** | ![](screenshots/before/login.png) | ![](screenshots/after/login-desktop.png) | ![](screenshots/after/login-mobile.png) |
-| **Register** | ![](screenshots/before/register.png) | ![](screenshots/after/register-desktop.png) | ![](screenshots/after/register-mobile.png) |
-| **Workshop List** | ![](screenshots/before/workshop-list.png) | ![](screenshots/after/workshop-list-desktop.png) | ![](screenshots/after/workshop-list-mobile.png) |
-| **Workshop Details** | ![](screenshots/before/workshop-details.png) | ![](screenshots/after/workshop-details-desktop.png) | ![](screenshots/after/workshop-details-mobile.png) |
-| **Propose Workshop** | ![](screenshots/before/propose.png) | ![](screenshots/after/propose-desktop.png) | ![](screenshots/after/propose-mobile.png) |
-| **Statistics** | ![](screenshots/before/statistics.png) | ![](screenshots/after/statistics-desktop.png) | ![](screenshots/after/statistics-mobile.png) |
-| **Coordinator Dashboard** | ![](screenshots/before/coordinator.png) | ![](screenshots/after/coordinator-desktop.png) | ![](screenshots/after/coordinator-mobile.png) |
-| **Instructor Dashboard** | ![](screenshots/before/instructor.png) | ![](screenshots/after/instructor-desktop.png) | ![](screenshots/after/instructor-mobile.png) |
-| **Profile** | ![](screenshots/before/profile.png) | ![](screenshots/after/profile-desktop.png) | ![](screenshots/after/profile-mobile.png) |
-
-> 📱 Mobile screenshots taken at 375px viewport width (iPhone SE size)
-> 🖥️ Desktop screenshots taken at 1440px viewport width
-
----
-
-## ⚙️ Setup Instructions
-
-### Prerequisites
-- Python 3.8+
-- pip
-- Node.js 18+
-- Git
-
-### Steps
-
+```bash
 git clone https://github.com/shivani-i-i/fossee-workshop-booking-ui.git
 cd fossee-workshop-booking-ui
+python -m venv .venv
+.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
+```
 
-Open the React frontend in a second terminal:
+The Django app runs at http://127.0.0.1:8000.
 
+### React frontend
+Open a second terminal in the same repo and run:
+
+```bash
 cd frontend
 npm install
 npm run dev
+```
 
-Then open:
-- Django backend: http://127.0.0.1:8000
-- React frontend: the Vite URL shown in the terminal, usually http://127.0.0.1:5173
+The React app runs at http://127.0.0.1:5173.
 
----
+## Screenshots
 
-## 🎨 Design Principles
+### Before vs After Comparison
 
-### 1. Mobile-First Approach
-Every design decision started at 375px and scaled
-up to desktop. Since FOSSEE's primary users are
-students who access the platform on mobile devices,
-navigation, cards, forms and tables were all designed
-for touch first. The React frontend keeps that same
-behavior with a compact header, responsive card grids,
-and stacked auth forms on small screens.
+| Page | Before (Original FOSSEE) | After Desktop | After Mobile |
+|------|--------------------------|---------------|--------------|
+| Home | ![](screenshots/before/home.png) | ![](screenshots/after/home-desktop.png) | ![](screenshots/after/home-mobile.png) |
+| Login | ![](screenshots/before/login.png) | ![](screenshots/after/login-desktop.png) | ![](screenshots/after/login-mobile.png) |
+| Register | ![](screenshots/before/register.png) | ![](screenshots/after/register-desktop.png) | ![](screenshots/after/register-mobile.png) |
+| Workshop List | ![](screenshots/before/workshop-list.png) | ![](screenshots/after/workshop-list-desktop.png) | ![](screenshots/after/workshop-list-mobile.png) |
+| Empty State | — | ![](screenshots/after/empty-state-desktop.png) | ![](screenshots/after/empty-state-mobile.png) |
+| Coordinator | ![](screenshots/before/coordinator.png) | ![](screenshots/after/coordinator-desktop.png) | ![](screenshots/after/coordinator-mobile.png) |
+| Instructor | ![](screenshots/before/instructor.png) | ![](screenshots/after/instructor-desktop.png) | ![](screenshots/after/instructor-mobile.png) |
+| Profile | ![](screenshots/before/profile.png) | ![](screenshots/after/profile-desktop.png) | ![](screenshots/after/profile-mobile.png) |
 
-### 2. Visual Hierarchy
-The original site had no clear visual hierarchy — 
-everything looked the same weight and importance. 
-I introduced a clear typographic scale (h1→h2→h3), 
-used bold orange CTAs to draw the eye to key actions, 
-added uppercase section labels with letter-spacing 
-above headings, and replaced dense data tables with 
-card-based layouts that naturally guide the user 
-through each page.
+> Before = original FOSSEE repo (github.com/FOSSEE/workshop_booking)
+> After = my React redesign at localhost:5173
+> Mobile = 375px viewport (iPhone SE size)
 
-### 3. IIT Bombay Brand Identity
-I chose a navy (#003366) and orange (#FF6B00) color 
-palette directly inspired by IIT Bombay's official 
-branding. This makes the platform feel authentically 
-connected to the institution and builds immediate 
-trust with Indian students who recognize these colors. 
-Every page prominently displays "FOSSEE by IIT Bombay" 
-branding to reinforce this identity.
+## Design Principles
 
-### 4. Consistency Through Design Tokens
-All colors, spacing, typography and shadows are
-defined as CSS custom properties in the shared React
-stylesheet. This keeps the UI cohesive and makes future
-changes easy.
+**Mobile-first layout**. The interface was redesigned from the smallest screens upward because students are most likely to open the portal on phones. Navigation, cards, forms, and workshop lists were tuned to stay readable and tappable on narrow viewports first, then expanded for desktop.
 
-### 5. Accessibility First
-Semantic HTML5 elements (nav, main, section, footer)
-are used throughout. Interactive elements have clear
-labels, the navigation remains keyboard accessible,
-and the React pages keep the same high-contrast visual
-hierarchy.
+**Clear visual hierarchy**. The redesign uses stronger typographic contrast, card spacing, and action emphasis so the user can immediately scan for the important route, action, and state. The workshop list now reads as a structured product surface instead of a flat static page.
 
----
+**IIT Bombay identity**. The palette follows the institution’s recognizable navy and orange language with #003366 and #FF6B00. That keeps the redesign visually tied to FOSSEE and makes the product feel official rather than generic.
 
-## 📱 Responsiveness
+**Design tokens through variables.css**. Shared colors, spacing, radii, shadows, and sizing live in CSS custom properties so the UI stays consistent across pages. This makes future changes predictable and reduces the chance of drifting styles.
 
-Responsiveness was achieved through multiple 
-layered strategies:
+**Honesty over fabrication**. The workshop page now uses a real Django endpoint and shows a truthful empty state when there is no data in the database. I avoided fake workshop records so the submission remains accurate, reviewable, and aligned with the actual backend state.
 
-- **CSS Grid and Flexbox** — All layouts use CSS Grid 
-  for page-level structure and Flexbox for component 
-  alignment. Workshop cards use a responsive grid 
-  that adjusts from 3 columns on desktop to 2 on 
-  tablet to 1 on mobile automatically.
+## Responsiveness
 
-- **Mobile-First Media Queries** — All CSS is written 
-  mobile-first with min-width breakpoints at 768px 
-  and 1024px adding complexity for larger screens.
+Responsiveness was handled with flexible layout primitives rather than separate page variants. Grid and flexbox were used to let cards, headers, and controls reflow naturally across widths. The workshop list collapses to a single column on smaller screens, while the same components remain usable on larger screens without layout rewrites.
 
-- **Hamburger Navigation** — Desktop navbar collapses 
-  into a hamburger menu below 768px with smooth 
-  slide-down animation and X close button.
+The typography and spacing scale down smoothly so headings, body text, chips, and buttons remain readable on 375px devices. Controls are sized for touch, and the design keeps enough vertical spacing to avoid accidental taps. The React app was also validated at mobile and desktop widths so the result behaves consistently across common student devices.
 
-- **Touch-Friendly Targets** — All buttons and 
-  interactive elements have minimum height of 44px 
-  following Apple Human Interface Guidelines.
+## Performance Tradeoffs
 
-- **Horizontal Scroll for Dense Content** — Filter 
-  chips and data tables use overflow-x auto with 
-  hidden scrollbars on mobile, allowing horizontal 
-  scroll rather than truncated content.
+1. I used plain React and CSS instead of adding animation or UI libraries, which keeps the bundle smaller and easier to maintain.
+2. I used a lightweight Django JSON endpoint for workshop data rather than introducing a heavier API layer, which keeps integration simple.
+3. I kept visual effects restrained so the interface looks modern without relying on expensive blur-heavy surfaces or large image assets.
+4. I accepted a smaller amount of dynamic logic in exchange for clarity and speed, because the screening task values quick load time and maintainability over flashy motion.
 
-- **Fluid Typography** — Font sizes use relative units 
-  and scale down on smaller screens. 32px desktop 
-  headings reduce to 24px on mobile.
+## Challenges
 
-Tested at: 375px (iPhone SE), 768px (iPad), 
-1024px (desktop), 1440px (wide desktop).
+**React to Django API connection via Vite proxy**. The React app needed to fetch data from Django during development without cross-origin issues. I solved that by adding a Vite proxy to forward `/workshop` requests to the backend and then wiring the workshops page to read the JSON response directly.
 
----
+**Honest empty state instead of fake data**. The database currently has no workshop records, so the UI could not truthfully show populated workshop cards. I redesigned the page to support loading, error, filter, and empty states so the experience stays useful even when no content exists.
 
-## ⚖️ Performance Tradeoffs
-
-### 1. Fonts vs Speed
-Used Google Fonts with display=swap to prevent 
-render-blocking. Chose Inter and Poppins which 
-are widely cached across the web, reducing actual 
-download time for most users on Indian networks.
-
-### 2. Animations vs Bundle Size
-Used CSS transitions and transforms exclusively 
-instead of JavaScript animation libraries like 
-Framer Motion or GSAP. CSS animations are GPU 
-accelerated and add zero JavaScript bundle weight, 
-keeping the page fast on budget Android phones.
-
-### 3. Glassmorphism Used Sparingly
-backdrop-filter blur is GPU-intensive on low-end 
-devices. Limited its use to only the scrolled 
-navbar state, avoiding it on cards and content 
-areas where it would hurt performance on the 
-budget devices many Indian students use.
-
----
-
-## 💡 Challenges
-
-### Challenge 1 — Table-Based Register Form
-The most challenging part was redesigning 
-register.html which used an HTML table for its 
-form layout — a pattern that completely breaks 
-on mobile screens.
-
-I had to replace the table structure with a modern 
-CSS Grid layout while keeping every Django form 
-field name, ID and validation attribute completely 
-intact. Any change to field names would break 
-backend form processing. I solved this by carefully 
-wrapping existing inputs in new div containers 
-rather than replacing them, preserving all Django 
-template tags and CSRF tokens throughout.
-
-### Challenge 2 — Statistics Page Mobile Layout
-The statistics page filter panel was designed 
-desktop-only with side-by-side filter and table. 
-I solved this by making the filter panel 
-collapsible on mobile using a CSS max-height 
-transition with no JavaScript required, so the 
-table gets full screen width on small devices 
-while the filter remains accessible via a toggle.
-
----
-
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Technology | Usage |
 |------------|-------|
-| Django | Backend (unchanged) |
-| React | Frontend UI |
-| Vite | Frontend build tool and dev server |
-| Pure CSS + Custom Properties | Shared styling system |
-| Semantic HTML5 | Structure and accessibility |
+| Django | Backend application and data source |
+| React | Frontend user interface |
+| Vite | React development server and build tool |
+| JavaScript | UI logic and data handling |
+| CSS | Visual styling and responsive layout |
 
----
+## Project Structure
 
-## 📁 Project Structure
+```text
+workshop_booking/
+├── frontend/
+│   ├── src/
+│   │   ├── App.jsx
+│   │   ├── main.jsx
+│   │   └── styles.css
+│   └── vite.config.js
+├── workshop_app/
+├── workshop_portal/
+├── screenshots/
+│   ├── before/
+│   └── after/
+└── README.md
+```
 
-workshop_app/
-├── static/workshop_app/css/
-│   ├── variables.css        # Design tokens
-│   ├── global.css           # Utility classes
-│   ├── navbar.css           # Navigation styles
-│   ├── login.css            # Login page
-│   ├── register.css         # Register page
-│   ├── workshop-list.css    # Workshop listing
-│   ├── workshop-details.css # Workshop detail
-│   ├── propose-workshop.css # Propose form
-│   ├── statistics.css       # Stats page
-│   ├── dashboard.css        # Coordinator/Instructor
-│   ├── profile.css          # Profile pages
-│   ├── footer.css           # Footer
-│   └── password.css         # Password pages
-└── templates/workshop_app/
-    ├── base.html            # Base layout
-    ├── login.html           # Login page
-    ├── register.html        # Register page
-    ├── workshop_type_list.html
-    ├── workshop_details.html
-    ├── propose_workshop.html
-    ├── workshop_status_coordinator.html
-    ├── workshop_status_instructor.html
-    ├── view_profile.html
-    └── edit_profile.html
+## Design References
 
----
+| Reference | Why it informed the redesign |
+|----------|-------------------------------|
+| NPTEL | Clean academic portal structure and information density |
+| Coursera | Card-based browsing and category scanning patterns |
+| Vercel | Crisp layout, strong hierarchy, and efficient spacing |
+| Linear | Minimal surfaces, status treatment, and compact controls |
+| IIT Bombay official | Brand colors and institutional visual identity |
 
-## 🎯 Design References
+## License
 
-These websites were studied before designing:
-
-- **NPTEL (nptel.ac.in)** — Academic portal patterns, 
-  stats bar, institution logo row
-- **Coursera** — Course card design, category chips
-- **Vercel (vercel.com)** — Login split layout, 
-  dashboard stat cards
-- **Linear (linear.app)** — Tables, status badges, 
-  minimal navbar
-- **Airbnb** — Card grid layout, filter chips
-
----
-
-## 📄 License
-MIT License — Free to use and modify.
+MIT License. See the repository `LICENSE` file for full terms.
