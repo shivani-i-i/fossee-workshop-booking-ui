@@ -205,7 +205,7 @@
 {% block extra-custom-scripts %}
     {{ block.super }}
     <script>
-        (function () {
+        document.addEventListener('DOMContentLoaded', function () {
             var form = document.getElementById('registerForm');
             var passwordField = document.getElementById('id_password');
             var confirmPasswordField = document.getElementById('id_confirm_password');
@@ -412,6 +412,6 @@
                     }, 700);
                 });
             }
-        })();
+        });
     </script>
 {% endblock %}
