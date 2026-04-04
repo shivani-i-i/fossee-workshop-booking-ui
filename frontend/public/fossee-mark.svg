@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 64" role="img" aria-labelledby="fosseeTitle fosseeDesc">
+  <title id="fosseeTitle">FOSSEE logo mark</title>
+  <desc id="fosseeDesc">FOSSEE text mark with geometric emblem</desc>
+  <rect x="2" y="2" width="236" height="60" rx="12" fill="#FFFFFF" stroke="#003366" stroke-width="2"/>
+  <g transform="translate(14 14)">
+    <rect x="0" y="0" width="36" height="36" rx="8" fill="#003366"/>
+    <path d="M8 10h20v4H12v4h14v4H12v10H8z" fill="#FFFFFF"/>
+  </g>
+  <text x="60" y="30" font-family="Poppins, Inter, sans-serif" font-size="20" font-weight="700" fill="#003366">FOSSEE</text>
+  <text x="60" y="46" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#FF6B00" letter-spacing="0.08em">IIT BOMBAY</text>
+</svg>

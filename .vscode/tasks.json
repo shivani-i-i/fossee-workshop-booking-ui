@@ -1,0 +1,29 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "commit-and-push",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"git add -A; git commit -m 'fix: align react ui with legacy layout'; git push origin master"
+			],
+			"isBackground": false,
+			"group": "build"
+		},
+		{
+			"label": "commit-push-now",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"git add -A; git commit -m 'fix: align react ui with legacy layout'; git push origin master"
+			],
+			"isBackground": false,
+			"group": "build"
+		}
+	]
+}

@@ -37,6 +37,10 @@ db.sqlite3
 .idea/workspace.xml
 .idea/vcs.xml
 
+# Frontend build artifacts
+frontend/node_modules/
+frontend/dist/
+
 #Emacs
 \#*#
 #Vim

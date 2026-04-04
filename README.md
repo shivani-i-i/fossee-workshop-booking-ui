@@ -1,8 +1,9 @@
-# FOSSEE Workshop Booking — UI/UX Redesign
+# FOSSEE Workshop Booking — React UI/UX Redesign
 
-> A modern, mobile-first redesign of the FOSSEE Workshop 
-> Booking Platform by IIT Bombay. Built with semantic HTML, 
-> pure CSS custom properties, and vanilla JavaScript.
+> A modern, mobile-first redesign of the FOSSEE Workshop
+> Booking Platform by IIT Bombay. The repository now includes
+> a React/Vite frontend in `frontend/` alongside the existing
+> Django backend.
 
 ---
 
@@ -32,6 +33,7 @@
 ### Prerequisites
 - Python 3.8+
 - pip
+- Node.js 18+
 - Git
 
 ### Steps
@@ -42,20 +44,28 @@ pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
 
-Then open: http://127.0.0.1:8000
+Open the React frontend in a second terminal:
+
+cd frontend
+npm install
+npm run dev
+
+Then open:
+- Django backend: http://127.0.0.1:8000
+- React frontend: the Vite URL shown in the terminal, usually http://127.0.0.1:5173
 
 ---
 
 ## 🎨 Design Principles
 
 ### 1. Mobile-First Approach
-Every design decision started at 375px and scaled 
-up to desktop. Since FOSSEE's primary users are 
-students who access the platform on mobile devices, 
-navigation, cards, forms and tables were all designed 
-for touch first. The hamburger navbar, single-column 
-card grid, horizontally scrollable filter chips and 
-stacked form layouts all stem from this principle.
+Every design decision started at 375px and scaled
+up to desktop. Since FOSSEE's primary users are
+students who access the platform on mobile devices,
+navigation, cards, forms and tables were all designed
+for touch first. The React frontend keeps that same
+behavior with a compact header, responsive card grids,
+and stacked auth forms on small screens.
 
 ### 2. Visual Hierarchy
 The original site had no clear visual hierarchy — 
@@ -77,19 +87,17 @@ Every page prominently displays "FOSSEE by IIT Bombay"
 branding to reinforce this identity.
 
 ### 4. Consistency Through Design Tokens
-All colors, spacing, typography and shadows are 
-defined as CSS custom properties in a single 
-variables.css file. This ensures every page feels 
-cohesive and makes future changes easy — updating 
-one variable cascades across the entire application.
+All colors, spacing, typography and shadows are
+defined as CSS custom properties in the shared React
+stylesheet. This keeps the UI cohesive and makes future
+changes easy.
 
 ### 5. Accessibility First
-Semantic HTML5 elements (nav, main, section, footer) 
-were used throughout. All interactive elements have 
-aria-labels, form fields have associated labels, 
-color contrast ratios meet WCAG AA standards, and 
-all interactive elements are keyboard navigable 
-with visible focus states.
+Semantic HTML5 elements (nav, main, section, footer)
+are used throughout. Interactive elements have clear
+labels, the navigation remains keyboard accessible,
+and the React pages keep the same high-contrast visual
+hierarchy.
 
 ---
 
@@ -187,10 +195,9 @@ while the filter remains accessible via a toggle.
 | Technology | Usage |
 |------------|-------|
 | Django | Backend (unchanged) |
-| Pure CSS + Custom Properties | All styling |
-| Vanilla JavaScript | Hamburger, accordion, modals |
-| Poppins + Inter (Google Fonts) | Typography |
-| Font Awesome | Icons (existing, reused) |
+| React | Frontend UI |
+| Vite | Frontend build tool and dev server |
+| Pure CSS + Custom Properties | Shared styling system |
 | Semantic HTML5 | Structure and accessibility |
 
 ---
