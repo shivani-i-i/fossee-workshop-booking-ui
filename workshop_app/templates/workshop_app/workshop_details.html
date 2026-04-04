@@ -9,6 +9,20 @@
 
 {% block content %}
 <div class="workshop-details-page container">
+    <nav class="workshop-details-breadcrumb" aria-label="Breadcrumb">
+        <a href="{% url 'workshop_app:index' %}">Home</a>
+        <span aria-hidden="true">&gt;</span>
+        <a href="{% url 'workshop_app:workshop_type_list' %}">Workshops</a>
+        <span aria-hidden="true">&gt;</span>
+        <span>{{ workshop.workshop_type.name }}</span>
+    </nav>
+
+    <section class="workshop-details-progress" aria-label="Booking progress">
+        <span class="workshop-details-progress__item is-done">Browse</span>
+        <span class="workshop-details-progress__item is-current">Workshop Details</span>
+        <span class="workshop-details-progress__item">Book</span>
+    </section>
+
     <section class="workshop-details-hero">
         <a href="javascript:history.back()" class="workshop-details-hero__back"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
         <div class="workshop-details-hero__head">
@@ -108,15 +122,27 @@
         </main>
 
         <aside class="workshop-action-card">
-            <h3>Actions</h3>
+            <h3>Enrollment</h3>
+            <div class="workshop-action-card__summary">
+                <span class="workshop-action-card__label">Status</span>
+                <span class="workshop-status-badge workshop-status-badge--{{ workshop.get_status|lower }}">{{ workshop.get_status }}</span>
+            </div>
+            <div class="workshop-action-card__summary">
+                <span class="workshop-action-card__label">Date</span>
+                <strong>{{ workshop.date|date }}</strong>
+            </div>
+            <div class="workshop-action-card__summary">
+                <span class="workshop-action-card__label">Duration</span>
+                <strong>{{ workshop.workshop_type.duration }} day{{ workshop.workshop_type.duration|pluralize }}</strong>
+            </div>
             {% if request.user.profile.position == 'coordinator' %}
                 <button type="button" class="workshop-action-btn workshop-action-btn--accept">Accept</button>
                 <button type="button" class="workshop-action-btn workshop-action-btn--reject">Reject</button>
             {% elif request.user.profile.position == 'instructor' %}
-                <a href="{% url 'workshop_app:workshop_type_details' workshop.workshop_type.id %}" class="workshop-action-btn workshop-action-btn--edit">Edit</a>
-                <button type="button" class="workshop-action-btn workshop-action-btn--cancel">Cancel</button>
+                <a href="{% url 'workshop_app:propose_workshop' %}" class="workshop-action-btn workshop-action-btn--book">Propose Similar</a>
+                <a href="{% url 'workshop_app:workshop_type_details' workshop.workshop_type.id %}" class="workshop-action-btn workshop-action-btn--edit">Edit Details</a>
             {% else %}
-                <a href="{% url 'workshop_app:propose_workshop' %}" class="workshop-action-btn workshop-action-btn--book">Book Now</a>
+                <a href="{% url 'workshop_app:propose_workshop' %}" class="workshop-action-btn workshop-action-btn--book">Book This Workshop</a>
             {% endif %}
         </aside>
     </div>

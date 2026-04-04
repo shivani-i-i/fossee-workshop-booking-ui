@@ -122,8 +122,34 @@
             navbar.classList.toggle('scrolled', isScrolled);
         }
 
+        var lastScroll = 0;
+        function setNavbarVisibilityOnScroll() {
+            if (!navbar) {
+                return;
+            }
+
+            var current = window.scrollY || 0;
+            if (current <= 0) {
+                navbar.style.transform = 'translateY(0)';
+                lastScroll = 0;
+                return;
+            }
+
+            if (current > lastScroll && current > 80) {
+                navbar.style.transform = 'translateY(-100%)';
+            } else {
+                navbar.style.transform = 'translateY(0)';
+            }
+
+            lastScroll = current;
+        }
+
         setNavbarScrollState();
-        window.addEventListener('scroll', setNavbarScrollState, { passive: true });
+        setNavbarVisibilityOnScroll();
+        window.addEventListener('scroll', function () {
+            setNavbarScrollState();
+            setNavbarVisibilityOnScroll();
+        }, { passive: true });
 
         if (!toggleButton || !menu) {
             return;
@@ -214,6 +240,14 @@
     })();
 </script>
 
+<section class="pre-footer" aria-label="Workshop updates">
+    <div class="pre-footer__inner">
+        <h3>Stay updated on new workshops</h3>
+        <p>Get notified when new workshops are announced</p>
+        <a href="{% url 'workshop_app:workshop_type_list' %}" class="pre-footer__btn">View All Workshops</a>
+    </div>
+</section>
+
 <footer class="site-footer" aria-label="Site footer">
     {% block footer %}
         <div class="site-footer__inner">
@@ -255,6 +289,11 @@
             </div>
 
             <div class="site-footer__bottom">
+                <div class="site-footer__institution-row" aria-label="Institutions">
+                    <img src="https://fossee.in/sites/all/themes/software_responsive_theme/img/iitb-logo.png" alt="IIT Bombay logo" class="site-footer__institution-logo">
+                    <img src="https://fossee.in/sites/all/themes/software_responsive_theme/img/logo.png" alt="FOSSEE logo" class="site-footer__institution-logo">
+                    <span class="site-footer__institution-text">MoE Govt. of India</span>
+                </div>
                 <p>An initiative of IIT Bombay under the National Mission on Education</p>
                 <p>© 2026 FOSSEE, IIT Bombay. All rights reserved.</p>
             </div>

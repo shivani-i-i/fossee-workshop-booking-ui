@@ -234,6 +234,7 @@ body {
 .cms-home-stats {
     background: #ffffff;
     border-top: 3px solid var(--color-primary);
+    border-bottom: 1px solid #E2E8F0;
 }
 
 .cms-home-stats__inner {
@@ -245,7 +246,7 @@ body {
 
 .cms-home-stats__item {
     margin: 0;
-    padding: 24px 12px;
+    padding: 32px 12px;
     text-align: center;
 }
 
@@ -269,6 +270,76 @@ body {
     letter-spacing: 0.04em;
 }
 
+.stat-number {
+    display: block;
+    color: #003366;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.stat-label {
+    display: block;
+    margin-top: 8px;
+    color: #64748B;
+    font-size: 13px;
+}
+
+.institution-bar {
+    background: #F8F9FA;
+    padding: 24px 16px;
+    border-bottom: 1px solid #E2E8F0;
+}
+
+.institution-bar__inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.institution-bar__label,
+.institution-bar__moe {
+    color: #64748B;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.institution-bar__logo {
+    width: 108px;
+    height: 32px;
+    object-fit: contain;
+    filter: grayscale(1);
+    opacity: 0.72;
+    transition: filter 220ms ease, opacity 220ms ease;
+}
+
+@media (max-width: 1024px) {
+    .cms-home-stats__item {
+        padding: 28px 10px;
+    }
+
+    .stat-number {
+        font-size: 28px;
+    }
+
+    .institution-bar {
+        padding: 20px 16px;
+    }
+
+    .institution-bar__inner {
+        gap: 12px;
+    }
+}
+
+.institution-bar__logo:hover {
+    filter: grayscale(0);
+    opacity: 1;
+}
+
 .cms-home-section-head {
     max-width: 1120px;
     margin: 0 auto;
@@ -284,12 +355,12 @@ body {
 }
 
 .cms-home-section-head::before {
-    content: "Section";
+    content: "WORKSHOPS";
     display: block;
     margin-bottom: 6px;
     font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 2px;
+    font-weight: 700;
+    letter-spacing: 3px;
     text-transform: uppercase;
     color: #FF6B00;
 }
@@ -451,6 +522,19 @@ body {
     font-weight: 700;
 }
 
+.cms-step-card__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    margin: 10px auto 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #F8FBFF;
+    color: #003366;
+    font-size: 18px;
+}
+
 .cms-step-card h3 {
     margin: 12px 0 8px;
     color: var(--color-primary);
@@ -538,6 +622,37 @@ body {
 
     .cms-home-stats__item + .cms-home-stats__item {
         border-left: 0;
+    }
+
+    .cms-home-stats__item:nth-child(odd) {
+        border-right: 1px solid #E2E8F0;
+    }
+
+    .cms-home-stats__item:nth-child(-n + 2) {
+        border-bottom: 1px solid #E2E8F0;
+    }
+
+    .institution-bar__inner {
+        gap: 8px;
+        flex-direction: column;
+    }
+
+    .institution-bar__label,
+    .institution-bar__moe {
+        font-size: 12px;
+    }
+
+    .institution-bar__logo {
+        width: 90px;
+        height: 26px;
+    }
+
+    .stat-number {
+        font-size: 24px;
+    }
+
+    .stat-label {
+        font-size: 12px;
     }
 
     .cms-home-categories__grid {

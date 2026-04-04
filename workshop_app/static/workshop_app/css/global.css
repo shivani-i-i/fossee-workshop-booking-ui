@@ -124,10 +124,27 @@ h6,
 
 .section-label {
     font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 2px;
+    font-weight: 700;
+    letter-spacing: 3px;
     text-transform: uppercase;
     color: #FF6B00;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.base-content section h2::before {
+    content: "WORKSHOPS";
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #FF6B00;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.section-label + h2::before {
+    content: none;
 }
 
 /* Shared button system */

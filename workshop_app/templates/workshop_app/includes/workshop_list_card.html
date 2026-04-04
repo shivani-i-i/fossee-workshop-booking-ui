@@ -1,4 +1,9 @@
 <article class="workshop-list-card workshop-list-card--{{ card_status_slug|default:'upcoming' }}" data-workshop-type="{{ card_type_label }}">
+    <div class="workshop-list-card__top" aria-hidden="true">
+        <i class="workshop-list-card__type-icon workshop-list-card__type-icon--default fa fa-book"></i>
+        <i class="workshop-list-card__type-icon workshop-list-card__type-icon--python fa fa-code"></i>
+        <i class="workshop-list-card__type-icon workshop-list-card__type-icon--scilab fa fa-calculator"></i>
+    </div>
     <div class="workshop-list-card__body">
         <div class="workshop-list-card__header">
             <h2 class="workshop-list-card__title">{{ card_title }}</h2>

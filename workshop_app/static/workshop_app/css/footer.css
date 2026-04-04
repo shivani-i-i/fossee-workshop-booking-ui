@@ -6,6 +6,70 @@
     position: relative;
 }
 
+.pre-footer {
+    background: #003366;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 48px 16px;
+    position: relative;
+    overflow: hidden;
+}
+
+.pre-footer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        -35deg,
+        rgba(255, 255, 255, 0.07) 0,
+        rgba(255, 255, 255, 0.07) 1px,
+        transparent 1px,
+        transparent 16px
+    );
+    pointer-events: none;
+}
+
+.pre-footer__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.pre-footer h3 {
+    margin: 0;
+    font-size: clamp(1.45rem, 3vw, 2rem);
+    color: #FFFFFF;
+}
+
+.pre-footer p {
+    margin: 12px 0 0;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 15px;
+}
+
+.pre-footer__btn {
+    margin-top: 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 20px;
+    border-radius: 8px;
+    background: #FF6B00;
+    border: 1px solid #FF6B00;
+    color: #FFFFFF;
+    font-weight: var(--font-weight-semibold);
+    text-decoration: none;
+}
+
+.pre-footer__btn:hover {
+    background: #E55A00;
+    border-color: #E55A00;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
 .site-footer::before {
     content: "";
     position: absolute;
@@ -153,13 +217,66 @@
     gap: var(--space-3);
 }
 
+.site-footer__institution-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+}
+
+.site-footer__institution-logo {
+    width: 104px;
+    height: 30px;
+    object-fit: contain;
+    filter: grayscale(1) brightness(1.9);
+    opacity: 0.85;
+}
+
+.site-footer__institution-text {
+    color: rgba(255, 255, 255, 0.86);
+    font-size: 13px;
+    font-weight: var(--font-weight-semibold);
+}
+
 .site-footer__bottom p {
     margin: 0;
     color: rgba(255, 255, 255, 0.72);
     font-size: var(--font-size-sm);
 }
 
+@media (max-width: 1024px) {
+    .pre-footer {
+        padding: 40px 16px;
+    }
+
+    .pre-footer p {
+        font-size: 14px;
+    }
+}
+
 @media (max-width: 767px) {
+    .pre-footer {
+        padding: 36px 16px;
+    }
+
+    .pre-footer h3 {
+        font-size: clamp(1.25rem, 6vw, 1.6rem);
+    }
+
+    .pre-footer p {
+        margin-top: 10px;
+        font-size: 13px;
+        line-height: 1.45;
+    }
+
+    .pre-footer__btn {
+        margin-top: 18px;
+        min-height: 42px;
+        width: 100%;
+        max-width: 260px;
+    }
+
     .site-footer {
         padding-top: 48px;
     }
@@ -182,5 +299,19 @@
     .site-footer__bottom {
         margin-top: var(--space-8);
         text-align: center;
+    }
+
+    .site-footer__institution-row {
+        gap: var(--space-2);
+    }
+
+    .site-footer__institution-logo {
+        width: 92px;
+        height: 26px;
+    }
+
+    .site-footer__institution-text {
+        width: 100%;
+        font-size: 12px;
     }
 }

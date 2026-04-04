@@ -40,6 +40,13 @@
             </button>
         </form>
 
+        <div class="category-chips" aria-label="Workshop categories">
+            <button type="button" class="cat-chip is-active"><i class="fa fa-th" aria-hidden="true"></i><span>All</span></button>
+            <button type="button" class="cat-chip"><i class="fa fa-code" aria-hidden="true"></i><span>Python</span></button>
+            <button type="button" class="cat-chip"><i class="fa fa-calculator" aria-hidden="true"></i><span>Scilab</span></button>
+            <button type="button" class="cat-chip"><i class="fa fa-cogs" aria-hidden="true"></i><span>Hardware</span></button>
+        </div>
+
         <div class="workshop-list-page__chips" aria-label="Workshop filters">
             <a class="workshop-chip{% if request.GET.filter|default:'all' == 'all' %} is-active{% endif %}" href="?filter=all{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}">
                 <span>All</span>
