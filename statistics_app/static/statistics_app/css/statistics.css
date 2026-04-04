@@ -36,6 +36,8 @@
     padding: var(--space-5);
     box-shadow: var(--shadow-card);
     height: fit-content;
+    position: sticky;
+    top: 84px;
 }
 
 .stats-filter-panel__header h2 {
@@ -195,6 +197,15 @@
 
 .stats-btn:hover {
     text-decoration: none;
+}
+
+.stats-btn:focus-visible,
+.stats-chip-btn:focus-visible,
+.stats-mobile-filter-toggle:focus-visible,
+.stats-filter-group input[type='date']:focus-visible,
+.stats-filter-group select:focus-visible {
+    outline: 2px solid #003366;
+    outline-offset: 2px;
 }
 
 .stats-btn--primary {
@@ -358,6 +369,22 @@
 
 .stats-table-scroll {
     overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #94A3B8 #E2E8F0;
+}
+
+.stats-table-scroll::-webkit-scrollbar {
+    height: 8px;
+}
+
+.stats-table-scroll::-webkit-scrollbar-track {
+    background: #E2E8F0;
+    border-radius: 999px;
+}
+
+.stats-table-scroll::-webkit-scrollbar-thumb {
+    background: #94A3B8;
+    border-radius: 999px;
 }
 
 .stats-table {
@@ -462,6 +489,7 @@
 
     .stats-filter-panel {
         display: none;
+        position: static;
     }
 
     .stats-filter-panel.is-open {
@@ -470,6 +498,21 @@
 
     .stats-summary-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .stats-summary-card,
+    .stats-chart-card,
+    .stats-table-card,
+    .stats-check-card,
+    .stats-btn,
+    .stats-chip-btn,
+    .stats-active-chip,
+    .stats-empty-state::before {
+        animation: none !important;
+        transition: none !important;
+        transform: none !important;
     }
 }
 
@@ -514,6 +557,35 @@
     .stats-table-card__top {
         flex-direction: column;
         align-items: stretch;
+    }
+
+    .stats-table-scroll {
+        margin: 0 -4px;
+        padding: 0 4px 6px;
+    }
+
+    .stats-table {
+        min-width: 640px;
+    }
+
+    .stats-table thead th,
+    .stats-table tbody td {
+        padding: 10px;
+        font-size: 12px;
+        white-space: nowrap;
+    }
+
+    .stats-table thead th {
+        position: static;
+    }
+
+    .stats-table tbody td {
+        line-height: 1.35;
+    }
+
+    .stats-empty-state {
+        gap: var(--space-2);
+        padding: var(--space-5) 0;
     }
 
     .stats-pagination-inline {
