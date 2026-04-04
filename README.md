@@ -13,12 +13,17 @@
 
 ## 📸 Before & After
 
-| Page | Before | After |
-|------|--------|-------|
-| Login | ![before](screenshots/before/login.png) | ![after](screenshots/after/login.png) |
-| Register | ![before](screenshots/before/register.png) | ![after](screenshots/after/register.png) |
-| Workshop List | ![before](screenshots/before/workshop-list.png) | ![after](screenshots/after/workshop-list.png) |
-| Home | ![before](screenshots/before/home.png) | ![after](screenshots/after/home.png) |
+| Page | Before | After (Desktop) | After (Mobile) |
+|------|--------|-----------------|----------------|
+| Home | ![](screenshots/before/home.png) | ![](screenshots/after/home-desktop.png) | ![](screenshots/after/home-mobile.png) |
+| Login | ![](screenshots/before/login.png) | ![](screenshots/after/login-desktop.png) | ![](screenshots/after/login-mobile.png) |
+| Register | ![](screenshots/before/register.png) | ![](screenshots/after/register-desktop.png) | ![](screenshots/after/register-mobile.png) |
+| Workshop List | ![](screenshots/before/workshop-list.png) | ![](screenshots/after/workshop-list-desktop.png) | ![](screenshots/after/workshop-list-mobile.png) |
+| Propose Workshop | - | ![](screenshots/after/propose-step1-desktop.png) | ![](screenshots/after/propose-mobile.png) |
+| Statistics | - | ![](screenshots/after/statistics-desktop.png) | ![](screenshots/after/statistics-mobile.png) |
+| Coordinator Dashboard | - | ![](screenshots/after/coordinator-dashboard-desktop.png) | ![](screenshots/after/coordinator-dashboard-mobile.png) |
+| Instructor Dashboard | - | ![](screenshots/after/instructor-dashboard-desktop.png) | ![](screenshots/after/instructor-dashboard-mobile.png) |
+| Profile | - | ![](screenshots/after/profile-desktop.png) | ![](screenshots/after/profile-mobile.png) |
 
 ---
 
