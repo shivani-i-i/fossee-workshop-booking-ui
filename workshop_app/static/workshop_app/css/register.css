@@ -3,8 +3,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: var(--space-8) var(--space-4);
-    background: var(--color-bg-secondary);
+    padding: 48px 16px;
+    background: #F0F4F8;
 }
 
 body.modal-open {
@@ -13,16 +13,16 @@ body.modal-open {
 
 .base-content {
     padding: 0;
-    background: var(--color-bg-secondary);
+    background: #F0F4F8;
 }
 
 .register-card {
     width: 100%;
     max-width: 560px;
-    padding: 40px;
-    border-radius: 12px;
-    background: var(--color-bg-primary);
-    box-shadow: var(--shadow-card);
+    padding: 48px;
+    border-radius: 16px;
+    background: #FFFFFF;
+    box-shadow: 0 4px 24px rgba(0, 51, 102, 0.08);
     transition: var(--transition-bounce);
 }
 
@@ -32,18 +32,29 @@ body.modal-open {
 }
 
 .register-card__brand {
-    width: 44px;
-    height: 44px;
+    width: fit-content;
+    height: auto;
     margin: 0 auto var(--space-4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: var(--color-primary);
-    color: var(--color-bg-primary);
-    font-size: 1.25rem;
-    font-weight: var(--font-weight-bold);
+    display: grid;
+    justify-items: center;
+    gap: 2px;
+    background: transparent;
+    color: var(--color-primary);
     line-height: 1;
+}
+
+.register-card__brand-name {
+    display: block;
+    font-size: 24px;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.02em;
+}
+
+.register-card__brand-tagline {
+    display: block;
+    color: var(--color-accent);
+    font-size: 12px;
+    font-weight: var(--font-weight-semibold);
 }
 
 .register-card__title {
@@ -52,16 +63,12 @@ body.modal-open {
     font-weight: var(--font-weight-bold);
     line-height: var(--line-height-tight);
     text-align: center;
-    background: linear-gradient(135deg, #003366, #FF6B00);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
+    color: #1A1A2E;
 }
 
 .register-card__subtitle {
     margin: var(--space-2) 0 0;
-    color: var(--color-text-secondary);
+    color: #64748B;
     font-size: var(--font-size-sm);
     line-height: var(--line-height-normal);
     text-align: center;
@@ -89,9 +96,9 @@ body.modal-open {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid var(--color-border);
-    background: var(--color-bg-primary);
-    color: var(--color-text-muted);
+    border: 1px solid #CBD5E1;
+    background: #FFFFFF;
+    color: #94A3B8;
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-semibold);
 }
@@ -103,22 +110,46 @@ body.modal-open {
     white-space: nowrap;
 }
 
-.register-step.is-active .register-step__dot {
-    border-color: var(--color-primary);
-    background: var(--color-primary);
-    color: var(--color-bg-primary);
+.register-step--completed .register-step__dot {
+    border-color: #003366;
+    background: #003366;
+    color: #FFFFFF;
 }
 
-.register-step.is-active .register-step__label {
-    color: var(--color-primary);
+.register-step--completed .register-step__label {
+    color: #003366;
 }
 
 .register-step__line {
     width: 56px;
     height: 2px;
     border-radius: var(--radius-full);
-    background: var(--color-border);
+    background: #CBD5E1;
     margin-bottom: calc(var(--space-4) - var(--space-1));
+}
+
+.register-step__line--passed {
+    background: #003366;
+}
+
+.register-step--current .register-step__dot {
+    border-color: #FF6B00;
+    background: #FF6B00;
+    color: #FFFFFF;
+}
+
+.register-step--current .register-step__label {
+    color: #FF6B00;
+}
+
+.register-step--future .register-step__dot {
+    border-color: #CBD5E1;
+    background: #FFFFFF;
+    color: #94A3B8;
+}
+
+.register-step--future .register-step__label {
+    color: #94A3B8;
 }
 
 .register-alert {
@@ -164,11 +195,11 @@ body.modal-open {
 .register-field input,
 .register-field select {
     width: 100%;
-    height: 44px;
-    padding: 14px calc(var(--space-6) + var(--space-4)) 0 var(--space-4);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    background: var(--color-bg-primary);
+    height: 52px;
+    padding: 20px calc(var(--space-6) + var(--space-4)) 10px var(--space-4);
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    background: #FFFFFF;
     color: var(--color-text-primary);
     font-size: var(--font-size-base);
     transition: var(--transition-interactive);
@@ -176,7 +207,7 @@ body.modal-open {
 
 .register-field select {
     appearance: none;
-    padding-top: 16px;
+    padding-top: 20px;
 }
 
 .register-field input::placeholder,
@@ -188,16 +219,17 @@ body.modal-open {
 .register-field select:focus {
     outline: none;
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.14);
+    box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.1);
 }
 
 .register-control label {
     position: absolute;
     left: var(--space-4);
     top: 50%;
-    transform: translateY(-50%);
-    color: var(--color-text-muted);
-    font-size: var(--font-size-sm);
+    transform: translateY(-50%) scale(1);
+    transform-origin: left top;
+    color: #64748B;
+    font-size: 13px;
     font-weight: var(--font-weight-medium);
     pointer-events: none;
     transition: var(--transition-interactive);
@@ -206,10 +238,54 @@ body.modal-open {
 .register-control input:focus + label,
 .register-control input:not(:placeholder-shown) + label,
 .register-control select:focus + label {
-    top: 10px;
-    transform: translateY(0);
-    font-size: var(--font-size-xs);
-    color: var(--color-primary);
+    top: 8px;
+    transform: translateY(0) scale(0.8);
+    color: #003366;
+}
+
+.register-field.has-value .register-control label {
+    top: 8px;
+    transform: translateY(0) scale(0.8);
+    color: #003366;
+}
+
+.register-control--select .register-select-placeholder {
+    position: absolute;
+    left: var(--space-4);
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94A3B8;
+    font-size: 13px;
+    font-weight: var(--font-weight-medium);
+    pointer-events: none;
+    transition: var(--transition-interactive);
+}
+
+.register-control--select:focus-within .register-select-placeholder {
+    opacity: 0;
+}
+
+.register-control--select select {
+    color: transparent;
+}
+
+.register-control--select:focus-within select {
+    color: #1A1A2E;
+}
+
+.register-field--role.has-value .register-control--select select {
+    color: #1A1A2E;
+}
+
+.register-field--role.has-value .register-select-placeholder {
+    opacity: 0;
+}
+
+.register-control--select:focus-within label,
+.register-field--role.has-value .register-control label {
+    top: 8px;
+    transform: translateY(0) scale(0.8);
+    color: #003366;
 }
 
 .register-field__icon {
@@ -285,7 +361,7 @@ body.modal-open {
 
 .register-strength {
     position: relative;
-    height: 8px;
+    height: 6px;
     border-radius: var(--radius-full);
     background: var(--color-border-light);
     overflow: hidden;
@@ -300,7 +376,7 @@ body.modal-open {
     width: 0;
     border-radius: var(--radius-full);
     background: var(--color-error);
-    transition: width var(--transition-slow), background var(--transition-slow);
+    transition: width 300ms ease, background var(--transition-slow);
 }
 
 .register-password-rules {
@@ -313,9 +389,10 @@ body.modal-open {
     display: flex;
     align-items: center;
     gap: var(--space-2);
-    color: var(--color-text-muted);
+    color: #94A3B8;
     font-size: var(--font-size-xs);
-    transition: color var(--transition-normal);
+    text-decoration: line-through;
+    transition: color var(--transition-normal), text-decoration-color var(--transition-normal);
 }
 
 .register-password-rules .rule-icon {
@@ -325,19 +402,28 @@ body.modal-open {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: var(--color-border-light);
-    color: var(--color-text-muted);
+    background: #CBD5E1;
+    color: #64748B;
     font-size: 10px;
     font-weight: var(--font-weight-bold);
-    transition: background var(--transition-normal), color var(--transition-normal);
+    transition: background var(--transition-normal), color var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.register-password-rules__text {
+    transition: color var(--transition-normal), text-decoration-color var(--transition-normal);
 }
 
 .register-password-rules li.is-met {
     color: var(--color-success);
+    text-decoration: none;
 }
 
 .register-password-rules li.is-met .rule-icon {
     background: color-mix(in srgb, var(--color-success) 20%, var(--color-bg-primary));
+    color: var(--color-success);
+}
+
+.register-password-rules li.is-met .register-password-rules__text {
     color: var(--color-success);
 }
 
@@ -418,12 +504,15 @@ body.modal-open {
 
 .register-submit {
     position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
-    height: 44px;
+    height: 52px;
     margin-top: var(--space-6);
-    border: 1px solid var(--color-primary);
-    border-radius: var(--radius-md);
-    background: var(--color-primary);
+    border: 1px solid #FF6B00;
+    border-radius: 8px;
+    background: #FF6B00;
     color: var(--color-bg-primary);
     font-size: var(--font-size-base);
     font-weight: var(--font-weight-semibold);
@@ -431,8 +520,9 @@ body.modal-open {
 }
 
 .register-submit:hover {
-    background: var(--color-primary-hover);
-    border-color: var(--color-primary-hover);
+    background: #E55A00;
+    border-color: #E55A00;
+    box-shadow: 0 10px 24px rgba(255, 107, 0, 0.22);
 }
 
 .register-submit:active {
@@ -474,7 +564,13 @@ body.modal-open {
 }
 
 .register-submit.is-loading .register-submit__label {
-    opacity: 0.85;
+    opacity: 0;
+}
+
+.register-submit.is-loading::before {
+    content: "Creating account...";
+    position: relative;
+    z-index: 1;
 }
 
 .register-submit.is-success {
@@ -544,6 +640,38 @@ body.modal-open {
     flex-direction: column;
     transform: translateY(var(--space-4));
     transition: transform var(--transition-normal);
+}
+
+@media (max-width: 480px) {
+    .register-page {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .register-card {
+        max-width: none;
+        padding: 32px 16px;
+    }
+
+    .register-form__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .register-field--half {
+        grid-column: 1 / -1;
+    }
+
+    .register-steps {
+        gap: var(--space-1);
+    }
+
+    .register-step__label {
+        display: none;
+    }
+
+    .register-step__line {
+        width: 28px;
+    }
 }
 
 .register-modal.is-open .register-modal__dialog {

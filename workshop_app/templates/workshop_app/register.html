@@ -12,22 +12,25 @@
 {% block content %}
     <div class="register-page">
         <div class="register-card">
-            <div class="register-card__brand" aria-hidden="true">F</div>
+            <div class="register-card__brand" aria-hidden="true">
+                <span class="register-card__brand-name">FOSSEE</span>
+                <span class="register-card__brand-tagline">by IIT Bombay</span>
+            </div>
             <h1 class="register-card__title">Create your account</h1>
-            <p class="register-card__subtitle">Join the workshop booking platform</p>
+            <p class="register-card__subtitle">Join 10,000+ students on FOSSEE</p>
 
             <div class="register-steps" aria-label="Registration progress">
-                <div class="register-step is-active">
-                    <span class="register-step__dot">1</span>
+                <div class="register-step register-step--completed">
+                    <span class="register-step__dot" aria-hidden="true"><i class="fa fa-check" aria-hidden="true"></i></span>
                     <span class="register-step__label">Personal Info</span>
                 </div>
-                <span class="register-step__line" aria-hidden="true"></span>
-                <div class="register-step is-active">
+                <span class="register-step__line register-step__line--passed" aria-hidden="true"></span>
+                <div class="register-step register-step--current">
                     <span class="register-step__dot">2</span>
                     <span class="register-step__label">Account Details</span>
                 </div>
                 <span class="register-step__line" aria-hidden="true"></span>
-                <div class="register-step">
+                <div class="register-step register-step--future">
                     <span class="register-step__dot">3</span>
                     <span class="register-step__label">Complete</span>
                 </div>
@@ -105,10 +108,11 @@
                         {% endfor %}
                     </div>
 
-                    <div class="register-field register-field--full{% if form.department.errors %} has-error{% elif form.department.value %} has-value{% endif %}">
+                    <div class="register-field register-field--full register-field--role{% if form.department.errors %} has-error{% elif form.department.value %} has-value{% endif %}">
                         <div class="register-control register-control--select">
                             {{ form.department }}
                             <label for="id_department">Role</label>
+                            <span class="register-select-placeholder" aria-hidden="true">Select Role</span>
                             <span class="register-field__icon register-field__icon--valid"><i class="fa fa-check" aria-hidden="true"></i></span>
                             <span class="register-field__icon register-field__icon--invalid"><i class="fa fa-times" aria-hidden="true"></i></span>
                         </div>
@@ -134,9 +138,9 @@
                             <span class="register-strength__fill" id="registerStrengthFill"></span>
                         </div>
                         <ul class="register-password-rules" id="passwordRules" aria-label="Password requirements">
-                            <li data-rule="length"><span class="rule-icon">✓</span>At least 8 characters</li>
-                            <li data-rule="number"><span class="rule-icon">✓</span>Contains a number</li>
-                            <li data-rule="upper"><span class="rule-icon">✓</span>Contains uppercase letter</li>
+                            <li data-rule="length"><span class="rule-icon" aria-hidden="true">•</span><span class="register-password-rules__text">At least 8 characters</span></li>
+                            <li data-rule="number"><span class="rule-icon" aria-hidden="true">•</span><span class="register-password-rules__text">Contains a number</span></li>
+                            <li data-rule="upper"><span class="rule-icon" aria-hidden="true">•</span><span class="register-password-rules__text">Contains uppercase letter</span></li>
                         </ul>
                         {% for error in form.password.errors %}
                             <p class="register-field__error">{{ error|escape }}</p>
@@ -166,7 +170,7 @@
                 </div>
 
                 <button type="submit" class="register-submit" id="registerSubmitBtn">
-                    <span class="register-submit__label">Create Account</span>
+                    <span class="register-submit__label">Create Account →</span>
                     <span class="register-submit__spinner" aria-hidden="true"></span>
                     <span class="register-submit__success" aria-hidden="true"><i class="fa fa-check"></i></span>
                 </button>
