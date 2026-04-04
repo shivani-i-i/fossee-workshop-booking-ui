@@ -1,3 +1,8 @@
+/**
+ * App
+ * Main React shell for the FOSSEE workshop booking redesign.
+ * Uses hash-based routing, accessible sections, and a lightweight data fetch for the workshop list.
+ */
 import React from 'react';
 
 const navItems = [

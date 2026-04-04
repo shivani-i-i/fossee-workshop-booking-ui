@@ -1,3 +1,9 @@
+/**
+ * styles.css
+ * Shared visual system for the React redesign.
+ * Centralizes design tokens, responsive layout rules, and accessible component styling.
+ */
+
 :root {
   color-scheme: light;
   --color-primary: #003366;
