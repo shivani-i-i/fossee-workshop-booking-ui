@@ -1407,6 +1407,23 @@ body {
   font-weight: 600;
 }
 
+.field-helper-list {
+  list-style: none;
+  padding: 0;
+  margin: 6px 0 0;
+  display: grid;
+  gap: 4px;
+  color: #7a889f;
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
+.field-helper-list li::before {
+  content: '•';
+  margin-right: 6px;
+  color: var(--color-accent);
+}
+
 .select-wrap {
   position: relative;
 }

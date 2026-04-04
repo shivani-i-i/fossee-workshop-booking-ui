@@ -228,8 +228,12 @@ function LoginPage({ navigate }) {
               {showPassword ? '🙈' : '👁'}
             </button>
           </div>
+          <ul className="field-helper-list" aria-label="Password requirements">
+            <li>At least 8 characters</li>
+            <li>Contains a number</li>
+            <li>Contains uppercase letter</li>
+          </ul>
         </label>
-        <p className="field-helper">Use at least 8 characters.</p>
         <p className="auth-card__link-row"><button type="button" className="text-button">Forgot password?</button></p>
         <button type="button" className="btn btn--solid">Sign In</button>
         <div className="panel-card__divider"><span>or</span></div>
@@ -315,7 +319,11 @@ function RegisterPage({ navigate }) {
                 {showPassword ? '🙈' : '👁'}
               </button>
             </div>
-            <span className="field-helper">Use at least 8 characters.</span>
+            <ul className="field-helper-list" aria-label="Password requirements">
+              <li>At least 8 characters</li>
+              <li>Contains a number</li>
+              <li>Contains uppercase letter</li>
+            </ul>
           </label>
           <label>
             Confirm Password
