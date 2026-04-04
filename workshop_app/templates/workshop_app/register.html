@@ -49,9 +49,9 @@
 
                 <div class="register-form__grid">
                     <div class="register-field register-field--half{% if form.first_name.errors %} has-error{% elif form.first_name.value %} has-value{% endif %}">
+                        <label class="register-field__label" for="id_first_name">First Name</label>
                         <div class="register-control">
                             {{ form.first_name }}
-                            <label for="id_first_name">First Name</label>
                             <span class="register-field__icon register-field__icon--valid"><i class="fa fa-check" aria-hidden="true"></i></span>
                             <span class="register-field__icon register-field__icon--invalid"><i class="fa fa-times" aria-hidden="true"></i></span>
                         </div>
@@ -61,9 +61,9 @@
                     </div>
 
                     <div class="register-field register-field--half{% if form.last_name.errors %} has-error{% elif form.last_name.value %} has-value{% endif %}">
+                        <label class="register-field__label" for="id_last_name">Last Name</label>
                         <div class="register-control">
                             {{ form.last_name }}
-                            <label for="id_last_name">Last Name</label>
                             <span class="register-field__icon register-field__icon--valid"><i class="fa fa-check" aria-hidden="true"></i></span>
                             <span class="register-field__icon register-field__icon--invalid"><i class="fa fa-times" aria-hidden="true"></i></span>
                         </div>
@@ -73,9 +73,9 @@
                     </div>
 
                     <div class="register-field register-field--full{% if form.email.errors %} has-error{% elif form.email.value %} has-value{% endif %}">
+                        <label class="register-field__label" for="id_email">Email</label>
                         <div class="register-control">
                             {{ form.email }}
-                            <label for="id_email">Email</label>
                             <span class="register-field__icon register-field__icon--valid"><i class="fa fa-check" aria-hidden="true"></i></span>
                             <span class="register-field__icon register-field__icon--invalid"><i class="fa fa-times" aria-hidden="true"></i></span>
                         </div>
@@ -85,9 +85,9 @@
                     </div>
 
                     <div class="register-field register-field--full{% if form.username.errors %} has-error{% elif form.username.value %} has-value{% endif %}">
+                        <label class="register-field__label" for="id_username">Username</label>
                         <div class="register-control">
                             {{ form.username }}
-                            <label for="id_username">Username</label>
                             <span class="register-field__icon register-field__icon--valid"><i class="fa fa-check" aria-hidden="true"></i></span>
                             <span class="register-field__icon register-field__icon--invalid"><i class="fa fa-times" aria-hidden="true"></i></span>
                         </div>
@@ -97,9 +97,9 @@
                     </div>
 
                     <div class="register-field register-field--full{% if form.institute.errors %} has-error{% elif form.institute.value %} has-value{% endif %}">
+                        <label class="register-field__label" for="id_institute">Institute Name</label>
                         <div class="register-control">
                             {{ form.institute }}
-                            <label for="id_institute">Institute Name</label>
                             <span class="register-field__icon register-field__icon--valid"><i class="fa fa-check" aria-hidden="true"></i></span>
                             <span class="register-field__icon register-field__icon--invalid"><i class="fa fa-times" aria-hidden="true"></i></span>
                         </div>
@@ -109,10 +109,9 @@
                     </div>
 
                     <div class="register-field register-field--full register-field--role{% if form.department.errors %} has-error{% elif form.department.value %} has-value{% endif %}">
+                        <label class="register-field__label" for="id_department">Role</label>
                         <div class="register-control register-control--select">
                             {{ form.department }}
-                            <label for="id_department">Role</label>
-                            <span class="register-select-placeholder" aria-hidden="true">Select Role</span>
                             <span class="register-field__icon register-field__icon--valid"><i class="fa fa-check" aria-hidden="true"></i></span>
                             <span class="register-field__icon register-field__icon--invalid"><i class="fa fa-times" aria-hidden="true"></i></span>
                         </div>
@@ -122,6 +121,7 @@
                     </div>
 
                     <div class="register-field register-field--full{% if form.password.errors %} has-error{% elif form.password.value %} has-value{% endif %}" id="passwordFieldBlock">
+                        <label class="register-field__label" for="id_password">Password</label>
                         <div class="register-control">
                             <div class="register-password-wrap">
                                 {{ form.password }}
@@ -130,7 +130,6 @@
                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                 </button>
                             </div>
-                            <label for="id_password">Password</label>
                             <span class="register-field__icon register-field__icon--valid"><i class="fa fa-check" aria-hidden="true"></i></span>
                             <span class="register-field__icon register-field__icon--invalid"><i class="fa fa-times" aria-hidden="true"></i></span>
                         </div>
@@ -148,9 +147,9 @@
                     </div>
 
                     <div class="register-field register-field--full{% if form.confirm_password.errors %} has-error{% elif form.confirm_password.value %} has-value{% endif %}">
+                        <label class="register-field__label" for="id_confirm_password">Confirm Password</label>
                         <div class="register-control">
                             {{ form.confirm_password }}
-                            <label for="id_confirm_password">Confirm Password</label>
                             <span class="register-field__icon register-field__icon--valid"><i class="fa fa-check" aria-hidden="true"></i></span>
                             <span class="register-field__icon register-field__icon--invalid"><i class="fa fa-times" aria-hidden="true"></i></span>
                         </div>

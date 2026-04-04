@@ -52,6 +52,7 @@
 </head>
 
 <body>
+<a class="skip-link" href="#main-content">Skip to content</a>
 {% block header %}
     <nav class="site-navbar" aria-label="Primary navigation">
         <div class="site-navbar__inner">
@@ -93,7 +94,7 @@
     <div class="site-nav-backdrop" id="siteNavBackdrop" aria-hidden="true"></div>
 {% endblock %}
 
-<div class="base-content">
+<div class="base-content" id="main-content" tabindex="-1">
     {% block content %}
         <h1>Base Template Content. Please override me</h1>
     {% endblock %}
@@ -246,20 +247,45 @@
         <h2>Frequently Asked Questions</h2>
         <div class="site-faq__grid">
             <article class="site-faq__item">
-                <h3>Are FOSSEE workshops free?</h3>
-                <p>Yes. Core workshops on this portal are free for students and educators.</p>
+                <button type="button" class="site-faq__q" aria-expanded="false">
+                    <span>Are FOSSEE workshops free?</span>
+                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                </button>
+                <p class="site-faq__a" hidden>Yes. Core workshops on this portal are free for students and educators.</p>
             </article>
             <article class="site-faq__item">
-                <h3>Who can join these workshops?</h3>
-                <p>Anyone with an academic or skill-building interest in open-source technologies.</p>
+                <button type="button" class="site-faq__q" aria-expanded="false">
+                    <span>Who can join these workshops?</span>
+                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                </button>
+                <p class="site-faq__a" hidden>Anyone with an academic or skill-building interest in open-source technologies.</p>
             </article>
             <article class="site-faq__item">
-                <h3>How do I stay updated?</h3>
-                <p>Use the workshop listing page and register to receive updates on new sessions.</p>
+                <button type="button" class="site-faq__q" aria-expanded="false">
+                    <span>How do I stay updated?</span>
+                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                </button>
+                <p class="site-faq__a" hidden>Use the workshop listing page and register to receive updates on new sessions.</p>
             </article>
         </div>
     </div>
 </section>
+
+<script>
+    (function () {
+        var faqButtons = document.querySelectorAll('.site-faq__q');
+        faqButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                var expanded = button.getAttribute('aria-expanded') === 'true';
+                var answer = button.nextElementSibling;
+                button.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+                if (answer) {
+                    answer.hidden = expanded;
+                }
+            });
+        });
+    })();
+</script>
 
 <section class="pre-footer" aria-label="Workshop updates">
     <div class="pre-footer__inner">
@@ -273,13 +299,11 @@
     {% block footer %}
         <div class="site-footer__inner">
             <div class="site-footer__logo-row">
-                <a class="site-footer__logo-chip" href="/">
+                <a class="site-footer__logo-plain" href="/" aria-label="FOSSEE home">
                     <img class="site-footer__logo-image" src="https://fossee.in/sites/all/themes/software_responsive_theme/img/logo.png" alt="FOSSEE logo">
-                    <span>FOSSEE</span>
                 </a>
-                <div class="site-footer__logo-chip site-footer__logo-chip--iit">
+                <div class="site-footer__logo-plain" aria-label="IIT Bombay">
                     <img class="site-footer__logo-image" src="https://fossee.in/sites/all/themes/software_responsive_theme/img/iitb-logo.png" alt="IIT Bombay logo">
-                    <span>IIT Bombay</span>
                 </div>
             </div>
 

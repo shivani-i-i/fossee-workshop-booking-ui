@@ -32,6 +32,11 @@
         </ul>
         <div class="my-2 my-lg-0">
             <ul class="navbar-nav mr-auto">
+                {% if page.permalink == 'home' %}
+                    <li class="nav-item">
+                        <a class="nav-link cms-site-nav__link" href="#about-section">About</a>
+                    </li>
+                {% endif %}
                 {% for nav in navs %}
                     <li class="nav-item">
                         {% if nav.subnavs %}
@@ -116,6 +121,31 @@
                 <strong>350+</strong>
                 <span>active institutions in our learning community</span>
             </article>
+        </div>
+    </section>
+
+    <section id="about-section" class="cms-about" aria-label="About FOSSEE Workshops">
+        <div class="cms-about__inner">
+            <div class="cms-about__content">
+                <span class="section-label">About Us</span>
+                <h2>About FOSSEE Workshop Portal</h2>
+                <p>The FOSSEE Workshop Portal is an IIT Bombay initiative that helps institutions host high-quality, practical workshops on free and open-source software. Our goal is to make technical learning accessible, hands-on, and career-relevant for every learner.</p>
+                <p>We collaborate with mentors, faculty, and campus coordinators to deliver structured learning experiences that combine fundamentals, guided practice, and real implementation.</p>
+            </div>
+            <div class="cms-about__highlights" role="list" aria-label="About highlights">
+                <article class="cms-about-chip" role="listitem">
+                    <strong>IIT Bombay</strong>
+                    <span>Academic leadership and trusted pedagogy</span>
+                </article>
+                <article class="cms-about-chip" role="listitem">
+                    <strong>Open Source Focus</strong>
+                    <span>Learn tools that are free, transparent, and industry-used</span>
+                </article>
+                <article class="cms-about-chip" role="listitem">
+                    <strong>Institution Ready</strong>
+                    <span>Designed for scalable campus-level workshop delivery</span>
+                </article>
+            </div>
         </div>
     </section>
 
