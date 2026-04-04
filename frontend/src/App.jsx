@@ -337,42 +337,182 @@ function RegisterPage({ navigate }) {
 }
 
 function WorkshopsPage() {
+  const [workshops, setWorkshops] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [loadError, setLoadError] = React.useState('');
+  const [query, setQuery] = React.useState('');
+  const [activeType, setActiveType] = React.useState('All');
+  const [activeStatus, setActiveStatus] = React.useState('All');
+  const [sortBy, setSortBy] = React.useState('newest');
+
+  React.useEffect(() => {
+    const controller = new AbortController();
+
+    const loadWorkshops = async () => {
+      setIsLoading(true);
+      setLoadError('');
+
+      try {
+        const response = await fetch('/workshop/api/workshops/', { signal: controller.signal });
+        if (!response.ok) {
+          throw new Error(`Request failed with status ${response.status}`);
+        }
+
+        const data = await response.json();
+        setWorkshops(Array.isArray(data.workshops) ? data.workshops : []);
+      } catch (error) {
+        if (error.name !== 'AbortError') {
+          setLoadError('Unable to load workshop data right now.');
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadWorkshops();
+
+    return () => controller.abort();
+  }, []);
+
+  const filteredWorkshops = React.useMemo(() => {
+    let results = [...workshops];
+
+    if (activeType !== 'All') {
+      results = results.filter((item) => item.type === activeType);
+    }
+
+    if (activeStatus !== 'All') {
+      results = results.filter((item) => item.status === activeStatus);
+    }
+
+    if (query.trim()) {
+      const term = query.trim().toLowerCase();
+      results = results.filter((item) => {
+        const haystack = `${item.title} ${item.type} ${item.status} ${item.durationLabel} ${item.dateLabel} ${item.coordinator}`.toLowerCase();
+        return haystack.includes(term);
+      });
+    }
+
+    results.sort((a, b) => {
+      if (sortBy === 'oldest') {
+        return new Date(a.date) - new Date(b.date);
+      }
+      if (sortBy === 'az') {
+        return a.title.localeCompare(b.title);
+      }
+      if (sortBy === 'za') {
+        return b.title.localeCompare(a.title);
+      }
+      return new Date(b.date) - new Date(a.date);
+    });
+
+    return results;
+  }, [activeStatus, activeType, query, sortBy, workshops]);
+
+  const workshopTypes = React.useMemo(() => {
+    const types = workshops.map((item) => item.type).filter(Boolean);
+    return ['All', ...Array.from(new Set(types))];
+  }, [workshops]);
+
+  const workshopStatuses = React.useMemo(() => {
+    const statuses = workshops.map((item) => item.status).filter(Boolean);
+    return ['All', ...Array.from(new Set(statuses))];
+  }, [workshops]);
+
+  const clearFilters = () => {
+    setQuery('');
+    setActiveType('All');
+    setActiveStatus('All');
+    setSortBy('newest');
+  };
+
   return (
     <>
       <section className="workshops-screen" aria-label="Available workshops page">
         <div className="workshops-screen__panel">
           <h1>Available Workshops</h1>
-          <p>Browse the listed workshops types and open each detail view to learn more.</p>
+          <p>Browse, filter, and find the workshop that fits your interests in seconds.</p>
+
+          {loadError ? <p className="workshops-screen__note workshops-screen__note--error">{loadError}</p> : null}
 
           <label className="workshops-screen__search" aria-label="Search workshops">
-            <input type="text" placeholder="Search workshops by name, type, or duration" />
+            <input
+              type="text"
+              placeholder="Search workshops by name, type, mode, or duration"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+            />
           </label>
 
           <div className="workshops-screen__chips" aria-label="Workshop type filters">
-            {['All', 'Python', 'Scilab', 'Hardware'].map((item, index) => (
-              <button key={item} className={`chip ${index === 0 ? 'is-active' : ''}`} type="button">{item}</button>
+            {workshopTypes.map((item) => (
+              <button
+                key={item}
+                className={`chip ${activeType === item ? 'is-active' : ''}`}
+                type="button"
+                onClick={() => setActiveType(item)}
+              >
+                {item}
+              </button>
             ))}
           </div>
 
           <div className="workshops-screen__chips" aria-label="Workshop status filters">
-            {['All', 'Pending', 'Accepted', 'Rejected'].map((item, index) => (
-              <button key={item} className={`chip ${index === 0 ? 'is-active' : ''}`} type="button">{item}</button>
+            {workshopStatuses.map((item) => (
+              <button
+                key={item}
+                className={`chip ${activeStatus === item ? 'is-active' : ''}`}
+                type="button"
+                onClick={() => setActiveStatus(item)}
+              >
+                {item}
+              </button>
             ))}
           </div>
 
-          <div className="workshops-screen__sort">
-            <span>Sort</span>
-            <select defaultValue="newest" aria-label="Sort workshops">
+          <div className="workshops-screen__toolbar">
+            <p className="workshops-screen__result-count">Showing {filteredWorkshops.length} workshop{filteredWorkshops.length === 1 ? '' : 's'}</p>
+            <div className="workshops-screen__sort">
+              <span>Sort</span>
+              <select value={sortBy} onChange={(event) => setSortBy(event.target.value)} aria-label="Sort workshops">
               <option value="newest">Newest</option>
               <option value="oldest">Oldest</option>
+              <option value="az">Name A-Z</option>
+              <option value="za">Name Z-A</option>
             </select>
+            </div>
+            <button type="button" className="btn btn--muted" onClick={clearFilters}>Reset</button>
           </div>
 
-          <div className="workshops-screen__empty">
-            <h2>No workshops available yet</h2>
-            <p>Check back soon or propose a workshop if you are an instructor</p>
-            <button type="button" className="btn btn--solid">Propose a Workshop</button>
-          </div>
+          {isLoading ? (
+            <div className="workshops-screen__empty" aria-live="polite">
+              <h2>Loading workshops</h2>
+              <p>Fetching the latest workshop records from the backend.</p>
+            </div>
+          ) : filteredWorkshops.length === 0 ? (
+            <div className="workshops-screen__empty">
+              <h2>No workshops match your filters</h2>
+              <p>{workshops.length === 0 ? 'No workshop records are available yet.' : 'Try a broader search or clear filters to see all available workshops.'}</p>
+              <button type="button" className="btn btn--solid" onClick={clearFilters}>Show All Workshops</button>
+            </div>
+          ) : (
+            <div className="workshops-screen__cards" aria-label="Workshop results">
+              {filteredWorkshops.map((workshop) => (
+                <article key={workshop.id} className="workshops-card">
+                  <div className="workshops-card__top">
+                    <span className="workshops-card__type">{workshop.type}</span>
+                    <span className={`workshops-card__status workshops-card__status--${workshop.status.toLowerCase()}`}>{workshop.status}</span>
+                  </div>
+                  <h3>{workshop.title}</h3>
+                  <p>{workshop.durationLabel} | Coordinator: {workshop.coordinator}</p>
+                  <div className="workshops-card__bottom">
+                    <span>{workshop.dateLabel}</span>
+                    <button type="button" className="btn btn--solid">View Details</button>
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

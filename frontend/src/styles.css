@@ -187,8 +187,7 @@ button {
 .hero-split__copy {
   padding: 44px 36px;
   color: #fff;
-  background-image: radial-gradient(rgba(255,255,255,0.11) 1px, transparent 0);
-  background-size: 16px 16px;
+  background: linear-gradient(135deg, var(--color-primary) 0%, #0f4c81 100%);
 }
 
 .eyebrow,
@@ -254,6 +253,12 @@ button {
   color: #fff;
 }
 
+.btn--muted {
+  background: #eef3ff;
+  color: #24509b;
+  border: 1px solid #c7d6f2;
+}
+
 .btn--outline {
   background: transparent;
   color: #fff;
@@ -283,7 +288,7 @@ button {
 .auth-split__hero {
   border-radius: 24px;
   padding: 36px;
-  background: linear-gradient(135deg, var(--color-primary), #0f4c81);
+  background: linear-gradient(135deg, var(--color-primary) 0%, #0f4c81 100%);
   color: #fff;
   box-shadow: var(--shadow);
 }
@@ -1145,6 +1150,116 @@ body {
   padding: 0 8px;
 }
 
+.workshops-screen__toolbar {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.workshops-screen__result-count {
+  margin: 0;
+  color: #30486e;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.workshops-screen__note {
+  margin: 6px 0 0;
+  color: #65768f;
+  font-size: 0.82rem;
+}
+
+.workshops-screen__note--error {
+  color: #9b2d2d;
+  font-weight: 700;
+}
+
+.workshops-screen__cards {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.workshops-card {
+  border: 1px solid #d5ddea;
+  border-radius: 8px;
+  background: #fff;
+  padding: 12px;
+  display: grid;
+  gap: 8px;
+}
+
+.workshops-card__top,
+.workshops-card__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.workshops-card__type,
+.workshops-card__status {
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.workshops-card__type {
+  background: #eaf2ff;
+  color: #25518f;
+}
+
+.workshops-card__status {
+  border: 1px solid transparent;
+}
+
+.workshops-card__status--accepted {
+  background: #e8f7ee;
+  color: #1f7a45;
+  border-color: #bfe9cf;
+}
+
+.workshops-card__status--pending {
+  background: #fff5e5;
+  color: #9b6a1e;
+  border-color: #f2dbaf;
+}
+
+.workshops-card__status--rejected {
+  background: #fdeeee;
+  color: #9b2d2d;
+  border-color: #f4caca;
+}
+
+.workshops-card h3 {
+  margin: 0;
+  color: #1e3150;
+  font-size: 0.94rem;
+}
+
+.workshops-card p {
+  margin: 0;
+  color: #697892;
+  font-size: 0.8rem;
+}
+
+.workshops-card__bottom span {
+  color: #4a5a77;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.workshops-card .btn {
+  min-height: 30px;
+  padding: 0 12px;
+  font-size: 0.74rem;
+}
+
 .workshops-screen__empty {
   margin-top: 14px;
   border: 1px solid #d6dde7;
@@ -1182,6 +1297,10 @@ body {
 
   .workshops-screen__panel h1 {
     font-size: 1.45rem;
+  }
+
+  .workshops-screen__cards {
+    grid-template-columns: 1fr;
   }
 }
 
