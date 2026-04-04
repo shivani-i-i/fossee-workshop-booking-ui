@@ -2,6 +2,10 @@
 
 React + Django redesign for the FOSSEE workshop booking portal. This submission modernizes the interface for mobile-first use, keeps the IIT Bombay visual identity, connects the workshop list to Django data, and documents the work clearly for screening review.
 
+## 🚀 Live Demo
+
+https://fossee-workshop-booking-d3qru89c3-shivani-i-is-projects.vercel.app
+
 ## Setup Instructions
 
 ### Django backend
@@ -46,7 +50,7 @@ The React app runs at http://127.0.0.1:5173.
 | Profile | ![](screenshots/before/profile.png) | ![](screenshots/after/profile-desktop.png) | ![](screenshots/after/profile-mobile.png) |
 
 > Before = original FOSSEE repo (github.com/FOSSEE/workshop_booking)
-> After = my React redesign at localhost:5173
+> After = my React redesign at https://fossee-workshop-booking-d3qru89c3-shivani-i-is-projects.vercel.app
 > Mobile = 375px viewport (iPhone SE size)
 
 ## Design Principles

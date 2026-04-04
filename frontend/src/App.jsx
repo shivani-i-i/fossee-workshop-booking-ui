@@ -16,6 +16,46 @@ const faq = [
   { q: 'How do I stay updated?', a: 'Use the workshop listing page and register to receive updates on new sessions.' },
 ];
 
+const homeStats = [
+  { value: '500+', label: 'Workshops Conducted' },
+  { value: '10,000+', label: 'Students Trained' },
+  { value: '20+', label: 'FOSS Topics' },
+  { value: '100%', label: 'Free' },
+];
+
+const homeSteps = [
+  {
+    number: '01',
+    icon: '🔎',
+    title: 'Browse Workshops',
+    description: 'Explore topics, dates, and formats to find a workshop that matches your goals.',
+  },
+  {
+    number: '02',
+    icon: '📝',
+    title: 'Register Free',
+    description: 'Create your profile in a quick and accessible registration flow.',
+  },
+  {
+    number: '03',
+    icon: '🎓',
+    title: 'Attend & Learn',
+    description: 'Join the session, learn from experts, and build hands-on skills.',
+  },
+];
+
+const homeTopics = [
+  { name: 'Python', icon: 'Py' },
+  { name: 'Scilab', icon: 'Sc' },
+  { name: 'OpenFOAM', icon: 'OF' },
+  { name: 'eSim', icon: 'eS' },
+  { name: 'OpenModelica', icon: 'OM' },
+  { name: 'DWSIM', icon: 'DW' },
+];
+
+const workshopTypeFilters = ['All', 'Python', 'Scilab', 'OpenFOAM', 'Hardware'];
+const workshopStatusFilters = ['All', 'Pending', 'Accepted', 'Rejected'];
+
 const routeMeta = {
   home: {
     title: 'FOSSEE Workshop Booking | Home',
@@ -101,9 +141,6 @@ function Header({ route, navigate }) {
   return (
     <header className="site-header">
       <a className="site-logo" href="#home" aria-label="FOSSEE home">
-        <span className="site-logo__mark" aria-hidden="true">
-          <img className="site-brand__image" src="https://fossee.in/sites/all/themes/software_responsive_theme/img/logo.png" alt="" />
-        </span>
         <span className="site-logo__text">
           <span className="site-logo__title">FOSSEE</span>
           <span className="site-logo__tagline">by IIT Bombay</span>
@@ -136,37 +173,65 @@ function Header({ route, navigate }) {
 function HomePage({ navigate }) {
   return (
     <>
-      <section className="hero-split">
-        <div className="hero-split__copy">
-          <h1>FOSSEE</h1>
-          <p className="hero-split__lead hero-split__lead--title">Workshop Booking Portal</p>
-          <p className="eyebrow">by IIT Bombay</p>
-          <ul className="hero-split__list">
-            <li>Free workshops for all students</li>
-            <li>Certified by IIT Bombay</li>
-            <li>500+ workshops conducted</li>
-          </ul>
-        </div>
-        <aside className="hero-split__panel" aria-label="Quick sign in preview">
-          <div className="panel-card">
-            <span className="panel-card__brand">FOSSEE</span>
-            <span className="panel-card__subbrand">Workshop Portal</span>
-            <h2>Sign in</h2>
-            <p className="panel-card__helper">Enter your credentials to continue</p>
-            <label>
-              Username
-              <input type="text" placeholder="Username" />
-            </label>
-            <label>
-              Password
-              <input type="password" placeholder="Password" />
-            </label>
-            <button type="button" className="btn btn--solid">Sign In</button>
-            <div className="panel-card__divider"><span>or</span></div>
-            <p className="auth-card__foot">New around here? <button type="button" className="text-button" onClick={() => navigate('register')}>Register</button></p>
-            <p className="panel-card__meta">© 2024 FOSSEE, IIT Bombay</p>
+      <section className="home-hero home-section--fullbleed">
+        <span className="home-hero__shape home-hero__shape--one" aria-hidden="true" />
+        <span className="home-hero__shape home-hero__shape--two" aria-hidden="true" />
+        <span className="home-hero__shape home-hero__shape--three" aria-hidden="true" />
+        <div className="home-hero__inner">
+          <p className="home-eyebrow">IIT Bombay Initiative</p>
+          <h1>Book Free Workshops by IIT Bombay</h1>
+          <p className="home-hero__lead">Learn from experts. Build real skills. Get certified.</p>
+          <div className="home-hero__actions">
+            <button type="button" className="btn btn--solid" onClick={() => navigate('workshops')}>Browse Workshops</button>
+            <button type="button" className="btn btn--outline" onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}>Learn More</button>
           </div>
-        </aside>
+        </div>
+      </section>
+
+      <section className="home-stats home-section">
+        <div className="home-stats__grid">
+          {homeStats.map((item, index) => (
+            <article key={item.label} className="home-stat">
+              <strong>{item.value}</strong>
+              <span>{item.label}</span>
+              {index < homeStats.length - 1 ? <span className="home-stat__divider" aria-hidden="true" /> : null}
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="how-it-works" className="home-section home-how">
+        <div className="section-heading home-section__heading">
+          <span>How it works</span>
+          <h2>Simple steps to get started</h2>
+        </div>
+        <div className="home-steps">
+          {homeSteps.map((step, index) => (
+            <article key={step.number} className="home-step">
+              <div className="home-step__number">{step.number}</div>
+              <div className="home-step__icon" aria-hidden="true">{step.icon}</div>
+              <h3>{step.title}</h3>
+              <p>{step.description}</p>
+              {index < homeSteps.length - 1 ? <span className="home-step__connector" aria-hidden="true" /> : null}
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="home-section home-topics">
+        <div className="section-heading home-section__heading">
+          <span>Explore Topics</span>
+          <h2>What would you like to learn?</h2>
+        </div>
+        <div className="home-topics__grid">
+          {homeTopics.map((topic) => (
+            <button key={topic.name} type="button" className="topic-card" onClick={() => navigate('workshops')}>
+              <span className="topic-card__icon" aria-hidden="true">{topic.icon}</span>
+              <span className="topic-card__name">{topic.name}</span>
+              <span className="topic-card__link">View Workshops →</span>
+            </button>
+          ))}
+        </div>
       </section>
 
       <section className="faq-strip">
@@ -204,6 +269,10 @@ function LoginPage({ navigate }) {
           <li>Certified by IIT Bombay</li>
           <li>500+ workshops conducted</li>
         </ul>
+        <div className="auth-screen__brand-row">
+          <span>FOSSEE</span>
+          <small>by IIT Bombay</small>
+        </div>
       </div>
       <div className="auth-screen__panel">
         <div className="auth-card auth-card--exact">
@@ -232,6 +301,7 @@ function LoginPage({ navigate }) {
             <li>At least 8 characters</li>
             <li>Contains a number</li>
             <li>Contains uppercase letter</li>
+            <li>Contains lowercase letter</li>
           </ul>
         </label>
         <p className="auth-card__link-row"><button type="button" className="text-button">Forgot password?</button></p>
@@ -260,6 +330,10 @@ function RegisterPage({ navigate }) {
           <li>Certified by IIT Bombay</li>
           <li>500+ workshops conducted</li>
         </ul>
+        <div className="auth-screen__brand-row">
+          <span>FOSSEE</span>
+          <small>by IIT Bombay</small>
+        </div>
       </div>
       <div className="auth-screen__panel">
       <div className="register-card register-card--exact">
@@ -323,6 +397,7 @@ function RegisterPage({ navigate }) {
               <li>At least 8 characters</li>
               <li>Contains a number</li>
               <li>Contains uppercase letter</li>
+              <li>Contains lowercase letter</li>
             </ul>
           </label>
           <label>
@@ -352,7 +427,6 @@ function RegisterPage({ navigate }) {
 function WorkshopsPage() {
   const [workshops, setWorkshops] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
-  const [loadError, setLoadError] = React.useState('');
   const [query, setQuery] = React.useState('');
   const [activeType, setActiveType] = React.useState('All');
   const [activeStatus, setActiveStatus] = React.useState('All');
@@ -363,7 +437,6 @@ function WorkshopsPage() {
 
     const loadWorkshops = async () => {
       setIsLoading(true);
-      setLoadError('');
 
       try {
         const response = await fetch('/workshop/api/workshops/', { signal: controller.signal });
@@ -375,7 +448,7 @@ function WorkshopsPage() {
         setWorkshops(Array.isArray(data.workshops) ? data.workshops : []);
       } catch (error) {
         if (error.name !== 'AbortError') {
-          setLoadError('Unable to load workshop data right now.');
+          setWorkshops([]);
         }
       } finally {
         setIsLoading(false);
@@ -422,16 +495,6 @@ function WorkshopsPage() {
     return results;
   }, [activeStatus, activeType, query, sortBy, workshops]);
 
-  const workshopTypes = React.useMemo(() => {
-    const types = workshops.map((item) => item.type).filter(Boolean);
-    return ['All', ...Array.from(new Set(types))];
-  }, [workshops]);
-
-  const workshopStatuses = React.useMemo(() => {
-    const statuses = workshops.map((item) => item.status).filter(Boolean);
-    return ['All', ...Array.from(new Set(statuses))];
-  }, [workshops]);
-
   const clearFilters = () => {
     setQuery('');
     setActiveType('All');
@@ -442,11 +505,14 @@ function WorkshopsPage() {
   return (
     <>
       <section className="workshops-screen" aria-label="Available workshops page">
-        <div className="workshops-screen__panel">
-          <h1>Available Workshops</h1>
+        <div className="workshops-screen__hero">
+          <div className="workshops-screen__hero-inner">
+            <p className="workshops-screen__breadcrumb">Home &gt; Workshops</p>
+            <h1>Available Workshops</h1>
+          </div>
+        </div>
+        <div className="workshops-screen__panel home-section">
           <p>Browse, filter, and find the workshop that fits your interests in seconds.</p>
-
-          {loadError ? <p className="workshops-screen__note workshops-screen__note--error">{loadError}</p> : null}
 
           <label className="workshops-screen__search" aria-label="Search workshops">
             <input
@@ -457,8 +523,8 @@ function WorkshopsPage() {
             />
           </label>
 
-          <div className="workshops-screen__chips" aria-label="Workshop type filters">
-            {workshopTypes.map((item) => (
+          <div className="workshops-screen__chips workshops-screen__chips--row" aria-label="Workshop type filters">
+            {workshopTypeFilters.map((item) => (
               <button
                 key={item}
                 className={`chip ${activeType === item ? 'is-active' : ''}`}
@@ -470,8 +536,8 @@ function WorkshopsPage() {
             ))}
           </div>
 
-          <div className="workshops-screen__chips" aria-label="Workshop status filters">
-            {workshopStatuses.map((item) => (
+          <div className="workshops-screen__chips workshops-screen__chips--row" aria-label="Workshop status filters">
+            {workshopStatusFilters.map((item) => (
               <button
                 key={item}
                 className={`chip ${activeStatus === item ? 'is-active' : ''}`}
@@ -503,9 +569,10 @@ function WorkshopsPage() {
               <p>Fetching the latest workshop records from the backend.</p>
             </div>
           ) : filteredWorkshops.length === 0 ? (
-            <div className="workshops-screen__empty">
-              <h2>No workshops match your filters</h2>
-              <p>{workshops.length === 0 ? 'No workshop records are available yet.' : 'Try a broader search or clear filters to see all available workshops.'}</p>
+            <div className="workshops-screen__empty workshops-screen__empty--clean">
+              <div className="workshops-screen__empty-icon" aria-hidden="true">🗓️</div>
+              <h2>No workshops available yet</h2>
+              <p>Workshops will appear here once added</p>
               <button type="button" className="btn btn--solid" onClick={clearFilters}>Show All Workshops</button>
             </div>
           ) : (
