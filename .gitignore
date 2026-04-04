@@ -45,3 +45,9 @@ db.sqlite3
 #images/gif
 *.png
 *.gif
+
+# Keep generated documentation screenshots tracked
+!screenshots/
+!screenshots/before/
+!screenshots/after/
+!screenshots/**/*.png
