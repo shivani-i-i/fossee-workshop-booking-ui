@@ -12,19 +12,25 @@
 
 ---
 
-## 📸 Before & After
+## 📸 Screenshots
 
-| Page | Before | After (Desktop) | After (Mobile) |
+### Before vs After Comparison
+
+| Page | Before | After — Desktop | After — Mobile |
 |------|--------|-----------------|----------------|
-| Home | <img src="screenshots/before/home.png" alt="before home" width="160"> | <img src="https://raw.githubusercontent.com/shivani-i-i/fossee-workshop-booking-ui/master/screenshots/after/home-desktop.png" alt="after home desktop" width="160"> | <img src="https://raw.githubusercontent.com/shivani-i-i/fossee-workshop-booking-ui/master/screenshots/after/home-mobile.png" alt="after home mobile" width="110"> |
-| Login | <img src="screenshots/before/login.png" alt="before login" width="160"> | <img src="https://raw.githubusercontent.com/shivani-i-i/fossee-workshop-booking-ui/master/screenshots/after/login-desktop.png" alt="after login desktop" width="160"> | <img src="https://raw.githubusercontent.com/shivani-i-i/fossee-workshop-booking-ui/master/screenshots/after/login-mobile.png" alt="after login mobile" width="110"> |
-| Register | <img src="screenshots/before/register.png" alt="before register" width="160"> | <img src="https://raw.githubusercontent.com/shivani-i-i/fossee-workshop-booking-ui/master/screenshots/after/register-desktop.png" alt="after register desktop" width="160"> | <img src="https://raw.githubusercontent.com/shivani-i-i/fossee-workshop-booking-ui/master/screenshots/after/register-mobile.png" alt="after register mobile" width="110"> |
-| Workshop List | <img src="screenshots/before/workshop-list.png" alt="before workshop list" width="160"> | <img src="https://raw.githubusercontent.com/shivani-i-i/fossee-workshop-booking-ui/master/screenshots/after/workshop-list-desktop.png" alt="after workshop list desktop" width="160"> | <img src="https://raw.githubusercontent.com/shivani-i-i/fossee-workshop-booking-ui/master/screenshots/after/workshop-list-mobile.png" alt="after workshop list mobile" width="110"> |
-| Propose Workshop | New feature in redesign | <img src="https://raw.githubusercontent.com/shivani-i-i/fossee-workshop-booking-ui/master/screenshots/after/propose-step1-desktop.png" alt="after propose workshop desktop" width="160"> | <img src="https://raw.githubusercontent.com/shivani-i-i/fossee-workshop-booking-ui/master/screenshots/after/propose-mobile.png" alt="after propose workshop mobile" width="110"> |
-| Statistics | New feature in redesign | <img src="https://raw.githubusercontent.com/shivani-i-i/fossee-workshop-booking-ui/master/screenshots/after/statistics-desktop.png" alt="after statistics desktop" width="160"> | <img src="https://raw.githubusercontent.com/shivani-i-i/fossee-workshop-booking-ui/master/screenshots/after/statistics-mobile.png" alt="after statistics mobile" width="110"> |
-| Coordinator Dashboard | New feature in redesign | <img src="https://raw.githubusercontent.com/shivani-i-i/fossee-workshop-booking-ui/master/screenshots/after/coordinator-dashboard-desktop.png" alt="after coordinator dashboard desktop" width="160"> | <img src="https://raw.githubusercontent.com/shivani-i-i/fossee-workshop-booking-ui/master/screenshots/after/coordinator-dashboard-mobile.png" alt="after coordinator dashboard mobile" width="110"> |
-| Instructor Dashboard | New feature in redesign | <img src="https://raw.githubusercontent.com/shivani-i-i/fossee-workshop-booking-ui/master/screenshots/after/instructor-dashboard-desktop.png" alt="after instructor dashboard desktop" width="160"> | <img src="https://raw.githubusercontent.com/shivani-i-i/fossee-workshop-booking-ui/master/screenshots/after/instructor-dashboard-mobile.png" alt="after instructor dashboard mobile" width="110"> |
-| Profile | New feature in redesign | <img src="https://raw.githubusercontent.com/shivani-i-i/fossee-workshop-booking-ui/master/screenshots/after/profile-desktop.png" alt="after profile desktop" width="160"> | <img src="https://raw.githubusercontent.com/shivani-i-i/fossee-workshop-booking-ui/master/screenshots/after/profile-mobile.png" alt="after profile mobile" width="110"> |
+| **Home** | ![](screenshots/before/home.png) | ![](screenshots/after/home-desktop.png) | ![](screenshots/after/home-mobile.png) |
+| **Login** | ![](screenshots/before/login.png) | ![](screenshots/after/login-desktop.png) | ![](screenshots/after/login-mobile.png) |
+| **Register** | ![](screenshots/before/register.png) | ![](screenshots/after/register-desktop.png) | ![](screenshots/after/register-mobile.png) |
+| **Workshop List** | ![](screenshots/before/workshop-list.png) | ![](screenshots/after/workshop-list-desktop.png) | ![](screenshots/after/workshop-list-mobile.png) |
+| **Workshop Details** | ![](screenshots/before/workshop-details.png) | ![](screenshots/after/workshop-details-desktop.png) | ![](screenshots/after/workshop-details-mobile.png) |
+| **Propose Workshop** | ![](screenshots/before/propose.png) | ![](screenshots/after/propose-desktop.png) | ![](screenshots/after/propose-mobile.png) |
+| **Statistics** | ![](screenshots/before/statistics.png) | ![](screenshots/after/statistics-desktop.png) | ![](screenshots/after/statistics-mobile.png) |
+| **Coordinator Dashboard** | ![](screenshots/before/coordinator.png) | ![](screenshots/after/coordinator-desktop.png) | ![](screenshots/after/coordinator-mobile.png) |
+| **Instructor Dashboard** | ![](screenshots/before/instructor.png) | ![](screenshots/after/instructor-desktop.png) | ![](screenshots/after/instructor-mobile.png) |
+| **Profile** | ![](screenshots/before/profile.png) | ![](screenshots/after/profile-desktop.png) | ![](screenshots/after/profile-mobile.png) |
+
+> 📱 Mobile screenshots taken at 375px viewport width (iPhone SE size)
+> 🖥️ Desktop screenshots taken at 1440px viewport width
 
 ---
 
