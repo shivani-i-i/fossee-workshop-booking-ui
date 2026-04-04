@@ -6,11 +6,9 @@ body {
 
 .cms-site-nav {
     min-height: 64px;
-    background: rgba(255, 255, 255, 0.85);
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 8px 24px rgba(0, 51, 102, 0.06);
+    background: #FFFFFF;
+    border-bottom: 1px solid rgba(0, 51, 102, 0.06);
+    box-shadow: 0 2px 10px rgba(0, 51, 102, 0.04);
 }
 
 .cms-site-nav .navbar-collapse {
@@ -84,9 +82,35 @@ body {
     position: relative;
     padding: 96px 16px 84px;
     overflow: hidden;
-    background: linear-gradient(135deg, #003366 0%, #0F4C81 100%);
-    background-size: 200% 200%;
-    animation: gradientShift 6s ease infinite;
+    background: linear-gradient(135deg, #003366 0%, #0a4d8c 40%, #1a6bb5 70%, #003366 100%);
+    background-size: 300% 300%;
+    animation: gradientShift 8s ease infinite;
+}
+
+.cms-home-hero::before {
+    content: "";
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: rgba(255, 107, 0, 0.15);
+    filter: blur(80px);
+    animation: orbFloatA 12s ease-in-out infinite;
+}
+
+.cms-home-hero::after {
+    content: "";
+    position: absolute;
+    bottom: -50px;
+    left: -50px;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    filter: blur(60px);
+    animation: orbFloatB 14s ease-in-out infinite;
 }
 
 .cms-home-hero__pattern {
@@ -94,6 +118,30 @@ body {
     inset: 0;
     opacity: 0.18;
     background-image: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0 1px, transparent 1px 14px);
+    overflow: hidden;
+}
+
+.cms-home-hero__pattern::before {
+    content: "";
+    position: absolute;
+    top: -200px;
+    right: -100px;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.cms-home-hero__pattern::after {
+    content: "";
+    position: absolute;
+    bottom: -150px;
+    left: -100px;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: rgba(255, 107, 0, 0.08);
 }
 
 .cms-home-hero__inner {
@@ -102,6 +150,19 @@ body {
     max-width: 980px;
     margin: 0 auto;
     text-align: center;
+}
+
+.cms-home-hero__inner::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    animation: slowSpin 20s linear infinite;
+    transform-origin: center;
 }
 
 .cms-home-hero h1 {
@@ -222,6 +283,17 @@ body {
     font-size: 32px;
 }
 
+.cms-home-section-head::before {
+    content: "Section";
+    display: block;
+    margin-bottom: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #FF6B00;
+}
+
 .cms-home-categories {
     padding: 64px 16px;
 }
@@ -331,6 +403,38 @@ body {
 
     100% {
         background-position: 0% 50%;
+    }
+}
+
+@keyframes orbFloatA {
+    0%,
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+
+    50% {
+        transform: translate3d(-24px, 18px, 0);
+    }
+}
+
+@keyframes orbFloatB {
+    0%,
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+
+    50% {
+        transform: translate3d(18px, -20px, 0);
+    }
+}
+
+@keyframes slowSpin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
     }
 }
 

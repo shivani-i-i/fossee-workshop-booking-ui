@@ -162,11 +162,6 @@
     font-size: 28px;
     font-weight: var(--font-weight-bold);
     letter-spacing: 1px;
-    background: linear-gradient(135deg, #003366, #FF6B00);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
 }
 
 .login-card__tagline {
@@ -185,11 +180,7 @@
     font-weight: var(--font-weight-bold);
     line-height: var(--line-height-tight);
     text-align: left;
-    background: linear-gradient(135deg, #003366, #FF6B00);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
+    color: #003366;
 }
 
 .login-card__subtitle {
@@ -389,6 +380,20 @@
     line-height: var(--line-height-normal);
 }
 
+@media (max-width: 1024px) {
+    .login-split-hero {
+        padding: var(--space-8);
+    }
+
+    .login-card-wrap {
+        padding: var(--space-7) var(--space-5);
+    }
+
+    .login-card {
+        padding: 32px;
+    }
+}
+
 @media (max-width: 767px) {
     .login-page {
         display: flex;
@@ -412,5 +417,35 @@
         padding: 28px 20px;
         border-radius: var(--radius-lg);
         box-shadow: var(--shadow-card);
+    }
+
+    .login-card__logo-group {
+        margin-bottom: var(--space-5);
+    }
+
+    .login-card__brand-name {
+        font-size: 24px;
+    }
+
+    .login-card__title {
+        font-size: clamp(1.35rem, 5.4vw, 1.7rem);
+    }
+
+    .login-card__subtitle {
+        font-size: 13px;
+        line-height: 1.45;
+    }
+
+    .login-form {
+        margin-top: var(--space-5);
+    }
+
+    .login-field {
+        margin-bottom: var(--space-4);
+    }
+
+    .login-field input,
+    .login-submit {
+        height: 46px;
     }
 }

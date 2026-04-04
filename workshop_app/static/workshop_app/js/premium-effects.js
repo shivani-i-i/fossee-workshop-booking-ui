@@ -1,4 +1,7 @@
 (function () {
+    var prefersReducedMotion = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    var isSmallScreen = !!(window.matchMedia && window.matchMedia('(max-width: 767px)').matches);
+
     var revealSelectors = [
         '.workshop-card',
         '.workshop-list-card',
@@ -40,6 +43,11 @@
     ];
 
     function countUp(element, target, duration) {
+        if (duration <= 0) {
+            element.textContent = String(target);
+            return;
+        }
+
         var start = 0;
         var startTime = null;
 
@@ -76,7 +84,7 @@
                 }
 
                 element.dataset.counted = 'true';
-                countUp(element, parseInt(value, 10), 900);
+                countUp(element, parseInt(value, 10), prefersReducedMotion ? 0 : (isSmallScreen ? 650 : 900));
             });
         });
     }
@@ -84,14 +92,22 @@
     function applyRevealClasses() {
         var items = document.querySelectorAll(revealSelectors.join(','));
         items.forEach(function (item) {
+            item.classList.add('reveal');
             item.classList.add('fade-in-up');
         });
     }
 
     function observeReveal() {
-        var items = document.querySelectorAll('.fade-in-up');
+        var items = document.querySelectorAll('.reveal, .fade-in-up');
 
         if (!items.length) {
+            return;
+        }
+
+        if (prefersReducedMotion) {
+            items.forEach(function (item) {
+                item.classList.add('visible');
+            });
             return;
         }
 
@@ -104,7 +120,7 @@
                     }
                 });
             }, {
-                threshold: 0.15,
+                threshold: 0.1,
                 rootMargin: '0px 0px -8% 0px'
             });
 

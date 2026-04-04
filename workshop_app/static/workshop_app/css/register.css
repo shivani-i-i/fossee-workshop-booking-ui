@@ -732,8 +732,26 @@ body.modal-open {
         padding: 28px 20px;
     }
 
+    .register-card__brand {
+        margin-bottom: var(--space-3);
+    }
+
+    .register-card__brand-name {
+        font-size: 22px;
+    }
+
+    .register-card__title {
+        font-size: clamp(1.35rem, 5.5vw, 1.75rem);
+    }
+
+    .register-card__subtitle {
+        font-size: 13px;
+        line-height: 1.45;
+    }
+
     .register-steps {
         gap: var(--space-1);
+        margin-top: var(--space-5);
     }
 
     .register-step__label {
@@ -753,8 +771,24 @@ body.modal-open {
         grid-column: 1 / -1;
     }
 
+    .register-field input,
+    .register-field select,
+    .register-submit {
+        height: 50px;
+    }
+
+    .register-field input,
+    .register-field select {
+        padding-top: 18px;
+    }
+
+    .register-form {
+        margin-top: var(--space-5);
+    }
+
     .register-terms {
         flex-direction: column;
         align-items: flex-start;
+        gap: var(--space-2);
     }
 }

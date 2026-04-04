@@ -1,6 +1,7 @@
 .stats-page {
     padding-top: var(--space-6);
     padding-bottom: var(--space-10);
+    background: linear-gradient(135deg, #f0f4ff, #fff5f0);
 }
 
 .stats-layout {
@@ -41,11 +42,7 @@
     margin: 0 0 var(--space-4);
     font-size: var(--font-size-xl);
     font-weight: var(--font-weight-semibold);
-    background: linear-gradient(135deg, #003366, #FF6B00);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
+    color: #003366;
 }
 
 .stats-filter-count {
@@ -246,12 +243,12 @@
 }
 
 .stats-summary-card {
-    background: var(--color-bg-primary);
-    border: 1px solid var(--color-border);
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.5);
     border-left: 4px solid var(--color-primary);
-    border-radius: var(--radius-lg);
+    border-radius: 16px;
     padding: var(--space-4);
-    box-shadow: var(--shadow-card);
+    box-shadow: 0 8px 32px rgba(0, 51, 102, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.6);
     transition: var(--transition-bounce);
 }
 
@@ -478,8 +475,36 @@
 
 @media (max-width: 767px) {
     .stats-page {
+        padding-top: var(--space-5);
         padding-left: 16px;
         padding-right: 16px;
+    }
+
+    .stats-page h1 {
+        font-size: clamp(1.5rem, 6vw, 2rem);
+    }
+
+    .stats-filter-panel,
+    .stats-chart-card,
+    .stats-table-card {
+        border-radius: 14px;
+    }
+
+    .stats-summary-card {
+        padding: var(--space-3);
+    }
+
+    .stats-summary-card strong {
+        font-size: 26px;
+    }
+
+    .stats-summary-card p,
+    .stats-results-meta {
+        font-size: 13px;
+    }
+
+    .stats-chip-btn {
+        min-height: 36px;
     }
 
     .stats-summary-grid {

@@ -117,7 +117,9 @@
             if (!navbar) {
                 return;
             }
-            navbar.classList.toggle('is-scrolled', window.scrollY > 2);
+            var isScrolled = window.scrollY > 50;
+            navbar.classList.toggle('is-scrolled', isScrolled);
+            navbar.classList.toggle('scrolled', isScrolled);
         }
 
         setNavbarScrollState();

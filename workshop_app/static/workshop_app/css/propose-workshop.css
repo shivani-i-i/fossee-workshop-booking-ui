@@ -137,11 +137,7 @@
     margin: 0;
     font-size: var(--font-size-xl);
     font-weight: var(--font-weight-semibold);
-    background: linear-gradient(135deg, #003366, #FF6B00);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
+    color: #003366;
 }
 
 .propose-panel__note {
@@ -359,12 +355,32 @@
     }
 
     .propose-shell {
-        padding: var(--space-5);
+        padding: var(--space-4);
+        border-radius: 14px;
+    }
+
+    .propose-panel h2 {
+        font-size: clamp(1.25rem, 4.8vw, 1.5rem);
+    }
+
+    .propose-panel__note {
+        font-size: 13px;
+        line-height: 1.45;
     }
 
     .propose-step__label {
-        font-size: var(--font-size-xs);
+        font-size: 11px;
         text-align: center;
+    }
+
+    .propose-step__circle {
+        width: 36px;
+        height: 36px;
+    }
+
+    .propose-date-input,
+    .propose-btn {
+        min-height: 46px;
     }
 
     .propose-type-grid {

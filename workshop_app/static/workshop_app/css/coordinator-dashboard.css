@@ -1,6 +1,7 @@
 .coordinator-dashboard {
     padding-top: var(--space-6);
     padding-bottom: var(--space-10);
+    background: linear-gradient(135deg, #f0f4ff, #fff5f0);
 }
 
 .coordinator-dashboard__header {
@@ -14,11 +15,7 @@
     margin: 0;
     font-size: var(--font-size-3xl);
     font-weight: var(--font-weight-bold);
-    background: linear-gradient(135deg, #003366, #FF6B00);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
+    color: #003366;
 }
 
 .coordinator-role-badge {
@@ -43,11 +40,13 @@
 }
 
 .coordinator-stat-card {
-    background: var(--color-bg-primary);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 16px;
     padding: var(--space-4);
-    box-shadow: var(--shadow-card);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 51, 102, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.6);
     transition: var(--transition-bounce);
 }
 
@@ -317,6 +316,68 @@
 
 .coordinator-empty-jumbo h1 {
     margin-top: 0;
+}
+
+@media (max-width: 1024px) {
+    .coordinator-stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 767px) {
+    .coordinator-dashboard {
+        padding-top: var(--space-5);
+    }
+
+    .coordinator-dashboard__header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-2);
+        margin-bottom: var(--space-4);
+    }
+
+    .coordinator-dashboard__header h1 {
+        font-size: clamp(1.45rem, 5.8vw, 2rem);
+    }
+
+    .coordinator-stats-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-3);
+    }
+
+    .coordinator-stat-card {
+        padding: var(--space-3);
+    }
+
+    .coordinator-stat-card strong {
+        font-size: 28px;
+    }
+
+    .coordinator-table-section__head {
+        padding: var(--space-3);
+        align-items: stretch;
+    }
+
+    .coordinator-table-tools {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .coordinator-table-search,
+    .coordinator-export-btn {
+        width: 100%;
+        min-width: 0;
+        height: 40px;
+    }
+
+    .coordinator-table {
+        min-width: 640px;
+    }
+
+    .coordinator-empty-state,
+    .coordinator-empty-jumbo {
+        padding: var(--space-6) var(--space-4);
+    }
 }
 
 @media (max-width: 767px) {
