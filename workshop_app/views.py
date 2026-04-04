@@ -225,6 +225,34 @@ def workshop_status_instructor(request):
                    "pending_count": pending_count})
 
 
+def workshops_api(request):
+    workshops = Workshop.objects.select_related(
+        'workshop_type', 'coordinator'
+    ).order_by('-date')
+
+    workshop_data = []
+    for workshop in workshops:
+        duration = workshop.workshop_type.duration
+        duration_label = f"{duration} day" if duration == 1 else f"{duration} days"
+        coordinator_name = workshop.coordinator.get_full_name().strip()
+        if not coordinator_name:
+            coordinator_name = workshop.coordinator.get_username()
+
+        workshop_data.append({
+            'id': workshop.id,
+            'title': workshop.workshop_type.name,
+            'type': workshop.workshop_type.name,
+            'status': workshop.get_status(),
+            'duration': duration,
+            'durationLabel': duration_label,
+            'date': workshop.date.isoformat(),
+            'dateLabel': workshop.date.strftime('%d %b %Y'),
+            'coordinator': coordinator_name,
+        })
+
+    return JsonResponse({"workshops": workshop_data})
+
+
 @login_required
 def accept_workshop(request, workshop_id):
     user = request.user
