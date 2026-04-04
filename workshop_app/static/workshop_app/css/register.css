@@ -193,7 +193,8 @@ body.modal-open {
 }
 
 .register-field input,
-.register-field select {
+.register-field select,
+.register-field textarea {
     width: 100%;
     height: 52px;
     padding: 20px calc(var(--space-6) + var(--space-4)) 10px var(--space-4);
@@ -210,13 +211,20 @@ body.modal-open {
     padding-top: 20px;
 }
 
+.register-field textarea {
+    min-height: 52px;
+    resize: vertical;
+}
+
 .register-field input::placeholder,
-.register-field select::placeholder {
+.register-field select::placeholder,
+.register-field textarea::placeholder {
     color: transparent;
 }
 
 .register-field input:focus,
-.register-field select:focus {
+.register-field select:focus,
+.register-field textarea:focus {
     outline: none;
     border-color: var(--color-primary);
     box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.1);
@@ -236,7 +244,6 @@ body.modal-open {
 }
 
 .register-control input:focus + label,
-.register-control input:not(:placeholder-shown) + label,
 .register-control select:focus + label {
     top: 8px;
     transform: translateY(0) scale(0.8);
@@ -321,13 +328,16 @@ body.modal-open {
 .register-field.is-invalid input,
 .register-field.has-error input,
 .register-field.is-invalid select,
-.register-field.has-error select {
+.register-field.has-error select,
+.register-field.is-invalid textarea,
+.register-field.has-error textarea {
     border-color: var(--color-error);
     box-shadow: 0 0 0 3px rgba(229, 72, 77, 0.12);
 }
 
 .register-field.is-valid input,
-.register-field.is-valid select {
+.register-field.is-valid select,
+.register-field.is-valid textarea {
     border-color: var(--color-success);
 }
 
@@ -391,8 +401,9 @@ body.modal-open {
     gap: var(--space-2);
     color: #94A3B8;
     font-size: var(--font-size-xs);
-    text-decoration: line-through;
-    transition: color var(--transition-normal), text-decoration-color var(--transition-normal);
+    text-decoration: none;
+    opacity: 0.9;
+    transition: color var(--transition-normal), opacity var(--transition-normal);
 }
 
 .register-password-rules .rule-icon {
@@ -402,8 +413,9 @@ body.modal-open {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: #CBD5E1;
-    color: #64748B;
+    background: #F1F5F9;
+    border: 1px solid #CBD5E1;
+    color: #94A3B8;
     font-size: 10px;
     font-weight: var(--font-weight-bold);
     transition: background var(--transition-normal), color var(--transition-normal), box-shadow var(--transition-normal);
@@ -416,11 +428,20 @@ body.modal-open {
 .register-password-rules li.is-met {
     color: var(--color-success);
     text-decoration: none;
+    opacity: 1;
 }
 
 .register-password-rules li.is-met .rule-icon {
-    background: color-mix(in srgb, var(--color-success) 20%, var(--color-bg-primary));
-    color: var(--color-success);
+    background: var(--color-success);
+    border-color: var(--color-success);
+    color: #FFFFFF;
+    font-size: 0;
+}
+
+.register-password-rules li.is-met .rule-icon::before {
+    content: "\2713";
+    font-size: 10px;
+    line-height: 1;
 }
 
 .register-password-rules li.is-met .register-password-rules__text {
@@ -773,6 +794,7 @@ body.modal-open {
 
     .register-field input,
     .register-field select,
+    .register-field textarea,
     .register-submit {
         height: 50px;
     }
