@@ -3,13 +3,13 @@
     margin-top: 64px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    background: #F8F9FA;
+    background: #FFFFFF;
 }
 
 .base-content {
     padding-top: 0;
     padding-bottom: 0;
-    background: #F8F9FA;
+    background: #FFFFFF;
 }
 
 .login-split-hero {
@@ -129,14 +129,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #F8F9FA;
-    padding: var(--space-10) var(--space-8);
+    background: #FFFFFF;
+    padding: var(--space-6) var(--space-4);
 }
 
 .login-card {
     width: 100%;
-    max-width: 460px;
-    padding: 40px;
+    max-width: 500px;
+    padding: 32px;
     border-radius: 16px;
     border: 1px solid #D9E2EC;
     background: #FFFFFF;
@@ -397,7 +397,7 @@
 @media (max-width: 767px) {
     .login-page {
         display: flex;
-        background: #F8F9FA;
+        background: #FFFFFF;
         min-height: calc(100vh - 56px);
         margin-top: 56px;
     }
@@ -409,12 +409,12 @@
     .login-card-wrap {
         width: 100%;
         min-height: calc(100vh - 56px);
-        padding: var(--space-4) 16px;
+        padding: var(--space-3) 14px;
     }
 
     .login-card {
         max-width: none;
-        padding: 28px 20px;
+        padding: 24px 18px;
         border-radius: var(--radius-lg);
         box-shadow: var(--shadow-card);
     }
