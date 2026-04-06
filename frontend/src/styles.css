@@ -196,10 +196,10 @@ button {
 }
 
 .hero-split {
-  margin-top: 24px;
+  margin-top: 16px;
   display: grid;
   grid-template-columns: 1.25fr 1fr;
-  min-height: 700px;
+  min-height: 560px;
   background: linear-gradient(135deg, var(--color-primary) 0%, #0f4c81 100%);
   border-radius: 28px;
   overflow: hidden;
@@ -207,7 +207,7 @@ button {
 }
 
 .hero-split__copy {
-  padding: 44px 36px;
+  padding: 32px 32px 28px;
   color: #fff;
   background: linear-gradient(135deg, var(--color-primary) 0%, #0f4c81 100%);
 }
@@ -290,14 +290,14 @@ button {
 .hero-split__panel {
   display: grid;
   place-items: center;
-  padding: 32px;
+  padding: 24px;
   background: #ffffff;
 }
 
 .auth-split,
 .register-layout {
   width: min(100%, 1040px);
-  margin: 24px auto 0;
+  margin: 16px auto 0;
 }
 
 .auth-split {
@@ -309,7 +309,7 @@ button {
 
 .auth-split__hero {
   border-radius: 24px;
-  padding: 36px;
+  padding: 28px;
   background: linear-gradient(135deg, var(--color-primary) 0%, #0f4c81 100%);
   color: #fff;
   box-shadow: var(--shadow);
@@ -345,7 +345,7 @@ button {
 .register-layout {
   display: grid;
   place-items: center;
-  padding: 10px 0 0;
+  padding: 0;
 }
 
 .register-card {
@@ -406,7 +406,7 @@ button {
 .register-page {
   display: flex;
   width: 100vw;
-  min-height: 100vh;
+  min-height: calc(100vh - 64px);
   margin: 0;
   padding: 0;
   position: relative;
@@ -419,7 +419,7 @@ button {
 .login-left,
 .register-left {
   flex: 1;
-  min-height: 100vh;
+  min-height: calc(100vh - 64px);
   background: linear-gradient(135deg, #003366 0%, #0a4d8c 100%);
   display: flex;
   flex-direction: column;
@@ -440,7 +440,7 @@ button {
 .register-left p {
   color: rgba(255, 255, 255, 0.8);
   font-size: 16px;
-  margin-bottom: 40px;
+  margin-bottom: 28px;
 }
 
 .login-left small,
@@ -476,12 +476,12 @@ button {
 .login-right,
 .register-right {
   flex: 1;
-  min-height: 100vh;
+  min-height: calc(100vh - 64px);
   background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 48px;
+  padding: 32px 40px;
 }
 
 .register-right {
@@ -975,7 +975,7 @@ main {
 }
 
 .workshops-screen {
-  padding: 20px 0 30px;
+  padding: 16px 0 24px;
 }
 
 .workshops-screen__panel {
@@ -984,17 +984,17 @@ main {
   background: #ffffff;
   border: 1px solid #d4dbe4;
   border-radius: 6px;
-  padding: 18px 18px 20px;
+  padding: 16px 16px 18px;
 }
 
 .workshops-screen__panel h1 {
   margin: 0;
   color: #1a2a44;
-  font-size: 2.05rem;
+  font-size: 1.8rem;
 }
 
 .workshops-screen__panel > p {
-  margin: 6px 0 14px;
+  margin: 4px 0 10px;
   color: #6f7c92;
   font-size: 0.85rem;
 }
@@ -1011,7 +1011,7 @@ main {
 }
 
 .workshops-screen__chips {
-  margin-top: 10px;
+  margin-top: 8px;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -1029,7 +1029,7 @@ main {
 }
 
 .workshops-screen__sort {
-  margin-top: 16px;
+  margin-top: 10px;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -1051,7 +1051,7 @@ main {
 }
 
 .workshops-screen__toolbar {
-  margin-top: 14px;
+  margin-top: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1078,7 +1078,7 @@ main {
 }
 
 .workshops-screen__cards {
-  margin-top: 14px;
+  margin-top: 10px;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
@@ -1088,7 +1088,7 @@ main {
   border: 1px solid #d5ddea;
   border-radius: 8px;
   background: #fff;
-  padding: 12px;
+  padding: 10px;
   display: grid;
   gap: 8px;
 }

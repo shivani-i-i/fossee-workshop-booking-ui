@@ -116,6 +116,7 @@ function useSeo(route) {
 function App() {
   const [route, setRoute] = useHashRoute();
   useSeo(route);
+  const showFooter = route !== 'login' && route !== 'register';
 
   const navigate = (nextRoute) => {
     window.location.hash = `#${nextRoute}`;
@@ -132,7 +133,7 @@ function App() {
         {route === 'register' && <RegisterPage navigate={navigate} />}
         {route === 'statistics' && <StatisticsPage />}
       </main>
-      <Footer navigate={navigate} />
+      {showFooter && <Footer navigate={navigate} />}
     </div>
   );
 }
