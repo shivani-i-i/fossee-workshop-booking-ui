@@ -517,10 +517,10 @@ button {
 }
 
 .register-right {
-  overflow-y: hidden;
-  align-items: center;
-  padding-top: 16px;
-  padding-bottom: 12px;
+  overflow-y: auto;
+  align-items: flex-start;
+  padding-top: 10px;
+  padding-bottom: 8px;
 }
 
 .login-form-box,
@@ -2066,7 +2066,7 @@ body,
 
 .register-form-box.auth-card {
   display: grid;
-  gap: 6px;
+  gap: 4px;
 }
 
 .register-form-box .auth-card__brand {
@@ -2078,46 +2078,49 @@ body,
 }
 
 .register-form-box h2 {
-  margin-top: 4px;
+  margin-top: 2px;
   margin-bottom: 0;
-  font-size: clamp(1.85rem, 2.4vw, 2.3rem);
+  font-size: clamp(1.7rem, 2.2vw, 2.05rem);
 }
 
 .register-form-box .register-grid {
-  gap: 8px 12px;
-  margin-top: 6px;
+  gap: 6px 10px;
+  margin-top: 4px;
 }
 
 .register-form-box label {
-  gap: 5px;
-  font-size: 0.9rem;
+  gap: 4px;
+  font-size: 0.85rem;
 }
 
 .register-form-box input,
 .register-form-box select {
-  min-height: 42px;
+  min-height: 38px;
 }
 
 .register-form-box .field-helper-list {
-  margin: 4px 0 0;
-  gap: 1px;
-  font-size: 0.66rem;
+  margin: 2px 0 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 8px;
+  font-size: 0.6rem;
   line-height: 1.2;
 }
 
 .register-form-box .field-helper {
-  margin-top: 3px;
-  font-size: 0.72rem;
+  margin-top: 2px;
+  font-size: 0.68rem;
   line-height: 1.2;
 }
 
 .register-form-box .btn {
-  min-height: 42px;
-  margin-top: 4px;
+  min-height: 38px;
+  margin-top: 2px;
 }
 
 .register-form-box .auth-card__foot {
-  margin: 6px 0 0;
+  margin: 2px 0 0;
+  font-size: 0.88rem;
 }
 
 .register-card--exact label,
