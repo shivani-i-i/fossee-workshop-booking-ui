@@ -129,6 +129,16 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 6px;
+}
+
+.site-logo__icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: #fff;
+  padding: 2px;
 }
 
 .site-logo__text {
@@ -1565,7 +1575,7 @@ body,
 }
 
 .site-logo {
-  gap: 0;
+  gap: 10px;
 }
 
 .site-logo__text {

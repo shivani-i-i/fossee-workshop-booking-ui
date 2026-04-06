@@ -150,6 +150,18 @@ function Header({ route, navigate }) {
   return (
     <header className="site-header">
       <a className="site-logo" href="#home" aria-label="FOSSEE home">
+        <span className="site-logo__mark" aria-hidden="true">
+          <img
+            className="site-logo__icon"
+            src="https://fossee.in/sites/all/themes/software_responsive_theme/img/logo.png"
+            alt=""
+          />
+          <img
+            className="site-logo__icon"
+            src="https://fossee.in/sites/all/themes/software_responsive_theme/img/iitb-logo.png"
+            alt=""
+          />
+        </span>
         <span className="site-logo__text">
           <span className="site-logo__title">FOSSEE</span>
           <span className="site-logo__tagline">by IIT Bombay</span>
