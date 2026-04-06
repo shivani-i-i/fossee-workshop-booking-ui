@@ -821,10 +821,6 @@ function Footer({ navigate }) {
   return (
     <footer className="site-footer">
       <div className="site-footer__inner">
-        <div className="site-footer__logo-row" aria-label="Institution logos">
-          <img className="site-footer__logo-image" src="https://fossee.in/sites/all/themes/software_responsive_theme/img/logo.png" alt="FOSSEE logo" />
-          <img className="site-footer__logo-image" src="https://fossee.in/sites/all/themes/software_responsive_theme/img/iitb-logo.png" alt="IIT Bombay logo" />
-        </div>
         <div className="site-footer__grid">
           <div>
             <h3>About</h3>
