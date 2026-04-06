@@ -118,6 +118,10 @@ function App() {
   useSeo(route);
   const showFooter = route !== 'login' && route !== 'register';
 
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [route]);
+
   const navigate = (nextRoute) => {
     window.location.hash = `#${nextRoute}`;
     setRoute(nextRoute);
@@ -152,12 +156,12 @@ function Header({ route, navigate }) {
       <a className="site-logo" href="#home" aria-label="FOSSEE home">
         <span className="site-logo__mark" aria-hidden="true">
           <img
-            className="site-logo__icon"
+            className="site-logo__icon site-logo__icon--fossee"
             src="https://fossee.in/sites/all/themes/software_responsive_theme/img/logo.png"
             alt=""
           />
           <img
-            className="site-logo__icon"
+            className="site-logo__icon site-logo__icon--iitb"
             src="https://fossee.in/sites/all/themes/software_responsive_theme/img/iitb-logo.png"
             alt=""
           />
@@ -283,19 +287,19 @@ function LoginPage({ navigate }) {
     <div style={{
       display: 'flex',
       width: '100%',
-      minHeight: '100vh',
+      minHeight: 'calc(100vh - 64px)',
       margin: 0,
       padding: 0,
       background: 'white',
     }} aria-label="Login page">
       <div className="login-left" style={{
         flex: 1,
-        minHeight: '100vh',
+        minHeight: 'calc(100vh - 64px)',
         background: 'linear-gradient(135deg, #003366 0%, #0a4d8c 100%)',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        padding: '60px 48px',
+        padding: '36px 32px',
         color: 'white',
       }}>
         <h2>FOSSEE</h2>
@@ -309,12 +313,12 @@ function LoginPage({ navigate }) {
       </div>
       <div className="login-right" style={{
         flex: 1,
-        minHeight: '100vh',
+        minHeight: 'calc(100vh - 64px)',
         background: 'white',
         display: 'flex',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         justifyContent: 'center',
-        padding: '48px',
+        padding: '24px 24px 20px',
       }}>
         <div className="login-form-box auth-card auth-card--exact">
           <span className="auth-card__brand">FOSSEE</span>
@@ -364,19 +368,19 @@ function RegisterPage({ navigate }) {
     <div style={{
       display: 'flex',
       width: '100%',
-      minHeight: '100vh',
+      minHeight: 'calc(100vh - 64px)',
       margin: 0,
       padding: 0,
       background: 'white',
     }} aria-label="Register page">
       <div className="register-left" style={{
         flex: 1,
-        minHeight: '100vh',
+        minHeight: 'calc(100vh - 64px)',
         background: 'linear-gradient(135deg, #003366 0%, #0a4d8c 100%)',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        padding: '60px 48px',
+        padding: '36px 32px',
         color: 'white',
       }}>
         <h2>FOSSEE</h2>
@@ -390,12 +394,12 @@ function RegisterPage({ navigate }) {
       </div>
       <div className="register-right" style={{
         flex: 1,
-        minHeight: '100vh',
+        minHeight: 'calc(100vh - 64px)',
         background: 'white',
         display: 'flex',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         justifyContent: 'center',
-        padding: '48px',
+        padding: '24px 24px 20px',
       }}>
         <div className="register-form-box auth-card auth-card--exact">
           <span className="auth-card__brand">FOSSEE</span>

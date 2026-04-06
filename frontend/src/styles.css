@@ -129,16 +129,23 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 10px;
 }
 
 .site-logo__icon {
-  width: 32px;
-  height: 32px;
+  width: auto;
+  height: 34px;
   object-fit: contain;
-  border-radius: 8px;
-  background: #fff;
-  padding: 2px;
+}
+
+.site-logo__icon--fossee {
+  width: 120px;
+  height: 34px;
+}
+
+.site-logo__icon--iitb {
+  width: 34px;
+  height: 34px;
 }
 
 .site-logo__text {
@@ -1618,7 +1625,7 @@ body,
 
 .home-section {
   width: 100%;
-  padding: 24px 20px;
+  padding: 18px 20px;
 }
 
 .home-section--fullbleed {
@@ -1632,7 +1639,7 @@ body,
 .home-hero {
   width: 100%;
   margin: 0;
-  padding: 40px 20px;
+  padding: 30px 20px;
   position: relative;
   overflow: hidden;
   background: linear-gradient(135deg, #003366, #0a4d8c);
@@ -1645,7 +1652,7 @@ body,
   z-index: 1;
   width: min(100%, 1200px);
   margin: 0 auto;
-  padding: 8px 0;
+  padding: 6px 0;
 }
 
 .home-eyebrow {
@@ -1659,8 +1666,8 @@ body,
 
 .home-hero h1 {
   margin: 0;
-  max-width: 13ch;
-  font-size: clamp(2.4rem, 5vw, 4.7rem);
+  max-width: 15ch;
+  font-size: clamp(2.1rem, 4.2vw, 3.8rem);
   line-height: 1.02;
 }
 
@@ -1675,7 +1682,7 @@ body,
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 28px;
+  margin-top: 20px;
 }
 
 .home-hero .btn--outline {
@@ -1729,7 +1736,7 @@ body,
 
 .home-stat {
   position: relative;
-  padding: 24px 16px;
+  padding: 18px 16px;
   text-align: center;
 }
 
@@ -1764,7 +1771,7 @@ body,
 
 .home-section__heading {
   width: min(100%, 1200px);
-  margin: 0 auto 16px;
+  margin: 0 auto 12px;
 }
 
 .home-section__heading span {
@@ -1781,13 +1788,13 @@ body,
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
+  gap: 8px;
 }
 
 .home-step {
   position: relative;
   background: #fff;
-  padding: 20px;
+  padding: 16px;
   border-radius: 18px;
   border: 1px solid #e2e8f0;
   box-shadow: 0 10px 24px rgba(0, 51, 102, 0.04);
@@ -1833,11 +1840,11 @@ body,
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
+  gap: 8px;
 }
 
 .faq-strip {
-  padding: 24px 20px;
+  padding: 18px 20px;
 }
 
 .faq-strip__inner {
@@ -1849,9 +1856,9 @@ body,
   border: 1px solid #e2e8f0;
   border-radius: 18px;
   background: #fff;
-  padding: 18px;
+  padding: 14px;
   display: grid;
-  gap: 10px;
+  gap: 8px;
   text-align: left;
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
@@ -2149,6 +2156,16 @@ body,
 }
 
 @media (max-width: 700px) {
+  .site-logo__icon--fossee {
+    width: 92px;
+    height: 28px;
+  }
+
+  .site-logo__icon--iitb {
+    width: 28px;
+    height: 28px;
+  }
+
   .site-header {
     height: auto;
     min-height: 64px;
