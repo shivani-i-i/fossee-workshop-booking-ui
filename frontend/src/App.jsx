@@ -194,7 +194,7 @@ function Header({ route, navigate }) {
 function HomePage({ navigate }) {
   return (
     <>
-      <section className="home-hero home-section--fullbleed" style={{ width: '100%', maxWidth: '100%', margin: 0, boxSizing: 'border-box' }}>
+      <section className="home-hero home-section--fullbleed">
         <span className="home-hero__shape home-hero__shape--one" aria-hidden="true" />
         <span className="home-hero__shape home-hero__shape--two" aria-hidden="true" />
         <span className="home-hero__shape home-hero__shape--three" aria-hidden="true" />
@@ -209,7 +209,7 @@ function HomePage({ navigate }) {
         </div>
       </section>
 
-      <section className="home-stats home-section" style={{ width: '100%', maxWidth: '100%', margin: 0, boxSizing: 'border-box' }}>
+      <section className="home-stats home-section">
         <div className="home-stats__grid">
           {homeStats.map((item, index) => (
             <article key={item.label} className="home-stat">
@@ -221,7 +221,7 @@ function HomePage({ navigate }) {
         </div>
       </section>
 
-      <section id="how-it-works" className="home-section home-how" style={{ width: '100%', maxWidth: '100%', margin: 0, boxSizing: 'border-box' }}>
+      <section id="how-it-works" className="home-section home-how">
         <div className="section-heading home-section__heading">
           <span>How it works</span>
           <h2>Simple steps to get started</h2>
@@ -239,7 +239,7 @@ function HomePage({ navigate }) {
         </div>
       </section>
 
-      <section className="home-section home-topics" style={{ width: '100%', maxWidth: '100%', margin: 0, boxSizing: 'border-box' }}>
+      <section className="home-section home-topics">
         <div className="section-heading home-section__heading">
           <span>Explore Topics</span>
           <h2>What would you like to learn?</h2>
@@ -255,7 +255,7 @@ function HomePage({ navigate }) {
         </div>
       </section>
 
-      <section className="faq-strip" style={{ width: '100%', maxWidth: '100%', margin: 0, boxSizing: 'border-box' }}>
+      <section className="faq-strip">
         <div className="faq-strip__inner">
           <p className="faq-strip__label">FAQ</p>
           <h2 className="faq-strip__title">Frequently Asked Questions</h2>
@@ -265,7 +265,7 @@ function HomePage({ navigate }) {
         </div>
       </section>
 
-      <section className="cta-band" style={{ width: '100%', maxWidth: '100%', margin: 0, boxSizing: 'border-box' }}>
+      <section className="cta-band">
         <div>
           <h2>Stay updated on new workshops</h2>
           <p>Get notified when new workshops are announced</p>
