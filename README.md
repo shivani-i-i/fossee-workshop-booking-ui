@@ -34,24 +34,58 @@ npm run dev
 
 The React app runs at http://127.0.0.1:5173.
 
-## Screenshots
+## 📸 Before & After
 
-### Before vs After Comparison
+> **Before** — Original FOSSEE repo (github.com/FOSSEE/workshop_booking)
+> **After** — My React redesign (live: https://fossee-workshop-booking-d3qru89c3-shivani-i-is-projects.vercel.app)
 
-| Page | Before (Original FOSSEE) | After Desktop | After Mobile |
-|------|--------------------------|---------------|--------------|
-| Home | ![](screenshots/before/home.png) | ![](screenshots/after/home-desktop.png) | ![](screenshots/after/home-mobile.png) |
-| Login | ![](screenshots/before/login.png) | ![](screenshots/after/login-desktop.png) | ![](screenshots/after/login-mobile.png) |
-| Register | ![](screenshots/before/register.png) | ![](screenshots/after/register-desktop.png) | ![](screenshots/after/register-mobile.png) |
-| Workshop List | ![](screenshots/before/workshop-list.png) | ![](screenshots/after/workshop-list-desktop.png) | ![](screenshots/after/workshop-list-mobile.png) |
-| Empty State | — | ![](screenshots/after/empty-state-desktop.png) | ![](screenshots/after/empty-state-mobile.png) |
-| Coordinator | ![](screenshots/before/coordinator.png) | ![](screenshots/after/coordinator-desktop.png) | ![](screenshots/after/coordinator-mobile.png) |
-| Instructor | ![](screenshots/before/instructor.png) | ![](screenshots/after/instructor-desktop.png) | ![](screenshots/after/instructor-mobile.png) |
-| Profile | ![](screenshots/before/profile.png) | ![](screenshots/after/profile-desktop.png) | ![](screenshots/after/profile-mobile.png) |
+---
 
-> Before = original FOSSEE repo (github.com/FOSSEE/workshop_booking)
-> After = my React redesign at https://fossee-workshop-booking-d3qru89c3-shivani-i-is-projects.vercel.app
-> Mobile = 375px viewport (iPhone SE size)
+### 🏠 Home Page
+| Before (Original FOSSEE) | After — Desktop | After — Mobile |
+|--------------------------|-----------------|----------------|
+| ![](screenshots/before/before-home.png) | ![](screenshots/after/after-home-desktop.png) | ![](screenshots/after/after-home-mobile.png) |
+
+**What changed:** Added full-width hero section, stats bar,
+how-it-works steps, category grid and CTA band.
+Original had no landing experience.
+
+---
+
+### 🔐 Login Page
+| Before (Original FOSSEE) | After — Desktop | After — Mobile |
+|--------------------------|-----------------|----------------|
+| ![](screenshots/before/before-login.png) | ![](screenshots/after/after-login-desktop.png) | ![](screenshots/after/after-login-mobile.png) |
+
+**What changed:** Replaced plain centered form with
+split-screen layout. Added IIT Bombay branding,
+trust points, password show/hide toggle and
+orange CTA button.
+
+---
+
+### 📝 Register Page
+| Before (Original FOSSEE) | After — Desktop | After — Mobile |
+|--------------------------|-----------------|----------------|
+| ![](screenshots/before/before-register.png) | ![](screenshots/after/after-register-desktop.png) | ![](screenshots/after/after-register-mobile.png) |
+
+**What changed:** Replaced HTML table-based form with
+modern CSS Grid layout. Added real-time password
+strength meter, per-field validation, terms modal
+and responsive two-column field layout.
+
+---
+
+### 📚 Workshop List
+| Before (Original FOSSEE) | After — Desktop | After — Mobile |
+|--------------------------|-----------------|----------------|
+| ![](screenshots/before/before-workshops.png) | ![](screenshots/after/after-workshops-desktop.png) | ![](screenshots/after/after-workshops-mobile.png) |
+
+**What changed:** Added hero banner, live search,
+category and status filter chips, sort dropdown,
+workshop cards with colored gradient headers,
+and graceful empty state. Original showed a
+plain unstyled list.
 
 ## Design Principles
 
