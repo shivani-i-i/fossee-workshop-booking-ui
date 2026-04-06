@@ -55,8 +55,8 @@ The React app runs at http://127.0.0.1:5173.
 		<th>Modernized Mobile</th>
 	</tr>
 	<tr>
-		<td align="center"><img src="screenshots/after/home-desktop.png" alt="Modernized landing page desktop view with hero and quick actions" width="550" /></td>
-		<td align="center"><img src="screenshots/after/home-mobile.png" alt="Modernized landing page mobile view" width="220" /></td>
+		<td align="center"><img src="screenshots/after/after-home-desktop.png" alt="Modernized landing page desktop view with hero and quick actions" width="550" /></td>
+		<td align="center"><img src="screenshots/after/after-home-mobile.png" alt="Modernized landing page mobile view" width="220" /></td>
 	</tr>
 </table>
 
