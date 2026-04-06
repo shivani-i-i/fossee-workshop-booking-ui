@@ -39,53 +39,16 @@ The React app runs at http://127.0.0.1:5173.
 > **Before** — Original FOSSEE repo (github.com/FOSSEE/workshop_booking)
 > **After** — My React redesign (live: https://fossee-workshop-booking-d3qru89c3-shivani-i-is-projects.vercel.app)
 
----
+<div align="center">
 
-### 🏠 Home Page
-| Before (Original FOSSEE) | After — Desktop | After — Mobile |
-|--------------------------|-----------------|----------------|
-| ![](screenshots/before/before-home.png) | ![](screenshots/after/after-home-desktop.png) | ![](screenshots/after/after-home-mobile.png) |
+| Feature | Legacy UI (Original) | Modernized UI (Redesign) |
+|---|---|---|
+| **Landing Page**<br/>Uses IIT Bombay visual hierarchy with navy `#003366` and accent `#FF6B00` for stronger first-screen orientation. | <img src="screenshots/before/before-home.png" alt="Legacy landing page from original workshop portal" width="400" /> | <img src="screenshots/after/home-desktop.png" alt="Modernized landing page desktop view with hero and quick actions" width="400" /><br/><img src="screenshots/after/home-mobile.png" alt="Modernized landing page mobile view" width="180" /><br/><ul><li><strong>Technical Impact:</strong> Replaced sparse, static entry surface with a full hero + structured sections using responsive CSS Grid/Flexbox and brand tokens (`#003366`, `#FF6B00`).</li></ul> |
+| **Authentication**<br/>Shifted from generic login to branded, guided sign-in flow aligned to IIT Bombay identity colors. | <img src="screenshots/before/before-login.png" alt="Legacy login page from original portal" width="400" /> | <img src="screenshots/after/login-desktop.png" alt="Modernized login desktop view with split panel" width="400" /><br/><img src="screenshots/after/login-mobile.png" alt="Modernized login mobile view" width="180" /><br/><ul><li><strong>Technical Impact:</strong> Moved from single-column legacy form to split-layout auth experience with improved affordance, compact spacing strategy, and touch-safe controls.</li></ul> |
+| **Registration**<br/>Modernized form architecture with clearer field grouping and color-consistent action emphasis (`#FF6B00`). | <img src="screenshots/before/before-register.png" alt="Legacy registration form from original portal" width="400" /> | <img src="screenshots/after/register-desktop.png" alt="Modernized registration desktop form with grouped fields" width="400" /><br/><img src="screenshots/after/register-mobile.png" alt="Modernized registration mobile form" width="180" /><br/><ul><li><strong>Technical Impact:</strong> Refactored table-like legacy form patterns into responsive two-column grid that collapses cleanly on mobile, reducing interaction friction and overflow issues.</li></ul> |
+| **Workshop Portal**<br/>Evolved list browsing into a modern discovery surface with readable card hierarchy and IIT palette continuity (`#003366` / `#FF6B00`). | <img src="screenshots/before/before-workshops.png" alt="Legacy workshops listing interface" width="400" /> | <img src="screenshots/after/workshop-list-desktop.png" alt="Modernized workshops listing desktop with filters and cards" width="400" /><br/><img src="screenshots/after/workshop-list-mobile.png" alt="Modernized workshops listing mobile view" width="180" /><br/><ul><li><strong>Technical Impact:</strong> Rebuilt flat listing into searchable/filterable card-based interface with responsive layouts and predictable empty-state behavior.</li></ul> |
 
-**What changed:** Added full-width hero section, stats bar,
-how-it-works steps, category grid and CTA band.
-Original had no landing experience.
-
----
-
-### 🔐 Login Page
-| Before (Original FOSSEE) | After — Desktop | After — Mobile |
-|--------------------------|-----------------|----------------|
-| ![](screenshots/before/before-login.png) | ![](screenshots/after/after-login-desktop.png) | ![](screenshots/after/after-login-mobile.png) |
-
-**What changed:** Replaced plain centered form with
-split-screen layout. Added IIT Bombay branding,
-trust points, password show/hide toggle and
-orange CTA button.
-
----
-
-### 📝 Register Page
-| Before (Original FOSSEE) | After — Desktop | After — Mobile |
-|--------------------------|-----------------|----------------|
-| ![](screenshots/before/before-register.png) | ![](screenshots/after/after-register-desktop.png) | ![](screenshots/after/after-register-mobile.png) |
-
-**What changed:** Replaced HTML table-based form with
-modern CSS Grid layout. Added real-time password
-strength meter, per-field validation, terms modal
-and responsive two-column field layout.
-
----
-
-### 📚 Workshop List
-| Before (Original FOSSEE) | After — Desktop | After — Mobile |
-|--------------------------|-----------------|----------------|
-| ![](screenshots/before/before-workshops.png) | ![](screenshots/after/after-workshops-desktop.png) | ![](screenshots/after/after-workshops-mobile.png) |
-
-**What changed:** Added hero banner, live search,
-category and status filter chips, sort dropdown,
-workshop cards with colored gradient headers,
-and graceful empty state. Original showed a
-plain unstyled list.
+</div>
 
 ## Design Principles
 
