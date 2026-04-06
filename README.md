@@ -41,12 +41,64 @@ The React app runs at http://127.0.0.1:5173.
 
 <div align="center">
 
+### 🏠 Landing Page (Home)
+
+<img src="screenshots/before/before-home.png" alt="Legacy landing page from original workshop portal" width="980" />
+<br/>
+<em>Legacy UI: Minimal, unbranded layout.</em>
+
+<br/><br/>
+
+<table>
+	<tr>
+		<th>Modernized Desktop</th>
+		<th>Modernized Mobile</th>
+	</tr>
+	<tr>
+		<td align="center"><img src="screenshots/after/home-desktop.png" alt="Modernized landing page desktop view with hero and quick actions" width="550" /></td>
+		<td align="center"><img src="screenshots/after/home-mobile.png" alt="Modernized landing page mobile view" width="220" /></td>
+	</tr>
+</table>
+
+#### What’s New
+
+- IIT Bombay institutional branding applied through the primary palette: navy #003366 and accent #FF6B00.
+- Mobile-optimized FAQ uses accessible accordion interactions for compact, touch-friendly discovery.
+- Improved visual hierarchy introduces clearer first-screen actions and stronger CTA prominence.
+
+<br/>&nbsp;<br/>
+
+### 🔐 Authentication (Login)
+
+<img src="screenshots/before/before-login.png" alt="Legacy login page from original workshop portal" width="980" />
+<br/>
+<em>Legacy UI: Minimal, unbranded layout.</em>
+
+<br/><br/>
+
+<table>
+	<tr>
+		<th>Modernized Desktop</th>
+		<th>Modernized Mobile</th>
+	</tr>
+	<tr>
+		<td align="center"><img src="screenshots/after/login-desktop.png" alt="Modernized login desktop view with split layout" width="550" /></td>
+		<td align="center"><img src="screenshots/after/login-mobile.png" alt="Modernized login mobile view" width="220" /></td>
+	</tr>
+</table>
+
+#### What’s New
+
+- IIT Bombay institutional branding is integrated directly into the authentication context for trust and continuity.
+- Mobile-optimized FAQ accordion remains accessible in the redesigned flow to reduce support friction on small screens.
+- Improved visual hierarchy with a clear Sign In CTA, better spacing, and stronger form focus.
+
+<br/>&nbsp;<br/>
+
 | Feature | Legacy UI (Original) | Modernized UI (Redesign) |
 |---|---|---|
-| **Landing Page**<br/>Uses IIT Bombay visual hierarchy with navy `#003366` and accent `#FF6B00` for stronger first-screen orientation. | <img src="screenshots/before/before-home.png" alt="Legacy landing page from original workshop portal" width="400" /> | <img src="screenshots/after/home-desktop.png" alt="Modernized landing page desktop view with hero and quick actions" width="400" /><br/><img src="screenshots/after/home-mobile.png" alt="Modernized landing page mobile view" width="180" /><br/><ul><li><strong>Technical Impact:</strong> Replaced sparse, static entry surface with a full hero + structured sections using responsive CSS Grid/Flexbox and brand tokens (`#003366`, `#FF6B00`).</li></ul> |
-| **Authentication**<br/>Shifted from generic login to branded, guided sign-in flow aligned to IIT Bombay identity colors. | <img src="screenshots/before/before-login.png" alt="Legacy login page from original portal" width="400" /> | <img src="screenshots/after/login-desktop.png" alt="Modernized login desktop view with split panel" width="400" /><br/><img src="screenshots/after/login-mobile.png" alt="Modernized login mobile view" width="180" /><br/><ul><li><strong>Technical Impact:</strong> Moved from single-column legacy form to split-layout auth experience with improved affordance, compact spacing strategy, and touch-safe controls.</li></ul> |
-| **Registration**<br/>Modernized form architecture with clearer field grouping and color-consistent action emphasis (`#FF6B00`). | <img src="screenshots/before/before-register.png" alt="Legacy registration form from original portal" width="400" /> | <img src="screenshots/after/register-desktop.png" alt="Modernized registration desktop form with grouped fields" width="400" /><br/><img src="screenshots/after/register-mobile.png" alt="Modernized registration mobile form" width="180" /><br/><ul><li><strong>Technical Impact:</strong> Refactored table-like legacy form patterns into responsive two-column grid that collapses cleanly on mobile, reducing interaction friction and overflow issues.</li></ul> |
-| **Workshop Portal**<br/>Evolved list browsing into a modern discovery surface with readable card hierarchy and IIT palette continuity (`#003366` / `#FF6B00`). | <img src="screenshots/before/before-workshops.png" alt="Legacy workshops listing interface" width="400" /> | <img src="screenshots/after/workshop-list-desktop.png" alt="Modernized workshops listing desktop with filters and cards" width="400" /><br/><img src="screenshots/after/workshop-list-mobile.png" alt="Modernized workshops listing mobile view" width="180" /><br/><ul><li><strong>Technical Impact:</strong> Rebuilt flat listing into searchable/filterable card-based interface with responsive layouts and predictable empty-state behavior.</li></ul> |
+| **Registration**<br/>Modernized form architecture with clearer field grouping and color-consistent action emphasis (#FF6B00). | <img src="screenshots/before/before-register.png" alt="Legacy registration form from original portal" width="400" /> | <img src="screenshots/after/register-desktop.png" alt="Modernized registration desktop form with grouped fields" width="400" /><br/><img src="screenshots/after/register-mobile.png" alt="Modernized registration mobile form" width="180" /><br/><ul><li><strong>Technical Impact:</strong> Refactored table-like legacy form patterns into responsive two-column grid that collapses cleanly on mobile, reducing interaction friction and overflow issues.</li></ul> |
+| **Workshop Portal**<br/>Evolved list browsing into a modern discovery surface with readable card hierarchy and IIT palette continuity (#003366 / #FF6B00). | <img src="screenshots/before/before-workshops.png" alt="Legacy workshops listing interface" width="400" /> | <img src="screenshots/after/workshop-list-desktop.png" alt="Modernized workshops listing desktop with filters and cards" width="400" /><br/><img src="screenshots/after/workshop-list-mobile.png" alt="Modernized workshops listing mobile view" width="180" /><br/><ul><li><strong>Technical Impact:</strong> Rebuilt flat listing into searchable/filterable card-based interface with responsive layouts and predictable empty-state behavior.</li></ul> |
 
 </div>
 
