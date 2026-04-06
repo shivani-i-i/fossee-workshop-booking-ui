@@ -95,10 +95,57 @@ The React app runs at http://127.0.0.1:5173.
 
 <br/>&nbsp;<br/>
 
-| Feature | Legacy UI (Original) | Modernized UI (Redesign) |
-|---|---|---|
-| **Registration**<br/>Modernized form architecture with clearer field grouping and color-consistent action emphasis (#FF6B00). | <img src="screenshots/before/before-register.png" alt="Legacy registration form from original portal" width="400" /> | <img src="screenshots/after/register-desktop.png" alt="Modernized registration desktop form with grouped fields" width="400" /><br/><img src="screenshots/after/register-mobile.png" alt="Modernized registration mobile form" width="180" /><br/><ul><li><strong>Technical Impact:</strong> Refactored table-like legacy form patterns into responsive two-column grid that collapses cleanly on mobile, reducing interaction friction and overflow issues.</li></ul> |
-| **Workshop Portal**<br/>Evolved list browsing into a modern discovery surface with readable card hierarchy and IIT palette continuity (#003366 / #FF6B00). | <img src="screenshots/before/before-workshops.png" alt="Legacy workshops listing interface" width="400" /> | <img src="screenshots/after/workshop-list-desktop.png" alt="Modernized workshops listing desktop with filters and cards" width="400" /><br/><img src="screenshots/after/workshop-list-mobile.png" alt="Modernized workshops listing mobile view" width="180" /><br/><ul><li><strong>Technical Impact:</strong> Rebuilt flat listing into searchable/filterable card-based interface with responsive layouts and predictable empty-state behavior.</li></ul> |
+### 📝 Registration (Create Account)
+
+<img src="screenshots/before/before-register.png" alt="Legacy registration form from original workshop portal" width="980" />
+<br/>
+<em>Legacy UI: Minimal, unbranded layout.</em>
+
+<br/><br/>
+
+<table>
+	<tr>
+		<th>Modernized Desktop</th>
+		<th>Modernized Mobile</th>
+	</tr>
+	<tr>
+		<td align="center"><img src="screenshots/after/register-desktop.png" alt="Modernized registration desktop view with structured field groups" width="550" /></td>
+		<td align="center"><img src="screenshots/after/register-mobile.png" alt="Modernized registration mobile view" width="220" /></td>
+	</tr>
+</table>
+
+#### What’s New
+
+- IIT Bombay institutional branding is retained with consistent primary and accent treatment (#003366 and #FF6B00).
+- Mobile-first field grouping improves scanning and keeps inputs usable on narrow screens.
+- Stronger visual hierarchy clarifies form flow and keeps account actions easy to identify.
+
+<br/>&nbsp;<br/>
+
+### 📚 Workshop Portal (List + Discovery)
+
+<img src="screenshots/before/before-workshops.png" alt="Legacy workshop list from original portal" width="980" />
+<br/>
+<em>Legacy UI: Minimal, unbranded layout.</em>
+
+<br/><br/>
+
+<table>
+	<tr>
+		<th>Modernized Desktop</th>
+		<th>Modernized Mobile</th>
+	</tr>
+	<tr>
+		<td align="center"><img src="screenshots/after/workshop-list-desktop.png" alt="Modernized workshop portal desktop view with search and filters" width="550" /></td>
+		<td align="center"><img src="screenshots/after/workshop-list-mobile.png" alt="Modernized workshop portal mobile view" width="220" /></td>
+	</tr>
+</table>
+
+#### What’s New
+
+- IIT Bombay-aligned visual system keeps page hierarchy and calls-to-action consistent (#003366 and #FF6B00).
+- Mobile-optimized browsing behavior improves discoverability for filters, cards, and workshop states.
+- Improved visual hierarchy moves users from search to selection with clearer, structured content blocks.
 
 </div>
 
