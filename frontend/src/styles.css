@@ -1826,6 +1826,13 @@ body,
   margin: 0;
 }
 
+#about,
+#how-it-works,
+#faqs,
+#explore-topics {
+  scroll-margin-top: 86px;
+}
+
 .home-section__heading {
   width: min(100%, 1200px);
   margin: 0 auto 12px;
