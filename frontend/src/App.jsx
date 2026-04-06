@@ -259,9 +259,9 @@ function LoginPage({ navigate }) {
   const [showPassword, setShowPassword] = React.useState(false);
 
   return (
-    <section className="auth-screen" aria-label="Login page">
-      <div className="auth-screen__hero">
-        <h1>FOSSEE</h1>
+    <section className="login-page" aria-label="Login page">
+      <div className="login-left">
+        <h2>FOSSEE</h2>
         <p>Workshop Booking Portal</p>
         <small>by IIT Bombay</small>
         <ul>
@@ -269,116 +269,16 @@ function LoginPage({ navigate }) {
           <li>Certified by IIT Bombay</li>
           <li>500+ workshops conducted</li>
         </ul>
-        <div className="auth-screen__brand-row">
-          <span>FOSSEE</span>
-          <small>by IIT Bombay</small>
-        </div>
       </div>
-      <div className="auth-screen__panel">
-        <div className="auth-card auth-card--exact">
-        <span className="auth-card__brand">FOSSEE</span>
-        <span className="auth-card__subtitle">Workshop Portal</span>
-        <h2>Sign in</h2>
-        <p className="panel-card__helper">Enter your credentials to continue</p>
-        <label>
-          Username
-          <input type="text" placeholder="Username" />
-        </label>
-        <label>
-          Password
-          <div className="input-with-icon">
-            <input type={showPassword ? 'text' : 'password'} placeholder="Password" />
-            <button
-              type="button"
-              className="field-icon-btn"
-              aria-label={showPassword ? 'Hide password' : 'Show password'}
-              onClick={() => setShowPassword((value) => !value)}
-            >
-              {showPassword ? '🙈' : '👁'}
-            </button>
-          </div>
-          <ul className="field-helper-list" aria-label="Password requirements">
-            <li>At least 8 characters</li>
-            <li>Contains a number</li>
-            <li>Contains uppercase letter</li>
-            <li>Contains lowercase letter</li>
-          </ul>
-        </label>
-        <p className="auth-card__link-row"><button type="button" className="text-button">Forgot password?</button></p>
-        <button type="button" className="btn btn--solid">Sign In</button>
-        <div className="panel-card__divider"><span>or</span></div>
-        <p className="auth-card__foot">New around here? <button type="button" className="text-button" onClick={() => navigate('register')}>Register</button></p>
-        <p className="panel-card__meta">© 2024 FOSSEE, IIT Bombay</p>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function RegisterPage({ navigate }) {
-  const [showPassword, setShowPassword] = React.useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
-
-  return (
-    <section className="auth-screen" aria-label="Register page">
-      <div className="auth-screen__hero">
-        <h1>FOSSEE</h1>
-        <p>Workshop Booking Portal</p>
-        <small>by IIT Bombay</small>
-        <ul>
-          <li>Free workshops for all students</li>
-          <li>Certified by IIT Bombay</li>
-          <li>500+ workshops conducted</li>
-        </ul>
-        <div className="auth-screen__brand-row">
-          <span>FOSSEE</span>
-          <small>by IIT Bombay</small>
-        </div>
-      </div>
-      <div className="auth-screen__panel">
-      <div className="register-card register-card--exact">
-        <span className="auth-card__brand">FOSSEE</span>
-        <span className="auth-card__subtitle">Workshop Portal</span>
-        <h2>Create account</h2>
-        <div className="register-grid">
-          <label>
-            First Name
-            <input type="text" placeholder="First Name" />
-          </label>
-          <label>
-            Last Name
-            <input type="text" placeholder="Last Name" />
-          </label>
-          <label>
-            Email
-            <input type="text" placeholder="Email" />
-          </label>
+      <div className="login-right">
+        <div className="login-form-box auth-card auth-card--exact">
+          <span className="auth-card__brand">FOSSEE</span>
+          <span className="auth-card__subtitle">Workshop Portal</span>
+          <h2>Sign in</h2>
+          <p className="panel-card__helper">Enter your credentials to continue</p>
           <label>
             Username
             <input type="text" placeholder="Username" />
-          </label>
-          <label>
-            Institute Name
-            <input type="text" placeholder="Institute Name" />
-          </label>
-          <label>
-            Role
-            <div className="select-wrap">
-              <select defaultValue="" aria-label="Role">
-                <option value="" disabled>Select role</option>
-                <option value="computer engineering">Computer Science</option>
-                <option value="information technology">Information Technology</option>
-                <option value="civil engineering">Civil Engineering</option>
-                <option value="electrical engineering">Electrical Engineering</option>
-                <option value="mechanical engineering">Mechanical Engineering</option>
-                <option value="chemical engineering">Chemical Engineering</option>
-                <option value="aerospace engineering">Aerospace Engineering</option>
-                <option value="biosciences and bioengineering">Biosciences and BioEngineering</option>
-                <option value="electronics">Electronics</option>
-                <option value="energy science and engineering">Energy Science and Engineering</option>
-              </select>
-              <span className="select-wrap__arrow" aria-hidden="true">▾</span>
-            </div>
           </label>
           <label>
             Password
@@ -400,25 +300,117 @@ function RegisterPage({ navigate }) {
               <li>Contains lowercase letter</li>
             </ul>
           </label>
-          <label>
-            Confirm Password
-            <div className="input-with-icon">
-              <input type={showConfirmPassword ? 'text' : 'password'} placeholder="Confirm Password" />
-              <button
-                type="button"
-                className="field-icon-btn"
-                aria-label={showConfirmPassword ? 'Hide confirm password' : 'Show confirm password'}
-                onClick={() => setShowConfirmPassword((value) => !value)}
-              >
-                {showConfirmPassword ? '🙈' : '👁'}
-              </button>
-            </div>
-            <span className="field-helper">Re-enter the same password to confirm.</span>
-          </label>
+          <p className="auth-card__link-row"><button type="button" className="text-button">Forgot password?</button></p>
+          <button type="button" className="btn btn--solid">Sign In</button>
+          <div className="panel-card__divider"><span>or</span></div>
+          <p className="auth-card__foot">New around here? <button type="button" className="text-button" onClick={() => navigate('register')}>Register</button></p>
+          <p className="panel-card__meta">© 2024 FOSSEE, IIT Bombay</p>
         </div>
-        <button type="button" className="btn btn--solid">Create Account</button>
-        <p className="auth-card__foot">Already have an account? <button type="button" className="text-button" onClick={() => navigate('login')}>Sign in</button></p>
       </div>
+    </section>
+  );
+}
+
+function RegisterPage({ navigate }) {
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
+
+  return (
+    <section className="register-page" aria-label="Register page">
+      <div className="register-left">
+        <h2>FOSSEE</h2>
+        <p>Workshop Booking Portal</p>
+        <small>by IIT Bombay</small>
+        <ul>
+          <li>Free workshops for all students</li>
+          <li>Certified by IIT Bombay</li>
+          <li>500+ workshops conducted</li>
+        </ul>
+      </div>
+      <div className="register-right">
+        <div className="register-form-box auth-card auth-card--exact">
+          <span className="auth-card__brand">FOSSEE</span>
+          <span className="auth-card__subtitle">Workshop Portal</span>
+          <h2>Create account</h2>
+          <div className="register-grid">
+            <label>
+              First Name
+              <input type="text" placeholder="First Name" />
+            </label>
+            <label>
+              Last Name
+              <input type="text" placeholder="Last Name" />
+            </label>
+            <label>
+              Email
+              <input type="text" placeholder="Email" />
+            </label>
+            <label>
+              Username
+              <input type="text" placeholder="Username" />
+            </label>
+            <label>
+              Institute Name
+              <input type="text" placeholder="Institute Name" />
+            </label>
+            <label>
+              Role
+              <div className="select-wrap">
+                <select defaultValue="" aria-label="Role">
+                  <option value="" disabled>Select role</option>
+                  <option value="computer engineering">Computer Science</option>
+                  <option value="information technology">Information Technology</option>
+                  <option value="civil engineering">Civil Engineering</option>
+                  <option value="electrical engineering">Electrical Engineering</option>
+                  <option value="mechanical engineering">Mechanical Engineering</option>
+                  <option value="chemical engineering">Chemical Engineering</option>
+                  <option value="aerospace engineering">Aerospace Engineering</option>
+                  <option value="biosciences and bioengineering">Biosciences and BioEngineering</option>
+                  <option value="electronics">Electronics</option>
+                  <option value="energy science and engineering">Energy Science and Engineering</option>
+                </select>
+                <span className="select-wrap__arrow" aria-hidden="true">▾</span>
+              </div>
+            </label>
+            <label>
+              Password
+              <div className="input-with-icon">
+                <input type={showPassword ? 'text' : 'password'} placeholder="Password" />
+                <button
+                  type="button"
+                  className="field-icon-btn"
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                  onClick={() => setShowPassword((value) => !value)}
+                >
+                  {showPassword ? '🙈' : '👁'}
+                </button>
+              </div>
+              <ul className="field-helper-list" aria-label="Password requirements">
+                <li>At least 8 characters</li>
+                <li>Contains a number</li>
+                <li>Contains uppercase letter</li>
+                <li>Contains lowercase letter</li>
+              </ul>
+            </label>
+            <label>
+              Confirm Password
+              <div className="input-with-icon">
+                <input type={showConfirmPassword ? 'text' : 'password'} placeholder="Confirm Password" />
+                <button
+                  type="button"
+                  className="field-icon-btn"
+                  aria-label={showConfirmPassword ? 'Hide confirm password' : 'Show confirm password'}
+                  onClick={() => setShowConfirmPassword((value) => !value)}
+                >
+                  {showConfirmPassword ? '🙈' : '👁'}
+                </button>
+              </div>
+              <span className="field-helper">Re-enter the same password to confirm.</span>
+            </label>
+          </div>
+          <button type="button" className="btn btn--solid">Create Account</button>
+          <p className="auth-card__foot">Already have an account? <button type="button" className="text-button" onClick={() => navigate('login')}>Sign in</button></p>
+        </div>
       </div>
     </section>
   );
