@@ -66,12 +66,6 @@ The React app runs at http://127.0.0.1:5173.
 - Mobile-optimized FAQ uses accessible accordion interactions for compact, touch-friendly discovery.
 - Improved visual hierarchy introduces clearer first-screen actions and stronger CTA prominence.
 
-### 🏡 Home Section Details
-
-<p align="center">These are the in-page sections below the hero, shown exactly as they appear in the live redesign.</p>
-
-<br/>&nbsp;<br/>
-
 ### 🔐 Authentication (Login)
 
 <img src="screenshots/before/before-login.png?v=20260406" alt="Legacy login page from original workshop portal" width="980" />
