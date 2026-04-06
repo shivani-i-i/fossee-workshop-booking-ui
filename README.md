@@ -1,19 +1,38 @@
 # FOSSEE Workshop Booking UI
 
-React + Django redesign for the FOSSEE workshop booking portal. This submission modernizes the interface for mobile-first use, keeps the IIT Bombay visual identity, connects the workshop list to Django data, and documents the work clearly for screening review.
+React + Django redesign of the FOSSEE workshop booking portal. The goal of this submission is to modernize usability, preserve IIT Bombay identity, and keep the data flow honest by reading workshops from the Django backend.
 
-## 🚀 Live Demo
+## Live Demo
 
 https://fossee-workshop-booking-d3qru89c3-shivani-i-is-projects.vercel.app
 
+## Highlights
+
+- Mobile-first redesign for Home, Login, Registration, and Workshop Discovery pages.
+- IIT Bombay visual identity using a consistent palette: navy #003366 and orange #FF6B00.
+- Real backend integration for workshop listing via Django endpoint (no fabricated data).
+- Clean empty, loading, and filter states for transparent UX when database content is limited.
+
 ## Setup Instructions
 
-### Django backend
-Prerequisites: Python 3.8+, pip, and Git.
+### Prerequisites
+
+- Python 3.8+
+- Node.js 18+
+- Git
+
+### 1. Clone repository
 
 ```bash
 git clone https://github.com/shivani-i-i/fossee-workshop-booking-ui.git
 cd fossee-workshop-booking-ui
+```
+
+### 2. Run Django backend
+
+Windows PowerShell:
+
+```bash
 python -m venv .venv
 .venv\Scripts\Activate.ps1
 pip install -r requirements.txt
@@ -21,10 +40,11 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-The Django app runs at http://127.0.0.1:8000.
+Backend URL: http://127.0.0.1:8000
 
-### React frontend
-Open a second terminal in the same repo and run:
+### 3. Run React frontend
+
+Open a second terminal in the same repository:
 
 ```bash
 cd frontend
@@ -32,16 +52,18 @@ npm install
 npm run dev
 ```
 
-The React app runs at http://127.0.0.1:5173.
+Frontend URL: http://127.0.0.1:5173
 
-## 📸 Before & After
+Note: Vite is configured to proxy `/workshop` requests to Django during local development.
 
-> **Before** — Original FOSSEE repo (github.com/FOSSEE/workshop_booking)
-> **After** — My React redesign (live: https://fossee-workshop-booking-d3qru89c3-shivani-i-is-projects.vercel.app)
+## Before and After
+
+> Before: Original FOSSEE portal (github.com/FOSSEE/workshop_booking)
+> After: React redesign for this submission
 
 <div align="center">
 
-### 🏠 Landing Page (Home)
+### Landing Page (Home)
 
 <img src="screenshots/before/before-home.png?v=20260406" alt="Legacy landing page from original workshop portal" width="980" />
 <br/>
@@ -60,13 +82,13 @@ The React app runs at http://127.0.0.1:5173.
 	</tr>
 </table>
 
-#### What’s New
+#### Improvements
 
-- IIT Bombay institutional branding applied through the primary palette: navy #003366 and accent #FF6B00.
-- Mobile-optimized FAQ uses accessible accordion interactions for compact, touch-friendly discovery.
-- Improved visual hierarchy introduces clearer first-screen actions and stronger CTA prominence.
+- Clearer first-screen CTAs and better information hierarchy.
+- Quick-jump links for About, How It Works, and FAQs.
+- Accessible FAQ accordion behavior tuned for mobile browsing.
 
-### 🔐 Authentication (Login)
+### Authentication (Login)
 
 <img src="screenshots/before/before-login.png?v=20260406" alt="Legacy login page from original workshop portal" width="980" />
 <br/>
@@ -85,15 +107,15 @@ The React app runs at http://127.0.0.1:5173.
 	</tr>
 </table>
 
-#### What’s New
+#### Improvements
 
-- IIT Bombay institutional branding is integrated directly into the authentication context for trust and continuity.
-- Mobile-optimized FAQ accordion remains accessible in the redesigned flow to reduce support friction on small screens.
-- Improved visual hierarchy with a clear Sign In CTA, better spacing, and stronger form focus.
+- Stronger form focus with cleaner spacing and action hierarchy.
+- Mobile-friendly layout that avoids cramped side-by-side blocks.
+- Password input helper and visibility toggle support.
 
 <br/>&nbsp;<br/>
 
-### 📝 Registration (Create Account)
+### Registration (Create Account)
 
 <img src="screenshots/before/before-register.png?v=20260406" alt="Legacy registration form from original workshop portal" width="980" />
 <br/>
@@ -112,15 +134,15 @@ The React app runs at http://127.0.0.1:5173.
 	</tr>
 </table>
 
-#### What’s New
+#### Improvements
 
-- IIT Bombay institutional branding is retained with consistent primary and accent treatment (#003366 and #FF6B00).
-- Mobile-first field grouping improves scanning and keeps inputs usable on narrow screens.
-- Stronger visual hierarchy clarifies form flow and keeps account actions easy to identify.
+- Better field grouping for faster scanning and fewer input mistakes.
+- Expanded profile fields required for workshop coordination.
+- Consistent visual behavior across desktop and mobile forms.
 
 <br/>&nbsp;<br/>
 
-### 📚 Workshop Portal (List + Discovery)
+### Workshop Portal (List and Discovery)
 
 <img src="screenshots/before/before-workshops.png?v=20260406" alt="Legacy workshop list from original portal" width="980" />
 <br/>
@@ -139,58 +161,51 @@ The React app runs at http://127.0.0.1:5173.
 	</tr>
 </table>
 
-#### What’s New
+#### Improvements
 
-- IIT Bombay-aligned visual system keeps page hierarchy and calls-to-action consistent (#003366 and #FF6B00).
-- Mobile-optimized browsing behavior improves discoverability for filters, cards, and workshop states.
-- Improved visual hierarchy moves users from search to selection with clearer, structured content blocks.
+- Integrated search and filters for faster workshop discovery.
+- Better card hierarchy for workshop status and metadata.
+- Honest empty state when no workshops are available in backend data.
 
 </div>
 
-## Design Principles
+## Design Approach
 
-**Mobile-first layout**. The interface was redesigned from the smallest screens upward because students are most likely to open the portal on phones. Navigation, cards, forms, and workshop lists were tuned to stay readable and tappable on narrow viewports first, then expanded for desktop.
+### Principles
 
-**Clear visual hierarchy**. The redesign uses stronger typographic contrast, card spacing, and action emphasis so the user can immediately scan for the important route, action, and state. The workshop list now reads as a structured product surface instead of a flat static page.
+- I started with mobile screens first and only then expanded to desktop layouts.
+- I reduced visual noise so users can quickly find the next action (browse, sign in, register).
+- I kept IIT Bombay branding consistent across all pages using #003366 and #FF6B00.
+- I reused CSS custom properties to keep spacing and colors consistent while editing fast.
 
-**IIT Bombay identity**. The palette follows the institution’s recognizable navy and orange language with #003366 and #FF6B00. That keeps the redesign visually tied to FOSSEE and makes the product feel official rather than generic.
+### Responsiveness
 
-**Design tokens through variables.css**. Shared colors, spacing, radii, shadows, and sizing live in CSS custom properties so the UI stays consistent across pages. This makes future changes predictable and reduces the chance of drifting styles.
+I used Grid and Flexbox so the same components reflow naturally instead of maintaining separate mobile pages. Navigation, auth panels, workshop cards, and filters collapse cleanly at smaller widths and stay readable on desktop.
 
-**Honesty over fabrication**. The workshop page now uses a real Django endpoint and shows a truthful empty state when there is no data in the database. I avoided fake workshop records so the submission remains accurate, reviewable, and aligned with the actual backend state.
+### Performance Trade-offs
 
-## Responsiveness
+1. I avoided heavy UI libraries and kept styling in plain CSS.
+2. I used a simple Django JSON endpoint instead of adding a complex API layer.
+3. I kept effects minimal so the app feels clean without slowing first load.
 
-Responsiveness was handled with flexible layout primitives rather than separate page variants. Grid and flexbox were used to let cards, headers, and controls reflow naturally across widths. The workshop list collapses to a single column on smaller screens, while the same components remain usable on larger screens without layout rewrites.
+### Challenges
 
-The typography and spacing scale down smoothly so headings, body text, chips, and buttons remain readable on 375px devices. Controls are sized for touch, and the design keeps enough vertical spacing to avoid accidental taps. The React app was also validated at mobile and desktop widths so the result behaves consistently across common student devices.
-
-## Performance Tradeoffs
-
-1. I used plain React and CSS instead of adding animation or UI libraries, which keeps the bundle smaller and easier to maintain.
-2. I used a lightweight Django JSON endpoint for workshop data rather than introducing a heavier API layer, which keeps integration simple.
-3. I kept visual effects restrained so the interface looks modern without relying on expensive blur-heavy surfaces or large image assets.
-4. I accepted a smaller amount of dynamic logic in exchange for clarity and speed, because the screening task values quick load time and maintainability over flashy motion.
-
-## Challenges
-
-**React to Django API connection via Vite proxy**. The React app needed to fetch data from Django during development without cross-origin issues. I solved that by adding a Vite proxy to forward `/workshop` requests to the backend and then wiring the workshops page to read the JSON response directly.
-
-**Honest empty state instead of fake data**. The database currently has no workshop records, so the UI could not truthfully show populated workshop cards. I redesigned the page to support loading, error, filter, and empty states so the experience stays useful even when no content exists.
+1. React and Django had to work together during local development. I solved this using the Vite proxy for `/workshop`.
+2. Workshop data can be empty. Instead of adding fake records, I built proper loading and empty states.
 
 ## Reflection
 
 ### What design principles guided the improvements?
-The redesign follows a mobile-first, institutionally branded system with clear hierarchy, consistent spacing, and strong action emphasis. I kept the palette aligned to IIT Bombay with #003366 and #FF6B00 so the experience feels official and coherent across pages.
+I followed three things throughout: mobile-first layout, clear action hierarchy, and IIT Bombay brand consistency. Most decisions came down to "can a first-time student understand the next step quickly?"
 
 ### How did you ensure responsiveness across devices?
-I used CSS Grid and Flexbox for the main layouts, then tuned each page to collapse cleanly on smaller screens. Forms, cards, navigation, and workshop lists reflow without separate mobile pages, and touch targets stay large enough on phones.
+I tested each page in mobile and desktop widths while building it, not just at the end. I used responsive Grid/Flex patterns and adjusted breakpoints mainly for the header, auth forms, and workshop cards.
 
 ### What trade-offs did you make between design and performance?
-I kept the interface intentionally lightweight by avoiding animation libraries and heavy visual effects. That preserves fast loading and simpler maintenance, even though it means the design is more restrained than a more motion-heavy marketing site.
+I intentionally skipped animation-heavy UI patterns. The design is simpler than a flashy landing page, but it loads faster and is easier to maintain.
 
 ### What was the most challenging part of the task and how did you approach it?
-The hardest part was connecting the React UI to the existing Django backend while keeping the interface honest when there was no real workshop data. I handled it by using a Vite proxy during development and by building truthful loading, empty, and filter states instead of fabricating placeholder workshop records.
+The toughest part was keeping the UI useful even when backend workshop data is missing or small. I handled this by showing honest loading and empty states and connecting filters to real API responses only.
 
 ## Tech Stack
 
@@ -198,9 +213,9 @@ The hardest part was connecting the React UI to the existing Django backend whil
 |------------|-------|
 | Django | Backend application and data source |
 | React | Frontend user interface |
-| Vite | React development server and build tool |
+| Vite | Frontend development server and build tool |
 | JavaScript | UI logic and data handling |
-| CSS | Visual styling and responsive layout |
+| CSS | Styling, tokens, and responsive behavior |
 
 ## Project Structure
 
@@ -224,12 +239,12 @@ workshop_booking/
 
 | Reference | Why it informed the redesign |
 |----------|-------------------------------|
-| NPTEL | Clean academic portal structure and information density |
-| Coursera | Card-based browsing and category scanning patterns |
-| Vercel | Crisp layout, strong hierarchy, and efficient spacing |
-| Linear | Minimal surfaces, status treatment, and compact controls |
-| IIT Bombay official | Brand colors and institutional visual identity |
+| NPTEL | Academic content hierarchy and information density patterns |
+| Coursera | Course discovery and card scanning behavior |
+| Vercel | Crisp layout rhythm and section spacing discipline |
+| Linear | Minimal component surfaces and status treatment |
+| IIT Bombay website | Institutional brand and color direction |
 
 ## License
 
-MIT License. See the repository `LICENSE` file for full terms.
+MIT License. See the repository LICENSE file for complete terms.
