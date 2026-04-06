@@ -2135,6 +2135,54 @@ body,
   gap: 4px;
 }
 
+.login-form-box.auth-card {
+  display: grid;
+  gap: 4px;
+}
+
+.login-form-box .auth-card__brand {
+  font-size: 1.75rem;
+}
+
+.login-form-box .auth-card__subtitle {
+  margin-top: -4px;
+}
+
+.login-form-box h2 {
+  margin-top: 2px;
+  margin-bottom: 0;
+  font-size: clamp(1.75rem, 2.2vw, 2.05rem);
+}
+
+.login-form-box label {
+  gap: 4px;
+  font-size: 0.85rem;
+}
+
+.login-form-box input,
+.login-form-box select {
+  min-height: 38px;
+}
+
+.login-form-box .field-helper-list {
+  display: none;
+}
+
+.login-form-box .auth-card__link-row {
+  margin: 0;
+}
+
+.login-form-box .btn {
+  min-height: 38px;
+  margin-top: 2px;
+}
+
+.login-form-box .panel-card__meta,
+.login-form-box .auth-card__foot {
+  margin: 2px 0 0;
+  font-size: 0.86rem;
+}
+
 .register-form-box .auth-card__brand {
   font-size: 1.75rem;
 }
@@ -2150,8 +2198,8 @@ body,
 }
 
 .register-form-box .register-grid {
-  gap: 6px 10px;
-  margin-top: 4px;
+  gap: 5px 10px;
+  margin-top: 2px;
 }
 
 .register-form-box label {
@@ -2161,27 +2209,20 @@ body,
 
 .register-form-box input,
 .register-form-box select {
-  min-height: 38px;
+  min-height: 36px;
 }
 
 .register-form-box .field-helper-list {
-  margin: 2px 0 0;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0 8px;
-  font-size: 0.6rem;
-  line-height: 1.2;
+  display: none;
 }
 
 .register-form-box .field-helper {
-  margin-top: 2px;
-  font-size: 0.68rem;
-  line-height: 1.2;
+  display: none;
 }
 
 .register-form-box .btn {
-  min-height: 38px;
-  margin-top: 2px;
+  min-height: 36px;
+  margin-top: 1px;
 }
 
 .register-form-box .auth-card__foot {

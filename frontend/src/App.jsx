@@ -339,7 +339,7 @@ function LoginPage({ navigate }) {
         display: 'flex',
         alignItems: 'flex-start',
         justifyContent: 'center',
-        padding: '24px 24px 20px',
+        padding: '10px 20px 8px',
       }}>
         <div className="login-form-box auth-card auth-card--exact">
           <span className="auth-card__brand">FOSSEE</span>
@@ -420,7 +420,7 @@ function RegisterPage({ navigate }) {
         display: 'flex',
         alignItems: 'flex-start',
         justifyContent: 'center',
-        padding: '10px 24px 8px',
+        padding: '8px 20px 6px',
       }}>
         <div className="register-form-box auth-card auth-card--exact">
           <span className="auth-card__brand">FOSSEE</span>
