@@ -428,6 +428,19 @@ function RegisterPage({ navigate }) {
           <h2>Create account</h2>
           <div className="register-grid">
             <label>
+              Title
+              <div className="select-wrap">
+                <select defaultValue="" aria-label="Title">
+                  <option value="" disabled>Select title</option>
+                  <option value="prof">Prof.</option>
+                  <option value="dr">Dr.</option>
+                  <option value="mr">Mr.</option>
+                  <option value="ms">Ms.</option>
+                </select>
+                <span className="select-wrap__arrow" aria-hidden="true">▾</span>
+              </div>
+            </label>
+            <label>
               First Name
               <input type="text" placeholder="First Name" />
             </label>
@@ -448,10 +461,14 @@ function RegisterPage({ navigate }) {
               <input type="text" placeholder="Institute Name" />
             </label>
             <label>
-              Role
+              Phone Number
+              <input type="text" placeholder="Phone Number" />
+            </label>
+            <label>
+              Department
               <div className="select-wrap">
-                <select defaultValue="" aria-label="Role">
-                  <option value="" disabled>Select role</option>
+                <select defaultValue="" aria-label="Department">
+                  <option value="" disabled>Select department</option>
                   <option value="computer engineering">Computer Science</option>
                   <option value="information technology">Information Technology</option>
                   <option value="civil engineering">Civil Engineering</option>
@@ -462,6 +479,27 @@ function RegisterPage({ navigate }) {
                   <option value="biosciences and bioengineering">Biosciences and BioEngineering</option>
                   <option value="electronics">Electronics</option>
                   <option value="energy science and engineering">Energy Science and Engineering</option>
+                </select>
+                <span className="select-wrap__arrow" aria-hidden="true">▾</span>
+              </div>
+            </label>
+            <label>
+              Location
+              <input type="text" placeholder="Place / City" />
+            </label>
+            <label>
+              State
+              <div className="select-wrap">
+                <select defaultValue="" aria-label="State">
+                  <option value="" disabled>Select state</option>
+                  <option value="andhra-pradesh">Andhra Pradesh</option>
+                  <option value="delhi">Delhi</option>
+                  <option value="gujarat">Gujarat</option>
+                  <option value="karnataka">Karnataka</option>
+                  <option value="maharashtra">Maharashtra</option>
+                  <option value="tamil-nadu">Tamil Nadu</option>
+                  <option value="uttar-pradesh">Uttar Pradesh</option>
+                  <option value="west-bengal">West Bengal</option>
                 </select>
                 <span className="select-wrap__arrow" aria-hidden="true">▾</span>
               </div>
