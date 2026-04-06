@@ -207,11 +207,13 @@ function HomePage({ navigate }) {
         <span className="home-hero__shape home-hero__shape--two" aria-hidden="true" />
         <span className="home-hero__shape home-hero__shape--three" aria-hidden="true" />
         <div className="home-hero__inner">
-          <nav className="home-jump-nav" aria-label="Home section links">
-            <button type="button" className="home-jump-nav__link" onClick={() => scrollToSection('about')}>About</button>
-            <button type="button" className="home-jump-nav__link" onClick={() => scrollToSection('how-it-works')}>How It Works</button>
-            <button type="button" className="home-jump-nav__link" onClick={() => scrollToSection('faqs')}>FAQs</button>
-          </nav>
+          <div className="home-hero__toprow">
+            <nav className="home-jump-nav" aria-label="Home section links">
+              <button type="button" className="home-jump-nav__link" onClick={() => scrollToSection('about')}>About</button>
+              <button type="button" className="home-jump-nav__link" onClick={() => scrollToSection('how-it-works')}>How It Works</button>
+              <button type="button" className="home-jump-nav__link" onClick={() => scrollToSection('faqs')}>FAQs</button>
+            </nav>
+          </div>
           <p className="home-eyebrow">IIT Bombay Initiative</p>
           <h1>Book Free Workshops by IIT Bombay</h1>
           <p className="home-hero__lead">Learn from experts. Build real skills. Get certified.</p>
