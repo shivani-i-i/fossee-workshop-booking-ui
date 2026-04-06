@@ -73,8 +73,8 @@ button {
 
 .app-main {
   width: 100%;
-  margin: 0 auto;
-  padding: 0 16px;
+  margin: 0;
+  padding: 0;
   min-height: unset;
 }
 
@@ -1213,7 +1213,7 @@ main {
   border: 1px solid #d4dce8;
   border-radius: 8px;
   overflow: hidden;
-  background: #f6f8fc;
+  background: #ffffff;
 }
 
 .auth-screen__hero {
@@ -1246,7 +1246,7 @@ main {
 }
 
 .auth-screen__panel {
-  background: #eceff5;
+  background: #ffffff;
   display: grid;
   place-items: center;
   padding: 22px;
@@ -1591,7 +1591,7 @@ body,
 
 .home-section {
   width: 100%;
-  padding: 80px 40px;
+  padding: 48px 24px;
 }
 
 .home-section--fullbleed {
@@ -1611,7 +1611,7 @@ body,
   z-index: 1;
   width: min(100%, 1200px);
   margin: 0 auto;
-  padding: 80px 40px;
+  padding: 48px 24px;
 }
 
 .home-eyebrow {
@@ -1694,7 +1694,7 @@ body,
 
 .home-stat {
   position: relative;
-  padding: 34px 20px;
+  padding: 24px 16px;
   text-align: center;
 }
 
@@ -1748,13 +1748,13 @@ body,
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
+  gap: 12px;
 }
 
 .home-step {
   position: relative;
   background: #fff;
-  padding: 28px 22px;
+  padding: 20px;
   border-radius: 18px;
   border: 1px solid #e2e8f0;
   box-shadow: 0 10px 24px rgba(0, 51, 102, 0.04);
@@ -1800,14 +1800,14 @@ body,
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+  gap: 12px;
 }
 
 .topic-card {
   border: 1px solid #e2e8f0;
   border-radius: 18px;
   background: #fff;
-  padding: 22px;
+  padding: 18px;
   display: grid;
   gap: 10px;
   text-align: left;
@@ -1864,7 +1864,7 @@ body,
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 40px;
+  padding: 0 24px;
 }
 
 .workshops-screen__breadcrumb {
@@ -1881,7 +1881,7 @@ body,
 .workshops-screen__panel {
   width: min(100%, 1200px);
   margin: 0 auto;
-  padding: 40px 40px 80px;
+  padding: 24px 24px 40px;
   background: #ffffff;
 }
 
@@ -1914,14 +1914,14 @@ body,
 
 .workshops-screen__cards {
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
+  gap: 12px;
 }
 
 .workshops-screen__empty--clean {
   align-items: center;
   justify-items: center;
   text-align: center;
-  padding: 36px 18px;
+  padding: 24px 16px;
 }
 
 .workshops-screen__empty-icon {
@@ -1937,21 +1937,21 @@ body,
   width: 100%;
   max-width: none;
   margin: 0;
-  min-height: calc(100vh - 64px);
+  min-height: 100vh;
   display: grid;
   grid-template-columns: 1fr 1fr;
   border: none;
   border-radius: 0;
   overflow: hidden;
-  background: transparent;
+  background: #ffffff;
 }
 
 .auth-screen__hero {
-  min-height: calc(100vh - 64px);
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 60px 48px;
+  padding: 32px 24px;
   background: linear-gradient(135deg, #003366 0%, #0a4d8c 100%);
 }
 
@@ -1991,12 +1991,12 @@ body,
 }
 
 .auth-screen__panel {
-  min-height: calc(100vh - 64px);
+  min-height: 100vh;
   background: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 32px 28px;
+  padding: 24px;
 }
 
 .auth-card--exact,
@@ -2051,6 +2051,34 @@ body,
 .site-footer,
 .cta-band,
 .faq-strip {
+  background: #ffffff;
+}
+
+.stats-screen {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  background: #ffffff;
+}
+
+.stats-screen__filters {
+  border-right: 1px solid #e0e7f5;
+  background: #ffffff;
+}
+
+.stats-chart {
+  background: #ffffff;
+}
+
+.workshops-screen__empty {
+  background: #ffffff;
+}
+
+.auth-screen__panel {
   background: #ffffff;
 }
 
