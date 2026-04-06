@@ -1686,14 +1686,15 @@ body,
   color: rgba(255, 255, 255, 0.92);
   font-weight: 800;
   font-size: 0.9rem;
-  padding: 4px 10px;
-  border-radius: 4px;
+  padding: 2px 8px;
+  border-radius: 0;
   line-height: 1.2;
 }
 
 .home-jump-nav__link:hover {
-  background: rgba(255, 255, 255, 0.12);
   color: #ffffff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .home-eyebrow {
