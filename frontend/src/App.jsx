@@ -557,7 +557,7 @@ function WorkshopsPage() {
         width: '100%',
         maxWidth: '100%',
         minHeight: '100vh',
-        background: '#f8f9fa',
+        background: 'white',
         margin: 0,
         padding: 0,
       }} aria-label="Available workshops page">
@@ -574,8 +574,9 @@ function WorkshopsPage() {
           </div>
         </div>
         <div className="workshops-screen__panel home-section" style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
+          width: '100%',
+          maxWidth: '100%',
+          margin: 0,
           padding: '40px 60px',
           boxSizing: 'border-box',
         }}>
