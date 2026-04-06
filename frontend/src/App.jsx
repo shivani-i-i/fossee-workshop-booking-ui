@@ -196,6 +196,10 @@ function Header({ route, navigate }) {
 }
 
 function HomePage({ navigate }) {
+  const scrollToSection = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return (
     <>
       <section className="home-hero home-section--fullbleed">
@@ -203,12 +207,17 @@ function HomePage({ navigate }) {
         <span className="home-hero__shape home-hero__shape--two" aria-hidden="true" />
         <span className="home-hero__shape home-hero__shape--three" aria-hidden="true" />
         <div className="home-hero__inner">
+          <nav className="home-jump-nav" aria-label="Home section links">
+            <button type="button" className="home-jump-nav__link" onClick={() => scrollToSection('about')}>About</button>
+            <button type="button" className="home-jump-nav__link" onClick={() => scrollToSection('how-it-works')}>How It Works</button>
+            <button type="button" className="home-jump-nav__link" onClick={() => scrollToSection('faqs')}>FAQs</button>
+          </nav>
           <p className="home-eyebrow">IIT Bombay Initiative</p>
           <h1>Book Free Workshops by IIT Bombay</h1>
           <p className="home-hero__lead">Learn from experts. Build real skills. Get certified.</p>
           <div className="home-hero__actions">
             <button type="button" className="btn btn--solid" onClick={() => navigate('workshops')}>Browse Workshops</button>
-            <button type="button" className="btn btn--outline" onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}>Learn More</button>
+            <button type="button" className="btn btn--outline" onClick={() => scrollToSection('how-it-works')}>Learn More</button>
           </div>
         </div>
       </section>
@@ -222,6 +231,16 @@ function HomePage({ navigate }) {
               {index < homeStats.length - 1 ? <span className="home-stat__divider" aria-hidden="true" /> : null}
             </article>
           ))}
+        </div>
+      </section>
+
+      <section id="about" className="home-section home-about">
+        <div className="section-heading home-section__heading">
+          <span>About</span>
+          <h2>Learn with FOSSEE and IIT Bombay</h2>
+        </div>
+        <div className="home-about__card">
+          <p>FOSSEE workshops bring practical, hands-on learning in open-source tools. Register for free sessions, follow guided instruction, and build industry-relevant skills with IIT Bombay backed content.</p>
         </div>
       </section>
 
@@ -243,7 +262,7 @@ function HomePage({ navigate }) {
         </div>
       </section>
 
-      <section className="home-section home-topics">
+      <section id="explore-topics" className="home-section home-topics">
         <div className="section-heading home-section__heading">
           <span>Explore Topics</span>
           <h2>What would you like to learn?</h2>
@@ -259,7 +278,7 @@ function HomePage({ navigate }) {
         </div>
       </section>
 
-      <section className="faq-strip">
+      <section id="faqs" className="faq-strip">
         <div className="faq-strip__inner">
           <p className="faq-strip__label">FAQ</p>
           <h2 className="faq-strip__title">Frequently Asked Questions</h2>
