@@ -43,7 +43,7 @@ The React app runs at http://127.0.0.1:5173.
 
 ### 🏠 Landing Page (Home)
 
-<img src="screenshots/before/before-home.png" alt="Legacy landing page from original workshop portal" width="980" />
+<img src="screenshots/before/before-home.png?v=20260406" alt="Legacy landing page from original workshop portal" width="980" />
 <br/>
 <em>Legacy UI: Minimal, unbranded layout.</em>
 
@@ -55,8 +55,8 @@ The React app runs at http://127.0.0.1:5173.
 		<th>Modernized Mobile</th>
 	</tr>
 	<tr>
-		<td align="center"><img src="screenshots/after/after-home-desktop.png" alt="Modernized landing page desktop view with hero and quick actions" width="550" /></td>
-		<td align="center"><img src="screenshots/after/after-home-mobile.png" alt="Modernized landing page mobile view" width="220" /></td>
+		<td align="center"><img src="screenshots/after/after-home-desktop.png?v=20260406" alt="Modernized landing page desktop view with hero and quick actions" width="550" /></td>
+		<td align="center"><img src="screenshots/after/after-home-mobile.png?v=20260406" alt="Modernized landing page mobile view" width="220" /></td>
 	</tr>
 </table>
 
@@ -70,7 +70,7 @@ The React app runs at http://127.0.0.1:5173.
 
 ### 🔐 Authentication (Login)
 
-<img src="screenshots/before/before-login.png" alt="Legacy login page from original workshop portal" width="980" />
+<img src="screenshots/before/before-login.png?v=20260406" alt="Legacy login page from original workshop portal" width="980" />
 <br/>
 <em>Legacy UI: Minimal, unbranded layout.</em>
 
@@ -82,8 +82,8 @@ The React app runs at http://127.0.0.1:5173.
 		<th>Modernized Mobile</th>
 	</tr>
 	<tr>
-		<td align="center"><img src="screenshots/after/after-login-desktop.png" alt="Modernized login desktop view with split layout" width="550" /></td>
-		<td align="center"><img src="screenshots/after/after-login-mobile.png" alt="Modernized login mobile view" width="220" /></td>
+		<td align="center"><img src="screenshots/after/after-login-desktop.png?v=20260406" alt="Modernized login desktop view with split layout" width="550" /></td>
+		<td align="center"><img src="screenshots/after/after-login-mobile.png?v=20260406" alt="Modernized login mobile view" width="220" /></td>
 	</tr>
 </table>
 
@@ -97,7 +97,7 @@ The React app runs at http://127.0.0.1:5173.
 
 ### 📝 Registration (Create Account)
 
-<img src="screenshots/before/before-register.png" alt="Legacy registration form from original workshop portal" width="980" />
+<img src="screenshots/before/before-register.png?v=20260406" alt="Legacy registration form from original workshop portal" width="980" />
 <br/>
 <em>Legacy UI: Minimal, unbranded layout.</em>
 
@@ -109,8 +109,8 @@ The React app runs at http://127.0.0.1:5173.
 		<th>Modernized Mobile</th>
 	</tr>
 	<tr>
-		<td align="center"><img src="screenshots/after/after-register-desktop.png" alt="Modernized registration desktop view with structured field groups" width="550" /></td>
-		<td align="center"><img src="screenshots/after/after-register-mobile.png" alt="Modernized registration mobile view" width="220" /></td>
+		<td align="center"><img src="screenshots/after/after-register-desktop.png?v=20260406" alt="Modernized registration desktop view with structured field groups" width="550" /></td>
+		<td align="center"><img src="screenshots/after/after-register-mobile.png?v=20260406" alt="Modernized registration mobile view" width="220" /></td>
 	</tr>
 </table>
 
@@ -124,7 +124,7 @@ The React app runs at http://127.0.0.1:5173.
 
 ### 📚 Workshop Portal (List + Discovery)
 
-<img src="screenshots/before/before-workshops.png" alt="Legacy workshop list from original portal" width="980" />
+<img src="screenshots/before/before-workshops.png?v=20260406" alt="Legacy workshop list from original portal" width="980" />
 <br/>
 <em>Legacy UI: Minimal, unbranded layout.</em>
 
@@ -136,8 +136,8 @@ The React app runs at http://127.0.0.1:5173.
 		<th>Modernized Mobile</th>
 	</tr>
 	<tr>
-		<td align="center"><img src="screenshots/after/after-workshops-desktop.png" alt="Modernized workshop portal desktop view with search and filters" width="550" /></td>
-		<td align="center"><img src="screenshots/after/after-workshops-mobile.png" alt="Modernized workshop portal mobile view" width="220" /></td>
+		<td align="center"><img src="screenshots/after/after-workshops-desktop.png?v=20260406" alt="Modernized workshop portal desktop view with search and filters" width="550" /></td>
+		<td align="center"><img src="screenshots/after/after-workshops-mobile.png?v=20260406" alt="Modernized workshop portal mobile view" width="220" /></td>
 	</tr>
 </table>
 
