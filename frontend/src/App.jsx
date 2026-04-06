@@ -397,9 +397,9 @@ function RegisterPage({ navigate }) {
         minHeight: 'calc(100vh - 64px)',
         background: 'white',
         display: 'flex',
-        alignItems: 'flex-start',
+        alignItems: 'center',
         justifyContent: 'center',
-        padding: '24px 24px 20px',
+        padding: '16px 24px 12px',
       }}>
         <div className="register-form-box auth-card auth-card--exact">
           <span className="auth-card__brand">FOSSEE</span>
