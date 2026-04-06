@@ -180,13 +180,17 @@ The typography and spacing scale down smoothly so headings, body text, chips, an
 
 ## Reflection
 
-**What design principles guided the improvements?** The redesign follows a mobile-first, institutionally branded system with clear hierarchy, consistent spacing, and strong action emphasis. I kept the palette aligned to IIT Bombay with #003366 and #FF6B00 so the experience feels official and coherent across pages.
+### What design principles guided the improvements?
+The redesign follows a mobile-first, institutionally branded system with clear hierarchy, consistent spacing, and strong action emphasis. I kept the palette aligned to IIT Bombay with #003366 and #FF6B00 so the experience feels official and coherent across pages.
 
-**How did you ensure responsiveness across devices?** I used CSS Grid and Flexbox for the main layouts, then tuned each page to collapse cleanly on smaller screens. Forms, cards, navigation, and workshop lists reflow without separate mobile pages, and touch targets stay large enough on phones.
+### How did you ensure responsiveness across devices?
+I used CSS Grid and Flexbox for the main layouts, then tuned each page to collapse cleanly on smaller screens. Forms, cards, navigation, and workshop lists reflow without separate mobile pages, and touch targets stay large enough on phones.
 
-**What trade-offs did you make between design and performance?** I kept the interface intentionally lightweight by avoiding animation libraries and heavy visual effects. That preserves fast loading and simpler maintenance, even though it means the design is more restrained than a more motion-heavy marketing site.
+### What trade-offs did you make between design and performance?
+I kept the interface intentionally lightweight by avoiding animation libraries and heavy visual effects. That preserves fast loading and simpler maintenance, even though it means the design is more restrained than a more motion-heavy marketing site.
 
-**What was the most challenging part of the task and how did you approach it?** The hardest part was connecting the React UI to the existing Django backend while keeping the interface honest when there was no real workshop data. I handled it by using a Vite proxy during development and by building truthful loading, empty, and filter states instead of fabricating placeholder workshop records.
+### What was the most challenging part of the task and how did you approach it?
+The hardest part was connecting the React UI to the existing Django backend while keeping the interface honest when there was no real workshop data. I handled it by using a Vite proxy during development and by building truthful loading, empty, and filter states instead of fabricating placeholder workshop records.
 
 ## Tech Stack
 
