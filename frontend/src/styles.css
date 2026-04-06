@@ -80,9 +80,20 @@ button {
 
 .app-main {
   width: 100%;
+  max-width: 100%;
   margin: 0;
   padding: 0;
+  flex: 1;
+  background: transparent;
   min-height: unset;
+}
+
+.app-main--home {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  background: transparent;
 }
 
 .site-header,
@@ -425,12 +436,12 @@ button {
 .register-left {
   flex: 1;
   min-height: 100vh;
-  background: linear-gradient(135deg, #003366 0%, #0a4d8c 100%);
+  background: linear-gradient(135deg, #003366, #0a4d8c);
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 60px 48px;
-  color: #ffffff;
+  color: white;
 }
 
 .login-left h2,
@@ -482,11 +493,11 @@ button {
 .register-right {
   flex: 1;
   min-height: 100vh;
-  background: #ffffff;
+  background: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 48px;
 }
 
 .register-right {
@@ -1538,9 +1549,11 @@ body,
 
 .app-main {
   width: 100%;
-  max-width: none;
+  max-width: 100%;
   margin: 0;
   padding: 0;
+  flex: 1;
+  background: transparent;
 }
 
 .site-header {
@@ -1600,15 +1613,22 @@ body,
 }
 
 .home-section--fullbleed {
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .home-hero {
+  width: 100%;
+  margin: 0;
+  padding: 80px 60px;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, #003366 0%, #0a4d8c 100%);
+  background: linear-gradient(135deg, #003366, #0a4d8c);
   color: #fff;
+  box-sizing: border-box;
 }
 
 .home-hero__inner {

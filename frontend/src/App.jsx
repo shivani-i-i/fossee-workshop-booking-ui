@@ -271,7 +271,6 @@ function LoginPage({ navigate }) {
     <div style={{
       display: 'flex',
       width: '100%',
-      maxWidth: '100%',
       minHeight: '100vh',
       margin: 0,
       padding: 0,
@@ -286,7 +285,6 @@ function LoginPage({ navigate }) {
         justifyContent: 'center',
         padding: '60px 48px',
         color: 'white',
-        boxSizing: 'border-box',
       }}>
         <h2>FOSSEE</h2>
         <p>Workshop Booking Portal</p>
@@ -305,7 +303,6 @@ function LoginPage({ navigate }) {
         alignItems: 'center',
         justifyContent: 'center',
         padding: '48px',
-        boxSizing: 'border-box',
       }}>
         <div className="login-form-box auth-card auth-card--exact">
           <span className="auth-card__brand">FOSSEE</span>
@@ -355,7 +352,6 @@ function RegisterPage({ navigate }) {
     <div style={{
       display: 'flex',
       width: '100%',
-      maxWidth: '100%',
       minHeight: '100vh',
       margin: 0,
       padding: 0,
@@ -370,7 +366,6 @@ function RegisterPage({ navigate }) {
         justifyContent: 'center',
         padding: '60px 48px',
         color: 'white',
-        boxSizing: 'border-box',
       }}>
         <h2>FOSSEE</h2>
         <p>Workshop Booking Portal</p>
@@ -389,7 +384,6 @@ function RegisterPage({ navigate }) {
         alignItems: 'center',
         justifyContent: 'center',
         padding: '48px',
-        boxSizing: 'border-box',
       }}>
         <div className="register-form-box auth-card auth-card--exact">
           <span className="auth-card__brand">FOSSEE</span>
