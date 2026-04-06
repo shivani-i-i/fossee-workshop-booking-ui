@@ -82,8 +82,8 @@ The React app runs at http://127.0.0.1:5173.
 		<th>Modernized Mobile</th>
 	</tr>
 	<tr>
-		<td align="center"><img src="screenshots/after/login-desktop.png" alt="Modernized login desktop view with split layout" width="550" /></td>
-		<td align="center"><img src="screenshots/after/login-mobile.png" alt="Modernized login mobile view" width="220" /></td>
+		<td align="center"><img src="screenshots/after/after-login-desktop.png" alt="Modernized login desktop view with split layout" width="550" /></td>
+		<td align="center"><img src="screenshots/after/after-login-mobile.png" alt="Modernized login mobile view" width="220" /></td>
 	</tr>
 </table>
 
@@ -109,8 +109,8 @@ The React app runs at http://127.0.0.1:5173.
 		<th>Modernized Mobile</th>
 	</tr>
 	<tr>
-		<td align="center"><img src="screenshots/after/register-desktop.png" alt="Modernized registration desktop view with structured field groups" width="550" /></td>
-		<td align="center"><img src="screenshots/after/register-mobile.png" alt="Modernized registration mobile view" width="220" /></td>
+		<td align="center"><img src="screenshots/after/after-register-desktop.png" alt="Modernized registration desktop view with structured field groups" width="550" /></td>
+		<td align="center"><img src="screenshots/after/after-register-mobile.png" alt="Modernized registration mobile view" width="220" /></td>
 	</tr>
 </table>
 
@@ -136,8 +136,8 @@ The React app runs at http://127.0.0.1:5173.
 		<th>Modernized Mobile</th>
 	</tr>
 	<tr>
-		<td align="center"><img src="screenshots/after/workshop-list-desktop.png" alt="Modernized workshop portal desktop view with search and filters" width="550" /></td>
-		<td align="center"><img src="screenshots/after/workshop-list-mobile.png" alt="Modernized workshop portal mobile view" width="220" /></td>
+		<td align="center"><img src="screenshots/after/after-workshops-desktop.png" alt="Modernized workshop portal desktop view with search and filters" width="550" /></td>
+		<td align="center"><img src="screenshots/after/after-workshops-mobile.png" alt="Modernized workshop portal mobile view" width="220" /></td>
 	</tr>
 </table>
 
