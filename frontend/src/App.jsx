@@ -124,7 +124,15 @@ function App() {
   };
 
   return (
-    <div className="app-shell">
+    <div style={{
+      width: '100%',
+      maxWidth: '100%',
+      margin: 0,
+      padding: 0,
+      background: 'white',
+      overflowX: 'hidden',
+      boxSizing: 'border-box',
+    }}>
       <Header route={route} navigate={navigate} />
       <main className={route === 'home' ? 'app-main app-main--home' : 'app-main'}>
         {route === 'home' && <HomePage navigate={navigate} />}
@@ -174,7 +182,7 @@ function Header({ route, navigate }) {
 function HomePage({ navigate }) {
   return (
     <>
-      <section className="home-hero home-section--fullbleed">
+      <section className="home-hero home-section--fullbleed" style={{ width: '100%', maxWidth: '100%', margin: 0, padding: '80px 60px', boxSizing: 'border-box' }}>
         <span className="home-hero__shape home-hero__shape--one" aria-hidden="true" />
         <span className="home-hero__shape home-hero__shape--two" aria-hidden="true" />
         <span className="home-hero__shape home-hero__shape--three" aria-hidden="true" />
@@ -189,7 +197,7 @@ function HomePage({ navigate }) {
         </div>
       </section>
 
-      <section className="home-stats home-section">
+      <section className="home-stats home-section" style={{ width: '100%', maxWidth: '100%', margin: 0, padding: '80px 60px', boxSizing: 'border-box' }}>
         <div className="home-stats__grid">
           {homeStats.map((item, index) => (
             <article key={item.label} className="home-stat">
@@ -201,7 +209,7 @@ function HomePage({ navigate }) {
         </div>
       </section>
 
-      <section id="how-it-works" className="home-section home-how">
+      <section id="how-it-works" className="home-section home-how" style={{ width: '100%', maxWidth: '100%', margin: 0, padding: '80px 60px', boxSizing: 'border-box' }}>
         <div className="section-heading home-section__heading">
           <span>How it works</span>
           <h2>Simple steps to get started</h2>
@@ -219,7 +227,7 @@ function HomePage({ navigate }) {
         </div>
       </section>
 
-      <section className="home-section home-topics">
+      <section className="home-section home-topics" style={{ width: '100%', maxWidth: '100%', margin: 0, padding: '80px 60px', boxSizing: 'border-box' }}>
         <div className="section-heading home-section__heading">
           <span>Explore Topics</span>
           <h2>What would you like to learn?</h2>
@@ -235,7 +243,7 @@ function HomePage({ navigate }) {
         </div>
       </section>
 
-      <section className="faq-strip">
+      <section className="faq-strip" style={{ width: '100%', maxWidth: '100%', margin: 0, padding: '80px 60px', boxSizing: 'border-box' }}>
         <div className="faq-strip__inner">
           <p className="faq-strip__label">FAQ</p>
           <h2 className="faq-strip__title">Frequently Asked Questions</h2>
@@ -245,7 +253,7 @@ function HomePage({ navigate }) {
         </div>
       </section>
 
-      <section className="cta-band">
+      <section className="cta-band" style={{ width: '100%', maxWidth: '100%', margin: 0, padding: '80px 60px', boxSizing: 'border-box' }}>
         <div>
           <h2>Stay updated on new workshops</h2>
           <p>Get notified when new workshops are announced</p>
@@ -260,8 +268,26 @@ function LoginPage({ navigate }) {
   const [showPassword, setShowPassword] = React.useState(false);
 
   return (
-    <section className="login-page" aria-label="Login page">
-      <div className="login-left">
+    <div style={{
+      display: 'flex',
+      width: '100%',
+      maxWidth: '100%',
+      minHeight: '100vh',
+      margin: 0,
+      padding: 0,
+      background: 'white',
+    }} aria-label="Login page">
+      <div className="login-left" style={{
+        flex: 1,
+        minHeight: '100vh',
+        background: 'linear-gradient(135deg, #003366 0%, #0a4d8c 100%)',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        padding: '60px 48px',
+        color: 'white',
+        boxSizing: 'border-box',
+      }}>
         <h2>FOSSEE</h2>
         <p>Workshop Booking Portal</p>
         <small>by IIT Bombay</small>
@@ -271,7 +297,16 @@ function LoginPage({ navigate }) {
           <li>500+ workshops conducted</li>
         </ul>
       </div>
-      <div className="login-right">
+      <div className="login-right" style={{
+        flex: 1,
+        minHeight: '100vh',
+        background: 'white',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '48px',
+        boxSizing: 'border-box',
+      }}>
         <div className="login-form-box auth-card auth-card--exact">
           <span className="auth-card__brand">FOSSEE</span>
           <span className="auth-card__subtitle">Workshop Portal</span>
@@ -308,7 +343,7 @@ function LoginPage({ navigate }) {
           <p className="panel-card__meta">© 2024 FOSSEE, IIT Bombay</p>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 
@@ -317,8 +352,26 @@ function RegisterPage({ navigate }) {
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
 
   return (
-    <section className="register-page" aria-label="Register page">
-      <div className="register-left">
+    <div style={{
+      display: 'flex',
+      width: '100%',
+      maxWidth: '100%',
+      minHeight: '100vh',
+      margin: 0,
+      padding: 0,
+      background: 'white',
+    }} aria-label="Register page">
+      <div className="register-left" style={{
+        flex: 1,
+        minHeight: '100vh',
+        background: 'linear-gradient(135deg, #003366 0%, #0a4d8c 100%)',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        padding: '60px 48px',
+        color: 'white',
+        boxSizing: 'border-box',
+      }}>
         <h2>FOSSEE</h2>
         <p>Workshop Booking Portal</p>
         <small>by IIT Bombay</small>
@@ -328,7 +381,16 @@ function RegisterPage({ navigate }) {
           <li>500+ workshops conducted</li>
         </ul>
       </div>
-      <div className="register-right">
+      <div className="register-right" style={{
+        flex: 1,
+        minHeight: '100vh',
+        background: 'white',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '48px',
+        boxSizing: 'border-box',
+      }}>
         <div className="register-form-box auth-card auth-card--exact">
           <span className="auth-card__brand">FOSSEE</span>
           <span className="auth-card__subtitle">Workshop Portal</span>
@@ -413,7 +475,7 @@ function RegisterPage({ navigate }) {
           <p className="auth-card__foot">Already have an account? <button type="button" className="text-button" onClick={() => navigate('login')}>Sign in</button></p>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 
@@ -497,14 +559,32 @@ function WorkshopsPage() {
 
   return (
     <>
-      <section className="workshops-screen" aria-label="Available workshops page">
-        <div className="workshops-screen__hero">
+      <div style={{
+        width: '100%',
+        maxWidth: '100%',
+        minHeight: '100vh',
+        background: '#f8f9fa',
+        margin: 0,
+        padding: 0,
+      }} aria-label="Available workshops page">
+        <div className="workshops-screen__hero" style={{
+          width: '100%',
+          background: 'linear-gradient(135deg, #003366, #0a4d8c)',
+          padding: '48px 60px',
+          color: 'white',
+          boxSizing: 'border-box',
+        }}>
           <div className="workshops-screen__hero-inner">
             <p className="workshops-screen__breadcrumb">Home &gt; Workshops</p>
             <h1>Available Workshops</h1>
           </div>
         </div>
-        <div className="workshops-screen__panel home-section">
+        <div className="workshops-screen__panel home-section" style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          padding: '40px 60px',
+          boxSizing: 'border-box',
+        }}>
           <p>Browse, filter, and find the workshop that fits your interests in seconds.</p>
 
           <label className="workshops-screen__search" aria-label="Search workshops">
@@ -587,7 +667,7 @@ function WorkshopsPage() {
             </div>
           )}
         </div>
-      </section>
+      </div>
 
       <section className="faq-strip">
         <div className="faq-strip__inner">
