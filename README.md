@@ -66,9 +66,11 @@ The React app runs at http://127.0.0.1:5173.
 - Mobile-optimized FAQ uses accessible accordion interactions for compact, touch-friendly discovery.
 - Improved visual hierarchy introduces clearer first-screen actions and stronger CTA prominence.
 
-#### Home Section Details
+### 🏡 Home Section Details
 
-##### About
+<p align="center">These are the in-page sections below the hero, shown exactly as they appear in the live redesign.</p>
+
+#### About
 
 <table>
 	<tr>
@@ -81,7 +83,9 @@ The React app runs at http://127.0.0.1:5173.
 	</tr>
 </table>
 
-##### How It Works
+<br/>&nbsp;<br/>
+
+#### How It Works
 
 <table>
 	<tr>
@@ -94,7 +98,9 @@ The React app runs at http://127.0.0.1:5173.
 	</tr>
 </table>
 
-##### FAQs
+<br/>&nbsp;<br/>
+
+#### FAQs
 
 <table>
 	<tr>
