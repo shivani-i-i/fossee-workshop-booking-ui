@@ -832,11 +832,6 @@ function Footer({ navigate }) {
             </ul>
           </div>
         </div>
-        <div className="site-footer__initiative" aria-label="Institution footer badges">
-          <img className="site-footer__mini-icon" src="https://fossee.in/sites/all/themes/software_responsive_theme/img/iitb-logo.png" alt="IIT Bombay" />
-          <img className="site-footer__mini-logo" src="https://fossee.in/sites/all/themes/software_responsive_theme/img/logo.png" alt="FOSSEE" />
-          <span>MoE Govt. of India</span>
-        </div>
         <p className="site-footer__copy">An initiative of IIT Bombay under the National Mission on Education</p>
         <p className="site-footer__copy">© 2026 FOSSEE, IIT Bombay. All rights reserved.</p>
       </div>
