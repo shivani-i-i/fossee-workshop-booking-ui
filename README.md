@@ -70,51 +70,6 @@ The React app runs at http://127.0.0.1:5173.
 
 <p align="center">These are the in-page sections below the hero, shown exactly as they appear in the live redesign.</p>
 
-#### About
-
-<table>
-	<tr>
-		<th>Desktop</th>
-		<th>Mobile</th>
-	</tr>
-	<tr>
-		<td align="center"><img src="screenshots/after/home-about-desktop.png?v=20260406" alt="About section of the modernized home page on desktop" width="550" /></td>
-		<td align="center"><img src="screenshots/after/home-about-mobile.png?v=20260406" alt="About section of the modernized home page on mobile" width="220" /></td>
-	</tr>
-</table>
-
-<br/>&nbsp;<br/>
-
-#### How It Works
-
-<table>
-	<tr>
-		<th>Desktop</th>
-		<th>Mobile</th>
-	</tr>
-	<tr>
-		<td align="center"><img src="screenshots/after/home-how-desktop.png?v=20260406" alt="How It Works section of the modernized home page on desktop" width="550" /></td>
-		<td align="center"><img src="screenshots/after/home-how-mobile.png?v=20260406" alt="How It Works section of the modernized home page on mobile" width="220" /></td>
-	</tr>
-</table>
-
-<br/>&nbsp;<br/>
-
-#### FAQs
-
-<table>
-	<tr>
-		<th>Desktop</th>
-		<th>Mobile</th>
-	</tr>
-	<tr>
-		<td align="center"><img src="screenshots/after/home-faq-desktop.png?v=20260406" alt="FAQ section of the modernized home page on desktop" width="550" /></td>
-		<td align="center"><img src="screenshots/after/home-faq-mobile.png?v=20260406" alt="FAQ section of the modernized home page on mobile" width="220" /></td>
-	</tr>
-</table>
-
-<br/>&nbsp;<br/>
-
 <br/>&nbsp;<br/>
 
 ### 🔐 Authentication (Login)
