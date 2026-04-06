@@ -305,7 +305,7 @@ function LoginPage({ navigate }) {
   const [showPassword, setShowPassword] = React.useState(false);
 
   return (
-    <div style={{
+    <div className="login-page" style={{
       display: 'flex',
       width: '100%',
       minHeight: 'calc(100vh - 64px)',
@@ -386,7 +386,7 @@ function RegisterPage({ navigate }) {
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
 
   return (
-    <div style={{
+    <div className="register-page" style={{
       display: 'flex',
       width: '100%',
       minHeight: 'calc(100vh - 64px)',
